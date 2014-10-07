@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pkg="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.UserProfileActivity">
+
+    <FrameLayout
+        android:id="@+id/session_photo_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="@drawable/photo_banner_scrim">
+
+        <ImageView
+            android:id="@+id/session_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@color/colorAccent" />
+    </FrameLayout>
+
+    <com.xda.one.ui.widget.NonSwipeableViewPager
+        android:id="@+id/forum_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:id="@+id/header_user_profile_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/header_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="48dp"
+            android:padding="8dp"
+            android:text="@string/loading"
+            android:textColor="@color/default_primary_text"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/header_user_stuff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/header_user_name"
+            android:layout_centerHorizontal="true"
+            android:padding="8dp"
+            android:text="@string/loading"
+            android:textColor="@color/default_secondary_text" />
+
+        <com.xda.one.ui.widget.TabLayout
+            android:id="@+id/fragment_sliding_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/header_user_stuff"
+            android:background="@color/colorPrimary" />
+    </RelativeLayout>
+
+    <com.makeramen.RoundedImageView
+        android:id="@+id/avatar"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-48dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/account_circle"
+        pkg:border_color="@android:color/transparent"
+        pkg:border_width="0dp"
+        pkg:mutate_background="true"
+        pkg:oval="true" />
+
+    <View
+        android:id="@+id/user_profile_header_background"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary" />
+</RelativeLayout>

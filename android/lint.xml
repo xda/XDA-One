@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="ValidFragment" severity="ignore" />
+    <issue id="ViewConstructor">
+        <ignore path="src/com/onlinemedia/xda/screens/ThreadAdapter.java" />
+        <ignore path="src/com/onlinemedia/xda/screens/forum/SubscribeThreadAdapter.java" />
+        <ignore path="src/com/onlinemedia/xda/screens/thread/ThreadAdapter.java" />
+    </issue>
+</lint>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="light_grey">#F5F5F5</color>
+    <color name="lighter_gray">#ddd</color>
+
+    <color name="main_xda_color">#553310</color>
+    <color name="main_xda_color_dark">#341f0a</color>
+    <color name="xda_color_accent">#283593</color>
+
+    <color name="colorPrimary">@color/main_xda_color</color>
+    <color name="colorPrimaryDark">@color/main_xda_color_dark</color>
+    <color name="colorAccent">@color/xda_color_accent</color>
+
+    <color name="selected_color">#E8BA88</color>
+    <color name="pager_tab_strip_indicator">#E17C10</color>
+    <color name="very_light_grey">#E0E0E0</color>
+
+    <color name="top_item">#a6c</color>
+    <color name="sticky_item">#f44</color>
+    <color name="sticky_item_text">#fff</color>
+    <color name="fab_color">@color/colorAccent</color>
+
+    <!-- Black palate from Google's guidelines -->
+    <color name="default_black">#ff000000</color>
+    <color name="default_divider">#1f000000</color>
+    <color name="default_hint">#42000000</color>
+    <color name="default_secondary_text">#8a000000</color>
+    <color name="default_primary_text">#de000000</color>
+
+</resources>

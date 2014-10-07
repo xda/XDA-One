@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/thread_list_item_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pkg="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_item_height"
+    android:background="@drawable/activatable_selectable_selector"
+    tools:context=".ui.MainActivity">
+
+    <TextView
+        android:id="@+id/thread_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="8dp"
+        android:layout_toLeftOf="@+id/reply_count"
+        android:layout_toStartOf="@+id/reply_count"
+        android:singleLine="true"
+        android:text="@string/thread_title"
+        android:textSize="14sp" />
+
+    <com.makeramen.RoundedImageView
+        android:id="@+id/avatar"
+        android:layout_width="@dimen/avatar_image_dimension"
+        android:layout_height="@dimen/avatar_image_dimension"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/account_circle"
+        pkg:border_color="@android:color/transparent"
+        pkg:oval="true" />
+
+    <TextView
+        android:id="@+id/poster_user_name"
+        style="@style/Theme.One.ThreadTextAppearanceSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/thread_title"
+        android:layout_marginLeft="72dp"
+        android:layout_marginTop="8dp"
+        android:singleLine="true"
+        android:text="@string/username" />
+
+    <TextView
+        android:id="@+id/thread_list_item_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/poster_user_name"
+        android:layout_marginLeft="72dp"
+        android:layout_marginTop="8dp"
+        android:singleLine="true"
+        android:text="@string/message_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/reply_count"
+        style="@style/Theme.One.ThreadTextAppearanceSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/thread_title"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/thread_title"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
+        android:text="@string/reply_count" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/avatar"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/thread_list_item_sticky"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_pin" />
+
+        <ImageView
+            android:id="@+id/thread_list_item_locked"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_lock" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/last_post"
+        style="@style/Theme.One.ThreadTextAppearanceSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/poster_user_name"
+        android:layout_alignEnd="@+id/reply_count"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignRight="@+id/reply_count"
+        android:layout_alignTop="@id/poster_user_name"
+        android:layout_below="@+id/reply_count"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
+        android:text="@string/last_post" />
+
+</RelativeLayout>

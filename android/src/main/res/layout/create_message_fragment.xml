@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pkg="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <com.makeramen.RoundedImageView
+        android:id="@+id/create_message_fragment_avatar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/account_circle"
+        pkg:oval="true" />
+
+    <TextView
+        android:id="@+id/create_message_fragment_curr_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/create_message_fragment_avatar"
+        android:background="@android:color/transparent"
+        android:hint="@string/username"
+        android:inputType="text"
+        android:maxLines="4"
+        android:padding="8dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/create_message_fragment_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/create_message_fragment_curr_username"
+        android:layout_toRightOf="@id/create_message_fragment_avatar"
+        android:background="@android:color/transparent"
+        android:hint="@string/to"
+        android:inputType="text"
+        android:maxLines="4"
+        android:padding="8dp"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/create_message_fragment_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/create_message_fragment_username"
+        android:background="@android:color/transparent"
+        android:hint="@string/message_subject"
+        android:inputType="textCapCharacters"
+        android:maxLines="4"
+        android:padding="16dp"
+        android:textSize="15sp" />
+
+    <include
+        android:id="@+id/create_message_fragment_content"
+        layout="@layout/default_content_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/create_message_fragment_title" />
+
+    <ImageView
+        android:id="@+id/create_message_fragment_send"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="8dp"
+        android:src="@drawable/send_button_background" />
+
+    <ImageView
+        android:id="@+id/create_message_fragment_emoticon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/create_message_fragment_send"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="8dp"
+        android:src="@drawable/ic_smilie" />
+</RelativeLayout>
+
+
+

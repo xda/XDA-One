@@ -1,0 +1,23 @@
+<resources>
+    <string name="placeholder_text_long">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        In auctor varius ligula quis imperdiet. Cras at arcu eget ligula lacinia aliquam. Donec
+        ultricies neque eu nisl elementum sed luctus leo porta. Nunc gravida molestie sodales. Nam
+        sit amet lacus a odio dictum dignissim. Pellentesque nec tincidunt urna. Praesent mattis
+        dignissim ante, eu placerat leo placerat vel. Curabitur nec consequat nisl. Donec dapibus
+        ante id enim faucibus ut scelerisque risus sollicitudin. Vestibulum ipsum sapien, molestie
+        vel dignissim eleifend, ultricies vitae libero. Nullam sapien libero, posuere non ornare sed,
+        tristique non nisi. Proin eu nunc sapien, vitae euismod neque. Fusce scelerisque purus sit
+        amet leo accumsan scelerisque varius ligula interdum. Maecenas non mauris vitae lacus
+        vehicula pulvinar sed quis dui. Nullam ultricies mollis tortor vel dictum. Phasellus
+        tincidunt dui id odio sodales tincidunt. Curabitur malesuada dapibus neque, non malesuada augue
+        tempus at. Integer et nulla et arcu sollicitudin semper.
+    </string>
+    <string name="placeholder_text_short">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        In auctor varius ligula quis imperdiet. Cras at arcu eget ligula lacinia aliquam. Donec
+    </string>
+    <string name="placeholder_text">
+        Lorem ipsum dolor sit amet
+    </string>
+</resources>

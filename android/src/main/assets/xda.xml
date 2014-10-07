@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns="http://kefirsf.org/kefirbb/schema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://kefirsf.org/kefirbb/schema http://kefirsf.org/kefirbb/schema/kefirbb-1.1.xsd">
+    <!-- XML escape symbols -->
+    <scope name="escapeXml">
+        <code priority="100">
+            <pattern>&amp;</pattern>
+            <template>&amp;amp;</template>
+        </code>
+        <code priority="100">
+            <pattern>&apos;</pattern>
+            <template>&amp;apos;</template>
+        </code>
+        <code priority="100">
+            <pattern>&lt;</pattern>
+            <template>&amp;lt;</template>
+        </code>
+        <code priority="100">
+            <pattern>&gt;</pattern>
+            <template>&amp;gt;</template>
+        </code>
+        <code priority="100">
+            <pattern>&quot;</pattern>
+            <template>&amp;quot;</template>
+        </code>
+    </scope>
+
+    <!-- Scope for escaping bb spec chars -->
+    <scope name="escapeBb" parent="escapeXml">
+        <!--
+            Escape bb-code symbols
+            double slash to slash
+            slash + square bracket to square bracket
+         -->
+        <code name="slash" priority="10">
+            <pattern>\\</pattern>
+            <template>\</template>
+        </code>
+        <code name="left_square_bracket" priority="9">
+            <pattern>\[</pattern>
+            <template>[</template>
+        </code>
+        <code name="right_square_bracket" priority="9">
+            <pattern>\]</pattern>
+            <template>]</template>
+        </code>
+        <coderef name="comment"/>
+    </scope>
+
+    <!-- Comment -->
+    <code name="comment">
+        <pattern>[*<junk/>*]</pattern>
+        <template/>
+    </code>
+
+    <!-- Escape basic HTML char sequences -->
+    <scope name="basic" parent="escapeBb">
+        <!-- line feed characters -->
+        <code name="br">
+            <pattern>&#x0A;&#x0D;</pattern>
+            <pattern>&#x0D;&#x0A;</pattern>
+            <pattern>&#x0A;</pattern>
+            <pattern>&#x0D;</pattern>
+            <template>&lt;br/&gt;</template>
+        </code>
+
+        <!-- Special html symbols -->
+        <code name="symbol">
+            <pattern ignoreCase="true">[symbol=<var scope="escapeXml"/>/]</pattern>
+            <template>&amp;<var/>;</template>
+        </code>
+
+        <!-- angle quotes -->
+        <code name="aquote">
+            <pattern ignoreCase="true">[aquote]<var inherit="true"/>[/aquote]</pattern>
+            <template>&amp;laquo;<var/>&amp;raquo;</template>
+        </code>
+    </scope>
+
+    <!-- Root scope. This scope uses when processor started work and by default, if not set other scope -->
+    <scope name="ROOT" parent="basic">
+        <!-- Formatting -->
+        <coderef name="bold"/>
+        <coderef name="u"/>
+        <coderef name="s"/>
+        <coderef name="i"/>
+        <coderef name="color"/>
+        <coderef name="size"/>
+
+        <!-- Quotes -->
+        <coderef name="code"/>
+        <coderef name="quote1"/>
+        <coderef name="quote2"/>
+
+        <!-- Images -->
+        <coderef name="img1"/>
+        <coderef name="img2"/>
+
+        <!-- links -->
+        <coderef name="url1"/>
+        <coderef name="url2"/>
+        <coderef name="url3"/>
+        <coderef name="url4"/>
+        <coderef name="url5"/>
+        <coderef name="url6"/>
+
+        <!-- Table -->
+        <coderef name="table"/>
+
+        <!-- List -->
+        <coderef name="list1"/>
+        <coderef name="list2"/>
+        <coderef name="list3"/>
+
+        <!-- Mention -->
+        <coderef name="mention"/>
+
+        <!-- Center -->
+        <coderef name="center"/>
+
+        <!-- Font -->
+        <coderef name="font"/>
+    </scope>
+
+    <!-- Simple formatting -->
+    <code name="bold">
+        <pattern ignoreCase="true">[b]<var inherit="true"/>[/b]</pattern>
+        <template>&lt;b&gt;<var/>&lt;/b&gt;</template>
+    </code>
+    <code name="u">
+        <pattern ignoreCase="true">[u]<var inherit="true"/>[/u]</pattern>
+        <template>&lt;u&gt;<var/>&lt;/u&gt;</template>
+    </code>
+    <code name="s">
+        <pattern ignoreCase="true">[s]<var inherit="true"/>[/s]</pattern>
+        <template>&lt;s&gt;<var/>&lt;/s&gt;</template>
+    </code>
+    <code name="i">
+        <pattern ignoreCase="true">[i]<var inherit="true"/>[/i]</pattern>
+        <template>&lt;i&gt;<var/>&lt;/i&gt;</template>
+    </code>
+
+    <!-- Font color -->
+    <code name="color">
+        <pattern ignoreCase="true">[color=<var name="color" scope="escapeXml"/>]<var name="text" inherit="true"/>[/color]</pattern>
+        <template>&lt;span style=&quot;color:<var name="color"/>;&quot;&gt;<var name="text"/>&lt;/span&gt;</template>
+    </code>
+
+    <!-- Font size -->
+    <code name="size">
+        <pattern ignoreCase="true">[size=<var name="size" scope="escapeXml"/>]<var name="text" inherit="true"/>[/size]</pattern>
+        <template>&lt;span style=&quot;font-size:<var name="size"/>;&quot;&gt;<var name="text"/>&lt;/span&gt;</template>
+    </code>
+
+    <!-- Insert image -->
+    <code name="img1" priority="2">
+        <pattern ignoreCase="true">[img]<var name="protocol" regex="((ht|f)tps?:|\.{1,2})?"/>/<var name="addr" scope="escapeXml"/>[/img]</pattern>
+        <template>&lt;img src=&quot;<var name="protocol"/>/<var name="addr"/>&quot;/&gt;</template>
+    </code>
+    <code name="img2" priority="1">
+        <pattern ignoreCase="true">[img]<var name="addr" scope="escapeXml"/>[/img]</pattern>
+        <template>&lt;img src=&quot;http://<var name="addr"/>&quot;/&gt;</template>
+    </code>
+
+    <!-- Links. http, https, malto protocols -->
+    <scope name="url" parent="basic">
+        <coderef name="bold"/>
+        <coderef name="u"/>
+        <coderef name="s"/>
+        <coderef name="i"/>
+        <coderef name="color"/>
+        <coderef name="size"/>
+
+        <coderef name="img1"/>
+        <coderef name="img2"/>
+    </scope>
+
+    <!-- HTTP -->
+    <code name="url1" priority="2">
+        <pattern ignoreCase="true">[url=<var name="protocol" regex="((ht|f)tps?:|\.{1,2})?"/>/<var name="url" scope="escapeXml"/>]<var
+            name="text" scope="url"/>[/url]</pattern>
+        <template>&lt;a href=&quot;<var name="protocol"/>/<var name="url"/>&quot;&gt;<var name="text"/>&lt;/a&gt;</template>
+    </code>
+    <code name="url2" priority="2">
+        <pattern ignoreCase="true">[url]<var name="protocol" regex="((ht|f)tps?:|\.{1,2})?"/>/<var name="url" scope="escapeXml"/>[/url]</pattern>
+        <template>&lt;a href=&quot;<var name="protocol"/>/<var name="url"/>&quot;&gt;<var name="protocol"/>/<var
+            name="url"/>&lt;/a&gt;</template>
+    </code>
+    <code name="url3" priority="1">
+        <pattern ignoreCase="true">[url=<var name="url" scope="escapeXml"/>]<var name="text" scope="url"/>[/url]</pattern>
+        <template>&lt;a href=&quot;http://<var name="url"/>&quot;&gt;<var name="text"/>&lt;/a&gt;</template>
+    </code>
+    <code name="url4" priority="1">
+        <pattern ignoreCase="true">[url]<var name="url" scope="escapeXml"/>[/url]</pattern>
+        <template>&lt;a href=&quot;http://<var name="url"/>&quot;&gt;<var name="url"/>&lt;/a&gt;</template>
+    </code>
+
+    <!-- MAILTO -->
+    <code name="url5" priority="2">
+        <pattern ignoreCase="true">[url=mailto:<var name="url" scope="escapeXml"/>]<var name="text" scope="url"/>[/url]</pattern>
+        <template>&lt;a href=&quot;mailto:<var name="url"/>&quot;&gt;<var name="text"/>&lt;/a&gt;</template>
+    </code>
+    <code name="url6" priority="2">
+        <pattern ignoreCase="true">[url]mailto:<var name="url" scope="escapeXml"/>[/url]</pattern>
+        <template>&lt;a href=&quot;mailto:<var name="url"/>&quot;&gt;mailto:<var name="url"/>&lt;/a&gt;</template>
+    </code>
+
+    <!-- Quote block -->
+    <code name="quote1">
+        <pattern ignoreCase="true">[quote]<var inherit="true" />[/quote]</pattern>
+        <template>&lt;blockquote&gt;<var />&lt;/blockquote&gt;</template>
+    </code>
+    <code name="quote2">
+        <pattern ignoreCase="true">[quote=<var name="quoteUser" scope="escapeXml" />]<var inherit="true" />[/quote]</pattern>
+        <template>&lt;xdaquote user=&quot;<var name="quoteUser"/>&quot;&gt;<var />&lt;/xdaquote&gt;</template>
+    </code>
+
+    <!-- Quote code block -->
+    <code name="code">
+        <pattern ignoreCase="true">[code]<var scope="basic" />[/code]</pattern>
+        <template>&lt;xdaquote&gt;<var />&lt;/xdaquote&gt;</template>
+    </code>
+
+    <!-- Mention -->
+    <code name="mention">
+        <pattern ignoreCase="true">[MENTION=<var name="quoteUser" />]<var name="text" />[/MENTION]</pattern>
+        <template>&lt;mention user=&quot;<var name="quoteUser" />&quot;&gt;<var name="text" />&lt;/mention&gt;</template>
+    </code>
+
+    <!-- Simple table -->
+    <code name="table">
+        <pattern ignoreCase="true">[table]<var scope="tableScope"/>[/table]</pattern>
+        <template>&lt;table&gt;<var/>&lt;/table&gt;</template>
+    </code>
+    <scope name="tableScope" ignoreText="true">
+        <code name="tr">
+            <pattern ignoreCase="true">[tr]<var scope="trScope"/>[/tr]</pattern>
+            <template>&lt;tr&gt;<var/>&lt;/tr&gt;</template>
+        </code>
+        <coderef name="comment"/>
+    </scope>
+    <scope name="trScope" ignoreText="true">
+        <code name="th">
+            <pattern ignoreCase="true">[th]<var/>[/th]</pattern>
+            <template>&lt;th&gt;<var/>&lt;/th&gt;</template>
+        </code>
+        <code name="td">
+            <pattern ignoreCase="true">[td]<var/>[/td]</pattern>
+            <template>&lt;td&gt;<var/>&lt;/td&gt;</template>
+        </code>
+        <coderef name="comment"/>
+    </scope>
+
+    <!-- Standard BB list -->
+    <code name="list1" priority="2">
+        <pattern ignoreCase="true">[list]<junk/>[*]<var name="content" scope="list1Scope" />[/list]</pattern>
+        <template>&lt;ul&gt;&lt;li&gt;<var name="content"/>&lt;/li&gt;&lt;/ul&gt;</template>
+    </code>
+    <scope name="list1Scope" parent="ROOT">
+        <code>
+            <pattern>[*]</pattern>
+            <template>&lt;/li&gt;&lt;li&gt;</template>
+        </code>
+    </scope>
+
+    <code name="list2" priority="1">
+        <pattern ignoreCase="true">[list]<junk/>*<var name="content" scope="list2Scope"/>[/list]</pattern>
+        <template>&lt;ul&gt;&lt;li&gt;<var name="content"/>&lt;/li&gt;&lt;/ul&gt;</template>
+    </code>
+    <scope name="list2Scope" parent="ROOT">
+        <code>
+            <pattern>*</pattern>
+            <template>&lt;/li&gt;&lt;li&gt;</template>
+        </code>
+    </scope>
+
+    <code name="list3" priority="2">
+        <pattern ignoreCase="true">[list=<var name="listCode" />]<junk/>[*]<var name="content" scope="list3Scope"/>[/list]</pattern>
+        <template>&lt;ul&gt;&lt;li&gt;<var name="content"/>&lt;/li&gt;&lt;/ul&gt;</template>
+    </code>
+    <scope name="list3Scope" parent="ROOT">
+        <code>
+            <pattern>[*]</pattern>
+            <template>&lt;/li&gt;&lt;li&gt;</template>
+        </code>
+    </scope>
+
+    <!-- Center block -->
+    <code name="center">
+        <pattern ignoreCase="true">[CENTER]<var inherit="true" />[/CENTER]</pattern>
+        <template>&lt;center&gt;<var />&lt;/center&gt;</template>
+    </code>
+
+    <!-- Font -->
+    <code name="font">
+        <pattern ignoreCase="true">[FONT=<var name="font" />]<var inherit="true" />[/FONT]</pattern>
+        <template><var /></template>
+    </code>
+</configuration>

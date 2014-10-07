@@ -1,0 +1,5 @@
+<resources>
+    <string name="placeholder_text" />
+    <string name="placeholder_text_short" />
+    <string name="placeholder_text_long" />
+</resources>

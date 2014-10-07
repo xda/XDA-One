@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    tools:context=".ui.MainActivity">
+
+    <ImageView
+        android:id="@+id/hierarchy_spinner_item_device_image"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:padding="16dp"
+        android:src="@drawable/phone"
+        android:tint="@android:color/white"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/hierarchy_spinner_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/hierarchy_spinner_item_device_image"
+        android:layout_toRightOf="@id/hierarchy_spinner_item_device_image"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center_vertical"
+        android:paddingBottom="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:singleLine="true"
+        android:text="@string/forums"
+        android:textAppearance="?android:attr/textAppearanceInverse"
+        android:textSize="15sp" />
+</RelativeLayout>

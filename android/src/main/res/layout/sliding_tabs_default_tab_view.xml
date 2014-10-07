@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    android:id="@+id/sliding_tabs_default_title"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/main_xda_color"
+    android:gravity="center"
+    android:hint="@string/app_name"
+    android:padding="16dp"
+    android:textAppearance="?android:attr/textAppearanceInverse" />

@@ -1,0 +1,2 @@
+include ':android'
+include ':libraries:cardview-v7', ':libraries:recyclerview-v7'

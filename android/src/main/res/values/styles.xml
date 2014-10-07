@@ -1,0 +1,42 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Root styles that vary by API level -->
+    <!-- Disable RTL support on older devices -->
+    <!-- Prevents crash on certain devices to namespace conflict -->
+    <style name="FrameworkRoot.Theme" parent="@style/Theme.AppCompat.Light.DarkActionBar" />
+
+    <style name="Theme.One" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/Theme.One.ActionBar</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:actionDropDownStyle">@style/Theme.One.DropDown</item>
+    </style>
+
+    <style name="Theme.One.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">#553310</item>
+    </style>
+
+    <style name="Theme.One.DropDown" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
+        <item name="android:popupBackground">#553310</item>
+    </style>
+
+    <style name="Theme.One.ThreadTextAppearanceSmall" parent="@android:style/TextAppearance.Small">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#777</item>
+    </style>
+
+    <style name="Theme.One.CreatePostTextAppearanceSmall" parent="@android:style/TextAppearance.Small">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- Session Details -->
+    <style name="Theme.One.UserProfile" parent="Theme.One">
+        <item name="android:actionBarStyle">@style/TransparentActionBar</item>
+        <item name="android:windowActionBarOverlay">true</item>
+    </style>
+
+    <style name="ActionBar" parent="Theme.One.ActionBar" />
+
+    <!-- Transparent Action Bar -->
+    <style name="TransparentActionBar" parent="ActionBar">
+        <item name="android:background">@null</item>
+    </style>
+</resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="@drawable/activatable_selectable_selector"
+    android:clickable="true"
+    tools:context=".ui.MainActivity">
+
+    <ImageView
+        android:id="@+id/forum_list_item_subscribe"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:padding="16dp"
+        android:src="@drawable/ic_star_light"
+        android:tint="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/forum_list_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/forum_list_item_subscribe"
+        android:gravity="center_vertical"
+        android:paddingBottom="16dp"
+        android:paddingLeft="72dp"
+        android:paddingTop="16dp"
+        android:singleLine="true"
+        android:text="@string/forums"
+        android:textAppearance="?android:attr/textAppearance"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/forum_list_item_device_image"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:padding="16dp"
+        android:src="@drawable/phone" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@+id/forum_list_item_device_image"
+        android:layout_toRightOf="@+id/forum_list_item_device_image"
+        android:background="@color/lighter_gray"
+        android:visibility="visible" />
+</RelativeLayout>

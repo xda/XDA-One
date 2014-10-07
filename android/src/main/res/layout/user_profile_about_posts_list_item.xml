@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pkg="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="2dp"
+    android:layout_marginTop="2dp"
+    android:foreground="@drawable/activatable_selectable_selector"
+    pkg:cardBackgroundColor="@android:color/white"
+    pkg:cardCornerRadius="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/user_profile_about_posts_list_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:padding="16dp"
+            android:text="Posts"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_profile_about_posts_list_title">
+
+            <View
+                android:id="@+id/user_profile_about_posts_list_divider_top"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/user_profile_about_posts_list_user_posts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/user_profile_about_posts_list_divider_top"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:lineSpacingMultiplier="1.5"
+                android:padding="16dp"
+                android:text="@string/placeholder_text_short" />
+
+            <View
+                android:id="@+id/user_profile_about_posts_list_divider_email"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@id/user_profile_about_posts_list_user_posts"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/user_profile_about_posts_list_user_thanked_posts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/user_profile_about_posts_list_divider_email"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:lineSpacingMultiplier="1.5"
+                android:padding="16dp"
+                android:text="@string/placeholder_text_short" />
+        </RelativeLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

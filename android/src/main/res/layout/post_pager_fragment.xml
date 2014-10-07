@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MainActivity">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/post_pager_fragment_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/pagination_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="?android:actionBarSize"
+        android:background="@color/colorPrimary"
+        android:weightSum="1">
+
+        <ImageButton
+            android:id="@+id/page_first"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_weight="0.25"
+            android:padding="8dp"
+            android:src="@drawable/skip_previous"
+            android:tint="@android:color/white"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/page_top_textview"
+            android:layout_width="0dp"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:background="?android:attr/selectableItemBackground"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/placeholder_text"
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceMediumInverse" />
+
+        <ImageButton
+            android:id="@+id/page_last"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_weight="0.25"
+            android:padding="8dp"
+            android:src="@drawable/skip_next"
+            android:tint="@android:color/white" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/page_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/pagination_bar"
+        android:background="@color/colorPrimary"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:visibility="invisible" />
+
+    <com.xda.one.ui.widget.FloatingActionButton
+        android:id="@+id/post_pager_fragment_floating_reply_button"
+        android:layout_width="@dimen/fab_size"
+        android:layout_height="@dimen/fab_size"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:clickable="true"
+        android:padding="16dp"
+        android:src="@drawable/reply"
+        android:tint="@android:color/white" />
+</RelativeLayout>

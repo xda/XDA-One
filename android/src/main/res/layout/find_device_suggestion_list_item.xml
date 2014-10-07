@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="@color/colorPrimary"
+    tools:context=".ui.MainActivity">
+
+    <ImageView
+        android:id="@+id/hierarchy_spinner_item_device_image"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:padding="16dp"
+        android:src="@drawable/phone"
+        android:tint="@android:color/white" />
+
+    <TextView
+        android:id="@+id/find_device_suggestion_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/hierarchy_spinner_item_device_image"
+        android:gravity="center_vertical"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:singleLine="true"
+        android:text="@string/forums"
+        android:textAppearance="?android:attr/textAppearanceInverse"
+        android:textSize="16sp" />
+</RelativeLayout>

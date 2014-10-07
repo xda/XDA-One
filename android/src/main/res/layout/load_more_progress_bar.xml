@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProgressBar
+    android:id="@+id/load_more_progress_bar"
+    style="?android:attr/android:progressBarStyleSmallInverse"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:indeterminate="true"
+    android:paddingBottom="8dp"
+    android:visibility="gone" />

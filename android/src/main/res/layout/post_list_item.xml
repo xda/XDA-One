@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pkg="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="1dp"
+    android:layout_marginTop="1dp"
+    android:foreground="@drawable/activatable_selectable_selector"
+    pkg:cardBackgroundColor="@android:color/white"
+    pkg:cardCornerRadius="2dp"
+    tools:context=".ui.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp">
+
+        <com.makeramen.RoundedImageView
+            android:id="@+id/avatar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:clickable="true"
+            android:maxHeight="48dp"
+            android:maxWidth="48dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/account_circle"
+            pkg:border_color="@android:color/transparent"
+            pkg:oval="true" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@id/avatar"
+            android:paddingLeft="8dp"
+            android:text="@string/username" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_name"
+            android:layout_toRightOf="@id/avatar"
+            android:paddingLeft="8dp"
+            android:paddingTop="8dp"
+            android:text="@string/date"
+            android:textAppearance="@style/Theme.One.ThreadTextAppearanceSmall" />
+
+        <LinearLayout
+            android:id="@+id/post_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/avatar"
+            android:layout_marginTop="8dip"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:id="@+id/attachments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/post_layout"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:id="@+id/post_list_item_actions_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/attachments"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/post_list_item_quote"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="8dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_quote_dark" />
+
+            <ImageButton
+                android:id="@+id/post_list_item_multi_quote"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="8dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_mult_quote_dark" />
+
+            <com.dd.xda.CircularProgressButton
+                android:id="@+id/post_list_item_thanks"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="8dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_thumb_up_dark"
+                pkg:cpb_paddingProgress="8dp"
+                pkg:cpb_selectorIdle="@drawable/test" />
+
+            <TextView
+                android:id="@+id/post_list_item_thanks_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:paddingRight="8dp"
+                android:text="@string/count"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

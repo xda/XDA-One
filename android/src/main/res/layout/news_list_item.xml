@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pkg="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_item_height"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    tools:context=".ui.MainActivity">
+
+    <com.makeramen.RoundedImageView
+        android:id="@+id/avatar"
+        android:layout_width="@dimen/avatar_image_dimension"
+        android:layout_height="@dimen/avatar_image_dimension"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_small"
+        android:scaleType="fitXY"
+        android:src="@drawable/account_circle"
+        pkg:border_color="@android:color/transparent"
+        pkg:oval="true" />
+
+    <TextView
+        android:id="@+id/news_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/avatar"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_toRightOf="@id/avatar"
+        android:singleLine="true"
+        android:text="@string/xda_news"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/news_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/news_title"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_toRightOf="@id/avatar"
+        android:ellipsize="end"
+        android:lineSpacingMultiplier="1.5"
+        android:lines="2"
+        android:text="@string/lorem_long"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="13sp" />
+</RelativeLayout>

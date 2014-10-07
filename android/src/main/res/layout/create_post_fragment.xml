@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pkg="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".ui.MainActivity">
+
+    <com.makeramen.RoundedImageView
+        android:id="@+id/create_post_dialog_fragment_avatar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/account_circle"
+        pkg:oval="true" />
+
+    <TextView
+        android:id="@+id/create_post_fragment_header_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/create_post_dialog_fragment_avatar"
+        android:layout_toRightOf="@+id/create_post_dialog_fragment_avatar"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="@string/username"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/create_post_fragment_header_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/create_post_fragment_header_username"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/create_post_dialog_fragment_avatar"
+        android:layout_toRightOf="@+id/create_post_dialog_fragment_avatar"
+        android:gravity="center_vertical"
+        android:paddingBottom="8dp"
+        android:text="@string/replying_to"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <ImageView
+        android:id="@+id/create_post_dialog_fragment_send"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="8dp"
+        android:src="@drawable/send_button_background" />
+
+    <ImageView
+        android:id="@+id/create_post_dialog_fragment_emoticon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/create_post_dialog_fragment_send"
+        android:layout_toStartOf="@+id/create_post_dialog_fragment_send"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="8dp"
+        android:src="@drawable/ic_smilie" />
+
+    <include
+        android:id="@+id/create_post_dialog_fragment_message"
+        layout="@layout/default_content_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/create_post_dialog_fragment_send"
+        android:layout_alignLeft="@id/create_post_dialog_fragment_avatar"
+        android:layout_alignStart="@id/create_post_dialog_fragment_avatar"
+        android:layout_below="@id/create_post_fragment_header_title" />
+</RelativeLayout>
