@@ -173,10 +173,8 @@ public class MainActivity extends BaseActivity
                 return;
             }
         }
-
-        if (!mDrawerLayout.isDrawerOpen(Gravity.LEFT)
-                && getSupportFragmentManager().getBackStackEntryCount() == 0) {
-            mDrawerLayout.openDrawer(Gravity.LEFT);
+        if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            closeNavigationDrawer();
             return;
         }
         super.onBackPressed();
