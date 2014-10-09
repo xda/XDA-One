@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">XDA One</string>
+
+    <string name="menu_send_message">作者にメッセージを送信</string>
+    <string name="menu_copy_content">投稿の内容をコピー</string>
+    <string name="menu_author_profile">作者のプロフィールを表示</string>
+    <string name="menu_open_browser">ブラウザで開く</string>
+
+    <string name="menu_add_attachment">添付ファイルを追加</string>
+
+    <string name="menu_profile_change_password">パスワードを変更</string>
+    <string name="menu_profile_update_email">メールアドレスを更新</string>
+
+    <string name="no_internet_connection">インターネットに接続してください</string>
+
+    <string name="sign_in_title">サインイン/登録</string>
+
+    <string name="forums">フォーラム</string>
+    <string name="threads">スレッド</string>
+
+    <string name="inbox_title">受信トレイ</string>
+    <string name="sent_items_title">送信済みアイテム</string>
+
+    <!-- forum menu -->
+    <string name="forum_home_title">XDAホーム</string>
+    <string name="subscribed">購読中</string>
+    <string name="participated">参加中</string>
+    <string name="notifications">通知</string>
+    <string name="forum_newest_title">新着</string>
+    <string name="forum_top_title">トップ</string>
+    <string name="forum_all_title">すべて</string>
+
+    <string name="drawer_open">開く</string>
+    <string name="drawer_close">閉じる</string>
+
+    <string name="d_items_checked">%d個のアイテムを選択しました</string>
+    <string name="posts_selected_number">%d件の投稿を選択しました</string>
+
+    <!-- Small phrases -->
+    <string name="send">送信</string>
+    <string name="message_content">メッセージの内容</string>
+    <string name="title">タイトル</string>
+    <string name="loading">読み込み中…</string>
+    <string name="username">ユーザー名</string>
+    <string name="password">パスワード</string>
+    <string name="sign_in">サインイン</string>
+    <string name="or">または</string>
+    <string name="settings">設定</string>
+    <string name="help">ヘルプ</string>
+    <string name="about">情報</string>
+    <string name="profile">プロフィール</string>
+    <string name="share">共有</string>
+    <string name="subscribe">購読</string>
+    <string name="unsubscribe">購読解除</string>
+    <string name="thanks">Thanks</string>
+    <string name="news">ニュース</string>
+    <string name="search">検索</string>
+    <string name="user">ユーザー</string>
+    <string name="private_messages">プライベートメッセージ</string>
+    <string name="more_xda">他のXDA</string>
+    <string name="replying_to">返信: %s</string>
+    <string name="other">その他</string>
+    <string name="last_post">前回の投稿</string>
+    <string name="thread_title">スレッドのタイトル</string>
+    <string name="views">表示回数</string>
+    <string name="reply_count">返信回数</string>
+    <string name="date">日時</string>
+    <string name="avatar">アバター</string>
+    <string name="remove_thanks">Thanksを取り消す</string>
+    <string name="count">回数</string>
+    <string name="email">メール</string>
+    <string name="mark_read">既読にする</string>
+    <string name="mark_unread">未読にする</string>
+    <string name="delete">削除</string>
+    <string name="forum_title">フォーラムのタイトル</string>
+    <string name="creating_new_post">作成中…</string>
+    <string name="quote">引用</string>
+
+    <string name="find_your_device_title">自分の端末を探す</string>
+
+    <string name="post_creation_failed">投稿を作成できませんでした</string>
+
+    <string name="message_delete_successful">メッセージの削除が完了しました</string>
+
+    <string name="forum_subscription_subscribed">フォーラムの購読が完了しました</string>
+    <string name="forum_subscription_unsubscribed">フォーラムの購読解除が完了しました</string>
+    <string name="forum_subscription_toggle_failed">フォーラムの購読状態を切り替えられませんでした</string>
+
+    <string name="thread_subscription_subscribed">スレッドの購読が完了しました</string>
+    <string name="thread_subscription_unsubscribed">スレッドの購読解除が完了しました</string>
+    <string name="thread_subscription_toggle_failed">スレッドの購読状態を切り替えられませんでした</string>
+
+    <!-- User Profile -->
+    <string name="user_profile_title">タイトル:\n%1$s</string>
+    <string name="user_profile_signature">署名:\n%1$s</string>
+    <string name="user_profile_devices">端末:\n%1$s</string>
+    <string name="user_profile_email">メール:\n%1$s</string>
+
+    <!-- Auth -->
+    <string name="dont_have_xda_account">
+        <![CDATA[xda-developersアカウントをまだ持っていませんか？]]></string>
+    <string name="sign_in_google_plus">Google+でサインイン</string>
+    <string name="register_email">メールで登録</string>
+    <string name="change_password">パスワードを変更</string>
+    <string name="change_email_address">メールアドレスを変更</string>
+    <string name="no_items_empty_view">表示するアイテムがありません</string>
+
+    <string name="message_reply_success">メッセージの返信が完了しました</string>
+    <string name="message_reply_failed">メッセージに返信できませんでした</string>
+    <string name="placeholder">プレースホルダー</string>
+    <string name="to">To</string>
+    <string name="message_subject">メッセージの件名</string>
+    <string name="content">内容</string>
+    <string name="user_profile">ユーザープロフィール</string>
+    <string name="find_your_device">Find Your Device</string>
+    <string name="multi_quote">複数引用</string>
+    <string name="mentions">メンション</string>
+    <string name="quotes">引用</string>
+    <string name="quote_mentions">引用/メンション</string>
+    <string name="user_profile_thanked_posts_count">Thanksされた投稿数:\n%1$d</string>
+    <string name="user_profile_post_count">投稿数:\n%1$d</string>
+    <string name="find_a_device">端末を探す</string>
+    <string name="forum_general_title">全般</string>
+    <string name="one_account_allowed">一度に追加できるXDAアカウントは1つだけです</string>
+    <string name="login">ログイン</string>
+    <string name="logout">ログアウト</string>
+    <string name="logging_in">ログイン中…</string>
+    <string name="new_message_send_successful">メッセージの送信が完了しました</string>
+    <string name="new_message_send_failed">メッセージを送信できませんでした</string>
+    <string name="my_devices">自分の端末</string>
+    <string name="failed_to_get_forum">URLのアイテムを取得できませんでした</string>
+    <string name="failed_to_logout">ログアウトできませんでした</string>
+    <string name="register">登録</string>
+    <string name="recaptcha">reCAPTCHAレスポンス</string>
+    <string name="pm">PM</string>
+
+    <string name="xda_news">XDAニュース</string>
+    <string name="lorem_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta pretium urna, at sagittis turpis posuere nec. Quisque vulputate dignissim metus, eget eleifend tortor commodo ultrices. Cras eros ante, faucibus sit amet eleifend at, rhoncus ut dolor. Suspendisse cursus sollicitudin elit, sit amet porta ante interdum id. Maecenas feugiat, neque eget lobortis volutpat, metus neque fermentum erat, at tincidunt purus purus in justo. Curabitur consectetur augue non elit porttitor rhoncus. Pellentesque accumsan congue blandit. Mauris tincidunt congue velit. Quisque gravida at sem in rhoncus. Curabitur id lectus sed lectus ultrices aliquet a vitae augue. Sed eu euismod nisi, vitae semper nulla. Proin mauris orci, efficitur sed nunc sed, dictum maximus lectus. Cras fringilla suscipit nisl, sit amet scelerisque leo tincidunt ut. </string>
+    <string name="read_more">もっと読む</string>
+</resources>
