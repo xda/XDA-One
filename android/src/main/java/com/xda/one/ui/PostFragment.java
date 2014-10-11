@@ -300,17 +300,24 @@ public class PostFragment extends Fragment
     @Override
     public void onLoadFinished(final Loader<AugmentedPostContainer> loader,
             final AugmentedPostContainer container) {
-        onItemsReceived(container.getPosts());
-        mCallback.onPageLoaded(container.getThread());
+        if (container == null) {
+            onItemsReceived(null);
+        } else {
+            onItemsReceived(container.getPosts());
+            mCallback.onPageLoaded(container.getThread());
+        }
     }
 
     private void onItemsReceived(final List<AugmentedPost> data) {
-        mAdapter.clear();
-
-        if (data == null) {
+        if (data == null && mAdapter.getItemCount() != 0) {
+            Toast.makeText(getActivity(), R.string.unable_to_refresh, Toast.LENGTH_LONG).show();
+            return;
+        } else if (data == null) {
             UIUtils.updateEmptyViewState(getView(), mRecyclerView, 0);
             return;
         }
+        mAdapter.clear();
+
         UIUtils.updateEmptyViewState(getView(), mRecyclerView, data.size());
         mAdapter.addAll(data);
 
