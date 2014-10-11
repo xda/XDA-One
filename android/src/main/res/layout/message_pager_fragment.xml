@@ -8,7 +8,7 @@
         android:id="@+id/pager_tab_strip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/main_xda_color" />
+        android:background="@color/tabLayoutBackgroundColor" />
 
     <com.xda.one.ui.widget.NonSwipeableViewPager
         android:id="@+id/message_view_pager"

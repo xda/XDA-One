@@ -53,8 +53,6 @@ public class NavigationDrawerFragment extends ListFragment
 
     private TextView mUsernameTextView;
 
-    private TextView mEmailTextView;
-
     private UserClient mUserClient;
 
     private ImageView mAvatar;
@@ -100,7 +98,6 @@ public class NavigationDrawerFragment extends ListFragment
         getListView().setOnItemClickListener(this);
 
         mUsernameTextView = (TextView) view.findViewById(R.id.navigation_drawer_fragment_username);
-        mEmailTextView = (TextView) view.findViewById(R.id.navigation_drawer_fragment_email);
 
         mAvatar = (ImageView) view.findViewById(R.id.navigation_drawer_fragment_avatar);
 
@@ -198,14 +195,12 @@ public class NavigationDrawerFragment extends ListFragment
             mLoginLogout.setText(getString(R.string.login));
 
             mUsernameTextView.setText("Anonymous");
-            mEmailTextView.setText("Anonymous");
             Picasso.with(getActivity()).load(R.drawable.ic_account_circle_light).into(mAvatar);
         } else {
             mLoginLogout.setIdleText(getString(R.string.logout));
             mLoginLogout.setText(getString(R.string.logout));
 
             mUsernameTextView.setText(account.getUserName());
-            mEmailTextView.setText(account.getEmail());
             Picasso.with(getActivity())
                     .load(account.getAvatarUrl())
                     .placeholder(R.drawable.ic_account_circle_light)

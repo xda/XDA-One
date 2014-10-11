@@ -19,7 +19,7 @@
         <ImageView
             android:id="@+id/navigation_drawer_header_background"
             android:layout_width="fill_parent"
-            android:layout_height="140dp"
+            android:layout_height="64dp"
             android:clickable="true"
             android:src="?android:attr/selectableItemBackground" />
 
@@ -29,7 +29,7 @@
             android:layout_height="48dp"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:minHeight="48dp"
             android:minWidth="48dp"
             android:scaleType="fitXY"
@@ -40,44 +40,33 @@
             android:id="@+id/navigation_drawer_fragment_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/navigation_drawer_fragment_email"
-            android:paddingBottom="8dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
+            android:padding="16dp"
             android:text="@string/username"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="?android:attr/textColorPrimaryInverse"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/navigation_drawer_fragment_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/navigation_drawer_header_background"
-            android:paddingBottom="16dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:text="@string/email"
-            android:textColor="?android:attr/textColorPrimaryInverse" />
+            android:textStyle="bold"
+            android:layout_alignTop="@+id/navigation_drawer_fragment_avatar"
+            android:layout_toRightOf="@+id/navigation_drawer_fragment_avatar"
+            android:layout_toEndOf="@+id/navigation_drawer_fragment_avatar" />
 
         <com.dd.CircularProgressButton
             android:id="@+id/navigation_drawer_login_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/navigation_drawer_header_background"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:background="?android:attr/selectableItemBackground"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@android:color/white"
+            android:textColor="?android:attr/textColorPrimaryInverse"
             android:textStyle="bold"
-            pkg:cpb_colorIndicator="@android:color/white"
+            pkg:cpb_colorIndicator="?android:attr/textColorPrimaryInverse"
             pkg:cpb_colorIndicatorBackground="@android:color/transparent"
             pkg:cpb_colorProgress="@android:color/transparent"
             pkg:cpb_cornerRadius="2dp"
             pkg:cpb_paddingProgress="16dp"
             pkg:cpb_selectorIdle="@drawable/test"
-            pkg:cpb_textIdle="Login" />
+            pkg:cpb_textIdle="Login"
+            android:layout_alignTop="@id/navigation_drawer_fragment_avatar"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
     <FrameLayout
