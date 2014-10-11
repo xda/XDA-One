@@ -12,7 +12,7 @@
     <color name="colorAccent">@color/xda_color_accent</color>
 
     <color name="selected_color">#E8BA88</color>
-    <color name="very_light_grey">#fafafa</color>
+    <color name="very_light_grey">#E0E0E0</color>
 
     <color name="top_item">#a6c</color>
     <color name="sticky_item">#f44</color>
