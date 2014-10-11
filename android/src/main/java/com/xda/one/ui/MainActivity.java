@@ -6,7 +6,10 @@ import com.xda.one.model.misc.ForumType;
 import com.xda.one.ui.helper.UrlParseHelper;
 import com.xda.one.util.AccountUtils;
 import com.xda.one.util.CrashUtils;
+import com.xda.one.util.UIUtils;
+import com.xda.one.util.Utils;
 
+import android.app.ActionBar;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -16,6 +19,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NavUtils;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -28,8 +32,6 @@ public class MainActivity extends BaseActivity
         ThreadFragment.Callback, PostPagerFragment.Callback, SearchFragment.Callback {
 
     private DrawerLayout mDrawerLayout;
-
-    private ActionBarDrawerToggle mDrawerToggle;
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
@@ -44,30 +46,27 @@ public class MainActivity extends BaseActivity
 
         setContentView(R.layout.main_activity);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final ActionBar actionBar = getActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setIcon(R.drawable.ic_action_menu);
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.nav_drawer_closed,
-                R.string.drawer_open, R.string.drawer_close);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View view, float v) {
-                mDrawerToggle.onDrawerSlide(view, v);
             }
 
             @Override
             public void onDrawerOpened(View view) {
-                mDrawerToggle.onDrawerOpened(view);
-                getActionBar().show();
+                actionBar.show();
             }
 
             @Override
             public void onDrawerClosed(View view) {
-                mDrawerToggle.onDrawerClosed(view);
             }
 
             @Override
             public void onDrawerStateChanged(int i) {
-                mDrawerToggle.onDrawerStateChanged(i);
             }
         });
 
@@ -81,6 +80,16 @@ public class MainActivity extends BaseActivity
             mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.navigation_drawer_frame);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                UIUtils.toggleDrawerLayout(mDrawerLayout);
+                return true;
+        }
+        return false;
     }
 
     private void initialReplaceFragment() {
@@ -130,23 +139,6 @@ public class MainActivity extends BaseActivity
                 }
             }
         });
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return mDrawerToggle.onOptionsItemSelected(item);
     }
 
     @Override
