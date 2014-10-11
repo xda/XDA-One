@@ -74,7 +74,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.google.android.gms:play-services:5.2.08'
+    compile 'com.google.android.gms:play-services:5.0.89'
 
     compile 'com.crashlytics.android:crashlytics:1.+'
 
