@@ -18,10 +18,11 @@ public interface PostClient {
     public void getPostsAsync(final String threadId, final int page,
             final Callback<ResponsePostContainer> consumer);
 
-    public void getPostsById(String postId, Consumer<ResponsePostContainer> consumer);
+    public void getPostsById(String postId, Consumer<ResponsePostContainer> consumer,
+            final Runnable failure);
 
-    public void getUnreadPostFeed(UnifiedThread unifiedThread,
-            Consumer<ResponsePostContainer> consumer);
+    public void getUnreadPostFeed(final UnifiedThread unifiedThread,
+            final Consumer<ResponsePostContainer> consumer, final Runnable failure);
 
     public void addAttachmentAsync(final Post post, final Consumer<Result> runnable);
 

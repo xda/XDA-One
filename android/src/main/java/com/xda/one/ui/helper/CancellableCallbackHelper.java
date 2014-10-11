@@ -5,7 +5,7 @@ import com.xda.one.api.misc.Consumer;
 import android.app.Dialog;
 import android.content.DialogInterface;
 
-public abstract class CancellableCallbackHelper<T> implements Consumer<T>,
+public abstract class CancellableCallbackHelper<T> implements Consumer<T>, Runnable,
         DialogInterface.OnCancelListener {
 
     private boolean mCancel;

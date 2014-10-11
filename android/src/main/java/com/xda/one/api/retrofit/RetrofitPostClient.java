@@ -74,7 +74,7 @@ public class RetrofitPostClient implements PostClient {
 
     @Override
     public void getPostsById(final String postId, final Consumer<ResponsePostContainer>
-            container) {
+            container, final Runnable failure) {
         mPostAPI.getPostsById(getAuthToken(), postId, new Callback<ResponsePostContainer>() {
             @Override
             public void success(final ResponsePostContainer responsePostContainer,
@@ -84,14 +84,14 @@ public class RetrofitPostClient implements PostClient {
 
             @Override
             public void failure(final RetrofitError error) {
-                error.printStackTrace();
+                Utils.handleRetrofitErrorQuietly(error);
             }
         });
     }
 
     @Override
     public void getUnreadPostFeed(final UnifiedThread unifiedThread,
-            final Consumer<ResponsePostContainer> consumer) {
+            final Consumer<ResponsePostContainer> consumer, final Runnable failure) {
         mPostAPI.getUnreadPostFeed(getAuthToken(), unifiedThread.getThreadId(),
                 new Callback<ResponsePostContainer>() {
                     @Override
@@ -102,7 +102,8 @@ public class RetrofitPostClient implements PostClient {
 
                     @Override
                     public void failure(final RetrofitError error) {
-                        error.printStackTrace();
+                        Utils.handleRetrofitErrorQuietly(error);
+                        failure.run();
                     }
                 });
     }

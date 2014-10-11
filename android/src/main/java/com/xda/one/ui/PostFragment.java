@@ -197,7 +197,8 @@ public class PostFragment extends Fragment
                                 "Finding post position", "Finding post position", true, true);
 
                         final PostClient client = RetrofitPostClient.getClient(getActivity());
-                        client.getPostsById(postId, new GoToQuoteCallback(dialog));
+                        GoToQuoteCallback callback = new GoToQuoteCallback(dialog);
+                        client.getPostsById(postId, callback, callback);
                     }
                 });
     }
@@ -300,7 +301,6 @@ public class PostFragment extends Fragment
     public void onLoadFinished(final Loader<AugmentedPostContainer> loader,
             final AugmentedPostContainer container) {
         onItemsReceived(container.getPosts());
-
         mCallback.onPageLoaded(container.getThread());
     }
 
@@ -439,6 +439,11 @@ public class PostFragment extends Fragment
             } else {
                 mCallback.switchToFragment(data);
             }
+        }
+
+        @Override
+        public void run() {
+
         }
     }
 }

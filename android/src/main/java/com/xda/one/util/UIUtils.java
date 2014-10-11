@@ -5,7 +5,9 @@ import com.xda.one.R;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
 
 import static android.view.View.GONE;
@@ -81,5 +83,13 @@ public class UIUtils {
 
         textView.setVisibility(GONE);
         progressBar.setVisibility(VISIBLE);
+    }
+
+    public static void toggleDrawerLayout(final DrawerLayout drawerLayout) {
+        if (drawerLayout.isDrawerOpen(Gravity.START)) {
+            drawerLayout.closeDrawer(Gravity.START);
+        } else {
+            drawerLayout.openDrawer(Gravity.START);
+        }
     }
 }

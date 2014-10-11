@@ -12,6 +12,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -37,7 +38,14 @@ public class ThreadUnreadPostHelper extends CancellableCallbackHelper<ResponsePo
 
     public void start() {
         final PostClient client = RetrofitPostClient.getClient(mContext);
-        client.getUnreadPostFeed(mUnifiedThread, this);
+        client.getUnreadPostFeed(mUnifiedThread, this, this);
+    }
+
+    @Override
+    public void run() {
+        Toast.makeText(mDialog.getContext(), R.string.something_went_wrong_request,
+                Toast.LENGTH_LONG).show();
+        mDialog.dismiss();
     }
 
     @Override

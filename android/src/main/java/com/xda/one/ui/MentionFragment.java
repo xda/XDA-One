@@ -24,6 +24,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -168,6 +169,12 @@ public class MentionFragment extends QuoteMentionBaseFragment
             transaction.addToBackStack(mMention.getThread().getTitle());
             transaction.replace(R.id.content_frame, fragment).commit();
         }
+
+        @Override
+        public void run() {
+            Toast.makeText(mDialog.getContext(), R.string.something_went_wrong_request,
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
     private class MentionClickListener implements View.OnClickListener {
@@ -183,8 +190,10 @@ public class MentionFragment extends QuoteMentionBaseFragment
             final AlertDialog dialog = ProgressDialog.show(getActivity(),
                     "Finding post position", "Finding post position", true, true);
 
+            final MentionCallback mentionCallback = new MentionCallback(dialog, mention);
+
             final PostClient client = RetrofitPostClient.getClient(getActivity());
-            client.getPostsById(mention.getPostId(), new MentionCallback(dialog, mention));
+            client.getPostsById(mention.getPostId(), mentionCallback, mentionCallback);
         }
     }
 }
