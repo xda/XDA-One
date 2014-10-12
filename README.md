@@ -13,5 +13,5 @@ Contributors/Authors
 
 Translators
 ==========
-Japanese: blackzigong
-Slovak: Dávid Kentoš
+* Japanese: blackzigong
+* Slovak: Dávid Kentoš
