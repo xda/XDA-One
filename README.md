@@ -14,3 +14,4 @@ Contributors/Authors
 Translators
 ==========
 Japanese: blackzigong
+Slovak: Dávid Kentoš
