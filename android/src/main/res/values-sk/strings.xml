@@ -2,33 +2,33 @@
 <resources>
     <string name="app_name">XDA One</string>
 
-    <string name="menu_send_message">Poslať Autorovi Správu</string>
-    <string name="menu_copy_content">Skopírovať Obsah</string>
-    <string name="menu_author_profile">Profil Autora</string>
-    <string name="menu_open_browser">Otvoriť v Prehliadači</string>
+    <string name="menu_send_message">Poslať správu autorovi</string>
+    <string name="menu_copy_content">Skopírovať obsah</string>
+    <string name="menu_author_profile">Profil autora</string>
+    <string name="menu_open_browser">Otvoriť v prehliadači</string>
 
-    <string name="menu_add_attachment">Vložiť Prílohu</string>
+    <string name="menu_add_attachment">Vložiť prílohu</string>
 
-    <string name="menu_profile_change_password">Zmeniť Heslo</string>
-    <string name="menu_profile_update_email">Zmeniť E-Mail</string>
+    <string name="menu_profile_change_password">Zmeniť heslo</string>
+    <string name="menu_profile_update_email">Zmeniť e-mail</string>
 
-    <string name="no_internet_connection">Prosím pripojte sa k Internetu</string>
+    <string name="no_internet_connection">Prosím, pripojte sa k internetu</string>
 
     <string name="sign_in_title">Prihlásiť/Registrovať</string>
 
     <string name="forums">Fóra</string>
     <string name="threads">Príspevky</string>
 
-    <string name="inbox_title">Inbox</string>
+    <string name="inbox_title">Doručená pošta</string>
     <string name="sent_items_title">Odoslané</string>
 
     <!-- forum menu -->
-    <string name="forum_home_title">XDA Home</string>
+    <string name="forum_home_title">XDA Domov</string>
     <string name="subscribed">Sledované</string>
     <string name="participated">Zúčastnené</string>
-    <string name="notifications">Notifikácie</string>
+    <string name="notifications">Upozornenia</string>
     <string name="forum_newest_title">Nové</string>
-    <string name="forum_top_title">Top</string>
+    <string name="forum_top_title">Najlepšie</string>
     <string name="forum_all_title">Všetko</string>
 
     <string name="drawer_open">Otvoriť</string>
@@ -39,16 +39,16 @@
 
     <!-- Small phrases -->
     <string name="send">Odoslať</string>
-    <string name="message_content">Obsah Správy</string>
+    <string name="message_content">Obsah správy</string>
     <string name="title">Názov</string>
     <string name="loading">Načítavanie…</string>
     <string name="username">Prezývka</string>
-    <string name="password">Heslp</string>
+    <string name="password">Heslo</string>
     <string name="sign_in">Prihlásiť</string>
     <string name="or">alebo</string>
     <string name="settings">Nastavenia</string>
     <string name="help">Pomoc</string>
-    <string name="about">Info</string>
+    <string name="about">Informácie</string>
     <string name="profile">Profil</string>
     <string name="share">Zdielať</string>
     <string name="subscribe">Sledovať</string>
@@ -57,85 +57,85 @@
     <string name="news">Novinky</string>
     <string name="search">Hladať</string>
     <string name="user">Používateľ</string>
-    <string name="private_messages">Osobné Správy</string>
+    <string name="private_messages">Osobné správy</string>
     <string name="more_xda">Viac XDA</string>
     <string name="replying_to">Odpovedať: %s</string>
     <string name="other">Iné</string>
-    <string name="last_post">Posledný Príspevok</string>
-    <string name="thread_title">Názov Príspevku</string>
+    <string name="last_post">Posledný príspevok</string>
+    <string name="thread_title">Názov príspevku</string>
     <string name="views">Zhliadnutia</string>
-    <string name="reply_count">Počet Odpovedí</string>
+    <string name="reply_count">Počet odpovedí</string>
     <string name="date">Dátum</string>
     <string name="avatar">Avatar</string>
-    <string name="remove_thanks">Odstrániť Poďakovani</string>
+    <string name="remove_thanks">Odstrániť poďakovanie</string>
     <string name="count">Počet</string>
-    <string name="email">Email</string>
-    <string name="mark_read">Označiť ako Prečítané</string>
-    <string name="mark_unread">Označiť ako Neprečítané</string>
-    <string name="delete">Ostrániť</string>
-    <string name="forum_title">Názov Fóra</string>
+    <string name="email">E-mail</string>
+    <string name="mark_read">Označiť ako prečítané</string>
+    <string name="mark_unread">Označiť ako neprečítané</string>
+    <string name="delete">Vymazať</string>
+    <string name="forum_title">Názov fóra</string>
     <string name="creating_new_post">Vytváranie…</string>
-    <string name="quote">Citát</string>
+    <string name="quote">Citovať</string>
 
-    <string name="find_your_device_title">Nájdi Svoje Zariadenie</string>
+    <string name="find_your_device_title">Nájdi svoje zariadenie</string>
 
     <string name="post_creation_failed">Tvorba príspevku zlyhala</string>
 
-    <string name="message_delete_successful">Úspešne zmazaná správa</string>
+    <string name="message_delete_successful">Úspešne vymazaná správa</string>
 
-    <string name="forum_subscription_subscribed">Odteraz sleduješ toto fórum</string>
-    <string name="forum_subscription_unsubscribed">Odteraz nesleduješ toto fórum</string>
+    <string name="forum_subscription_subscribed">Odteraz sledujete toto fórum</string>
+    <string name="forum_subscription_unsubscribed">Odteraz nesledujete toto fórum</string>
     <string name="forum_subscription_toggle_failed">Zvolenie sledovania fóra zlyhalo</string>
 
-    <string name="thread_subscription_subscribed">Odteraz sleduješ tento príspevok</string>
-    <string name="thread_subscription_unsubscribed">Odteraz nesleduješ tento príspevok</string>
+    <string name="thread_subscription_subscribed">Odteraz sledujete tento príspevok</string>
+    <string name="thread_subscription_unsubscribed">Odteraz nesledujete tento príspevok</string>
     <string name="thread_subscription_toggle_failed">Zvolenie sledovania príspevku zlyhalo</string>
 
     <!-- User Profile -->
     <string name="user_profile_title">Názov:\n%1$s</string>
     <string name="user_profile_signature">Podpis:\n%1$s</string>
     <string name="user_profile_devices">Zariadenia:\n%1$s</string>
-    <string name="user_profile_email">Email:\n%1$s</string>
+    <string name="user_profile_email">E-mail:\n%1$s</string>
 
     <!-- Auth -->
     <string name="dont_have_xda_account">
-        <![CDATA[Don&apos;t have an xda-developers account yet?]]></string>
+        <![CDATA[Nemáte ešte účet na xda-developers?]]></string>
     <string name="sign_in_google_plus">g+ Prihlásiť sa cez Google</string>
-    <string name="register_email">Registrovať cez Email</string>
-    <string name="change_password">Zmeniť Heslo</string>
-    <string name="change_email_address">Zmeniť Email Adresu</string>
+    <string name="register_email">Registrovať cez e-mail</string>
+    <string name="change_password">Zmeniť heslo</string>
+    <string name="change_email_address">Zmeniť e-mailovú adresu</string>
     <string name="no_items_empty_view">Tu nie je nič</string>
 
-    <string name="message_reply_success">Odpoveď na správu úspešná</string>
+    <string name="message_reply_success">Odpoveď na správu bola úspešná</string>
     <string name="message_reply_failed">Odpoveď na správu zlyhala</string>
-    <string name="placeholder">Placeholder</string>
+    <string name="placeholder">Zástupca</string>
     <string name="to">Pre</string>
-    <string name="message_subject">Subjekt Správy</string>
+    <string name="message_subject">Predmet správy</string>
     <string name="content">Obsah</string>
-    <string name="user_profile">Profil Používateľa</string>
-    <string name="find_your_device">Nájdi Svoje Zariadenie</string>
-    <string name="multi_quote">Multi Citovanie</string>
-    <string name="mentions">Zmienka</string>
+    <string name="user_profile">Profil používateľa</string>
+    <string name="find_your_device">Nájdi svoje tariadenie</string>
+    <string name="multi_quote">Viacnásobné citovanie</string>
+    <string name="mentions">Zmienky</string>
     <string name="quotes">Citácie</string>
     <string name="quote_mentions">Citácie/Zmienky</string>
-    <string name="user_profile_thanked_posts_count">Ďakovaných Príspevkov:\n%1$d</string>
-    <string name="user_profile_post_count">Počet Príspevkov:\n%1$d</string>
-    <string name="find_a_device">Nájsť Zariadenie</string>
+    <string name="user_profile_thanked_posts_count">Počet poďakovaných príspevkov:\n%1$d</string>
+    <string name="user_profile_post_count">Počet príspevkov:\n%1$d</string>
+    <string name="find_a_device">Nájsť zariadenie</string>
     <string name="forum_general_title">Všeobecné</string>
-    <string name="one_account_allowed">Iba jeden XDA účet môže byť pridaný</string>
+    <string name="one_account_allowed">Môže byť pridaný iba jeden XDA účet</string>
     <string name="login">Prihlásiť</string>
     <string name="logout">Odhlásiť</string>
     <string name="logging_in">Prihlasovanie…</string>
     <string name="new_message_send_successful">Správa úspešne odoslaná</string>
     <string name="new_message_send_failed">Odosielanie správy zlyhalo</string>
-    <string name="my_devices">Moje Zariadenia</string>
-    <string name="failed_to_get_forum">Zlyhanie získavania vecí URL</string>
-    <string name="failed_to_logout">Odhlásenie neúspešné</string>
+    <string name="my_devices">Moje zariadenia</string>
+    <string name="failed_to_get_forum">Zlyhanie získavania URL položiek</string>
+    <string name="failed_to_logout">Odhlásenie bolo neúspešné</string>
     <string name="register">Registrovať</string>
     <string name="recaptcha">reCAPTCHA</string>
-    <string name="pm">PM</string>
+    <string name="pm">Súkromná správa</string>
 
-    <string name="xda_news">XDA News</string>
+    <string name="xda_news">XDA Novinky</string>
     <string name="lorem_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta pretium urna, at sagittis turpis posuere nec. Quisque vulputate dignissim metus, eget eleifend tortor commodo ultrices. Cras eros ante, faucibus sit amet eleifend at, rhoncus ut dolor. Suspendisse cursus sollicitudin elit, sit amet porta ante interdum id. Maecenas feugiat, neque eget lobortis volutpat, metus neque fermentum erat, at tincidunt purus purus in justo. Curabitur consectetur augue non elit porttitor rhoncus. Pellentesque accumsan congue blandit. Mauris tincidunt congue velit. Quisque gravida at sem in rhoncus. Curabitur id lectus sed lectus ultrices aliquet a vitae augue. Sed eu euismod nisi, vitae semper nulla. Proin mauris orci, efficitur sed nunc sed, dictum maximus lectus. Cras fringilla suscipit nisl, sit amet scelerisque leo tincidunt ut. </string>
-    <string name="read_more">Čítať viac</string>
+    <string name="read_more">Prečítať viac</string>
 </resources>
