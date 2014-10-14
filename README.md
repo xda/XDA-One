@@ -10,3 +10,8 @@ Contributors/Authors
 ==========
 * Lalit Maganti (tilal6991) - Co-author
 * andriyKan - (Early) Co-author
+
+Translators
+==========
+* Japanese: blackzigong
+* Slovak: Dávid Kentoš
