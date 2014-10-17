@@ -66,10 +66,10 @@ public class MyDeviceFragment extends Fragment
         ViewCompat.setOverScrollMode(mRecyclerView, ViewCompat.OVER_SCROLL_NEVER);
         mModeHelper.setRecyclerView(mRecyclerView);
 
-        final ActionBar bar = getActivity().getActionBar();
-        bar.show();
-        bar.setTitle(R.string.my_devices);
-        bar.setSubtitle(null);
+        // final ActionBar bar = getActivity().getActionBar();
+        // bar.show();
+        // bar.setTitle(R.string.my_devices);
+        // bar.setSubtitle(null);
 
         getLoaderManager().initLoader(0, null, this);
     }

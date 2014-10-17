@@ -2,8 +2,8 @@ package com.xda.one.ui.listener;
 
 import android.support.v7.widget.RecyclerView;
 
-public class InfiniteRecyclerLoadHelper implements RecyclerEndHelper.Callback,
-        RecyclerView.OnScrollListener {
+public class InfiniteRecyclerLoadHelper extends RecyclerView.OnScrollListener
+        implements RecyclerEndHelper.Callback {
 
     private final Callback mCallback;
 
@@ -45,19 +45,19 @@ public class InfiniteRecyclerLoadHelper implements RecyclerEndHelper.Callback,
     }
 
     @Override
-    public void onScrollStateChanged(int newState) {
+    public void onScrollStateChanged(final RecyclerView recyclerView, final int newState) {
         if (mScrollListener != null) {
-            mScrollListener.onScrollStateChanged(newState);
+            mScrollListener.onScrollStateChanged(recyclerView, newState);
         }
-        mRecyclerEndHelper.onScrollStateChanged(newState);
+        mRecyclerEndHelper.onScrollStateChanged(recyclerView, newState);
     }
 
     @Override
-    public void onScrolled(int dx, int dy) {
+    public void onScrolled(final RecyclerView recyclerView, final int dx, final int dy) {
         if (mScrollListener != null) {
-            mScrollListener.onScrolled(dx, dy);
+            mScrollListener.onScrolled(recyclerView, dx, dy);
         }
-        mRecyclerEndHelper.onScrolled(dx, dy);
+        mRecyclerEndHelper.onScrolled(recyclerView, dx, dy);
     }
 
     public void updateRecyclerView(RecyclerView recyclerView) {

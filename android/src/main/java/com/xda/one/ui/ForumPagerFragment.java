@@ -59,10 +59,10 @@ public class ForumPagerFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
 
-        final ActionBar bar = getActivity().getActionBar();
-        bar.show();
-        bar.setTitle(R.string.subscribed);
-        bar.setSubtitle(null);
+        // final ActionBar bar = getActivity().getActionBar();
+        // bar.show();
+        // bar.setTitle(R.string.subscribed);
+        // bar.setSubtitle(null);
 
         final ViewPager pager = (ViewPager) view.findViewById(R.id.forum_view_pager);
         pager.setOffscreenPageLimit(3);
@@ -79,7 +79,7 @@ public class ForumPagerFragment extends Fragment {
     public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
         inflater.inflate(R.menu.forum_pager_ab, menu);
 
-        mSearchMenuItem = menu.findItem(R.id.find_your_device_search);
+        /*mSearchMenuItem = menu.findItem(R.id.find_your_device_search);
 
         // Get the SearchView and set the searchable configuration
         final SearchManager searchManager = (SearchManager) getActivity()
@@ -92,7 +92,7 @@ public class ForumPagerFragment extends Fragment {
 
         final SearchQueryListener listener = new SearchQueryListener(searchView);
         searchView.setOnQueryTextListener(listener);
-        searchView.setOnSuggestionListener(listener);
+        searchView.setOnSuggestionListener(listener);*/
     }
 
     public boolean onBackPressed() {

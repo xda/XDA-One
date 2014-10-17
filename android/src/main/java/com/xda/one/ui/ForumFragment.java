@@ -214,10 +214,10 @@ public class ForumFragment extends Fragment
 
         mModeHelper.setRecyclerView(mRecyclerView);
 
-        final ActionBar bar = getActivity().getActionBar();
-        bar.show();
-        bar.setTitle(mForumTitle);
-        bar.setSubtitle(mParentForumTitle);
+        // final ActionBar bar = getActivity().getActionBar();
+        // bar.show();
+        // bar.setTitle(mForumTitle);
+        // bar.setSubtitle(mParentForumTitle);
 
         if (mAdapter.getItemCount() == 0) {
             getLoaderManager().initLoader(0, null, this);

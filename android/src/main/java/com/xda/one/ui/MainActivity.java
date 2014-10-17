@@ -6,21 +6,20 @@ import com.xda.one.model.misc.ForumType;
 import com.xda.one.ui.helper.UrlParseHelper;
 import com.xda.one.util.AccountUtils;
 import com.xda.one.util.CrashUtils;
-import com.xda.one.util.UIUtils;
-import com.xda.one.util.Utils;
+import com.xda.one.util.FragmentUtils;
 
-import android.app.ActionBar;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.NavUtils;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,6 +36,10 @@ public class MainActivity extends BaseActivity
 
     private Runnable mLoginSuccessfulRunnable;
 
+    private ActionBarDrawerToggle mDrawerToggle;
+
+    private Toolbar mToolBar;
+
     @Override
     public void onCreate(final Bundle bundle) {
         requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
@@ -46,12 +49,15 @@ public class MainActivity extends BaseActivity
 
         setContentView(R.layout.main_activity);
 
-        final ActionBar actionBar = getActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setIcon(R.drawable.ic_action_menu);
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+        mToolBar = (Toolbar) findViewById(R.id.toolbar);
+
+        mDrawerToggle = new ActionBarDrawerToggle(this,
+                mDrawerLayout, mToolBar, R.string.drawer_open, R.string.drawer_close);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        setSupportActionBar(mToolBar);
+
+        /*mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View view, float v) {
             }
@@ -68,7 +74,7 @@ public class MainActivity extends BaseActivity
             @Override
             public void onDrawerStateChanged(int i) {
             }
-        });
+        });*/
 
         if (bundle == null) {
             mNavigationDrawerFragment = new NavigationDrawerFragment();
@@ -82,14 +88,26 @@ public class MainActivity extends BaseActivity
         }
     }
 
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                UIUtils.toggleDrawerLayout(mDrawerLayout);
-                return true;
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
         }
-        return false;
+        return super.onOptionsItemSelected(item);
     }
 
     private void initialReplaceFragment() {
@@ -204,11 +222,10 @@ public class MainActivity extends BaseActivity
     public void switchCurrentlyDisplayedFragment(final Fragment fragment,
             final boolean backStackAndAnimate, final String title) {
         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        final FragmentTransaction transaction = FragmentUtils
+                .getDefaultTransaction(getSupportFragmentManager());
         if (backStackAndAnimate) {
-            transaction.addToBackStack(title)
-                    .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
-                            R.anim.slide_in_left, R.anim.slide_out_right);
+            transaction.addToBackStack(title);
         }
         transaction.replace(R.id.content_frame, fragment).commit();
     }

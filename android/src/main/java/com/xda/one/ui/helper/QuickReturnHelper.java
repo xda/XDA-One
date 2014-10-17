@@ -122,7 +122,7 @@ public class QuickReturnHelper {
         mPosition = position;
     }
 
-    private class QuickReturnOnScroll implements RecyclerView.OnScrollListener {
+    private class QuickReturnOnScroll extends RecyclerView.OnScrollListener {
 
         private final int mFragmentPosition;
 
@@ -143,11 +143,7 @@ public class QuickReturnHelper {
         }
 
         @Override
-        public void onScrollStateChanged(int newState) {
-        }
-
-        @Override
-        public void onScrolled(final int dx, final int dy) {
+        public void onScrolled(final RecyclerView recyclerView, final int dx, final int dy) {
             if (mPosition != mFragmentPosition) {
                 return;
             }

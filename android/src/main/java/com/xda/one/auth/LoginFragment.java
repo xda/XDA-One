@@ -1,13 +1,5 @@
 package com.xda.one.auth;
 
-import com.google.android.gms.auth.GoogleAuthException;
-import com.google.android.gms.auth.GoogleAuthUtil;
-import com.google.android.gms.auth.UserRecoverableAuthException;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.Scopes;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.plus.Plus;
-
 import com.squareup.otto.Subscribe;
 import com.xda.one.R;
 import com.xda.one.api.inteface.UserClient;
@@ -35,8 +27,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
-public class LoginFragment extends Fragment implements View.OnClickListener,
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class LoginFragment extends Fragment implements View.OnClickListener {
 
     public final static String ARG_ACCOUNT_NAME = "ACCOUNT_NAME";
 
@@ -58,7 +49,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
     private String mAccountName;
 
     /* Client used to interact with Google APIs. */
-    private GoogleApiClient mGoogleApiClient;
+    // private GoogleApiClient mGoogleApiClient;
 
     /* A flag indicating that a PendingIntent is in progress and prevents
      * us from starting further intents.
@@ -74,7 +65,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
     /* Store the connection result from onConnectionFailed callbacks so that we can
      * resolve them when the user clicks sign-in.
      */
-    private ConnectionResult mConnectionResult;
+    // private ConnectionResult mConnectionResult;
 
     public static Fragment createInstance(final String accountName) {
         final Bundle bundle = new Bundle();
@@ -100,11 +91,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
         mProgressDialog.setCancelable(false);
         mProgressDialog.setCanceledOnTouchOutside(false);
 
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+        /*mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(Plus.API)
-                .build();
+                .build();*/
     }
 
     @Override
@@ -161,16 +152,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
     public void onStart() {
         super.onStart();
 
-        mGoogleApiClient.connect();
+        // mGoogleApiClient.connect();
     }
 
     @Override
     public void onStop() {
         super.onStop();
 
-        if (mGoogleApiClient.isConnected()) {
+        /*if (mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
-        }
+        }*/
     }
 
     public void submit() {
@@ -185,7 +176,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
     }
 
     /* A helper method to resolve the current ConnectionResult error. */
-    private void resolveSignInError() {
+    /*private void resolveSignInError() {
         if (mConnectionResult.hasResolution()) {
             try {
                 mIntentInProgress = true;
@@ -212,14 +203,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
                 resolveSignInError();
             }
         }
-    }
+    }*/
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.sign_in_button && !mGoogleApiClient.isConnecting()) {
+        /*if (view.getId() == R.id.sign_in_button && !mGoogleApiClient.isConnecting()) {
             mSignInClicked = true;
             resolveSignInError();
-        }
+        }*/
     }
 
     @Override
@@ -233,7 +224,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
 
             mIntentInProgress = false;
 
-            if (!mGoogleApiClient.isConnecting()) {
+            /*if (!mGoogleApiClient.isConnecting()) {
                 mGoogleApiClient.connect();
 
                 String accessToken = null;
@@ -257,11 +248,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
                     throw new RuntimeException(e);
                 }
                 Log.e("XDA-One", accessToken);
-            }
+            }*/
         }
     }
 
-    @Override
+    /*@Override
     public void onConnected(Bundle connectionHint) {
         mSignInClicked = false;
         Toast.makeText(getActivity(), "User is connected!", Toast.LENGTH_LONG).show();
@@ -270,7 +261,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onConnectionSuspended(final int i) {
         mGoogleApiClient.connect();
-    }
+    }*/
 
     private final class EventListener {
 
