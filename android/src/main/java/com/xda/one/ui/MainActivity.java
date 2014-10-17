@@ -42,8 +42,6 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onCreate(final Bundle bundle) {
-        requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-        requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
         super.onCreate(bundle);
         CrashUtils.startCrashlytics(this);
 
@@ -53,28 +51,15 @@ public class MainActivity extends BaseActivity
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
 
         mDrawerToggle = new ActionBarDrawerToggle(this,
-                mDrawerLayout, mToolBar, R.string.drawer_open, R.string.drawer_close);
+                mDrawerLayout, mToolBar, R.string.drawer_open, R.string.drawer_close) {
+            @Override
+            public void onDrawerOpened(final View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getSupportActionBar().show();
+            }
+        };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         setSupportActionBar(mToolBar);
-
-        /*mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
-            @Override
-            public void onDrawerSlide(View view, float v) {
-            }
-
-            @Override
-            public void onDrawerOpened(View view) {
-                actionBar.show();
-            }
-
-            @Override
-            public void onDrawerClosed(View view) {
-            }
-
-            @Override
-            public void onDrawerStateChanged(int i) {
-            }
-        });*/
 
         if (bundle == null) {
             mNavigationDrawerFragment = new NavigationDrawerFragment();
@@ -87,7 +72,6 @@ public class MainActivity extends BaseActivity
                     .findFragmentById(R.id.navigation_drawer_frame);
         }
     }
-
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

@@ -1,14 +1,15 @@
 package com.xda.one.ui;
 
 import com.xda.one.R;
+import com.xda.one.util.UIUtils;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -53,7 +54,7 @@ public class SearchFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
 
-        final ActionBar actionBar = getActivity().getActionBar();
+        final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
         actionBar.show();
         actionBar.setTitle(R.string.search);
         actionBar.setSubtitle(null);

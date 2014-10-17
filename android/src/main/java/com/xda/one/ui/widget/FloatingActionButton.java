@@ -55,7 +55,7 @@ public class FloatingActionButton extends ImageView {
 
         setClickable(true);
 
-        if (CompatUtils.hasL()) {
+        if (CompatUtils.hasLollipop()) {
             /*setElevation(getResources().getDimension(R.dimen.fab_elevation));
 
             final int diameter = getResources().getDimensionPixelSize(R.dimen.fab_size);
@@ -83,7 +83,7 @@ public class FloatingActionButton extends ImageView {
 
     @Override
     protected void onDraw(@NonNull final Canvas canvas) {
-        if (!CompatUtils.hasL()) {
+        if (!CompatUtils.hasLollipop()) {
             canvas.drawCircle(getWidth() / 2, getHeight() / 2, (getWidth() / 2f) - 10f,
                     mButtonPaint);
         }
@@ -92,7 +92,7 @@ public class FloatingActionButton extends ImageView {
 
     @Override
     public boolean onTouchEvent(@NonNull final MotionEvent event) {
-        if (CompatUtils.hasL()) {
+        if (CompatUtils.hasLollipop()) {
             return super.onTouchEvent(event);
         }
 
@@ -109,7 +109,7 @@ public class FloatingActionButton extends ImageView {
 
     @Override
     public void setBackgroundColor(final int fabColor) {
-        if (CompatUtils.hasL()) {
+        if (CompatUtils.hasLollipop()) {
             super.setBackgroundColor(fabColor);
         } else {
             updatePreLBackgroundColor(fabColor);

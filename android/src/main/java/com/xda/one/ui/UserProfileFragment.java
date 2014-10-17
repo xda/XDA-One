@@ -8,7 +8,6 @@ import com.xda.one.ui.widget.TabLayout;
 import com.xda.one.util.CompatUtils;
 import com.xda.one.util.UIUtils;
 
-import android.app.ActionBar;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -18,6 +17,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -108,7 +108,7 @@ public class UserProfileFragment extends Fragment
         viewPager.setAdapter(mAdapter);
         viewPager.setOffscreenPageLimit(10);
 
-        final ActionBar actionBar = getActivity().getActionBar();
+        final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         mSlidingTabLayout = (TabLayout) view.findViewById(R.id.fragment_sliding_tab_layout);

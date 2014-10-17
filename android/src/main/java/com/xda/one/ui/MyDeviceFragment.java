@@ -3,7 +3,6 @@ package com.xda.one.ui;
 import com.squareup.picasso.Picasso;
 import com.xda.one.R;
 import com.xda.one.api.model.interfaces.Forum;
-import com.xda.one.api.model.response.ResponseForum;
 import com.xda.one.api.model.response.ResponseUserProfile;
 import com.xda.one.loader.UserProfileLoader;
 import com.xda.one.ui.helper.ActionModeHelper;
@@ -11,13 +10,13 @@ import com.xda.one.ui.widget.XDALinerLayoutManager;
 import com.xda.one.util.FragmentUtils;
 import com.xda.one.util.UIUtils;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -66,10 +65,10 @@ public class MyDeviceFragment extends Fragment
         ViewCompat.setOverScrollMode(mRecyclerView, ViewCompat.OVER_SCROLL_NEVER);
         mModeHelper.setRecyclerView(mRecyclerView);
 
-        // final ActionBar bar = getActivity().getActionBar();
-        // bar.show();
-        // bar.setTitle(R.string.my_devices);
-        // bar.setSubtitle(null);
+        final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
+        actionBar.show();
+        actionBar.setTitle(R.string.my_devices);
+        actionBar.setSubtitle(null);
 
         getLoaderManager().initLoader(0, null, this);
     }

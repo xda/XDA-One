@@ -9,7 +9,6 @@ import com.xda.one.ui.widget.XDALinerLayoutManager;
 import com.xda.one.util.UIUtils;
 import com.xda.one.util.Utils;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +16,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,10 +78,10 @@ public class NewsFragment extends Fragment
 
         mLoadMoreProgressBar = (ProgressBar) view.findViewById(R.id.load_more_progress_bar);
 
-        final ActionBar bar = getActivity().getActionBar();
-        bar.show();
-        bar.setTitle(R.string.xda_news);
-        bar.setSubtitle(null);
+        final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
+        actionBar.show();
+        actionBar.setTitle(R.string.xda_news);
+        actionBar.setSubtitle(null);
 
         mRecyclerView = (RecyclerView) view.findViewById(android.R.id.list);
         mRecyclerView.setAdapter(mAdapter);

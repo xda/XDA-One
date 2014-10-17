@@ -1,11 +1,16 @@
 package com.xda.one.util;
 
 import com.xda.one.R;
+import com.xda.one.ui.BaseActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.internal.widget.ActionBarOverlayLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
@@ -91,5 +96,9 @@ public class UIUtils {
         } else {
             drawerLayout.openDrawer(Gravity.START);
         }
+    }
+
+    public static ActionBar getSupportActionBar(final Activity activity) {
+        return ((BaseActivity) activity).getSupportActionBar();
     }
 }

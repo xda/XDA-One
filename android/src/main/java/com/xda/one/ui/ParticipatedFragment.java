@@ -15,7 +15,6 @@ import com.xda.one.ui.widget.XDALinerLayoutManager;
 import com.xda.one.ui.widget.XDARefreshLayout;
 import com.xda.one.util.UIUtils;
 
-import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -24,6 +23,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -109,10 +109,10 @@ public class ParticipatedFragment extends Fragment implements
             }
         });
 
-        final ActionBar bar = getActivity().getActionBar();
-        bar.show();
-        bar.setTitle(R.string.participated);
-        bar.setSubtitle(null);
+        final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
+        actionBar.show();
+        actionBar.setTitle(R.string.participated);
+        actionBar.setSubtitle(null);
 
         // If the listener already exists then tell it about the new recycler view
         if (mInfiniteScrollListener != null) {

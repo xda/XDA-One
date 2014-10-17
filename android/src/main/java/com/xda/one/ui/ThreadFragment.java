@@ -20,7 +20,6 @@ import com.xda.one.util.FragmentUtils;
 import com.xda.one.util.UIUtils;
 import com.xda.one.util.Utils;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,6 +31,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -170,19 +170,17 @@ public class ThreadFragment extends Fragment
         final FloatingActionButton button = (FloatingActionButton) view
                 .findViewById(R.id.thread_fragment_create_thread);
         button.setOnClickListener(new CreateThreadListener());
-        if (CompatUtils.hasL()) {
+        if (CompatUtils.hasLollipop()) {
             CompatUtils.setBackground(button, getResources().getDrawable(R.drawable
                     .fab_background));
         } else {
             button.setBackgroundColor(getResources().getColor(R.color.fab_color));
         }
 
-        // Make sure that this is set back to normal after visiting any PostFragments
-        final ActionBar bar = getActivity().getActionBar();
-        bar.show();
-        // Set the titles correctly
-        bar.setTitle(mForumTitle);
-        bar.setSubtitle(mParentForumTitle);
+        final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
+        actionBar.show();
+        actionBar.setTitle(mForumTitle);
+        actionBar.setSubtitle(mParentForumTitle);
 
         // If the listener already exists then tell it about the new recycler view
         if (mInfiniteScrollListener != null) {

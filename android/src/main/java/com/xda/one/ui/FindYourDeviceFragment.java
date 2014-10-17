@@ -9,7 +9,6 @@ import com.xda.one.ui.widget.XDALinerLayoutManager;
 import com.xda.one.util.FragmentUtils;
 import com.xda.one.util.UIUtils;
 
-import android.app.ActionBar;
 import android.app.SearchManager;
 import android.content.Context;
 import android.database.Cursor;
@@ -19,8 +18,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,7 +30,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
 
 import java.util.ArrayList;
 
@@ -109,7 +110,7 @@ public class FindYourDeviceFragment extends Fragment
         mEmptyView = view.findViewById(android.R.id.empty);
         mEmptyView.setVisibility(View.GONE);
 
-        final ActionBar actionBar = getActivity().getActionBar();
+        final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
         actionBar.setSubtitle(null);
 
         if (mQuery == null) {
@@ -163,18 +164,18 @@ public class FindYourDeviceFragment extends Fragment
             @Override
             public void run() {
                 if (mQuery == null) {
-                    mSearchMenuItem.expandActionView();
+                    MenuItemCompat.expandActionView(mSearchMenuItem);
                 } else {
-                    mSearchMenuItem.collapseActionView();
+                    MenuItemCompat.collapseActionView(mSearchMenuItem);
                 }
             }
         });
     }
 
     public boolean onBackPressed() {
-        final boolean isExpanded = mSearchMenuItem.isActionViewExpanded();
+        final boolean isExpanded = MenuItemCompat.isActionViewExpanded(mSearchMenuItem);
         if (isExpanded) {
-            mSearchMenuItem.collapseActionView();
+            MenuItemCompat.collapseActionView(mSearchMenuItem);
         }
         return isExpanded;
     }
@@ -193,10 +194,10 @@ public class FindYourDeviceFragment extends Fragment
             if (TextUtils.isEmpty(query)) {
                 return false;
             }
-            mSearchView.onActionViewCollapsed();
+            MenuItemCompat.collapseActionView(mSearchMenuItem);
 
             mQuery = query;
-            final ActionBar actionBar = getActivity().getActionBar();
+            final ActionBar actionBar = ((BaseActivity) getActivity()).getSupportActionBar();
             actionBar.setTitle(mQuery);
             getLoaderManager().restartLoader(0, null, FindYourDeviceFragment.this);
 

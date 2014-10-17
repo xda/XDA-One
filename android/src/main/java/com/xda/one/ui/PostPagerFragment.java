@@ -14,9 +14,9 @@ import com.xda.one.ui.helper.QuickReturnHelper;
 import com.xda.one.ui.widget.FloatingActionButton;
 import com.xda.one.util.AccountUtils;
 import com.xda.one.util.CompatUtils;
+import com.xda.one.util.UIUtils;
 
 import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -27,6 +27,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -246,7 +247,7 @@ public class PostPagerFragment extends Fragment
             mPageRecyclerView.setVisibility(View.GONE);
         }
 
-        final ActionBar actionBar = getActivity().getActionBar();
+        final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
         actionBar.setTitle(null);
         actionBar.setSubtitle(null);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
@@ -267,7 +268,7 @@ public class PostPagerFragment extends Fragment
         final FloatingActionButton button = (FloatingActionButton) view
                 .findViewById(R.id.post_pager_fragment_floating_reply_button);
         button.setOnClickListener(new CreatePostListener());
-        if (CompatUtils.hasL()) {
+        if (CompatUtils.hasLollipop()) {
             final Drawable drawable = getResources().getDrawable(R.drawable.fab_background);
             button.setBackground(drawable);
         } else {
@@ -305,7 +306,7 @@ public class PostPagerFragment extends Fragment
     public void onDestroyView() {
         super.onDestroyView();
 
-        final ActionBar actionBar = getActivity().getActionBar();
+        final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
         mThreadClient.getBus().unregister(mEventHandler);
