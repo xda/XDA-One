@@ -64,6 +64,7 @@ public class MyDeviceFragment extends Fragment
         mRecyclerView.setLayoutManager(new XDALinerLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
         ViewCompat.setOverScrollMode(mRecyclerView, ViewCompat.OVER_SCROLL_NEVER);
+        mModeHelper.setRecyclerView(mRecyclerView);
 
         final ActionBar bar = getActivity().getActionBar();
         bar.show();

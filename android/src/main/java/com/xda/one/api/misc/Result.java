@@ -35,7 +35,7 @@ public class Result {
             inputStream = response.getBody().in();
             final String output = IOUtils.toString(inputStream);
             return Result.parseResultFromString(output);
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         } finally {
             IOUtils.closeQuietly(inputStream);
