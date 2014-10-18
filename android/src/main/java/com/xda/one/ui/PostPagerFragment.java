@@ -30,6 +30,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.XDALinerLayoutManager;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -204,8 +205,8 @@ public class PostPagerFragment extends Fragment
         mAdapter = new PostFragmentAdapter(getChildFragmentManager(), mUnifiedThread,
                 mTotalPages, mContainerArgument);
         mSpinnerAdapter = new HierarchySpinnerAdapter();
-        mPageAdapter = new PostPageAdapter(getActivity(), mTotalPages,
-                new PostPageClickListener());
+
+        mPageAdapter = new PostPageAdapter(getActivity(), mTotalPages, new PostPageClickListener());
     }
 
     @Override
@@ -222,8 +223,9 @@ public class PostPagerFragment extends Fragment
 
         final View header = view.findViewById(R.id.pagination_bar);
         mPageRecyclerView = (RecyclerView) view.findViewById(R.id.page_list);
+        mPageRecyclerView.setLayoutManager(new XDALinerLayoutManager(getActivity()));
+
         if (mTotalPages > 1) {
-            mPageRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             mPageRecyclerView.setAdapter(mPageAdapter);
             ViewCompat.setOverScrollMode(mPageRecyclerView, ViewCompat.OVER_SCROLL_NEVER);
             mPageRecyclerView.post(new Runnable() {
@@ -440,7 +442,8 @@ public class PostPagerFragment extends Fragment
         private final LayoutInflater mLayouInflater;
 
         public HierarchySpinnerAdapter() {
-            mLayouInflater = LayoutInflater.from(getActivity());
+            final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
+            mLayouInflater = LayoutInflater.from(actionBar.getThemedContext());
         }
 
         @Override
@@ -490,7 +493,8 @@ public class PostPagerFragment extends Fragment
         if (getTargetFragment() != null) {
             final Intent intent = new Intent();
             intent.putExtra("thread", thread);
-            getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
+            getTargetFragment()
+                    .onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
         }
     }
 

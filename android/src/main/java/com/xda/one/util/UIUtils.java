@@ -72,14 +72,6 @@ public class UIUtils {
         progressBar.setVisibility(VISIBLE);
     }
 
-    public static void toggleDrawerLayout(final DrawerLayout drawerLayout) {
-        if (drawerLayout.isDrawerOpen(Gravity.START)) {
-            drawerLayout.closeDrawer(Gravity.START);
-        } else {
-            drawerLayout.openDrawer(Gravity.START);
-        }
-    }
-
     public static ActionBar getSupportActionBar(final Activity activity) {
         return ((BaseActivity) activity).getSupportActionBar();
     }

@@ -98,9 +98,8 @@ public class MainActivity extends BaseActivity
     }
 
     private void initialReplaceFragment() {
-        Intent intent = getIntent();
-        if (Intent.ACTION_VIEW.equals(intent.getAction())) {
-            String url = intent.getDataString();
+        if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
+            String url = getIntent().getDataString();
             if (url != null) {
                 parseAndDisplayForumUrl(url, true);
                 return;
