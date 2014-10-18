@@ -442,8 +442,7 @@ public class PostPagerFragment extends Fragment
         private final LayoutInflater mLayouInflater;
 
         public HierarchySpinnerAdapter() {
-            final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
-            mLayouInflater = LayoutInflater.from(actionBar.getThemedContext());
+            mLayouInflater = LayoutInflater.from(getActivity());
         }
 
         @Override

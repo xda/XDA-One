@@ -1,6 +1,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <style name="Theme.One" parent="@style/Theme.AppCompat.Light.NoActionBar">
-        <!-- customize the color palette -->
+        <item name="actionBarStyle">@style/Theme.One.ActionBar</item>
+
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -17,8 +18,15 @@
         <item name="android:textSize">12sp</item>
     </style>
 
-    <!-- Session Details -->
     <style name="Theme.One.UserProfile" parent="Theme.One">
         <item name="android:windowActionBarOverlay">true</item>
+    </style>
+
+    <style name="Theme.One.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
+
+    <style name="Theme.One.Popup" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:background">?attr/colorPrimary</item>
     </style>
 </resources>
