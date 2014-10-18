@@ -102,7 +102,7 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.QuoteViewHol
     public void clear() {
         final int count = mQuotes.size();
         mQuotes.clear();
-        notifyItemRangeRemoved(0, count - 1);
+        notifyItemRangeRemoved(0, count);
     }
 
     public int indexOf(final AugmentedQuote quote) {

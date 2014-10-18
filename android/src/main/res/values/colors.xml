@@ -19,7 +19,7 @@
     <color name="sticky_item_text">#fff</color>
     <color name="fab_color">@color/colorAccent</color>
 
-    <color name="tabLayoutBackgroundColor">@color/colorPrimaryDark</color>
+    <color name="tab_layout_background_color">@color/colorPrimaryDark</color>
 
     <!-- Black palate from Google's guidelines -->
     <color name="default_black">#ff000000</color>

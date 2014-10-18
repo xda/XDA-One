@@ -5,13 +5,10 @@ import com.xda.one.ui.BaseActivity;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.internal.widget.ActionBarOverlayLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 
@@ -20,26 +17,11 @@ import static android.view.View.VISIBLE;
 
 public class UIUtils {
 
-    private static final int[] RES_IDS_ACTION_BAR_SIZE = {android.R.attr.actionBarSize};
-
     public static int calculateActionBarSize(final Context context) {
-        if (context == null) {
-            return 0;
-        }
-
-        Resources.Theme curTheme = context.getTheme();
-        if (curTheme == null) {
-            return 0;
-        }
-
-        TypedArray att = curTheme.obtainStyledAttributes(RES_IDS_ACTION_BAR_SIZE);
-        if (att == null) {
-            return 0;
-        }
-
-        float size = att.getDimension(0, 0);
-        att.recycle();
-        return (int) size;
+        final TypedValue tv = new TypedValue();
+        context.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true);
+        return TypedValue.complexToDimensionPixelSize(tv.data,
+                context.getResources().getDisplayMetrics());
     }
 
     public static void updateEmptyViewState(final View view, final RecyclerView recyclerView,

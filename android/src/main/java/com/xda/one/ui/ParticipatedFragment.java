@@ -11,7 +11,11 @@ import com.xda.one.ui.helper.ThreadEventHelper;
 import com.xda.one.ui.helper.ThreadUnreadPostHelper;
 import com.xda.one.ui.helper.UnifiedThreadFragmentActionModeHelper;
 import com.xda.one.ui.listener.InfiniteRecyclerLoadHelper;
-import com.xda.one.ui.widget.XDALinerLayoutManager;
+
+import android.graphics.Color;
+import android.support.v7.widget.XDALinerLayoutManager;
+
+import com.xda.one.ui.widget.FloatingActionButton;
 import com.xda.one.ui.widget.XDARefreshLayout;
 import com.xda.one.util.UIUtils;
 
@@ -28,7 +32,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +49,7 @@ public class ParticipatedFragment extends Fragment implements
 
     private XDARefreshLayout mRefreshLayout;
 
-    private ProgressBar mLoadMoreProgressBar;
+    private View mLoadMoreProgressContainer;
 
     private InfiniteRecyclerLoadHelper mInfiniteScrollListener;
 
@@ -89,8 +92,10 @@ public class ParticipatedFragment extends Fragment implements
 
         mThreadClient.getBus().register(mThreadEventHelper);
 
-        mLoadMoreProgressBar = (ProgressBar) view.findViewById(R.id
-                .participated_fragment_load_more_progress_bar);
+        final FloatingActionButton loadMoreBackground = (FloatingActionButton) view
+                .findViewById(R.id.load_more_progress_bar_background);
+        loadMoreBackground.setBackgroundColor(Color.WHITE);
+        mLoadMoreProgressContainer = view.findViewById(R.id.load_more_progress_container);
 
         mRecyclerView = (RecyclerView) view.findViewById(android.R.id.list);
         mRecyclerView.setLayoutManager(new XDALinerLayoutManager(getActivity()));
@@ -171,7 +176,7 @@ public class ParticipatedFragment extends Fragment implements
             mInfiniteScrollListener = new InfiniteRecyclerLoadHelper(mRecyclerView,
                     new InfiniteLoadCallback(), data.getTotalPages(), null);
         }
-        mLoadMoreProgressBar.setVisibility(View.GONE);
+        mLoadMoreProgressContainer.setVisibility(View.GONE);
         mInfiniteScrollListener.onLoadFinished();
         addDataToAdapter(data.getThreads());
     }
@@ -192,7 +197,7 @@ public class ParticipatedFragment extends Fragment implements
 
         @Override
         public void loadMoreData(final int page) {
-            mLoadMoreProgressBar.setVisibility(View.VISIBLE);
+            mLoadMoreProgressContainer.setVisibility(View.VISIBLE);
 
             final Bundle bundle = new Bundle();
             bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, page);

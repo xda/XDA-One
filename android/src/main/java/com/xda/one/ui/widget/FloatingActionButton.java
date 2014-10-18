@@ -1,38 +1,34 @@
 package com.xda.one.ui.widget;
 
+import com.xda.one.R;
 import com.xda.one.util.CompatUtils;
 
 import android.animation.ObjectAnimator;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Outline;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.support.annotation.NonNull;
+import android.os.Build;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.Display;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewOutlineProvider;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
-// import android.graphics.Outline;
-
 public class FloatingActionButton extends ImageView {
-
-    private final Context mContext;
 
     private Paint mButtonPaint;
 
-    private int mScreenHeight;
-
-    private float mCurrentY;
-
     public FloatingActionButton(final Context context, final AttributeSet attributeSet) {
         super(context, attributeSet);
-
-        mContext = context;
 
         init(Color.BLUE);
     }
@@ -40,33 +36,26 @@ public class FloatingActionButton extends ImageView {
     public FloatingActionButton(final Context context) {
         super(context);
 
-        mContext = context;
-
         init(Color.BLUE);
     }
 
+    @TargetApi(Build.VERSION_CODES.L)
     private void init(final int color) {
-        final WindowManager windowManager = (WindowManager) mContext.getSystemService(Context
-                .WINDOW_SERVICE);
-        final Display display = windowManager.getDefaultDisplay();
-        final Point size = new Point();
-        display.getSize(size);
-        mScreenHeight = size.y;
-
         setClickable(true);
 
-        if (CompatUtils.hasLollipop()) {
-            /*setElevation(getResources().getDimension(R.dimen.fab_elevation));
-
+        if (CompatUtils.hasElevation()) {
             final int diameter = getResources().getDimensionPixelSize(R.dimen.fab_size);
+            setOutlineProvider(new ViewOutlineProvider() {
+                @Override
+                public void getOutline(final View view, final Outline outline) {
+                    outline.setOval(0, 0, diameter, diameter);
+                }
+            });
 
-            final Outline outline = new Outline();
-            outline.setOval(0, 0, diameter, diameter);
-
-            setOutline(outline);
-            setClipToOutline(true);*/
+            setClipToOutline(true);
+            setElevation(getResources().getDimension(R.dimen.fab_elevation));
         } else {
-            setLayerType(LAYER_TYPE_SOFTWARE, null);
+            ViewCompat.setLayerType(this, ViewCompat.LAYER_TYPE_SOFTWARE, null);
 
             super.setBackgroundColor(Color.TRANSPARENT);
             updatePreLBackgroundColor(color);
@@ -82,7 +71,7 @@ public class FloatingActionButton extends ImageView {
     }
 
     @Override
-    protected void onDraw(@NonNull final Canvas canvas) {
+    protected void onDraw(final Canvas canvas) {
         if (!CompatUtils.hasLollipop()) {
             canvas.drawCircle(getWidth() / 2, getHeight() / 2, (getWidth() / 2f) - 10f,
                     mButtonPaint);
@@ -91,7 +80,7 @@ public class FloatingActionButton extends ImageView {
     }
 
     @Override
-    public boolean onTouchEvent(@NonNull final MotionEvent event) {
+    public boolean onTouchEvent(final MotionEvent event) {
         if (CompatUtils.hasLollipop()) {
             return super.onTouchEvent(event);
         }
@@ -114,25 +103,6 @@ public class FloatingActionButton extends ImageView {
         } else {
             updatePreLBackgroundColor(fabColor);
             invalidate();
-        }
-    }
-
-    public void hide() {
-        if (getVisibility() == VISIBLE) {
-            mCurrentY = getY();
-            ObjectAnimator hideAnimation = ObjectAnimator.ofFloat(this, "Y", mScreenHeight);
-            hideAnimation.setInterpolator(new AccelerateInterpolator());
-            hideAnimation.start();
-            setVisibility(GONE);
-        }
-    }
-
-    public void show() {
-        if (getVisibility() != VISIBLE) {
-            final ObjectAnimator showAnimation = ObjectAnimator.ofFloat(this, "Y", mCurrentY);
-            showAnimation.setInterpolator(new DecelerateInterpolator());
-            showAnimation.start();
-            setVisibility(VISIBLE);
         }
     }
 }

@@ -106,7 +106,7 @@ public class UnifiedThreadAdapter
     public void clear() {
         final int count = mThreads.size();
         mThreads.clear();
-        notifyItemRangeRemoved(0, count - 1);
+        notifyItemRangeRemoved(0, count);
     }
 
     public AugmentedUnifiedThread getThread(final int position) {

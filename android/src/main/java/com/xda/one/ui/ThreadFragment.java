@@ -12,7 +12,6 @@ import com.xda.one.ui.helper.ThreadEventHelper;
 import com.xda.one.ui.helper.UnifiedThreadFragmentActionModeHelper;
 import com.xda.one.ui.listener.InfiniteRecyclerLoadHelper;
 import com.xda.one.ui.widget.FloatingActionButton;
-import com.xda.one.ui.widget.XDALinerLayoutManager;
 import com.xda.one.ui.widget.XDARefreshLayout;
 import com.xda.one.util.AccountUtils;
 import com.xda.one.util.CompatUtils;
@@ -22,6 +21,7 @@ import com.xda.one.util.Utils;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -33,6 +33,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.XDALinerLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +76,7 @@ public class ThreadFragment extends Fragment
 
     private UnifiedThreadAdapter mAdapter;
 
-    private ProgressBar mLoadMoreProgressBar;
+    private View mLoadMoreProgressContainer;
 
     private ActionModeHelper mModeHelper;
 
@@ -148,7 +149,10 @@ public class ThreadFragment extends Fragment
 
         mThreadClient.getBus().register(mThreadEventHelper);
 
-        mLoadMoreProgressBar = (ProgressBar) view.findViewById(R.id.load_more_progress_bar);
+        final FloatingActionButton loadMoreBackground = (FloatingActionButton) view
+                .findViewById(R.id.load_more_progress_bar_background);
+        loadMoreBackground.setBackgroundColor(Color.WHITE);
+        mLoadMoreProgressContainer = view.findViewById(R.id.load_more_progress_container);
 
         mRefreshLayout = (XDARefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mRefreshLayout.setXDAColourScheme();
@@ -293,7 +297,7 @@ public class ThreadFragment extends Fragment
 
         final int count = mAdapter.getItemCount();
         mTotalPages = data.getTotalPages();
-        mLoadMoreProgressBar.setVisibility(View.GONE);
+        mLoadMoreProgressContainer.setVisibility(View.GONE);
         if (data.getCurrentPage() == 1 && mRefreshLayout.isRefreshing()) {
             mAdapter.clear();
             mInfiniteScrollListener = createInfiniteScrollListener(data.getTotalPages());
@@ -336,7 +340,7 @@ public class ThreadFragment extends Fragment
 
         @Override
         public void loadMoreData(final int page) {
-            mLoadMoreProgressBar.setVisibility(View.VISIBLE);
+            mLoadMoreProgressContainer.setVisibility(View.VISIBLE);
 
             final Bundle bundle = new Bundle();
             bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, page);

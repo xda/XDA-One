@@ -110,7 +110,7 @@ public class MentionFragment extends QuoteMentionBaseFragment
             mLoadHelper = createInfiniteScrollListener(data.getTotalPages());
         }
 
-        mLoadMoreProgressBar.setVisibility(View.GONE);
+        mLoadMoreProgressContainer.setVisibility(View.GONE);
         mLoadHelper.onLoadFinished();
         addDataToAdapter(data.getMentions());
     }
@@ -136,7 +136,7 @@ public class MentionFragment extends QuoteMentionBaseFragment
 
         @Override
         public void loadMoreData(final int page) {
-            mLoadMoreProgressBar.setVisibility(View.VISIBLE);
+            mLoadMoreProgressContainer.setVisibility(View.VISIBLE);
 
             final Bundle bundle = new Bundle();
             bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, page);

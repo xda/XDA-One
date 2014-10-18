@@ -241,7 +241,8 @@ public class PostPagerFragment extends Fragment
             mTopBar.setOnClickListener(new TopBarClickListener());
             setupPagingButtons(header);
 
-            mQuickReturnHelper = new QuickReturnHelper(header, getActivity().getActionBar());
+            final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
+            mQuickReturnHelper = new QuickReturnHelper(getActivity(), header, actionBar);
         } else {
             header.setVisibility(View.GONE);
             mPageRecyclerView.setVisibility(View.GONE);
@@ -348,7 +349,7 @@ public class PostPagerFragment extends Fragment
     @Override
     public void postPaddingToQuickReturn(final View content) {
         final View header = getView().findViewById(R.id.pagination_bar);
-        QuickReturnHelper.postPaddingToQuickReturn(getActivity().getActionBar(), header, content);
+        QuickReturnHelper.postPaddingToQuickReturn(header, content);
     }
 
     @Override

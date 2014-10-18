@@ -16,7 +16,7 @@ import com.xda.one.model.augmented.AugmentedPostContainer;
 import com.xda.one.ui.helper.ActionModeHelper;
 import com.xda.one.ui.helper.CancellableCallbackHelper;
 import com.xda.one.ui.listener.AvatarClickListener;
-import com.xda.one.ui.widget.XDALinerLayoutManager;
+import android.support.v7.widget.XDALinerLayoutManager;
 import com.xda.one.util.UIUtils;
 import com.xda.one.util.Utils;
 

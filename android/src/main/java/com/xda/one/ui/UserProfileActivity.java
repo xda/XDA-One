@@ -33,8 +33,8 @@ public class UserProfileActivity extends BaseActivity {
         }
 
         // Remove the title and subtitle if any
-        final ActionBar actionBar = UIUtils.getSupportActionBar(this);
+        /*final ActionBar actionBar = UIUtils.getSupportActionBar(this);
         actionBar.setTitle(null);
-        actionBar.setSubtitle(null);
+        actionBar.setSubtitle(null);*/
     }
 }

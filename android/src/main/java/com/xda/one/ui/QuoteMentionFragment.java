@@ -2,14 +2,14 @@ package com.xda.one.ui;
 
 import com.xda.one.R;
 import com.xda.one.ui.widget.TabLayout;
+import com.xda.one.util.UIUtils;
 
-import android.app.ActionBar;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,13 +32,13 @@ public class QuoteMentionFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, final @Nullable ViewGroup container,
-            final @Nullable Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+            final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.quote_mention_fragment, container, false);
     }
 
     @Override
-    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         final ViewPager viewPager = (ViewPager) view.findViewById(R.id.forum_view_pager);
@@ -52,7 +52,7 @@ public class QuoteMentionFragment extends Fragment {
         mSlidingTabLayout.setViewPager(viewPager);
 
         // Make sure that this is set back to normal after visiting any PostFragments
-        final ActionBar bar = getActivity().getActionBar();
+        final ActionBar bar = UIUtils.getSupportActionBar(getActivity());
         bar.show();
         // Set the titles correctly
         bar.setTitle(R.string.quote_mentions);

@@ -6,7 +6,7 @@ import com.xda.one.api.model.interfaces.Forum;
 import com.xda.one.api.model.response.ResponseUserProfile;
 import com.xda.one.loader.UserProfileLoader;
 import com.xda.one.ui.helper.ActionModeHelper;
-import com.xda.one.ui.widget.XDALinerLayoutManager;
+import android.support.v7.widget.XDALinerLayoutManager;
 import com.xda.one.util.FragmentUtils;
 import com.xda.one.util.UIUtils;
 

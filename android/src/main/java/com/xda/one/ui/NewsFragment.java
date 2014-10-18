@@ -5,7 +5,11 @@ import com.xda.one.api.model.response.ResponseNews;
 import com.xda.one.api.model.response.container.ResponseNewsContainer;
 import com.xda.one.loader.NewsLoader;
 import com.xda.one.ui.listener.InfiniteRecyclerLoadHelper;
-import com.xda.one.ui.widget.XDALinerLayoutManager;
+
+import android.graphics.Color;
+import android.support.v7.widget.XDALinerLayoutManager;
+
+import com.xda.one.ui.widget.FloatingActionButton;
 import com.xda.one.util.UIUtils;
 import com.xda.one.util.Utils;
 
@@ -21,7 +25,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +47,7 @@ public class NewsFragment extends Fragment
 
     private int mTotalPages;
 
-    private ProgressBar mLoadMoreProgressBar;
+    private View mLoadMoreProgressContainer;
 
     public static NewsFragment createInstance() {
         return new NewsFragment();
@@ -76,7 +79,10 @@ public class NewsFragment extends Fragment
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mLoadMoreProgressBar = (ProgressBar) view.findViewById(R.id.load_more_progress_bar);
+        final FloatingActionButton loadMoreBackground = (FloatingActionButton) view
+                .findViewById(R.id.load_more_progress_bar_background);
+        loadMoreBackground.setBackgroundColor(Color.WHITE);
+        mLoadMoreProgressContainer = view.findViewById(R.id.load_more_progress_container);
 
         final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
         actionBar.show();
@@ -153,7 +159,7 @@ public class NewsFragment extends Fragment
             mAdapter.clear();
             mInfiniteScrollListener = createInfiniteScrollListener(data.getTotalPages());
         }
-        mLoadMoreProgressBar.setVisibility(View.GONE);
+        mLoadMoreProgressContainer.setVisibility(View.GONE);
         mInfiniteScrollListener.onLoadFinished();
         addDataToAdapter(data.getNewsItems());
     }
@@ -173,7 +179,7 @@ public class NewsFragment extends Fragment
 
         @Override
         public void loadMoreData(final int page) {
-            mLoadMoreProgressBar.setVisibility(View.VISIBLE);
+            mLoadMoreProgressContainer.setVisibility(View.VISIBLE);
 
             final Bundle bundle = new Bundle();
             bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, page);

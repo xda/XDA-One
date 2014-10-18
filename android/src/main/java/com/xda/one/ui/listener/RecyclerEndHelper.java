@@ -1,6 +1,6 @@
 package com.xda.one.ui.listener;
 
-import com.xda.one.ui.widget.XDALinerLayoutManager;
+import android.support.v7.widget.XDALinerLayoutManager;
 
 import android.support.v7.widget.RecyclerView;
 

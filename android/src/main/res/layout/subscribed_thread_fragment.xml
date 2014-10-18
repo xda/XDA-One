@@ -23,16 +23,7 @@
             android:visibility="gone" />
     </com.xda.one.ui.widget.XDARefreshLayout>
 
-    <ProgressBar
-        android:id="@+id/subscribed_thread_fragment_load_more_progress_bar"
-        style="?android:attr/android:progressBarStyleSmallInverse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:indeterminate="true"
-        android:paddingBottom="8dp"
-        android:visibility="gone" />
+    <include layout="@layout/load_more_progress_bar" />
 
     <include
         android:id="@android:id/empty"

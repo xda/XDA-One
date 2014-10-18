@@ -2,7 +2,10 @@ package com.xda.one.ui;
 
 import com.xda.one.R;
 import com.xda.one.ui.listener.InfiniteRecyclerLoadHelper;
-import com.xda.one.ui.widget.XDALinerLayoutManager;
+import com.xda.one.ui.widget.FloatingActionButton;
+
+import android.graphics.Color;
+import android.support.v7.widget.XDALinerLayoutManager;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +15,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 public abstract class QuoteMentionBaseFragment extends Fragment {
 
@@ -27,7 +29,7 @@ public abstract class QuoteMentionBaseFragment extends Fragment {
 
     protected XDALinerLayoutManager mLayoutManager;
 
-    protected ProgressBar mLoadMoreProgressBar;
+    protected View mLoadMoreProgressContainer;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container,
@@ -50,6 +52,9 @@ public abstract class QuoteMentionBaseFragment extends Fragment {
             mLoadHelper.updateRecyclerView(mRecyclerView);
         }
 
-        mLoadMoreProgressBar = (ProgressBar) view.findViewById(R.id.load_more_progress_bar);
+        final FloatingActionButton loadMoreBackground = (FloatingActionButton) view
+                .findViewById(R.id.load_more_progress_bar_background);
+        loadMoreBackground.setBackgroundColor(Color.WHITE);
+        mLoadMoreProgressContainer = view.findViewById(R.id.load_more_progress_container);
     }
 }

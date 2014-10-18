@@ -13,7 +13,11 @@ import com.xda.one.model.augmented.AugmentedMessage;
 import com.xda.one.model.augmented.container.AugmentedMessageContainer;
 import com.xda.one.ui.listener.AvatarClickListener;
 import com.xda.one.ui.listener.InfiniteRecyclerLoadHelper;
-import com.xda.one.ui.widget.XDALinerLayoutManager;
+
+import android.graphics.Color;
+import android.support.v7.widget.XDALinerLayoutManager;
+
+import com.xda.one.ui.widget.FloatingActionButton;
 import com.xda.one.ui.widget.XDARefreshLayout;
 import com.xda.one.util.UIUtils;
 
@@ -30,7 +34,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -82,7 +85,7 @@ public class MessageFragment extends Fragment implements LoaderManager
 
     private PrivateMessageClient mPrivateMessageClient;
 
-    private ProgressBar mLoadMoreProgressBar;
+    private View mLoadMoreProgressContainer;
 
     public static MessageFragment getInstance(
             final MessagePagerFragment.MessageContainerType type) {
@@ -120,8 +123,10 @@ public class MessageFragment extends Fragment implements LoaderManager
     public void onViewCreated(final View view, final Bundle bundle) {
         super.onViewCreated(view, bundle);
 
-        mLoadMoreProgressBar = (ProgressBar) view.findViewById(R.id
-                .message_fragment_load_more_progress_bar);
+        final FloatingActionButton loadMoreBackground = (FloatingActionButton) view
+                .findViewById(R.id.load_more_progress_bar_background);
+        loadMoreBackground.setBackgroundColor(Color.WHITE);
+        mLoadMoreProgressContainer = view.findViewById(R.id.load_more_progress_container);
 
         mRefreshLayout = (XDARefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mRefreshLayout.setXDAColourScheme();
@@ -200,7 +205,7 @@ public class MessageFragment extends Fragment implements LoaderManager
             mInfiniteScrollListener = new InfiniteRecyclerLoadHelper(mRecyclerView,
                     new InfiniteLoadCallback(), data.getTotalPages(), null);
         }
-        mLoadMoreProgressBar.setVisibility(View.GONE);
+        mLoadMoreProgressContainer.setVisibility(View.GONE);
         mInfiniteScrollListener.onLoadFinished();
         addDataToAdapter(data.getMessages());
     }
@@ -252,7 +257,7 @@ public class MessageFragment extends Fragment implements LoaderManager
 
         @Override
         public void loadMoreData(final int page) {
-            mLoadMoreProgressBar.setVisibility(View.VISIBLE);
+            mLoadMoreProgressContainer.setVisibility(View.VISIBLE);
 
             final Bundle bundle = new Bundle();
             bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, page);

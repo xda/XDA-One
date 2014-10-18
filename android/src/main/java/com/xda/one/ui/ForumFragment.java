@@ -15,7 +15,7 @@ import com.xda.one.event.forum.ForumSubscriptionChangingFailedEvent;
 import com.xda.one.loader.ForumLoader;
 import com.xda.one.model.misc.ForumType;
 import com.xda.one.ui.helper.ActionModeHelper;
-import com.xda.one.ui.widget.XDALinerLayoutManager;
+import android.support.v7.widget.XDALinerLayoutManager;
 import com.xda.one.ui.widget.XDARefreshLayout;
 import com.xda.one.util.AccountUtils;
 import com.xda.one.util.FragmentUtils;

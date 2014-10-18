@@ -1,10 +1,13 @@
 package com.xda.one.ui.helper;
 
-import com.xda.one.ui.widget.XDALinerLayoutManager;
+import com.xda.one.util.UIUtils;
 
-import android.app.ActionBar;
+import android.content.Context;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.XDALinerLayoutManager;
 import android.util.SparseArray;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.animation.Animation;
@@ -12,7 +15,7 @@ import android.view.animation.TranslateAnimation;
 
 public class QuickReturnHelper {
 
-    private static final int ANIMATION_DURATION_MILLIS = 400;
+    private static final int ANIMATION_DURATION_MILLIS = 100;
 
     private final View mQuickReturnView;
 
@@ -31,14 +34,16 @@ public class QuickReturnHelper {
 
     private int mTouchSlop;
 
-    public QuickReturnHelper(final View quickReturnView, final ActionBar actionBar) {
+    public QuickReturnHelper(final Context context, final View quickReturnView,
+            final ActionBar actionBar) {
         mQuickReturnView = quickReturnView;
         mActionBar = actionBar;
 
         final ViewConfiguration vc = ViewConfiguration.get(actionBar.getThemedContext());
         mTouchSlop = vc.getScaledTouchSlop();
 
-        mActionBarHeight = mActionBar.getHeight();
+        mActionBarHeight = UIUtils.calculateActionBarSize(context) ;
+
         if (quickReturnView == null) {
             return;
         }
@@ -47,13 +52,12 @@ public class QuickReturnHelper {
             @Override
             public void run() {
                 mQuickReturnHeight = mQuickReturnView.getHeight();
-                mActionBarHeight = mActionBar.getHeight();
             }
         });
     }
 
-    public static void postPaddingToQuickReturn(final ActionBar actionBar,
-            final View quickReturnView, final View content) {
+
+    public static void postPaddingToQuickReturn(final View quickReturnView, final View content) {
         quickReturnView.post(new Runnable() {
             @Override
             public void run() {
@@ -61,8 +65,10 @@ public class QuickReturnHelper {
                 final int paddingTop = content.getPaddingTop();
                 final int paddingRight = content.getPaddingRight();
                 final int paddingBottom = content.getPaddingBottom();
-                content.setPadding(paddingLeft, quickReturnView.getHeight() + actionBar.getHeight()
-                        + paddingTop, paddingRight, paddingBottom);
+                content.setPadding(paddingLeft,
+                        UIUtils.calculateActionBarSize(content.getContext()) +
+                                quickReturnView.getHeight() +
+                                paddingTop, paddingRight, paddingBottom);
             }
         });
     }

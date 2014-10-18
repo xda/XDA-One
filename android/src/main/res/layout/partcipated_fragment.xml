@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="?android:actionBarSize"
-    android:orientation="vertical">
+    android:layout_marginTop="?android:attr/actionBarSize">
 
     <com.xda.one.ui.widget.XDARefreshLayout
         android:id="@+id/swipe_refresh_layout"
@@ -21,16 +20,7 @@
             android:visibility="gone" />
     </com.xda.one.ui.widget.XDARefreshLayout>
 
-    <ProgressBar
-        android:id="@+id/participated_fragment_load_more_progress_bar"
-        style="?android:attr/android:progressBarStyleSmallInverse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:indeterminate="true"
-        android:paddingBottom="8dp"
-        android:visibility="gone" />
+    <include layout="@layout/load_more_progress_bar" />
 
     <FrameLayout
         android:id="@android:id/empty"

@@ -5,8 +5,13 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 
 public class CompatUtils {
+
+    public static boolean hasElevation() {
+        return hasLollipop();
+    }
 
     public static boolean hasLollipop() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;

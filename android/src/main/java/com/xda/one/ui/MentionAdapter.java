@@ -104,7 +104,7 @@ public class MentionAdapter extends RecyclerView.Adapter<MentionAdapter.MentionV
     public void clear() {
         final int count = mMentions.size();
         mMentions.clear();
-        notifyItemRangeRemoved(0, count - 1);
+        notifyItemRangeRemoved(0, count);
     }
 
     public int indexOf(final AugmentedMention quote) {

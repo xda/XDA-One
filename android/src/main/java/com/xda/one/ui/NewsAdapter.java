@@ -74,7 +74,7 @@ public class NewsAdapter
     public void clear() {
         final int count = mNews.size();
         mNews.clear();
-        notifyItemRangeRemoved(0, count - 1);
+        notifyItemRangeRemoved(0, count);
     }
 
     public void addAll(final List<ResponseNews> news) {
