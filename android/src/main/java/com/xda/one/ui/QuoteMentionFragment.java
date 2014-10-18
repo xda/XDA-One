@@ -51,10 +51,8 @@ public class QuoteMentionFragment extends Fragment {
                 .white));
         mSlidingTabLayout.setViewPager(viewPager);
 
-        // Make sure that this is set back to normal after visiting any PostFragments
         final ActionBar bar = UIUtils.getSupportActionBar(getActivity());
         bar.show();
-        // Set the titles correctly
         bar.setTitle(R.string.quote_mentions);
         bar.setSubtitle(null);
     }

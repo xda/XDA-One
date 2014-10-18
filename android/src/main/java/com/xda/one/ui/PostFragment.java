@@ -230,8 +230,8 @@ public class PostFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
 
         mRecyclerView = (RecyclerView) view.findViewById(android.R.id.list);
-        mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new XDALinerLayoutManager(getActivity()));
+        mRecyclerView.setAdapter(mAdapter);
         ViewCompat.setOverScrollMode(mRecyclerView, ViewCompat.OVER_SCROLL_NEVER);
 
         mEmptyView = view.findViewById(android.R.id.empty);

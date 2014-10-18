@@ -101,7 +101,7 @@ public class SearchFragment extends Fragment {
 
         mSearchMenuItem = menu.findItem(R.id.search_ab_search);
 
-        final SearchView searchView = (SearchView) mSearchMenuItem.getActionView();
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(mSearchMenuItem);
         final SearchQueryListener listener = new SearchQueryListener();
         searchView.setOnQueryTextListener(listener);
 
@@ -116,7 +116,6 @@ public class SearchFragment extends Fragment {
 
     @Override
     public void onPrepareOptionsMenu(final Menu menu) {
-
     }
 
     @Override

@@ -175,8 +175,8 @@ public class ThreadFragment extends Fragment
                 .findViewById(R.id.thread_fragment_create_thread);
         button.setOnClickListener(new CreateThreadListener());
         if (CompatUtils.hasLollipop()) {
-            CompatUtils.setBackground(button, getResources().getDrawable(R.drawable
-                    .fab_background));
+            CompatUtils.setBackground(button, getResources()
+                    .getDrawable(R.drawable.fab_background));
         } else {
             button.setBackgroundColor(getResources().getColor(R.color.fab_color));
         }

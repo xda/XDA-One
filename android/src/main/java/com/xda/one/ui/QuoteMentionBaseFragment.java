@@ -27,8 +27,6 @@ public abstract class QuoteMentionBaseFragment extends Fragment {
 
     protected RecyclerView mRecyclerView;
 
-    protected XDALinerLayoutManager mLayoutManager;
-
     protected View mLoadMoreProgressContainer;
 
     @Override
@@ -41,10 +39,8 @@ public abstract class QuoteMentionBaseFragment extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mLayoutManager = new XDALinerLayoutManager(getActivity());
-
         mRecyclerView = (RecyclerView) view.findViewById(android.R.id.list);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setLayoutManager(new XDALinerLayoutManager(getActivity()));
         ViewCompat.setOverScrollMode(mRecyclerView, ViewCompat.OVER_SCROLL_NEVER);
 
         // If the listener already exists then tell it about the new recycler view
