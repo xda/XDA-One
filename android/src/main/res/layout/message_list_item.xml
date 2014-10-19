@@ -59,7 +59,8 @@
         android:singleLine="true"
         android:text="@string/message_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textSize="13sp" />
+        android:textSize="13sp"
+        android:textIsSelectable="true"/>
 
     <TextView
         android:id="@+id/messsage_list_item_last_post"
