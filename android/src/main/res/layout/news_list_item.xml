@@ -18,7 +18,7 @@
         android:layout_marginLeft="@dimen/margin_medium"
         android:layout_marginStart="@dimen/margin_medium"
         android:layout_marginTop="@dimen/margin_small"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:src="@drawable/account_circle"
         pkg:border_color="@android:color/transparent"
         pkg:oval="true" />
