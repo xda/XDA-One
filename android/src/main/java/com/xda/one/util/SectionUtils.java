@@ -159,6 +159,7 @@ public class SectionUtils {
         view.setTextColor(Color.DKGRAY);
         view.setTextSize(Dimension.UNIT_SP, 13);
         view.setPadding(16, 16, 16, 16);
+        view.setTextIsSelectable(true);
         return view;
     }
 
@@ -170,6 +171,7 @@ public class SectionUtils {
         view.setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
         view.setTextColor(Color.BLACK);
         view.setTextSize(Dimension.UNIT_SP, 13);
+        view.setTextIsSelectable(true);
         return view;
     }
 }
