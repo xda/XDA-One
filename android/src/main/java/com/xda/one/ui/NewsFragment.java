@@ -5,15 +5,12 @@ import com.xda.one.api.model.response.ResponseNews;
 import com.xda.one.api.model.response.container.ResponseNewsContainer;
 import com.xda.one.loader.NewsLoader;
 import com.xda.one.ui.listener.InfiniteRecyclerLoadHelper;
-
-import android.graphics.Color;
-import android.support.v7.widget.XDALinerLayoutManager;
-
 import com.xda.one.ui.widget.FloatingActionButton;
 import com.xda.one.util.UIUtils;
 import com.xda.one.util.Utils;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,6 +19,7 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.XDALinerLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

@@ -15,7 +15,6 @@ import com.xda.one.event.forum.ForumSubscriptionChangingFailedEvent;
 import com.xda.one.loader.ForumLoader;
 import com.xda.one.model.misc.ForumType;
 import com.xda.one.ui.helper.ActionModeHelper;
-import android.support.v7.widget.XDALinerLayoutManager;
 import com.xda.one.ui.widget.XDARefreshLayout;
 import com.xda.one.util.AccountUtils;
 import com.xda.one.util.FragmentUtils;
@@ -27,18 +26,20 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.RecyclerView;
-import android.view.ActionMode;
+import android.support.v7.widget.ShareActionProvider;
+import android.support.v7.widget.XDALinerLayoutManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -289,7 +290,8 @@ public class ForumFragment extends Fragment
             mShareMenuItem = menu.findItem(R.id.forum_fragment_cab_share);
 
             // Fetch and store ShareActionProvider
-            mShareActionProvider = (ShareActionProvider) mShareMenuItem.getActionProvider();
+            mShareActionProvider = (ShareActionProvider) MenuItemCompat
+                    .getActionProvider(mShareMenuItem);
 
             // Get the subscribed menu item
             mSubscribeItem = menu.findItem(R.id.forum_fragment_cab_subscribe);

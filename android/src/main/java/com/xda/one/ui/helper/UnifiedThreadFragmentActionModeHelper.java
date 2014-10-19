@@ -4,20 +4,24 @@ import com.xda.one.R;
 import com.xda.one.api.inteface.ThreadClient;
 import com.xda.one.constants.XDAConstants;
 import com.xda.one.model.augmented.AugmentedUnifiedThread;
+import com.xda.one.ui.BaseActivity;
 import com.xda.one.ui.UnifiedThreadAdapter;
 import com.xda.one.util.AccountUtils;
+import com.xda.one.util.UIUtils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.view.ActionMode;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.view.ActionMode;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ShareActionProvider;
 
 public class UnifiedThreadFragmentActionModeHelper
         extends ActionModeHelper.RecyclerViewActionModeCallback {
 
-    private final Context mContext;
+    private final Activity mActivity;
 
     private final ThreadClient mThreadClient;
 
@@ -29,9 +33,9 @@ public class UnifiedThreadFragmentActionModeHelper
 
     private MenuItem mSubscribeItem;
 
-    public UnifiedThreadFragmentActionModeHelper(final Context context,
+    public UnifiedThreadFragmentActionModeHelper(final Activity activity,
             final ThreadClient threadClient) {
-        mContext = context;
+        mActivity = activity;
         mThreadClient = threadClient;
     }
 
@@ -41,13 +45,14 @@ public class UnifiedThreadFragmentActionModeHelper
 
     @Override
     public boolean onCreateActionMode(final ActionMode actionMode, final Menu menu) {
-        actionMode.getMenuInflater().inflate(R.menu.thread_fragment_cab, menu);
+        final BaseActivity baseActivity = UIUtils.getBaseActivity(mActivity);
+        baseActivity.getMenuInflater().inflate(R.menu.thread_fragment_cab, menu);
 
-        // Locate MenuItem with ShareActionProvider
         final MenuItem shareMenuItem = menu.findItem(R.id.thread_fragment_cab_share);
 
         // Fetch and store ShareActionProvider
-        mShareActionProvider = (ShareActionProvider) shareMenuItem.getActionProvider();
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat
+                .getActionProvider(shareMenuItem);
 
         // Get the subscribed menu item
         mSubscribeItem = menu.findItem(R.id.thread_fragment_cab_subscribe);
@@ -60,7 +65,7 @@ public class UnifiedThreadFragmentActionModeHelper
         if (mModeHelper.getCheckedItemCount() == 1) {
             updateShareIntent();
 
-            final boolean visible = AccountUtils.isAccountAvailable(mContext);
+            final boolean visible = AccountUtils.isAccountAvailable(mActivity);
             mSubscribeItem.setVisible(visible);
             if (visible) {
                 final boolean subscribed = getCheckedThread().isSubscribed();

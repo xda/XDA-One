@@ -18,7 +18,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.WindowCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -39,22 +38,18 @@ public class MainActivity extends BaseActivity
 
     private ActionBarDrawerToggle mDrawerToggle;
 
-    private Toolbar mToolBar;
-
     @Override
     public void onCreate(final Bundle bundle) {
-        supportRequestWindowFeature(WindowCompat.FEATURE_ACTION_MODE_OVERLAY);
-
         super.onCreate(bundle);
         CrashUtils.startCrashlytics(this);
 
         setContentView(R.layout.main_activity);
 
+        final Toolbar toolBar = (Toolbar) findViewById(R.id.toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mToolBar = (Toolbar) findViewById(R.id.toolbar);
 
         mDrawerToggle = new ActionBarDrawerToggle(this,
-                mDrawerLayout, mToolBar, R.string.drawer_open, R.string.drawer_close) {
+                mDrawerLayout, toolBar, R.string.drawer_open, R.string.drawer_close) {
             @Override
             public void onDrawerOpened(final View drawerView) {
                 super.onDrawerOpened(drawerView);
@@ -62,7 +57,7 @@ public class MainActivity extends BaseActivity
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        setSupportActionBar(mToolBar);
+        setSupportActionBar(toolBar);
 
         if (bundle == null) {
             mNavigationDrawerFragment = new NavigationDrawerFragment();

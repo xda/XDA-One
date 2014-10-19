@@ -13,16 +13,13 @@ import com.xda.one.model.augmented.AugmentedMessage;
 import com.xda.one.model.augmented.container.AugmentedMessageContainer;
 import com.xda.one.ui.listener.AvatarClickListener;
 import com.xda.one.ui.listener.InfiniteRecyclerLoadHelper;
-
-import android.graphics.Color;
-import android.support.v7.widget.XDALinerLayoutManager;
-
 import com.xda.one.ui.widget.FloatingActionButton;
 import com.xda.one.ui.widget.XDARefreshLayout;
 import com.xda.one.util.UIUtils;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
@@ -31,6 +28,7 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.XDALinerLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

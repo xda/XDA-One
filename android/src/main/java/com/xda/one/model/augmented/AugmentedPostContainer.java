@@ -2,7 +2,6 @@ package com.xda.one.model.augmented;
 
 import com.xda.one.api.model.interfaces.Post;
 import com.xda.one.api.model.interfaces.container.PostContainer;
-import com.xda.one.api.model.response.ResponsePost;
 import com.xda.one.api.model.response.ResponseUnifiedThread;
 import com.xda.one.api.model.response.container.ResponsePostContainer;
 

@@ -13,8 +13,6 @@ import android.text.style.ForegroundColorSpan;
 
 public final class AugmentedQuote implements Quote {
 
-    private static final String QUOTE_USERNAME_CONTENT_SEPARATOR = " - ";
-
     public static final Creator<AugmentedQuote> CREATOR = new Creator<AugmentedQuote>() {
         @Override
         public AugmentedQuote createFromParcel(Parcel source) {
@@ -26,6 +24,8 @@ public final class AugmentedQuote implements Quote {
             return new AugmentedQuote[size];
         }
     };
+
+    private static final String QUOTE_USERNAME_CONTENT_SEPARATOR = " - ";
 
     private final Quote mQuote;
 

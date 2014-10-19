@@ -7,7 +7,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.XDALinerLayoutManager;
 import android.util.SparseArray;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.animation.Animation;
@@ -42,7 +41,7 @@ public class QuickReturnHelper {
         final ViewConfiguration vc = ViewConfiguration.get(actionBar.getThemedContext());
         mTouchSlop = vc.getScaledTouchSlop();
 
-        mActionBarHeight = UIUtils.calculateActionBarSize(context) ;
+        mActionBarHeight = UIUtils.calculateActionBarSize(context);
 
         if (quickReturnView == null) {
             return;

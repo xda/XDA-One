@@ -6,7 +6,6 @@ import com.xda.one.api.model.interfaces.Forum;
 import com.xda.one.api.model.response.ResponseUserProfile;
 import com.xda.one.loader.UserProfileLoader;
 import com.xda.one.ui.helper.ActionModeHelper;
-import android.support.v7.widget.XDALinerLayoutManager;
 import com.xda.one.util.FragmentUtils;
 import com.xda.one.util.UIUtils;
 
@@ -17,8 +16,9 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.RecyclerView;
-import android.view.ActionMode;
+import android.support.v7.widget.XDALinerLayoutManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;

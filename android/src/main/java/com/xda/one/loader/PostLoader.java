@@ -1,16 +1,11 @@
 package com.xda.one.loader;
 
 import com.xda.one.api.inteface.PostClient;
-import com.xda.one.api.model.interfaces.Post;
 import com.xda.one.api.model.response.container.ResponsePostContainer;
 import com.xda.one.api.retrofit.RetrofitPostClient;
-import com.xda.one.model.augmented.AugmentedPost;
 import com.xda.one.model.augmented.AugmentedPostContainer;
 
 import android.content.Context;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PostLoader extends AsyncLoader<AugmentedPostContainer> {
 

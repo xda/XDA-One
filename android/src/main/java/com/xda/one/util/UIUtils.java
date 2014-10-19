@@ -5,11 +5,9 @@ import com.xda.one.ui.BaseActivity;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
 
 import static android.view.View.GONE;
@@ -74,5 +72,9 @@ public class UIUtils {
 
     public static ActionBar getSupportActionBar(final Activity activity) {
         return ((BaseActivity) activity).getSupportActionBar();
+    }
+
+    public static BaseActivity getBaseActivity(final Activity activity) {
+        return (BaseActivity) activity;
     }
 }

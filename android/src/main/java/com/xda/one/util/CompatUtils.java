@@ -3,9 +3,7 @@ package com.xda.one.util;
 import android.annotation.TargetApi;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v7.app.ActionBar;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 
 public class CompatUtils {
 

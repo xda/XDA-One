@@ -5,7 +5,6 @@ import com.xda.one.api.model.interfaces.Forum;
 import com.xda.one.api.model.response.ResponseForum;
 import com.xda.one.db.ForumDbHelper;
 import com.xda.one.loader.FindYouDeviceLoader;
-import android.support.v7.widget.XDALinerLayoutManager;
 import com.xda.one.util.FragmentUtils;
 import com.xda.one.util.UIUtils;
 
@@ -23,6 +22,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.XDALinerLayoutManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;

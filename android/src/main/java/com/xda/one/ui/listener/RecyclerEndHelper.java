@@ -1,8 +1,7 @@
 package com.xda.one.ui.listener;
 
-import android.support.v7.widget.XDALinerLayoutManager;
-
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.XDALinerLayoutManager;
 
 public class RecyclerEndHelper extends RecyclerView.OnScrollListener {
 

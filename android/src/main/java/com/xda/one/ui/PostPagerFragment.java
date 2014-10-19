@@ -28,7 +28,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.XDALinerLayoutManager;
 import android.text.Html;
@@ -404,6 +403,16 @@ public class PostPagerFragment extends Fragment
         }
     }
 
+    @Override
+    public void onPageLoaded(final ResponseUnifiedThread thread) {
+        if (getTargetFragment() != null) {
+            final Intent intent = new Intent();
+            intent.putExtra("thread", thread);
+            getTargetFragment()
+                    .onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
+        }
+    }
+
     public interface Callback {
 
         public void login(final Runnable runnable);
@@ -484,16 +493,6 @@ public class PostPagerFragment extends Fragment
         public boolean onNavigationItemSelected(int itemPosition, long itemId) {
             getFragmentManager().popBackStack(getItem(itemPosition), 0);
             return true;
-        }
-    }
-
-    @Override
-    public void onPageLoaded(final ResponseUnifiedThread thread) {
-        if (getTargetFragment() != null) {
-            final Intent intent = new Intent();
-            intent.putExtra("thread", thread);
-            getTargetFragment()
-                    .onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
         }
     }
 
