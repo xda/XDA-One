@@ -30,6 +30,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -396,7 +397,7 @@ public class PostFragment extends Fragment
             final DownloadManager.Request request = new DownloadManager
                     .Request(Uri.parse(a.getAttachmentUrl()))
                     .setAllowedOverRoaming(false)
-                    .setDestinationInExternalPublicDir("XDA-One-Downloads", a.getFileName());
+                    .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS + "/XDA One/", a.getFileName());
             manager.enqueue(request);
         }
     }
