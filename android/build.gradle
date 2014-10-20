@@ -17,6 +17,11 @@ apply plugin: 'crashlytics'
 android {
     compileSdkVersion 19
     buildToolsVersion '20.0.0'
+    
+    lintOptions {
+    abortOnError false
+    disable 'MissingTranslation', 'ExtraTranslation'
+    }    
 
     packagingOptions {
         exclude 'META-INF/LICENSE'
