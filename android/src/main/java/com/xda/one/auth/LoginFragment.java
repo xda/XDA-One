@@ -120,7 +120,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        view.findViewById(R.id.sign_in_button).setOnClickListener(this);
+        // view.findViewById(R.id.sign_in_button).setOnClickListener(this);
 
         mUsername = (EditText) view.findViewById(R.id.accountName);
         mUsername.setText(mAccountName);
