@@ -1,6 +1,7 @@
 package com.xda.one.ui;
 
 import com.xda.one.R;
+import com.xda.one.util.AnalyticsUtil;
 
 import android.app.ActionBar;
 import android.content.Context;
@@ -13,6 +14,8 @@ public class UserProfileActivity extends BaseActivity {
 
     public static final String USER_ID_ARGUMENT = "user_id";
 
+    private final String SCREEN_NAME = "ViewMessageActivity";
+
     public static Intent createIntent(final Context context, final String userId) {
         final Intent intent = new Intent(context, UserProfileActivity.class);
         intent.putExtra(USER_ID_ARGUMENT, userId);
@@ -23,6 +26,8 @@ public class UserProfileActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.frame_activity);
+
+        AnalyticsUtil.startTracker(UserProfileActivity.this, SCREEN_NAME);
 
         if (savedInstanceState == null) {
             final String userId = getIntent().getStringExtra(USER_ID_ARGUMENT);

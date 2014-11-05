@@ -1,31 +1,27 @@
 package com.xda.one.ui;
 
-import com.xda.one.R;
-import com.xda.one.api.misc.Consumer;
-import com.xda.one.model.misc.ForumType;
-import com.xda.one.ui.helper.UrlParseHelper;
-import com.xda.one.util.AccountUtils;
-import com.xda.one.util.CrashUtils;
-import com.xda.one.util.UIUtils;
-import com.xda.one.util.Utils;
-
 import android.app.ActionBar;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.NavUtils;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
+import com.xda.one.R;
+import com.xda.one.api.misc.Consumer;
+import com.xda.one.model.misc.ForumType;
+import com.xda.one.ui.helper.UrlParseHelper;
+import com.xda.one.util.AccountUtils;
+import com.xda.one.util.AnalyticsUtil;
+import com.xda.one.util.CrashUtils;
+import com.xda.one.util.UIUtils;
 
 public class MainActivity extends BaseActivity
         implements NavigationDrawerFragment.Callback, SubscribedPagerFragment.Callback,
@@ -37,12 +33,17 @@ public class MainActivity extends BaseActivity
 
     private Runnable mLoginSuccessfulRunnable;
 
+    private final String SCREEN_NAME = "MainActivity";
+
     @Override
     public void onCreate(final Bundle bundle) {
         requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
         super.onCreate(bundle);
-        CrashUtils.startCrashlytics(this);
+
+        //CrashUtils.startCrashlytics(this);
+
+        AnalyticsUtil.startTracker(MainActivity.this, SCREEN_NAME);
 
         setContentView(R.layout.main_activity);
 
@@ -218,4 +219,5 @@ public class MainActivity extends BaseActivity
         mLoginSuccessfulRunnable = runnable;
         mNavigationDrawerFragment.login();
     }
+
 }
