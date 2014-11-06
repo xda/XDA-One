@@ -24,8 +24,6 @@ public class ViewMessageActivity extends BaseActivity {
         super.onCreate(bundle);
         setContentView(R.layout.frame_activity);
 
-        AnalyticsUtil.startTracker(ViewMessageActivity.this, SCREEN_NAME);
-
         if (bundle == null) {
             final AugmentedMessage message = getIntent().getParcelableExtra(MESSAGE_ARGUMENT);
             mMessageFragment = ViewMessageFragment.createInstance(message);

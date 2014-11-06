@@ -11,30 +11,6 @@
         XDA-One MainActivity
     </screenName>
 
-    <screenName name="com.xda.one.ui.ViewMessageActivity">
-        XDA-One ViewMessageActivity
-    </screenName>
-
-    <screenName name="com.xda.one.ui.HelpActivity">
-        XDA-One HelpActivity
-    </screenName>
-
-    <screenName name="com.xda.one.ui.AboutActivity">
-        XDA-One AboutActivity
-    </screenName>
-
-    <screenName name="com.xda.one.ui.SettingsActivity">
-        XDA-One SettingsActivity
-    </screenName>
-
-    <screenName name="com.xda.one.ui.UserProfileActivity">
-        XDA-One UserProfileActivity
-    </screenName>
-
-    <screenName name="com.xda.one.auth.XDAAuthenticatorActivity">
-        XDA-One XDAAuthenticatorActivity
-    </screenName>
-
     <!--  The following value should be replaced with correct property id. -->
     <string name="ga_trackingId">UA-12268453-6</string>
 </resources>

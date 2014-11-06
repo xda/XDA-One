@@ -16,8 +16,6 @@ public class XDAAuthenticatorActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.frame_activity);
 
-        AnalyticsUtil.startTracker(XDAAuthenticatorActivity.this, SCREEN_NAME);
-
         if (savedInstanceState == null) {
             final String accountName = getIntent().getStringExtra(LoginFragment.ARG_ACCOUNT_NAME);
             final Fragment instance = LoginFragment.createInstance(accountName);

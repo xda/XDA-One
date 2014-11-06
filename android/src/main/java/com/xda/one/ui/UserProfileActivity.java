@@ -27,8 +27,6 @@ public class UserProfileActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.frame_activity);
 
-        AnalyticsUtil.startTracker(UserProfileActivity.this, SCREEN_NAME);
-
         if (savedInstanceState == null) {
             final String userId = getIntent().getStringExtra(USER_ID_ARGUMENT);
             final Fragment fragment = UserProfileFragment.createInstance(userId);

@@ -1,19 +1,8 @@
 package com.xda.one.ui;
 
-import android.app.ActionBar;
-import android.app.FragmentManager;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
-import android.view.Gravity;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.Window;
-import android.widget.Toast;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.xda.one.R;
 import com.xda.one.api.misc.Consumer;
 import com.xda.one.model.misc.ForumType;
@@ -22,6 +11,26 @@ import com.xda.one.util.AccountUtils;
 import com.xda.one.util.AnalyticsUtil;
 import com.xda.one.util.CrashUtils;
 import com.xda.one.util.UIUtils;
+import com.xda.one.util.Utils;
+
+import android.app.ActionBar;
+import android.app.FragmentManager;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NavUtils;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.widget.Toast;
 
 public class MainActivity extends BaseActivity
         implements NavigationDrawerFragment.Callback, SubscribedPagerFragment.Callback,
@@ -33,7 +42,7 @@ public class MainActivity extends BaseActivity
 
     private Runnable mLoginSuccessfulRunnable;
 
-    private final String SCREEN_NAME = "MainActivity";
+    private final String SCREEN_NAME = "XDA-One MainActivity";
 
     @Override
     public void onCreate(final Bundle bundle) {
@@ -41,15 +50,15 @@ public class MainActivity extends BaseActivity
         requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
         super.onCreate(bundle);
 
-        //CrashUtils.startCrashlytics(this);
-
-        AnalyticsUtil.startTracker(MainActivity.this, SCREEN_NAME);
+//        CrashUtils.startCrashlytics(this);
 
         setContentView(R.layout.main_activity);
 
         final ActionBar actionBar = getActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setIcon(R.drawable.ic_action_menu);
+
+        startTracker(SCREEN_NAME);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
@@ -91,6 +100,16 @@ public class MainActivity extends BaseActivity
                 return true;
         }
         return false;
+    }
+
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stub
+
+        super.onStart();
+        GoogleAnalytics.getInstance(MainActivity.this).reportActivityStart(this);
+        //Get an Analytics tracker to report app starts & uncaught exceptions etc.
+
     }
 
     private void initialReplaceFragment() {
@@ -176,6 +195,14 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
+    protected void onStop() {
+        // TODO Auto-generated method stub
+        super.onStop();
+        //Stop the analytics tracking
+        GoogleAnalytics.getInstance(MainActivity.this).reportActivityStop(this);
+    }
+
+    @Override
     public void closeNavigationDrawer() {
         mDrawerLayout.closeDrawer(Gravity.LEFT);
     }
@@ -220,4 +247,16 @@ public class MainActivity extends BaseActivity
         mNavigationDrawerFragment.login();
     }
 
+    private void startTracker(String screenName){
+        // Get tracker.
+        Tracker tracker = ((AnalyticsUtil) this.getApplication()).getTracker(
+                AnalyticsUtil.TrackerName.APP_TRACKER);
+
+        // Set screen name.
+        // Where path is a String representing the screen name.
+        tracker.setScreenName(screenName);
+
+        // Send a screen view.
+        tracker.send(new HitBuilders.AppViewBuilder().build());
+    }
 }
