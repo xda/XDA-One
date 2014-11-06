@@ -15,6 +15,7 @@ import com.xda.one.event.forum.ForumSubscriptionChangingFailedEvent;
 import com.xda.one.loader.ForumLoader;
 import com.xda.one.model.misc.ForumType;
 import com.xda.one.ui.helper.ActionModeHelper;
+import com.xda.one.ui.widget.HierarchySpinnerAdapter;
 import com.xda.one.ui.widget.XDALinerLayoutManager;
 import com.xda.one.ui.widget.XDARefreshLayout;
 import com.xda.one.util.AccountUtils;
@@ -57,6 +58,8 @@ public class ForumFragment extends Fragment
     private static final String FORUM = "forum";
 
     private final EventHandler mEventHandler = new EventHandler();
+
+    private HierarchySpinnerAdapter mSpinnerAdapter;
 
     private List<String> mHierarchy;
 
@@ -109,21 +112,6 @@ public class ForumFragment extends Fragment
 
         mClient = RetrofitForumClient.getClient(getActivity());
 
-        mModeHelper = new ActionModeHelper(getActivity(),
-                new ForumFragmentActionMode(),
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(final View view) {
-                        final int position = mRecyclerView.getChildPosition(view);
-                        if (position == RecyclerView.NO_POSITION) {
-                            return;
-                        }
-                        final Forum responseForum = mAdapter.getForum(position);
-                        onListItemClicked(responseForum);
-                    }
-                },
-                ActionModeHelper.SelectionMode.SINGLE);
-
         mForumType = (ForumType) getArguments().getSerializable(FORUM_TYPE);
         if (mForumType == ForumType.CHILD) {
             mForum = getArguments().getParcelable(FORUM);
@@ -134,6 +122,25 @@ public class ForumFragment extends Fragment
             mForumTitle = getString(mForumType.getStringTitleId());
             mHierarchy = Collections.emptyList();
         }
+
+        mModeHelper = new ActionModeHelper(getActivity(),
+                new ForumFragmentActionMode(),
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(final View view) {
+                        final int position = mRecyclerView.getChildPosition(view);
+                        if (position == RecyclerView.NO_POSITION) {
+                            return;
+                        }
+
+                        final Forum responseForum = mAdapter.getForum(position);
+                        onListItemClicked(responseForum);
+
+                    }
+                },
+                ActionModeHelper.SelectionMode.SINGLE);
+
+        mSpinnerAdapter = new HierarchySpinnerAdapter(getActivity(), LayoutInflater.from(getActivity()),mHierarchy,getFragmentManager());
 
         mAdapter = new ForumAdapter<>(getActivity(), mModeHelper, mModeHelper, mModeHelper,
                 new ForumAdapter.ImageViewDeviceDelegate() {
@@ -218,6 +225,12 @@ public class ForumFragment extends Fragment
         bar.show();
         bar.setTitle(mForumTitle);
         bar.setSubtitle(mParentForumTitle);
+        if (mForumType == ForumType.CHILD) {
+            bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+            bar.setListNavigationCallbacks(mSpinnerAdapter, mSpinnerAdapter);
+            bar.setSelectedNavigationItem(mSpinnerAdapter.getCount() - 1);
+        }
+
 
         if (mAdapter.getItemCount() == 0) {
             getLoaderManager().initLoader(0, null, this);
