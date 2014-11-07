@@ -63,6 +63,7 @@ public class ForumPagerFragment extends Fragment {
         bar.show();
         bar.setTitle(R.string.subscribed);
         bar.setSubtitle(null);
+        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
         final ViewPager pager = (ViewPager) view.findViewById(R.id.forum_view_pager);
         pager.setOffscreenPageLimit(3);
