@@ -1,12 +1,15 @@
 package com.xda.one.auth;
 
 import com.xda.one.R;
+import com.xda.one.util.AnalyticsUtil;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 public class XDAAuthenticatorActivity extends FragmentActivity {
+
+    private final String SCREEN_NAME = "XDAAuthenticatorActivity";
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {

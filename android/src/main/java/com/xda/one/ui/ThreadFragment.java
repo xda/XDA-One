@@ -2,16 +2,19 @@ package com.xda.one.ui;
 
 import com.xda.one.R;
 import com.xda.one.api.inteface.ThreadClient;
+import com.xda.one.api.model.interfaces.Forum;
 import com.xda.one.api.model.interfaces.UnifiedThread;
 import com.xda.one.api.retrofit.RetrofitThreadClient;
 import com.xda.one.loader.ThreadLoader;
 import com.xda.one.model.augmented.AugmentedUnifiedThread;
 import com.xda.one.model.augmented.container.AugmentedUnifiedThreadContainer;
+import com.xda.one.model.misc.ForumType;
 import com.xda.one.ui.helper.ActionModeHelper;
 import com.xda.one.ui.helper.ThreadEventHelper;
 import com.xda.one.ui.helper.UnifiedThreadFragmentActionModeHelper;
 import com.xda.one.ui.listener.InfiniteRecyclerLoadHelper;
 import com.xda.one.ui.widget.FloatingActionButton;
+import com.xda.one.ui.widget.HierarchySpinnerAdapter;
 import com.xda.one.ui.widget.XDALinerLayoutManager;
 import com.xda.one.ui.widget.XDARefreshLayout;
 import com.xda.one.util.AccountUtils;
@@ -60,6 +63,10 @@ public class ThreadFragment extends Fragment
 
     private static final String FORUM_HIERARCHY_ARGUMENT = "hierarchy";
 
+    private ForumType mForumType = ForumType.ALL;
+
+    public static final String FORUM_TYPE = "forum_type";
+
     private int mForumId;
 
     // Infinite scrolling
@@ -80,6 +87,8 @@ public class ThreadFragment extends Fragment
     private ActionModeHelper mModeHelper;
 
     private List<String> mHierarchy;
+
+    private HierarchySpinnerAdapter mSpinnerAdapter;
 
     private int mTotalPages;
 
@@ -129,10 +138,13 @@ public class ThreadFragment extends Fragment
         helper.setAdapter(mAdapter);
         helper.setModeHelper(mModeHelper);
 
+        mForumType = (ForumType) getArguments().getSerializable(FORUM_TYPE);
         mForumId = getArguments().getInt(FORUM_ID_ARGUMENT, 0);
         mForumTitle = getArguments().getString(FORUM_TITLE_ARGUMENT, null);
         mParentForumTitle = getArguments().getString(PARENT_FORUM_TITLE_ARGUMENT, null);
         mHierarchy = getArguments().getStringArrayList(FORUM_HIERARCHY_ARGUMENT);
+
+        mSpinnerAdapter = new HierarchySpinnerAdapter(getActivity(), LayoutInflater.from(getActivity()),mHierarchy,getFragmentManager());
     }
 
     @Override
@@ -183,6 +195,9 @@ public class ThreadFragment extends Fragment
         // Set the titles correctly
         bar.setTitle(mForumTitle);
         bar.setSubtitle(mParentForumTitle);
+        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        bar.setListNavigationCallbacks(mSpinnerAdapter, mSpinnerAdapter);
+        bar.setSelectedNavigationItem(mSpinnerAdapter.getCount() - 1);
 
         // If the listener already exists then tell it about the new recycler view
         if (mInfiniteScrollListener != null) {
