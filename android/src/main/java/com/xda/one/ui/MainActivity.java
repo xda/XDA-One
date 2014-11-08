@@ -58,6 +58,7 @@ public class MainActivity extends BaseActivity
         startTracker(SCREEN_NAME);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.colorAccent));
 
         mDrawerToggle = new ActionBarDrawerToggle(this,
                 mDrawerLayout, toolBar, R.string.drawer_open, R.string.drawer_close) {
