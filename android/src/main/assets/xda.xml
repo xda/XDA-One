@@ -10,7 +10,7 @@
         </code>
         <code priority="100">
             <pattern>&apos;</pattern>
-            <template>&amp;apos;</template>
+            <template>&amp;#39;</template>
         </code>
         <code priority="100">
             <pattern>&lt;</pattern>

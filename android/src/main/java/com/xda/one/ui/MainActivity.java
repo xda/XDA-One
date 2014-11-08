@@ -1,15 +1,20 @@
 package com.xda.one.ui;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.xda.one.R;
 import com.xda.one.api.misc.Consumer;
 import com.xda.one.model.misc.ForumType;
 import com.xda.one.ui.helper.UrlParseHelper;
 import com.xda.one.util.AccountUtils;
+import com.xda.one.util.AnalyticsUtil;
 import com.xda.one.util.CrashUtils;
 import com.xda.one.util.FragmentUtils;
 
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -38,14 +43,20 @@ public class MainActivity extends BaseActivity
 
     private ActionBarDrawerToggle mDrawerToggle;
 
+    private final String SCREEN_NAME = "XDA-One MainActivity";
+
     @Override
     public void onCreate(final Bundle bundle) {
         super.onCreate(bundle);
-        CrashUtils.startCrashlytics(this);
+
+//        CrashUtils.startCrashlytics(this);
 
         setContentView(R.layout.main_activity);
 
         final Toolbar toolBar = (Toolbar) findViewById(R.id.toolbar);
+
+        startTracker(SCREEN_NAME);
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         mDrawerToggle = new ActionBarDrawerToggle(this,
@@ -90,6 +101,16 @@ public class MainActivity extends BaseActivity
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stub
+
+        super.onStart();
+        GoogleAnalytics.getInstance(MainActivity.this).reportActivityStart(this);
+        //Get an Analytics tracker to report app starts & uncaught exceptions etc.
+
     }
 
     private void initialReplaceFragment() {
@@ -174,6 +195,14 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
+    protected void onStop() {
+        // TODO Auto-generated method stub
+        super.onStop();
+        //Stop the analytics tracking
+        GoogleAnalytics.getInstance(MainActivity.this).reportActivityStop(this);
+    }
+
+    @Override
     public void closeNavigationDrawer() {
         mDrawerLayout.closeDrawer(Gravity.LEFT);
     }
@@ -215,5 +244,18 @@ public class MainActivity extends BaseActivity
     public void login(final Runnable runnable) {
         mLoginSuccessfulRunnable = runnable;
         mNavigationDrawerFragment.login();
+    }
+
+    private void startTracker(String screenName){
+        // Get tracker.
+        Tracker tracker = ((AnalyticsUtil) this.getApplication()).getTracker(
+                AnalyticsUtil.TrackerName.APP_TRACKER);
+
+        // Set screen name.
+        // Where path is a String representing the screen name.
+        tracker.setScreenName(screenName);
+
+        // Send a screen view.
+        tracker.send(new HitBuilders.AppViewBuilder().build());
     }
 }
