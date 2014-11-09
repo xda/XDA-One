@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">XDA One</string>
+
+    <string name="menu_send_message">Invia messaggio all\'utente</string>
+    <string name="menu_copy_content">Copia contenuto post</string>
+    <string name="menu_author_profile">Vedi profilo utente</string>
+    <string name="menu_open_browser">Apri nel browser</string>
+
+    <string name="menu_add_attachment">Aggiungi allegato</string>
+
+    <string name="menu_profile_change_password">Cambio password</string>
+    <string name="menu_profile_update_email">Aggiorna email</string>
+
+    <string name="no_internet_connection">Per favore collegarsi ad internet</string>
+
+    <string name="sign_in_title">Accedi/Registrati</string>
+
+    <string name="forums">Forum</string>
+    <string name="threads">Thread</string>
+
+    <string name="inbox_title">Inbox</string>
+    <string name="sent_items_title">Inviati</string>
+
+    <!-- forum menu -->
+    <string name="forum_home_title">XDA Home</string>
+    <string name="subscribed">Sottoscritti</string>
+    <string name="participated">Partecipati</string>
+    <string name="notifications">Notifiche</string>
+    <string name="forum_newest_title">Nuovi</string>
+    <string name="forum_top_title">Top</string>
+    <string name="forum_all_title">Tutto</string>
+
+    <string name="drawer_open">Apri</string>
+    <string name="drawer_close">Chiudi</string>
+
+    <string name="d_items_checked">%d elementi selezionati</string>
+    <string name="posts_selected_number">%d post selezionati</string>
+
+    <!-- Small phrases -->
+    <string name="send">Invia</string>
+    <string name="message_content">Contenuto messaggio</string>
+    <string name="title">Titolo</string>
+    <string name="loading">Caricamento…</string>
+    <string name="username">Nome utente</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Accedi</string>
+    <string name="or">oppure</string>
+    <string name="settings">Impostazioni</string>
+    <string name="help">Aiuto</string>
+    <string name="about">Info</string>
+    <string name="profile">Profilo</string>
+    <string name="share">Condividi</string>
+    <string name="subscribe">Sottoscrivi</string>
+    <string name="unsubscribe">Elimina sottoscrizione</string>
+    <string name="thanks">Thanks</string>
+    <string name="news">Novità</string>
+    <string name="search">Cerca</string>
+    <string name="user">Utente</string>
+    <string name="private_messages">Messaggi privati</string>
+    <string name="more_xda">Di più su XDA</string>
+    <string name="replying_to">Invio risposta a: %s</string>
+    <string name="other">Altro</string>
+    <string name="last_post">Ultimo post</string>
+    <string name="thread_title">Titolo thread</string>
+    <string name="views">Visualizzazioni</string>
+    <string name="reply_count">Contatore risposte</string>
+    <string name="date">Data</string>
+    <string name="avatar">Avatar</string>
+    <string name="remove_thanks">Rimuovi thanks</string>
+    <string name="count">Contatore</string>
+    <string name="email">Email</string>
+    <string name="mark_read">Segna come letto</string>
+    <string name="mark_unread">Segna come non letto</string>
+    <string name="delete">Elimina</string>
+    <string name="forum_title">Titolo forum</string>
+    <string name="creating_new_post">Creazione…</string>
+    <string name="quote">Quota</string>
+
+    <string name="find_your_device_title">Trova il tuo dispositivo</string>
+
+    <string name="post_creation_failed">Creazione del post fallita</string>
+
+    <string name="message_delete_successful">Messaggio eliminato con successo</string>
+
+    <string name="forum_subscription_subscribed">Iscrizione al forum riuscita</string>
+    <string name="forum_subscription_unsubscribed">Iscrizione al forum rimossa</string>
+    <string name="forum_subscription_toggle_failed">Cambio stato di sottoscrizione fallito</string>
+
+    <string name="thread_subscription_subscribed">Iscrizione al thread riuscita</string>
+    <string name="thread_subscription_unsubscribed">Iscrizione al thread rimossa</string>
+    <string name="thread_subscription_toggle_failed">Cambio stato di sottoscrizione
+        fallito</string>
+
+    <!-- User Profile -->
+    <string name="user_profile_title">Titolo:\n%1$s</string>
+    <string name="user_profile_signature">Firma:\n%1$s</string>
+    <string name="user_profile_devices">Dispositivi:\n%1$s</string>
+    <string name="user_profile_email">Email:\n%1$s</string>
+
+    <!-- Auth -->
+    <string name="dont_have_xda_account">
+        <![CDATA[Ancora non hai un account su xda-developers?]]></string>
+    <string name="sign_in_google_plus">g+ Accedi con Google</string>
+    <string name="register_email">Registrati usando l\'email</string>
+    <string name="change_password">Cambia password</string>
+    <string name="change_email_address">Cambia indirizzo email</string>
+    <string name="no_items_empty_view">Nessun elemento da mostrare</string>
+
+    <string name="message_reply_success">Risposta inviata con successo</string>
+    <string name="message_reply_failed">Impossibile inviare la risposta</string>
+    <string name="placeholder">Testo</string>
+    <string name="to">A</string>
+    <string name="message_subject">Oggetto</string>
+    <string name="content">Contenuto</string>
+    <string name="user_profile">Profilo utente</string>
+    <string name="find_your_device">Trova il tuo dispositivo</string>
+    <string name="multi_quote">Quote multiplo</string>
+    <string name="mentions">Menzioni</string>
+    <string name="quotes">Quote</string>
+    <string name="quote_mentions">Quote/Menziono</string>
+    <string name="user_profile_thanked_posts_count">Post con thanks ricevuti:\n%1$d</string>
+    <string name="user_profile_post_count">Numero post:\n%1$d</string>
+    <string name="find_a_device">Trova un dispositivo</string>
+    <string name="forum_general_title">Generale</string>
+    <string name="one_account_allowed">Puoi avere solo un account di XDA alla volta</string>
+    <string name="login">Accedi</string>
+    <string name="logout">Esci</string>
+    <string name="logging_in">Accesso in corso…</string>
+    <string name="new_message_send_successful">Messaggio inviato</string>
+    <string name="new_message_send_failed">Invio messaggio fallito</string>
+    <string name="my_devices">I miei dispositivi</string>
+    <string name="failed_to_get_forum">Impossibile prendere il link</string>
+    <string name="failed_to_logout">Logout fallito</string>
+    <string name="register">Registrati</string>
+    <string name="recaptcha">Un altro CAPTCHA</string>
+    <string name="pm">PM</string>
+
+    <string name="xda_news">Novità di XDA</string>
+    <string name="lorem_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta pretium urna, at sagittis turpis posuere nec. Quisque vulputate dignissim metus, eget eleifend tortor commodo ultrices. Cras eros ante, faucibus sit amet eleifend at, rhoncus ut dolor. Suspendisse cursus sollicitudin elit, sit amet porta ante interdum id. Maecenas feugiat, neque eget lobortis volutpat, metus neque fermentum erat, at tincidunt purus purus in justo. Curabitur consectetur augue non elit porttitor rhoncus. Pellentesque accumsan congue blandit. Mauris tincidunt congue velit. Quisque gravida at sem in rhoncus. Curabitur id lectus sed lectus ultrices aliquet a vitae augue. Sed eu euismod nisi, vitae semper nulla. Proin mauris orci, efficitur sed nunc sed, dictum maximus lectus. Cras fringilla suscipit nisl, sit amet scelerisque leo tincidunt ut. </string>
+    <string name="read_more">Leggi altro</string>
+    <string name="something_went_wrong_request">Qualcosa è andato storto con la tua richiesta</string>
+    <string name="unable_to_refresh">Impossibile aggiornare</string>
+</resources>
