@@ -69,7 +69,7 @@
         android:layout_toStartOf="@+id/create_post_dialog_fragment_send"
         android:background="?android:attr/selectableItemBackground"
         android:padding="8dp"
-        android:src="@drawable/ic_smilie" />
+        android:src="@drawable/ic_insert_emoticon" />
 
     <include
         android:id="@+id/create_post_dialog_fragment_message"

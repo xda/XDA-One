@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,8 +96,10 @@ public class NavigationDrawerFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
 
         mListView = (ListView) view.findViewById(android.R.id.list);
-        mListView.setOnItemClickListener(this);
+        ViewCompat.setOverScrollMode(mListView, ViewCompat.OVER_SCROLL_NEVER);
 
+        mListView.setOnItemClickListener(this);
+g
         final LayoutInflater inflater = LayoutInflater.from(getActivity());
         final View headerView = inflater.inflate(R.layout.navigation_drawer_header,
                 mListView, false);

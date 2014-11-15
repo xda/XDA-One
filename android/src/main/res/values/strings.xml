@@ -141,4 +141,5 @@
     <string name="read_more">Read more</string>
     <string name="something_went_wrong_request">Something went wrong with that request</string>
     <string name="unable_to_refresh">Unable to refresh posts</string>
+    <string name="post_title">Post Title</string>
 </resources>
