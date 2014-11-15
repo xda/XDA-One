@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.One" parent="Theme.AppCompat.Light.NoActionBar">
+
+    <style name="Theme.One" parent="Theme.One.Base">
+        <item name="android:statusBarColor">?colorPrimaryDark</item>
+    </style>
+
+    <style name="Theme.One.NavDrawer" parent="Theme.One.Base">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
 </resources>

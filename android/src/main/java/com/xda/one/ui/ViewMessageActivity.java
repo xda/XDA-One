@@ -1,12 +1,8 @@
 package com.xda.one.ui;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.xda.one.R;
 import com.xda.one.model.augmented.AugmentedMessage;
-import com.xda.one.util.AnalyticsUtil;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.WindowManager;

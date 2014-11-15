@@ -12,12 +12,10 @@ import android.support.multidex.MultiDex;
 
 import java.util.HashMap;
 
-public class AnalyticsUtil extends Application {
+public class OneApplication extends Application {
 
     // The following line should be changed to include the correct property id.
     private static final String PROPERTY_ID = "UA-12268453-6";
-
-    public static int GENERAL_TRACKER = 0;
 
     public enum TrackerName {
         APP_TRACKER, // Tracker used only in this app.
@@ -25,21 +23,32 @@ public class AnalyticsUtil extends Application {
         ECOMMERCE_TRACKER, // Tracker used by all ecommerce transactions from a company.
     }
 
-    HashMap<TrackerName, Tracker> mTrackers = new HashMap<TrackerName, Tracker>();
+    private final HashMap<TrackerName, Tracker> mTrackers = new HashMap<TrackerName, Tracker>();
 
     public synchronized Tracker getTracker(TrackerName trackerId) {
-        if (!mTrackers.containsKey(trackerId)) {
-
-            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
-            analytics.getLogger().setLogLevel(Logger.LogLevel.VERBOSE);
-            Tracker t = (trackerId == TrackerName.APP_TRACKER) ? analytics.newTracker(PROPERTY_ID)
-                    : (trackerId == TrackerName.GLOBAL_TRACKER) ? analytics.newTracker(
-                            R.xml.global_tracker)
-                            : analytics.newTracker(R.xml.global_tracker);
-            t.enableAdvertisingIdCollection(true);
-            mTrackers.put(trackerId, t);
+        if (mTrackers.containsKey(trackerId)) {
+            return mTrackers.get(trackerId);
         }
-        return mTrackers.get(trackerId);
+
+        final GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+        analytics.getLogger().setLogLevel(Logger.LogLevel.VERBOSE);
+
+        final Tracker tracker;
+        switch (trackerId) {
+            case APP_TRACKER:
+                tracker = analytics.newTracker(PROPERTY_ID);
+                break;
+            case GLOBAL_TRACKER:
+                tracker = analytics.newTracker(R.xml.global_tracker);
+                break;
+            default:
+                tracker = analytics.newTracker(R.xml.global_tracker);
+                break;
+        }
+        tracker.enableAdvertisingIdCollection(true);
+        mTrackers.put(trackerId, tracker);
+
+        return tracker;
     }
 
     @Override

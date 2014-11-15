@@ -62,13 +62,11 @@ public class MessagePagerFragment extends Fragment {
         final FloatingActionButton button = (FloatingActionButton) view
                 .findViewById(R.id.message_fragment_action_create);
 
-        final Fragment holder = this;
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 final DialogFragment fragment = CreateMessageFragment.createInstance();
-                fragment.setTargetFragment(holder, CREATE_MESSAGE_REQUEST_CODE);
+                fragment.setTargetFragment(MessagePagerFragment.this, CREATE_MESSAGE_REQUEST_CODE);
                 fragment.show(getFragmentManager(), "createMessage");
             }
         });

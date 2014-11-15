@@ -1,7 +1,6 @@
 package com.xda.one.ui;
 
 import com.xda.one.R;
-import com.xda.one.util.AnalyticsUtil;
 
 import android.content.Context;
 import android.content.Intent;

@@ -29,6 +29,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.XDALinerLayoutManager;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -46,8 +47,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostPagerFragment extends Fragment
-        implements PostFragment.Callback {
+public class PostPagerFragment extends Fragment implements PostFragment.Callback {
 
     public static final String THREAD_PAGE_COUNT_ARGUMENT = "thread_page_count";
 
@@ -242,8 +242,8 @@ public class PostPagerFragment extends Fragment
             mTopBar.setOnClickListener(new TopBarClickListener());
             setupPagingButtons(header);
 
-            final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
-            mQuickReturnHelper = new QuickReturnHelper(getActivity(), header, actionBar);
+            mQuickReturnHelper = new QuickReturnHelper(getActivity(), header,
+                    mCallback.getToolbar());
         } else {
             header.setVisibility(View.GONE);
             mPageRecyclerView.setVisibility(View.GONE);
@@ -414,6 +414,8 @@ public class PostPagerFragment extends Fragment
     }
 
     public interface Callback {
+
+        public Toolbar getToolbar();
 
         public void login(final Runnable runnable);
     }

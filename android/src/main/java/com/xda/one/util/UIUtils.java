@@ -71,7 +71,7 @@ public class UIUtils {
     }
 
     public static ActionBar getSupportActionBar(final Activity activity) {
-        return ((BaseActivity) activity).getSupportActionBar();
+        return getBaseActivity(activity).getSupportActionBar();
     }
 
     public static BaseActivity getBaseActivity(final Activity activity) {

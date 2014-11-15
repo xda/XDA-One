@@ -1,7 +1,6 @@
 package com.xda.one.auth;
 
 import com.xda.one.R;
-import com.xda.one.util.AnalyticsUtil;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
