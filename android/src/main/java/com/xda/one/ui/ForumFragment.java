@@ -224,10 +224,6 @@ public class ForumFragment extends Fragment
         mModeHelper.setRecyclerView(mRecyclerView);
 
         final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
-        actionBar.show();
-        actionBar.setTitle(mForumTitle);
-        actionBar.setSubtitle(mParentForumTitle);
-        actionBar.show();
         actionBar.setTitle(mForumTitle);
         actionBar.setSubtitle(mParentForumTitle);
         if (mForumType == ForumType.CHILD) {

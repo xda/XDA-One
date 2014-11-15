@@ -310,6 +310,9 @@ public class PostPagerFragment extends Fragment implements PostFragment.Callback
 
         final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        if (mQuickReturnHelper != null) {
+            mQuickReturnHelper.showToolbar();
+        }
 
         mThreadClient.getBus().unregister(mEventHandler);
     }

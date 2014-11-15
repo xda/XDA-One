@@ -193,7 +193,6 @@ public class ThreadFragment extends Fragment
         }
 
         final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
-        actionBar.show();
         actionBar.setTitle(mForumTitle);
         actionBar.setSubtitle(mParentForumTitle);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);

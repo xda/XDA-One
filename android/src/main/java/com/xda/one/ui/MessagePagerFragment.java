@@ -48,7 +48,6 @@ public class MessagePagerFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
-        actionBar.show();
         actionBar.setTitle(R.string.private_messages);
 
         mViewPager = (ViewPager) view.findViewById(R.id.message_view_pager);

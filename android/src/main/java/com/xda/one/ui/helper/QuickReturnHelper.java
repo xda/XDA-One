@@ -15,6 +15,8 @@ public class QuickReturnHelper {
 
     private static final int ANIMATION_DURATION_MILLIS = 300;
 
+    private static final int DEFAULT_ANIMATED_POSITION = 0;
+
     private final View mQuickReturnView;
 
     private final Toolbar mToolbar;
@@ -95,31 +97,33 @@ public class QuickReturnHelper {
     }
 
     private void animateToOffScreen() {
-        startAnimation(-mActionBarHeight, -mQuickReturnHeight - mActionBarHeight);
+        animateView(mToolbar, -mActionBarHeight);
+        animateView(mQuickReturnView, -mQuickReturnHeight - mActionBarHeight);
+
         mQuickReturnView.setVisibility(View.INVISIBLE);
     }
 
     private void animateToExpanding() {
-        startAnimation(0, 0);
+        animateView(mToolbar, DEFAULT_ANIMATED_POSITION);
+        animateView(mQuickReturnView, DEFAULT_ANIMATED_POSITION);
+
         mQuickReturnView.setVisibility(View.VISIBLE);
     }
 
-    private void startAnimation(final int toolBar, final int view) {
-        mToolbar.animate()
+    private void animateView(final View view, final int animationOffset) {
+        view.animate()
                 .setDuration(ANIMATION_DURATION_MILLIS)
-                .translationY(toolBar)
-                .setInterpolator(new AccelerateInterpolator())
-                .start();
-
-        mQuickReturnView.animate()
-                .setDuration(ANIMATION_DURATION_MILLIS)
-                .translationY(view)
+                .translationY(animationOffset)
                 .setInterpolator(new AccelerateInterpolator())
                 .start();
     }
 
     public void setPosition(int position) {
         mPosition = position;
+    }
+
+    public void showToolbar() {
+        animateView(mToolbar, DEFAULT_ANIMATED_POSITION);
     }
 
     private class QuickReturnOnScroll extends RecyclerView.OnScrollListener {

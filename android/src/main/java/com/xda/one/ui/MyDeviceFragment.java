@@ -66,7 +66,6 @@ public class MyDeviceFragment extends Fragment
         mModeHelper.setRecyclerView(mRecyclerView);
 
         final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
-        actionBar.show();
         actionBar.setTitle(R.string.my_devices);
         actionBar.setSubtitle(null);
 

@@ -83,7 +83,6 @@ public class NewsFragment extends Fragment
         mLoadMoreProgressContainer = view.findViewById(R.id.load_more_progress_container);
 
         final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
-        actionBar.show();
         actionBar.setTitle(R.string.xda_news);
         actionBar.setSubtitle(null);
 

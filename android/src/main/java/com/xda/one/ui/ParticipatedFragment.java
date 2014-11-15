@@ -113,7 +113,6 @@ public class ParticipatedFragment extends Fragment implements
         });
 
         final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
-        actionBar.show();
         actionBar.setTitle(R.string.participated);
         actionBar.setSubtitle(null);
 

@@ -99,7 +99,7 @@ public class NavigationDrawerFragment extends Fragment
         ViewCompat.setOverScrollMode(mListView, ViewCompat.OVER_SCROLL_NEVER);
 
         mListView.setOnItemClickListener(this);
-g
+
         final LayoutInflater inflater = LayoutInflater.from(getActivity());
         final View headerView = inflater.inflate(R.layout.navigation_drawer_header,
                 mListView, false);
