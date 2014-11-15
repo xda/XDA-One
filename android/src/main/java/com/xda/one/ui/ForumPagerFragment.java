@@ -37,8 +37,6 @@ public class ForumPagerFragment extends Fragment {
 
     private MenuItem mSearchMenuItem;
 
-    private SimpleCursorAdapter mSuggestionAdapter;
-
     public static Fragment createInstance() {
         return new ForumPagerFragment();
     }

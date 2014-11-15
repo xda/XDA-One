@@ -83,17 +83,12 @@ public class NavigationDrawerAdapter extends BaseAdapter {
 
         NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.forum,
                 R.string.forum_home_title, R.string.forums));
-
         NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.ic_feed_icon,
                 R.string.xda_news, R.string.forums));
-
         NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.ic_search_dark,
                 R.string.find_a_device, R.string.forums));
 
         if (account != null) {
-            NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.account_circle,
-                    R.string.user_profile, R.string.user));
-
             final String quoteMentionsCount = account.getQuoteCount() + "/" + account
                     .getMentionCount();
             NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.account_circle,

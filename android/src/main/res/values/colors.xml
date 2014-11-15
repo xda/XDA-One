@@ -27,4 +27,6 @@
     <color name="default_hint">#42000000</color>
     <color name="default_secondary_text">#8a000000</color>
     <color name="default_primary_text">#de000000</color>
+
+    <color name="navigation_drawer_icon">#8c000000</color>
 </resources>
