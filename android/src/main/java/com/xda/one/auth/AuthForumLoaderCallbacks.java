@@ -1,10 +1,5 @@
 package com.xda.one.auth;
 
-import com.xda.one.api.model.response.ResponseForum;
-import com.xda.one.loader.ForumLoader;
-import com.xda.one.model.misc.ForumType;
-import com.xda.one.util.Utils;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,6 +7,11 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.widget.Toast;
+
+import com.xda.one.api.model.response.ResponseForum;
+import com.xda.one.loader.ForumLoader;
+import com.xda.one.model.misc.ForumType;
+import com.xda.one.util.Utils;
 
 import java.util.List;
 

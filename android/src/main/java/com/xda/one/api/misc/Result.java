@@ -14,9 +14,8 @@ import static com.xda.one.api.retrofit.RetrofitClient.OBJECT_MAPPER;
 public class Result {
 
     private static final String ERROR = "error";
-
     private static final String MESSAGE = "message";
-
+    private boolean isFromGoogle;
     private boolean mSuccess;
 
     private String mMessage;
@@ -74,5 +73,14 @@ public class Result {
 
     public String getMessage() {
         return mMessage;
+    }
+
+
+    public boolean isFromGoogle() {
+        return isFromGoogle;
+    }
+
+    public void setFromGoogle(boolean isFromGoogle) {
+        this.isFromGoogle = isFromGoogle;
     }
 }
