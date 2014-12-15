@@ -6,7 +6,7 @@
     android:versionCode="10"
     android:versionName="0.1.10">
 
-    <uses-sdk tools:node="replace" />
+    <uses-sdk/>
 
     <!-- Network -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
