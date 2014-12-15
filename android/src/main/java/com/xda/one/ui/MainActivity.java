@@ -31,6 +31,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
+import com.newrelic.agent.android.NewRelic;
 
 public class MainActivity extends BaseActivity
         implements NavigationDrawerFragment.Callback, SubscribedPagerFragment.Callback,
@@ -46,6 +47,11 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onCreate(final Bundle bundle) {
+
+        NewRelic.withApplicationToken(
+                "AA31aa88f94b9a9db9fba799fdb1112f100438c79f"
+        ).start(this.getApplication());
+
         requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
         super.onCreate(bundle);
