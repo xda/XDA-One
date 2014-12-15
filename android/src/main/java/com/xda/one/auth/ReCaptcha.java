@@ -1,5 +1,10 @@
 package com.xda.one.auth;
 
+import android.os.AsyncTask;
+import android.text.TextUtils;
+import android.util.Log;
+import android.widget.ImageView;
+
 import com.squareup.picasso.Picasso;
 
 import org.apache.http.client.HttpClient;
@@ -9,22 +14,17 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.os.AsyncTask;
-import android.text.TextUtils;
-import android.util.Log;
-import android.widget.ImageView;
-
 import java.io.IOException;
 
 public class ReCaptcha {
 
     private static final String CHALLENGE_URL
-            = "http://www.google.com/recaptcha/api/challenge?k=%s";
+            = "http://www.googleplus.com/recaptcha/api/challenge?k=%s";
 
     private static final String RECAPTCHA_OBJECT_TOKEN_URL
-            = "http://www.google.com/recaptcha/api/reload?c=%s&k=%s&type=%s";
+            = "http://www.googleplus.com/recaptcha/api/reload?c=%s&k=%s&type=%s";
 
-    private static final String IMAGE_URL = "http://www.google.com/recaptcha/api/image?c=%s";
+    private static final String IMAGE_URL = "http://www.googleplus.com/recaptcha/api/image?c=%s";
 
     private final String mPublicKey;
 

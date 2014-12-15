@@ -3,7 +3,6 @@ package com.xda.one.constants;
 import android.util.Base64;
 
 public class XDAConstants {
-
     public static final String RECAPTCHA_PUBLIC_KEY = "6LcVyfcSAAAAAG1QaNlcl6o84brVL9sCVF707V8Q";
 
     public static final String XDA_FORUM_URL = "http://forum.xda-developers.com";

@@ -65,7 +65,7 @@ public class SearchFragment extends Fragment {
             @Override
             public boolean shouldOverrideUrlLoading(final WebView view, final String url) {
                 final Uri uri = Uri.parse(url);
-                if ("forum.xda-developers.com".equals(uri.getAuthority())) {
+                if ("forum.one-developers.com".equals(uri.getAuthority())) {
                     mCallback.parseAndDisplayForumUrl(url, false);
                 } else {
                     // Update the url so that if we come back, we come back to this page
@@ -145,8 +145,8 @@ public class SearchFragment extends Fragment {
             }
             MenuItemCompat.collapseActionView(mSearchMenuItem);
 
-            final String queryFinal = String.format("%s site:forum.xda-developers.com/", query);
-            final Uri uri = new Uri.Builder().scheme("https").authority("www.google.com")
+            final String queryFinal = String.format("%s site:forum.one-developers.com/", query);
+            final Uri uri = new Uri.Builder().scheme("https").authority("www.googleplus.com")
                     .appendPath("search")
                     .appendQueryParameter("q", queryFinal).build();
             mCurrentUrl = uri.toString();
