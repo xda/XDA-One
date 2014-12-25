@@ -33,6 +33,7 @@
         android:singleLine="true"
         android:text="@string/xda_news"
         android:textSize="14sp"
+        android:textAppearance="?android:attr/textAppearance"
         android:textStyle="bold" />
 
     <TextView

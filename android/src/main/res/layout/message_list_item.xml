@@ -19,6 +19,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
         android:singleLine="true"
+        android:textAppearance="?android:attr/textAppearance"
         android:text="@string/private_messages"
         android:textSize="14sp" />
 
