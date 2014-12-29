@@ -102,6 +102,7 @@
         <coderef name="url4"/>
         <coderef name="url5"/>
         <coderef name="url6"/>
+        <coderef name="url7"/>
 
         <!-- Table -->
         <coderef name="table"/>
@@ -182,6 +183,10 @@
     <code name="url4" priority="1">
         <pattern ignoreCase="true">[url]<var name="url" scope="escapeXml"/>[/url]</pattern>
         <template>&lt;a href=&quot;<var name="url"/>&quot;&gt;<var name="url"/>&lt;/a&gt;</template>
+    </code>
+    <code name="url7" priority="2">
+        <pattern ignoreCase="true">[url="<var name="url" scope="escapeXml"/>"]<var name="text" scope="url"/>[/url]</pattern>
+        <template>&lt;a href=&quot;<var name="url"/>&quot;&gt;<var name="text"/>&lt;/a&gt;</template>
     </code>
 
     <!-- MAILTO -->
