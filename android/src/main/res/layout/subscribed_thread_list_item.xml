@@ -13,6 +13,7 @@
         android:padding="8dp"
         android:singleLine="true"
         android:text="@string/title"
+        android:textAppearance="?android:attr/textAppearance"
         android:textSize="14sp" />
 
     <TextView

@@ -24,6 +24,7 @@
         android:layout_toStartOf="@+id/reply_count"
         android:singleLine="true"
         android:text="@string/thread_title"
+        android:textAppearance="?android:attr/textAppearance"
         android:textSize="14sp" />
 
     <com.makeramen.RoundedImageView
@@ -50,7 +51,8 @@
         android:layout_marginLeft="72dp"
         android:layout_marginTop="8dp"
         android:singleLine="true"
-        android:text="@string/username" />
+        android:text="@string/username"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
         android:id="@+id/thread_list_item_content"
