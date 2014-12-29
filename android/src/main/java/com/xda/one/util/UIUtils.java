@@ -23,12 +23,12 @@ public class UIUtils {
     }
 
     public static void updateEmptyViewState(final View view, final RecyclerView recyclerView,
-            int itemCount) {
+            boolean isEmpty) {
         // Find the empty view from the main view - it's using the android id for it
         final View emptyView = view.findViewById(android.R.id.empty);
 
         // If we don't have any threads then simply tell the user this and quit
-        if (itemCount == 0) {
+        if (isEmpty) {
             // Toggle what's happening with the view
             showEmptyText(recyclerView, emptyView);
 
@@ -46,6 +46,11 @@ public class UIUtils {
         recyclerView.setVisibility(View.VISIBLE);
         // ... and manually remove the loading view
         emptyView.setVisibility(View.GONE);
+    }
+
+    public static void updateEmptyViewState(final View view, final RecyclerView recyclerView,
+            int itemCount) {
+        updateEmptyViewState(view, recyclerView, itemCount == 0);
     }
 
     public static void showEmptyText(final RecyclerView recyclerView, final View emptyView) {

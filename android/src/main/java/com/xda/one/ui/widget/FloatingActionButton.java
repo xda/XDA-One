@@ -33,7 +33,7 @@ public class FloatingActionButton extends ImageView {
         init(Color.BLUE);
     }
 
-    @TargetApi(Build.VERSION_CODES.L)
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void init(final int color) {
         setClickable(true);
 

@@ -183,7 +183,7 @@ public class NavigationDrawerFragment extends Fragment
                 mCallback.onNavigationItemClicked(new SubscribedPagerFragment());
                 break;
             case R.string.participated:
-                mCallback.onNavigationItemClicked(new ParticipatedFragment());
+                mCallback.onNavigationItemClicked(ThreadFragment.createParticipated());
                 break;
             case R.string.my_devices:
                 mCallback.onNavigationItemClicked(new MyDeviceFragment());

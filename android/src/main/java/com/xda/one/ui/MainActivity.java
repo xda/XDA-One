@@ -4,7 +4,6 @@ import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
-import com.newrelic.agent.android.NewRelic;
 import com.xda.one.R;
 import com.xda.one.api.misc.Consumer;
 import com.xda.one.model.misc.ForumType;
@@ -27,7 +26,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Toast;
 
 public class MainActivity extends BaseActivity
@@ -48,16 +46,13 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onCreate(final Bundle bundle) {
-        NewRelic.withApplicationToken(
+        /*NewRelic.withApplicationToken(
                 "AA31aa88f94b9a9db9fba799fdb1112f100438c79f"
-        ).start(getApplication());
-
-        supportRequestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-        supportRequestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
+        ).start(getApplication());*/
         super.onCreate(bundle);
 
         setContentView(R.layout.main_activity);
-        startTracker(SCREEN_NAME);
+        // startTracker(SCREEN_NAME);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -102,7 +97,7 @@ public class MainActivity extends BaseActivity
     protected void onStart() {
         super.onStart();
 
-        GoogleAnalytics.getInstance(MainActivity.this).reportActivityStart(this);
+        // GoogleAnalytics.getInstance(MainActivity.this).reportActivityStart(this);
     }
 
     private void initialReplaceFragment() {
@@ -176,6 +171,11 @@ public class MainActivity extends BaseActivity
             if (searchFragment.onBackPressed()) {
                 return;
             }
+        } else if (fragment instanceof ForumPagerFragment) {
+            final ForumPagerFragment pagerFragment = (ForumPagerFragment) fragment;
+            if (pagerFragment.onBackPressed()) {
+                return;
+            }
         }
 
         if (!mDrawerLayout.isDrawerOpen(Gravity.START)
@@ -190,7 +190,7 @@ public class MainActivity extends BaseActivity
     protected void onStop() {
         super.onStop();
 
-        GoogleAnalytics.getInstance(MainActivity.this).reportActivityStop(this);
+        // GoogleAnalytics.getInstance(MainActivity.this).reportActivityStop(this);
     }
 
     @Override

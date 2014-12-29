@@ -1,20 +1,6 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            url 'http://download.crashlytics.com/maven'
-        }
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:1.0.0'
-        classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
-        classpath 'com.newrelic.agent.android:agent-gradle-plugin:4.+'
-    }
-}
-
 apply plugin: 'com.android.application'
 apply plugin: 'crashlytics'
-apply plugin : 'newrelic'
+// apply plugin : 'newrelic'
 
 android {
     compileSdkVersion 21
@@ -39,10 +25,7 @@ android {
     defaultConfig {
         applicationId 'com.xda.one'
         minSdkVersion 14
-        targetSdkVersion 21
-
-        // Enabling multidex support.
-        multiDexEnabled true
+        targetSdkVersion 19
     }
 
     buildTypes {
@@ -61,25 +44,11 @@ android {
 
     productFlavors {
         simple {
-            applicationId = android.defaultConfig.applicationId
-            versionName = android.defaultConfig.versionName
             ext.enableCrashlytics = false
         }
         full {
-            applicationId = android.defaultConfig.applicationId
-            versionName = android.defaultConfig.versionName
             ext.enableCrashlytics = true
         }
-    }
-}
-
-repositories {
-    mavenCentral()
-    maven {
-        url "https://oss.sonatype.org/content/repositories/snapshots/"
-    }
-    maven {
-        url 'http://download.crashlytics.com/maven'
     }
 }
 
@@ -87,10 +56,12 @@ dependencies {
     compile 'com.google.android.gms:play-services-plus:6.5.+'
     compile 'com.google.android.gms:play-services-identity:6.5.+'
 
-    compile 'com.crashlytics.android:crashlytics:1.+'
+    // compile 'com.crashlytics.android:crashlytics:1.+'
 
-    compile 'com.android.support:support-v4:21.0.0'
-    compile 'com.android.support:appcompat-v7:21.0.0'
+    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:cardview-v7:21.0.3'
+    compile 'com.android.support:recyclerview-v7:21.0.3'
 
     compile 'com.squareup.retrofit:retrofit:1.8.0'
     compile 'com.squareup.retrofit:converter-jackson:1.8.0'
@@ -111,12 +82,7 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.3.2'
     compile 'commons-io:commons-io:2.4'
 
-    compile 'com.android.support:cardview-v7:21.0.0'
-    compile 'com.android.support:recyclerview-v7:21.0.0'
-
-    compile 'com.android.support:multidex:1.0.0'
-
-    compile 'com.newrelic.agent.android:android-agent:4.+'
+    // compile 'com.newrelic.agent.android:android-agent:4.+'
 
     compile fileTree(dir: 'libs', include: '*.jar')
 }

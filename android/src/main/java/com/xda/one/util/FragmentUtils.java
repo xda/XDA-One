@@ -69,7 +69,7 @@ public class FragmentUtils {
             final Forum forum, final String parentTitle, final ArrayList<String> hierarchy) {
         final FragmentTransaction transaction = getDefaultTransaction(fragmentManager);
         transaction.addToBackStack(forum.getTitle());
-        final Fragment fragment = ThreadFragment.createInstance(forum.getForumId(),
+        final Fragment fragment = ThreadFragment.createDefault(forum.getForumId(),
                 forum.getTitle(), parentTitle, hierarchy);
         transaction.replace(R.id.content_frame, fragment).commit();
     }
@@ -81,12 +81,10 @@ public class FragmentUtils {
 
     public static Fragment switchToPostList(final AugmentedUnifiedThread unifiedThread,
             final ArrayList<String> hierarchy, final ResponsePostContainer container) {
-        int pageCount;
+        final int pageCount;
         if (container == null) {
-            pageCount = unifiedThread.getTotalPosts() / 10;
-            if (unifiedThread.getTotalPosts() % 10 != 0) {
-                pageCount += 1;
-            }
+            final int totalPosts = unifiedThread.getTotalPosts();
+            pageCount = (totalPosts / 10) + (totalPosts % 10 == 0 ? 0 : 1);
         } else {
             pageCount = container.getTotalPages();
         }

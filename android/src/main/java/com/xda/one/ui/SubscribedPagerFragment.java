@@ -73,13 +73,13 @@ public class SubscribedPagerFragment extends Fragment implements SubscribedForum
 
         private SubscribedForumFragment mSubscribedForumFragment;
 
-        private SubscribedThreadFragment mSubscribedThreadFragment;
+        private ThreadFragment mSubscribedThreadFragment;
 
         public SubscribeFragmentAdapter(final FragmentManager fm) {
             super(fm);
 
             mSubscribedForumFragment = new SubscribedForumFragment();
-            mSubscribedThreadFragment = new SubscribedThreadFragment();
+            mSubscribedThreadFragment = ThreadFragment.createSubscribed();
         }
 
         @Override

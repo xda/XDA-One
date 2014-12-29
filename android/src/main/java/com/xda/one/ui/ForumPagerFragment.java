@@ -6,6 +6,7 @@ import com.xda.one.db.ForumDbHelper;
 import com.xda.one.model.misc.ForumType;
 import com.xda.one.ui.widget.TabLayout;
 import com.xda.one.util.FragmentUtils;
+import com.xda.one.util.UIUtils;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -59,7 +60,7 @@ public class ForumPagerFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
 
-        final ActionBar bar = ((ActionBarActivity) getActivity()).getSupportActionBar();
+        final ActionBar bar = UIUtils.getSupportActionBar(getActivity());
         bar.show();
         bar.setTitle(R.string.subscribed);
         bar.setSubtitle(null);

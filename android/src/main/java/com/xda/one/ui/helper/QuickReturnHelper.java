@@ -42,6 +42,7 @@ public class QuickReturnHelper {
         mTouchSlop = vc.getScaledTouchSlop();
 
         mActionBarHeight = UIUtils.calculateActionBarSize(context);
+        //////mActionBarHeight = toolbar.getHeight();
 
         if (quickReturnView == null) {
             return;
@@ -54,7 +55,6 @@ public class QuickReturnHelper {
             }
         });
     }
-
 
     public static void postPaddingToQuickReturn(final View quickReturnView, final View content) {
         quickReturnView.post(new Runnable() {

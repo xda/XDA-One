@@ -119,6 +119,10 @@ public class ForumAdapter<T extends Forum>
         return mForums.indexOf(forum);
     }
 
+    public boolean isEmpty() {
+        return mForums.isEmpty();
+    }
+
     public static interface ImageViewDeviceDelegate {
 
         public void setupImageViewDevice(final ImageView imageView, final Forum forum);

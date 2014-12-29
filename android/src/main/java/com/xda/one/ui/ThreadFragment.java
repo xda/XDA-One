@@ -2,34 +2,36 @@ package com.xda.one.ui;
 
 import com.xda.one.R;
 import com.xda.one.api.inteface.ThreadClient;
-import com.xda.one.api.model.interfaces.Forum;
 import com.xda.one.api.model.interfaces.UnifiedThread;
 import com.xda.one.api.retrofit.RetrofitThreadClient;
-import com.xda.one.loader.ThreadLoader;
 import com.xda.one.model.augmented.AugmentedUnifiedThread;
 import com.xda.one.model.augmented.container.AugmentedUnifiedThreadContainer;
-import com.xda.one.model.misc.ForumType;
 import com.xda.one.ui.helper.ActionModeHelper;
-import com.xda.one.ui.helper.ThreadEventHelper;
-import com.xda.one.ui.helper.UnifiedThreadFragmentActionModeHelper;
 import com.xda.one.ui.listener.InfiniteRecyclerLoadHelper;
+import com.xda.one.ui.thread.DefaultThreadLoaderStrategy;
+import com.xda.one.ui.thread.FirstThreadClickStrategy;
+import com.xda.one.ui.thread.ParticipatedThreadLoaderStrategy;
+import com.xda.one.ui.thread.SubscribedThreadLoaderStrategy;
+import com.xda.one.ui.thread.ThreadActionModeHelper;
+import com.xda.one.ui.thread.ThreadClickStrategy;
+import com.xda.one.ui.thread.ThreadEventHelper;
+import com.xda.one.ui.thread.ThreadLoaderStrategy;
+import com.xda.one.ui.thread.UnreadThreadClickStrategy;
 import com.xda.one.ui.widget.FloatingActionButton;
 import com.xda.one.ui.widget.HierarchySpinnerAdapter;
 import com.xda.one.ui.widget.XDARefreshLayout;
 import com.xda.one.util.AccountUtils;
 import com.xda.one.util.CompatUtils;
-import com.xda.one.util.FragmentUtils;
 import com.xda.one.util.UIUtils;
 import com.xda.one.util.Utils;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewCompat;
@@ -44,67 +46,124 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThreadFragment extends Fragment
-        implements LoaderManager.LoaderCallbacks<AugmentedUnifiedThreadContainer> {
+public class ThreadFragment extends Fragment {
 
+    // Request codes
+    public static final int CREATE_THREAD_REQUEST_CODE = 101;
+
+    // Argument keys
     public static final String FORUM_ID_ARGUMENT = "sub_forum_id";
 
-    public static final String FORUM_TITLE_ARGUMENT = "forum_title";
+    private static final String FORUM_TITLE_ARGUMENT = "forum_title";
 
-    public static final String PARENT_FORUM_TITLE_ARGUMENT = "parent_forum_title";
+    private static final String PARENT_FORUM_TITLE_ARGUMENT = "parent_forum_title";
 
-    public static final int CREATE_MESSAGE_REQUEST_CODE = 101;
+    private static final String ADD_EXTRA_DECOR_ARGUMENT = "add_extra_decor";
+
+    private static final String THREAD_LOAD_STRATEGY_ARGUMENT = "thread_load_strategy";
+
+    private static final String THREAD_CLICK_STRATEGY_ARGUMENT = "thread_click_strategy";
 
     private static final String CURRENT_PAGE_LOADER_ARGUMENT = "current_page";
 
+    private static final String FORUM_HIERARCHY_ARGUMENT = "hierarchy";
+
+    // Saved state keys
     private static final String THREADS_SAVED_STATE = "threads_saved_state";
 
     private static final String PAGES_SAVED_STATE = "pages_saved_state";
 
-    private static final String FORUM_HIERARCHY_ARGUMENT = "hierarchy";
+    // Callbacks
+    private final LoaderCallbacks mLoaderCallbacks = new LoaderCallbacks();
 
-    private ForumType mForumType = ForumType.ALL;
+    private Callback mCallback;
 
-    public static final String FORUM_TYPE = "forum_type";
+    // Useful objects
+    private ThreadClient mThreadClient;
 
+    // Internal arguments
+    private boolean mAddExtraDecor;
+
+    private ThreadLoaderStrategy mThreadLoadStrategy;
+
+    private ThreadClickStrategy mThreadClickStrategy;
+
+    // External Arguments
     private int mForumId;
-
-    // Infinite scrolling
-    private InfiniteRecyclerLoadHelper mInfiniteScrollListener;
 
     private String mForumTitle;
 
     private String mParentForumTitle;
 
+    private List<String> mHierarchy;
+
+    // Views
     private XDARefreshLayout mRefreshLayout;
 
     private RecyclerView mRecyclerView;
 
-    private UnifiedThreadAdapter mAdapter;
-
-    private View mLoadMoreProgressContainer;
-
+    // View helpers
     private ActionModeHelper mModeHelper;
-
-    private List<String> mHierarchy;
-
-    private HierarchySpinnerAdapter mSpinnerAdapter;
-
-    private int mTotalPages;
-
-    private ThreadClient mThreadClient;
 
     private ThreadEventHelper mThreadEventHelper;
 
-    private Callback mCallback;
+    private InfiniteRecyclerLoadHelper mInfiniteScrollListener;
 
-    public static ThreadFragment createInstance(final int forumId, final String forumTitle,
+    // Adapters
+    private ThreadAdapter mAdapter;
+
+    private HierarchySpinnerAdapter mSpinnerAdapter;
+
+    // Data
+    private int mTotalPages;
+
+    public static ThreadFragment createDefault(final int forumId, final String forumTitle,
             final String parentForumTitle, final ArrayList<String> hierarchy) {
         final Bundle bundle = new Bundle();
+
+        // Internal use
+        bundle.putBoolean(ADD_EXTRA_DECOR_ARGUMENT, true);
+        bundle.putParcelable(THREAD_LOAD_STRATEGY_ARGUMENT, new DefaultThreadLoaderStrategy());
+        bundle.putParcelable(THREAD_CLICK_STRATEGY_ARGUMENT, new FirstThreadClickStrategy());
+
+        // From external
         bundle.putInt(FORUM_ID_ARGUMENT, forumId);
         bundle.putString(FORUM_TITLE_ARGUMENT, forumTitle);
         bundle.putString(PARENT_FORUM_TITLE_ARGUMENT, parentForumTitle);
         bundle.putStringArrayList(FORUM_HIERARCHY_ARGUMENT, hierarchy);
+
+        final ThreadFragment threadFragment = new ThreadFragment();
+        threadFragment.setArguments(bundle);
+
+        return threadFragment;
+    }
+
+    public static ThreadFragment createSubscribed() {
+        final Bundle bundle = new Bundle();
+
+        // All are from internal
+        bundle.putBoolean(ADD_EXTRA_DECOR_ARGUMENT, false);
+        bundle.putParcelable(THREAD_LOAD_STRATEGY_ARGUMENT, new SubscribedThreadLoaderStrategy());
+        bundle.putParcelable(THREAD_CLICK_STRATEGY_ARGUMENT, new UnreadThreadClickStrategy());
+
+        bundle.putStringArrayList(FORUM_HIERARCHY_ARGUMENT, new ArrayList<String>());
+
+        final ThreadFragment threadFragment = new ThreadFragment();
+        threadFragment.setArguments(bundle);
+
+        return threadFragment;
+    }
+
+    public static ThreadFragment createParticipated() {
+        final Bundle bundle = new Bundle();
+
+        // All are from internal
+        bundle.putBoolean(ADD_EXTRA_DECOR_ARGUMENT, false);
+        bundle.putParcelable(THREAD_LOAD_STRATEGY_ARGUMENT, new ParticipatedThreadLoaderStrategy());
+        bundle.putParcelable(THREAD_CLICK_STRATEGY_ARGUMENT, new UnreadThreadClickStrategy());
+
+        bundle.putString(FORUM_TITLE_ARGUMENT, "Participated");
+        bundle.putStringArrayList(FORUM_HIERARCHY_ARGUMENT, new ArrayList<String>());
 
         final ThreadFragment threadFragment = new ThreadFragment();
         threadFragment.setArguments(bundle);
@@ -125,26 +184,30 @@ public class ThreadFragment extends Fragment
 
         mThreadClient = RetrofitThreadClient.getClient(getActivity());
 
-        final UnifiedThreadFragmentActionModeHelper helper =
-                new UnifiedThreadFragmentActionModeHelper(getActivity(), mThreadClient);
+        // Retrieve the arguments from the given bundle
+        // Internal arguments
+        mAddExtraDecor = getArguments().getBoolean(ADD_EXTRA_DECOR_ARGUMENT, true);
+        mThreadLoadStrategy = getArguments().getParcelable(THREAD_LOAD_STRATEGY_ARGUMENT);
+        mThreadClickStrategy = getArguments().getParcelable(THREAD_CLICK_STRATEGY_ARGUMENT);
 
-        mModeHelper = new ActionModeHelper(getActivity(), helper,
-                new ThreadClickListener(),
-                ActionModeHelper.SelectionMode.SINGLE);
-        mAdapter = new UnifiedThreadAdapter(getActivity(), mModeHelper, mModeHelper, mModeHelper);
-
-        mThreadEventHelper = new ThreadEventHelper(getActivity(), mAdapter);
-
-        helper.setAdapter(mAdapter);
-        helper.setModeHelper(mModeHelper);
-
-        mForumType = (ForumType) getArguments().getSerializable(FORUM_TYPE);
+        // From external
         mForumId = getArguments().getInt(FORUM_ID_ARGUMENT, 0);
         mForumTitle = getArguments().getString(FORUM_TITLE_ARGUMENT, null);
         mParentForumTitle = getArguments().getString(PARENT_FORUM_TITLE_ARGUMENT, null);
         mHierarchy = getArguments().getStringArrayList(FORUM_HIERARCHY_ARGUMENT);
 
-        mSpinnerAdapter = new HierarchySpinnerAdapter(getActivity(), LayoutInflater.from(getActivity()),mHierarchy,getFragmentManager());
+        final ThreadActionModeHelper helper =
+                new ThreadActionModeHelper(getActivity(), mThreadClient);
+
+        mModeHelper = new ActionModeHelper(getActivity(), helper,
+                new ThreadClickListener(), ActionModeHelper.SelectionMode.SINGLE);
+        mAdapter = new ThreadAdapter(getActivity(), mModeHelper, mModeHelper, mModeHelper);
+        mSpinnerAdapter = new HierarchySpinnerAdapter(getActivity(),
+                LayoutInflater.from(getActivity()), mHierarchy, getFragmentManager());
+
+        mThreadEventHelper = new ThreadEventHelper(getActivity(), mAdapter);
+        helper.setAdapter(mAdapter);
+        helper.setModeHelper(mModeHelper);
     }
 
     @Override
@@ -160,54 +223,22 @@ public class ThreadFragment extends Fragment
 
         mThreadClient.getBus().register(mThreadEventHelper);
 
-        final FloatingActionButton loadMoreBackground = (FloatingActionButton) view
-                .findViewById(R.id.load_more_progress_bar_background);
-        loadMoreBackground.setBackgroundColor(Color.WHITE);
-        mLoadMoreProgressContainer = view.findViewById(R.id.load_more_progress_container);
+        // Setup views
+        setupRefreshLayout(view);
+        setupRecyclerView(view);
+        setupAddThreadButton(view);
+        setupActionBar();
 
-        mRefreshLayout = (XDARefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
-        mRefreshLayout.setXDAColourScheme();
-        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                UIUtils.updateEmptyViewState(getView(), mRecyclerView, mAdapter.getItemCount());
-                reloadTheFirstPage();
-            }
-        });
-
-        mRecyclerView = (RecyclerView) view.findViewById(android.R.id.list);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new XDALinerLayoutManager(getActivity()));
-        ViewCompat.setOverScrollMode(mRecyclerView, ViewCompat.OVER_SCROLL_NEVER);
-
+        // Tell helpers about RecyclerView
         mModeHelper.setRecyclerView(mRecyclerView);
-
-        final FloatingActionButton button = (FloatingActionButton) view
-                .findViewById(R.id.thread_fragment_create_thread);
-        button.setOnClickListener(new CreateThreadListener());
-        if (CompatUtils.hasLollipop()) {
-            CompatUtils.setBackground(button, getResources()
-                    .getDrawable(R.drawable.fab_background));
-        } else {
-            button.setBackgroundColor(getResources().getColor(R.color.fab_color));
-        }
-
-        final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
-        actionBar.setTitle(mForumTitle);
-        actionBar.setSubtitle(mParentForumTitle);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        actionBar.setListNavigationCallbacks(mSpinnerAdapter, mSpinnerAdapter);
-        actionBar.setSelectedNavigationItem(mSpinnerAdapter.getCount() - 1);
-
-        // If the listener already exists then tell it about the new recycler view
         if (mInfiniteScrollListener != null) {
             mInfiniteScrollListener.updateRecyclerView(mRecyclerView);
         }
 
-        if (mAdapter.getItemCount() != 0) {
+        // Start loading data if necessary
+        if (!mAdapter.isEmpty()) {
             return;
         }
-
         if (savedInstanceState == null) {
             loadTheFirstPage();
         } else {
@@ -220,14 +251,66 @@ public class ThreadFragment extends Fragment
             } else {
                 // This should give a non-zero integer
                 mTotalPages = savedInstanceState.getInt(PAGES_SAVED_STATE);
-                if (mInfiniteScrollListener == null) {
-                    mInfiniteScrollListener = createInfiniteScrollListener(mTotalPages);
-                } else {
-                    // TODO - Should never happen - investigate if it does
-                }
+                mInfiniteScrollListener = new InfiniteRecyclerLoadHelper(mRecyclerView,
+                        new InfiniteLoadCallback(),
+                        mTotalPages, null);
                 addDataToAdapter(threads);
             }
         }
+    }
+
+    private void setupRefreshLayout(final View view) {
+        mRefreshLayout = (XDARefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        mRefreshLayout.setXDAColourScheme();
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                UIUtils.updateEmptyViewState(getView(), mRecyclerView, mAdapter.isEmpty());
+                reloadTheFirstPage();
+            }
+        });
+    }
+
+    private void setupRecyclerView(final View view) {
+        mRecyclerView = (RecyclerView) view.findViewById(android.R.id.list);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new XDALinerLayoutManager(getActivity()));
+        ViewCompat.setOverScrollMode(mRecyclerView, ViewCompat.OVER_SCROLL_NEVER);
+    }
+
+    private void setupAddThreadButton(final View view) {
+        final FloatingActionButton button = (FloatingActionButton) view
+                .findViewById(R.id.thread_fragment_create_thread);
+        if (!mAddExtraDecor) {
+            button.setVisibility(View.GONE);
+            return;
+        }
+
+        button.setOnClickListener(new CreateThreadListener());
+        if (CompatUtils.hasLollipop()) {
+            final Drawable drawable = getResources().getDrawable(R.drawable.fab_background);
+            CompatUtils.setBackground(button, drawable);
+        } else {
+            final int color = getResources().getColor(R.color.fab_color);
+            button.setBackgroundColor(color);
+        }
+    }
+
+    private void setupActionBar() {
+        final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
+        if (mForumTitle != null) {
+            actionBar.setTitle(mForumTitle.isEmpty() ? null : mForumTitle);
+        }
+        if (mParentForumTitle != null) {
+            actionBar.setSubtitle(mParentForumTitle.isEmpty() ? null : mParentForumTitle);
+        }
+
+        if (!mAddExtraDecor) {
+            return;
+        }
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        actionBar.setListNavigationCallbacks(mSpinnerAdapter, mSpinnerAdapter);
+        actionBar.setSelectedNavigationItem(mSpinnerAdapter.getCount() - 1);
     }
 
     @Override
@@ -254,23 +337,16 @@ public class ThreadFragment extends Fragment
         state.putInt(PAGES_SAVED_STATE, mTotalPages);
     }
 
-    private InfiniteRecyclerLoadHelper createInfiniteScrollListener(final int totalPages) {
-        return new InfiniteRecyclerLoadHelper(mRecyclerView, new InfiniteLoadCallback(),
-                totalPages, null);
-    }
-
     private void loadTheFirstPage() {
         final Bundle bundle = new Bundle();
         bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, 1);
-        getLoaderManager().initLoader(0, bundle, this);
-
-        mRefreshLayout.setRefreshing(true);
+        getLoaderManager().initLoader(0, bundle, mLoaderCallbacks);
     }
 
     private void reloadTheFirstPage() {
         final Bundle bundle = new Bundle();
         bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, 1);
-        getLoaderManager().restartLoader(0, bundle, this);
+        getLoaderManager().restartLoader(0, bundle, mLoaderCallbacks);
     }
 
     @Override
@@ -293,55 +369,12 @@ public class ThreadFragment extends Fragment
         mAdapter.updateThread(position, unifiedThread);
     }
 
-    @Override
-    public Loader<AugmentedUnifiedThreadContainer> onCreateLoader(int id, Bundle bundle) {
-        return new ThreadLoader(getActivity(), mForumId,
-                bundle.getInt(CURRENT_PAGE_LOADER_ARGUMENT));
-    }
-
-    @Override
-    public void onLoadFinished(final Loader<AugmentedUnifiedThreadContainer> loader,
-            final AugmentedUnifiedThreadContainer data) {
-        if (data == null) {
-            // TODO - we need to tailor this to lack of connection/other network issue
-            addDataToAdapter(null);
-            return;
-        }
-
-        final int count = mAdapter.getItemCount();
-        mTotalPages = data.getTotalPages();
-        mLoadMoreProgressContainer.setVisibility(View.GONE);
-        if (data.getCurrentPage() == 1 && mRefreshLayout.isRefreshing()) {
-            mAdapter.clear();
-            mInfiniteScrollListener = createInfiniteScrollListener(data.getTotalPages());
-        } else if (!mInfiniteScrollListener.isLoading() && count != 0) {
-            // This may happen when we are coming back from posts fragment to threads. For some
-            // reason loadFinished gets called. However, we may have new data about the thread -
-            // don't disturb this data.
-            UIUtils.updateEmptyViewState(getView(), mRecyclerView, count);
-            mRecyclerView.setOnScrollListener(mInfiniteScrollListener);
-            return;
-        }
-        mInfiniteScrollListener.onLoadFinished();
-        addDataToAdapter(data.getThreads());
-    }
-
     private void addDataToAdapter(final List<AugmentedUnifiedThread> data) {
         UIUtils.updateEmptyViewState(getView(), mRecyclerView, data == null ? 0 : data.size());
 
         // Let's actually add the items now
         mAdapter.addAll(data);
         mRefreshLayout.setRefreshing(false);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<AugmentedUnifiedThreadContainer> loader) {
-    }
-
-    private void createNewThread() {
-        final DialogFragment fragment = CreateThreadFragment.createInstance(mForumId);
-        fragment.setTargetFragment(this, CREATE_MESSAGE_REQUEST_CODE);
-        fragment.show(getFragmentManager(), "createThread");
     }
 
     public interface Callback {
@@ -353,11 +386,9 @@ public class ThreadFragment extends Fragment
 
         @Override
         public void loadMoreData(final int page) {
-            mLoadMoreProgressContainer.setVisibility(View.VISIBLE);
-
             final Bundle bundle = new Bundle();
             bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, page);
-            getLoaderManager().restartLoader(0, bundle, ThreadFragment.this);
+            getLoaderManager().restartLoader(0, bundle, mLoaderCallbacks);
         }
     }
 
@@ -371,13 +402,7 @@ public class ThreadFragment extends Fragment
             }
 
             final AugmentedUnifiedThread thread = mAdapter.getThread(position);
-            final Fragment fragment = FragmentUtils
-                    .switchToPostList(thread, new ArrayList<>(mHierarchy));
-            fragment.setTargetFragment(ThreadFragment.this, 101);
-            final FragmentTransaction transaction = FragmentUtils.getDefaultTransaction(
-                    getFragmentManager());
-            transaction.addToBackStack(thread.getTitle());
-            transaction.replace(R.id.content_frame, fragment).commit();
+            mThreadClickStrategy.onClick(ThreadFragment.this, mHierarchy, thread);
         }
     }
 
@@ -395,6 +420,58 @@ public class ThreadFragment extends Fragment
                     }
                 });
             }
+        }
+
+        private void createNewThread() {
+            final DialogFragment fragment = CreateThreadFragment.createInstance(mForumId);
+            fragment.setTargetFragment(ThreadFragment.this, CREATE_THREAD_REQUEST_CODE);
+            fragment.show(getFragmentManager(), "createThread");
+        }
+    }
+
+    private class LoaderCallbacks
+            implements LoaderManager.LoaderCallbacks<AugmentedUnifiedThreadContainer> {
+
+        @Override
+        public Loader<AugmentedUnifiedThreadContainer> onCreateLoader(int id, Bundle bundle) {
+            return mThreadLoadStrategy.createLoader(getActivity(), mForumId,
+                    bundle.getInt(CURRENT_PAGE_LOADER_ARGUMENT));
+        }
+
+        @Override
+        public void onLoadFinished(final Loader<AugmentedUnifiedThreadContainer> loader,
+                final AugmentedUnifiedThreadContainer data) {
+            if (data == null) {
+                // TODO - we need to tailor this to lack of connection/other network issue
+                addDataToAdapter(null);
+                return;
+            } else if (mInfiniteScrollListener != null && !mInfiniteScrollListener.isLoading()
+                    && mAdapter.isEmpty()) {
+                // This may happen when we are coming back from posts fragment to threads. For some
+                // reason loadFinished gets called. However, we may have new data about the thread -
+                // don't disturb this data.
+                // UIUtils.updateEmptyViewState(getView(), mRecyclerView, count);
+                // mRecyclerView.setOnScrollListener(mInfiniteScrollListener);
+                return;
+            }
+
+            if (data.getCurrentPage() == 1) {
+                mAdapter.clear();
+
+                mTotalPages = data.getTotalPages();
+                mInfiniteScrollListener = new InfiniteRecyclerLoadHelper(mRecyclerView,
+                        new InfiniteLoadCallback(), mTotalPages, null);
+            }
+            mInfiniteScrollListener.onLoadFinished();
+
+            addDataToAdapter(data.getThreads());
+            if (!mInfiniteScrollListener.hasMoreData()) {
+                mAdapter.removeFooter();
+            }
+        }
+
+        @Override
+        public void onLoaderReset(Loader<AugmentedUnifiedThreadContainer> loader) {
         }
     }
 }

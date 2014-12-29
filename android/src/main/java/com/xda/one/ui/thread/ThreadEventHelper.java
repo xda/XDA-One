@@ -1,11 +1,11 @@
-package com.xda.one.ui.helper;
+package com.xda.one.ui.thread;
 
 import com.squareup.otto.Subscribe;
 import com.xda.one.R;
 import com.xda.one.event.thread.ThreadSubscriptionChangedEvent;
 import com.xda.one.event.thread.ThreadSubscriptionChangingFailedEvent;
 import com.xda.one.model.augmented.AugmentedUnifiedThread;
-import com.xda.one.ui.UnifiedThreadAdapter;
+import com.xda.one.ui.ThreadAdapter;
 
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
@@ -14,9 +14,10 @@ public class ThreadEventHelper {
 
     private final FragmentActivity mActivity;
 
-    private UnifiedThreadAdapter mAdapter;
+    private ThreadAdapter mAdapter;
 
-    public ThreadEventHelper(final FragmentActivity activity, final UnifiedThreadAdapter adapter) {
+    public ThreadEventHelper(final FragmentActivity activity,
+            final ThreadAdapter adapter) {
         mActivity = activity;
         mAdapter = adapter;
     }
@@ -36,6 +37,9 @@ public class ThreadEventHelper {
 
         // We would need to update the state of the subscribe button now
         final int position = mAdapter.indexOf(thread);
+        if (position == -1) {
+            return;
+        }
         final AugmentedUnifiedThread actualThread = mAdapter.getThread(position);
         actualThread.setSubscribedFlag(event.isNowSubscribed);
         mAdapter.notifyItemChanged(position);

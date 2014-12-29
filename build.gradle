@@ -1,18 +1,29 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
+        maven {
+            url 'http://download.crashlytics.com/maven'
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.0.0'
+        classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
+        // classpath 'com.newrelic.agent.android:agent-gradle-plugin:4.+'
     }
 }
 
 allprojects {
     repositories {
-        mavenCentral()
+        jcenter()
         maven {
             url "http://repo.pageturner-reader.org"
+        }
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        maven {
+            url 'http://download.crashlytics.com/maven'
         }
     }
 }

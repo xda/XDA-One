@@ -1,16 +1,16 @@
-package com.xda.one.ui.helper;
+package com.xda.one.ui.thread;
 
 import com.xda.one.R;
 import com.xda.one.api.inteface.ThreadClient;
 import com.xda.one.constants.XDAConstants;
 import com.xda.one.model.augmented.AugmentedUnifiedThread;
 import com.xda.one.ui.BaseActivity;
-import com.xda.one.ui.UnifiedThreadAdapter;
+import com.xda.one.ui.ThreadAdapter;
+import com.xda.one.ui.helper.ActionModeHelper;
 import com.xda.one.util.AccountUtils;
 import com.xda.one.util.UIUtils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
@@ -18,8 +18,7 @@ import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class UnifiedThreadFragmentActionModeHelper
-        extends ActionModeHelper.RecyclerViewActionModeCallback {
+public class ThreadActionModeHelper extends ActionModeHelper.RecyclerViewActionModeCallback {
 
     private final Activity mActivity;
 
@@ -27,19 +26,19 @@ public class UnifiedThreadFragmentActionModeHelper
 
     private ActionModeHelper mModeHelper;
 
-    private UnifiedThreadAdapter mAdapter;
+    private ThreadAdapter mAdapter;
 
     private ShareActionProvider mShareActionProvider;
 
     private MenuItem mSubscribeItem;
 
-    public UnifiedThreadFragmentActionModeHelper(final Activity activity,
+    public ThreadActionModeHelper(final Activity activity,
             final ThreadClient threadClient) {
         mActivity = activity;
         mThreadClient = threadClient;
     }
 
-    public void setAdapter(final UnifiedThreadAdapter adapter) {
+    public void setAdapter(final ThreadAdapter adapter) {
         mAdapter = adapter;
     }
 

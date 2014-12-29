@@ -8,7 +8,6 @@ import com.xda.one.R;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
 
 import java.util.HashMap;
 
@@ -23,7 +22,7 @@ public class OneApplication extends Application {
         ECOMMERCE_TRACKER, // Tracker used by all ecommerce transactions from a company.
     }
 
-    private final HashMap<TrackerName, Tracker> mTrackers = new HashMap<TrackerName, Tracker>();
+    private final HashMap<TrackerName, Tracker> mTrackers = new HashMap<>();
 
     public synchronized Tracker getTracker(TrackerName trackerId) {
         if (mTrackers.containsKey(trackerId)) {
@@ -55,6 +54,6 @@ public class OneApplication extends Application {
     protected void attachBaseContext(final Context base) {
         super.attachBaseContext(base);
 
-        MultiDex.install(this);
+        // MultiDex.install(this);
     }
 }

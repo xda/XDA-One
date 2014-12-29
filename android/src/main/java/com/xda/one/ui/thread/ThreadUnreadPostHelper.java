@@ -1,10 +1,11 @@
-package com.xda.one.ui.helper;
+package com.xda.one.ui.thread;
 
 import com.xda.one.R;
 import com.xda.one.api.inteface.PostClient;
 import com.xda.one.api.model.response.container.ResponsePostContainer;
 import com.xda.one.api.retrofit.RetrofitPostClient;
 import com.xda.one.model.augmented.AugmentedUnifiedThread;
+import com.xda.one.ui.helper.CancellableCallbackHelper;
 import com.xda.one.util.FragmentUtils;
 
 import android.app.AlertDialog;
