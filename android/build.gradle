@@ -6,13 +6,15 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.14.1'
+        classpath 'com.android.tools.build:gradle:1.0.0'
         classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
+        classpath 'com.newrelic.agent.android:agent-gradle-plugin:4.+'
     }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'crashlytics'
+apply plugin : 'newrelic'
 
 android {
     compileSdkVersion 21
@@ -113,6 +115,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:21.0.0'
 
     compile 'com.android.support:multidex:1.0.0'
+
+    compile 'com.newrelic.agent.android:android-agent:4.+'
 
     compile fileTree(dir: 'libs', include: '*.jar')
 }

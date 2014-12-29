@@ -4,6 +4,7 @@ import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
+import com.newrelic.agent.android.NewRelic;
 import com.xda.one.R;
 import com.xda.one.api.misc.Consumer;
 import com.xda.one.model.misc.ForumType;
@@ -26,6 +27,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Toast;
 
 public class MainActivity extends BaseActivity
@@ -46,6 +48,12 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onCreate(final Bundle bundle) {
+        NewRelic.withApplicationToken(
+                "AA31aa88f94b9a9db9fba799fdb1112f100438c79f"
+        ).start(getApplication());
+
+        supportRequestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+        supportRequestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
         super.onCreate(bundle);
 
         setContentView(R.layout.main_activity);
