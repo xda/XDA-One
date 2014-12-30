@@ -22,6 +22,12 @@ import java.util.List;
 public class NewsAdapter
         extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
+    private static final int NORMAL_VIEW_TYPE = 1;
+
+    private static final int FOOTER_VIEW_TYPE = 2;
+
+    private int mFooterItemCount = 0;
+
     protected final LayoutInflater mLayoutInflater;
 
     private final Context mContext;
@@ -38,13 +44,30 @@ public class NewsAdapter
     }
 
     @Override
+    public int getItemViewType(final int position) {
+        if (position == mNews.size()) {
+            return FOOTER_VIEW_TYPE;
+        }
+        return NORMAL_VIEW_TYPE;
+    }
+
+    @Override
     public NewsViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+        if (viewType == FOOTER_VIEW_TYPE) {
+            final View view = mLayoutInflater.inflate(R.layout.load_more_progress_bar_only,
+                    parent, false);
+            return new FooterViewType(view);
+        }
         final View view = mLayoutInflater.inflate(R.layout.news_list_item, parent, false);
         return new NewsViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final NewsViewHolder holder, final int position) {
+        if (getItemViewType(position) == FOOTER_VIEW_TYPE) {
+            return;
+        }
+
         final ResponseNews item = getItem(position);
 
         holder.itemView.setTag(item.getUrl());
@@ -68,13 +91,17 @@ public class NewsAdapter
 
     @Override
     public int getItemCount() {
-        return mNews.size();
+        return mNews.size() + mFooterItemCount;
     }
 
     public void clear() {
+        if (isEmpty()) {
+            return;
+        }
+
         final int count = mNews.size();
         mNews.clear();
-        notifyItemRangeRemoved(0, count);
+        notifyItemRangeRemoved(0, count + mFooterItemCount--);
     }
 
     public void addAll(final List<ResponseNews> news) {
@@ -84,7 +111,22 @@ public class NewsAdapter
 
         final int count = mNews.size();
         mNews.addAll(news);
-        notifyItemRangeInserted(count, news.size());
+
+        if (count == 0) {
+            // Add the footer in as well
+            notifyItemRangeInserted(count, news.size() + ++mFooterItemCount);
+        } else {
+            notifyItemRangeInserted(count, news.size());
+        }
+    }
+
+    public void removeFooter() {
+        mFooterItemCount = 0;
+        notifyItemRemoved(mNews.size());
+    }
+
+    public boolean isEmpty() {
+        return mNews.isEmpty();
     }
 
     public List<ResponseNews> getNews() {
@@ -105,6 +147,13 @@ public class NewsAdapter
             titleView = (TextView) itemView.findViewById(R.id.news_title);
             contentView = (TextView) itemView.findViewById(R.id.news_content);
             imageView = (ImageView) itemView.findViewById(R.id.avatar);
+        }
+    }
+
+    private static class FooterViewType extends NewsViewHolder {
+
+        public FooterViewType(final View itemView) {
+            super(itemView);
         }
     }
 }

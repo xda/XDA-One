@@ -7,7 +7,6 @@ import com.xda.one.util.StringUtils;
 import com.xda.one.util.Utils;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +15,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MentionAdapter extends RecyclerView.Adapter<MentionAdapter.MentionViewHolder> {
+
+    private static final int NORMAL_VIEW_TYPE = 1;
+
+    private static final int FOOTER_VIEW_TYPE = 2;
+
+    private int mFooterItemCount = 0;
 
     private static final int MAX_STRING_LENGTH = 100;
 
@@ -43,13 +49,30 @@ public class MentionAdapter extends RecyclerView.Adapter<MentionAdapter.MentionV
     }
 
     @Override
+    public int getItemViewType(final int position) {
+        if (position == mMentions.size()) {
+            return FOOTER_VIEW_TYPE;
+        }
+        return NORMAL_VIEW_TYPE;
+    }
+
+    @Override
     public MentionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == FOOTER_VIEW_TYPE) {
+            final View view = mLayoutInflater
+                    .inflate(R.layout.load_more_progress_bar_only, parent, false);
+            return new FooterViewType(view);
+        }
         final View view = mLayoutInflater.inflate(R.layout.quote_mention_list_item, parent, false);
         return new MentionViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final MentionViewHolder quoteHolder, final int position) {
+        if (getItemViewType(position) == FOOTER_VIEW_TYPE) {
+            return;
+        }
+
         final AugmentedMention mention = getMention(position);
 
         quoteHolder.itemView.setOnClickListener(mViewClickListener);
@@ -74,52 +97,51 @@ public class MentionAdapter extends RecyclerView.Adapter<MentionAdapter.MentionV
 
     @Override
     public int getItemCount() {
-        return mMentions.size();
+        return mMentions.size() + mFooterItemCount;
     }
 
-    public void addAll(final List<AugmentedMention> quotes) {
-        if (Utils.isCollectionEmpty(quotes)) {
+    public void addAll(final List<AugmentedMention> mentions) {
+        if (Utils.isCollectionEmpty(mentions)) {
             return;
         }
 
         final int count = mMentions.size();
-        mMentions.addAll(quotes);
-        notifyItemRangeInserted(count, quotes.size());
-    }
-
-    public void remove(final AugmentedMention item) {
-        remove(indexOf(item));
-    }
-
-    void remove(final int position) {
-        if (position < 0 || position >= mMentions.size()) {
-            // TODO - maybe throw an exception?
-            return;
+        mMentions.addAll(mentions);
+        if (count == 0) {
+            // Add the footer in as well
+            notifyItemRangeInserted(count, mentions.size() + ++mFooterItemCount);
+        } else {
+            notifyItemRangeInserted(count, mentions.size());
         }
-
-        mMentions.remove(position);
-        notifyItemRemoved(position);
     }
 
     public void clear() {
+        if (isEmpty()) {
+            return;
+        }
+
         final int count = mMentions.size();
         mMentions.clear();
-        notifyItemRangeRemoved(0, count);
-    }
-
-    public int indexOf(final AugmentedMention quote) {
-        return mMentions.indexOf(quote);
+        notifyItemRangeRemoved(0, count + mFooterItemCount--);
     }
 
     public void update(final AugmentedMention quote) {
-        final int position = indexOf(quote);
+        final int position = mMentions.indexOf(quote);
         mMentions.set(position, quote);
         notifyItemChanged(position);
     }
 
-    public void onSaveInstanceState(final Bundle outState) {
-        final ArrayList<AugmentedMention> quotes = new ArrayList<>(mMentions);
-        outState.putParcelableArrayList(MentionFragment.SAVED_ADAPTER_STATE, quotes);
+    public void removeFooter() {
+        mFooterItemCount = 0;
+        notifyItemRemoved(mMentions.size());
+    }
+
+    public boolean isEmpty() {
+        return mMentions.isEmpty();
+    }
+
+    public List<AugmentedMention> getMentions() {
+        return Collections.unmodifiableList(mMentions);
     }
 
     public static class MentionViewHolder extends RecyclerView.ViewHolder {
@@ -136,6 +158,13 @@ public class MentionAdapter extends RecyclerView.Adapter<MentionAdapter.MentionV
             avatarImageView = (ImageView) itemView.findViewById(R.id.avatar);
             titleTextView = (TextView) itemView.findViewById(R.id.user_profile_list_item_title);
             contentTextView = (TextView) itemView.findViewById(R.id.user_profile_list_item_content);
+        }
+    }
+
+    private static class FooterViewType extends MentionViewHolder {
+
+        public FooterViewType(final View itemView) {
+            super(itemView);
         }
     }
 }

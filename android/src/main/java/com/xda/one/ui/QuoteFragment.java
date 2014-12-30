@@ -22,6 +22,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
@@ -50,12 +51,18 @@ public class QuoteFragment extends QuoteMentionBaseFragment
     public void onViewCreated(final View view, @Nullable final Bundle state) {
         super.onViewCreated(view, state);
 
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                UIUtils.updateEmptyViewState(getView(), mRecyclerView, mAdapter.isEmpty());
+                reloadTheFirstPage();
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
 
-        if (mAdapter.getItemCount() > 0) {
+        if (!mAdapter.isEmpty()) {
             return;
         }
-
         if (state == null) {
             loadTheFirstPage();
         } else {
@@ -65,11 +72,8 @@ public class QuoteFragment extends QuoteMentionBaseFragment
             } else {
                 // This should give a non-zero integer
                 mTotalPages = state.getInt(PAGES_SAVED_STATE);
-                if (mLoadHelper == null) {
-                    mLoadHelper = createInfiniteScrollListener(mTotalPages);
-                } else {
-                    // TODO - Should never happen - investigate if it does
-                }
+                mInfiniteScrollListener = new InfiniteRecyclerLoadHelper(mRecyclerView,
+                        new InfiniteLoadCallback(), mTotalPages, null);
                 addDataToAdapter(quotes);
             }
         }
@@ -79,14 +83,9 @@ public class QuoteFragment extends QuoteMentionBaseFragment
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        mAdapter.onSaveInstanceState(outState);
+        final ArrayList<AugmentedQuote> quotes = new ArrayList<>(mAdapter.getQuotes());
+        outState.putParcelableArrayList(QuoteFragment.SAVED_ADAPTER_STATE, quotes);
         outState.putInt(PAGES_SAVED_STATE, mTotalPages);
-    }
-
-    private void loadTheFirstPage() {
-        final Bundle bundle = new Bundle();
-        bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, 1);
-        getLoaderManager().initLoader(0, bundle, this);
     }
 
     @Override
@@ -103,25 +102,31 @@ public class QuoteFragment extends QuoteMentionBaseFragment
             return;
         }
 
-        mTotalPages = data.getTotalPages();
-
-        if (data.getCurrentPage() == 1) {
+        if (mInfiniteScrollListener != null && !mInfiniteScrollListener.isLoading()
+                && !mRefreshLayout.isRefreshing()) {
+            // This may happen when we are coming back from posts fragment to threads. For some
+            // reason loadFinished gets called. However, we may have new data about the thread -
+            // don't disturb this data.
+            UIUtils.updateEmptyViewState(getView(), mRecyclerView, false);
+            mRecyclerView.setOnScrollListener(mInfiniteScrollListener);
+            return;
+        } else if (data.getCurrentPage() == 1 || mInfiniteScrollListener == null) {
             mAdapter.clear();
-            mLoadHelper = createInfiniteScrollListener(data.getTotalPages());
-        }
 
-        mLoadMoreProgressContainer.setVisibility(View.GONE);
-        mLoadHelper.onLoadFinished();
+            mTotalPages = data.getTotalPages();
+            mInfiniteScrollListener = new InfiniteRecyclerLoadHelper(mRecyclerView,
+                    new InfiniteLoadCallback(), mTotalPages, null);
+        }
+        mInfiniteScrollListener.onLoadFinished();
+
         addDataToAdapter(data.getQuotes());
+        if (!mInfiniteScrollListener.hasMoreData()) {
+            mAdapter.removeFooter();
+        }
     }
 
     @Override
     public void onLoaderReset(Loader<AugmentedQuoteContainer> loader) {
-    }
-
-    private InfiniteRecyclerLoadHelper createInfiniteScrollListener(final int totalPages) {
-        return new InfiniteRecyclerLoadHelper(mRecyclerView, new InfiniteLoadCallback(),
-                totalPages, null);
     }
 
     private void addDataToAdapter(final List<AugmentedQuote> data) {
@@ -130,14 +135,25 @@ public class QuoteFragment extends QuoteMentionBaseFragment
 
         // Let's actually add the items now
         mAdapter.addAll(data);
+        mRefreshLayout.setRefreshing(false);
+    }
+
+    private void loadTheFirstPage() {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, 1);
+        getLoaderManager().initLoader(0, bundle, this);
+    }
+
+    private void reloadTheFirstPage() {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, 1);
+        getLoaderManager().restartLoader(0, bundle, this);
     }
 
     private class InfiniteLoadCallback implements InfiniteRecyclerLoadHelper.Callback {
 
         @Override
         public void loadMoreData(final int page) {
-            mLoadMoreProgressContainer.setVisibility(View.VISIBLE);
-
             final Bundle bundle = new Bundle();
             bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, page);
             getLoaderManager().restartLoader(0, bundle, QuoteFragment.this);

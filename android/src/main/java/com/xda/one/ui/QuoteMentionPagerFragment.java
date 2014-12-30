@@ -14,14 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class QuoteMentionFragment extends Fragment {
+public class QuoteMentionPagerFragment extends Fragment {
 
     private QuoteMentionFragmentPagerAdapter mAdapter;
 
-    private TabLayout mSlidingTabLayout;
-
-    public static QuoteMentionFragment getInstance() {
-        return new QuoteMentionFragment();
+    public static QuoteMentionPagerFragment getInstance() {
+        return new QuoteMentionPagerFragment();
     }
 
     @Override
@@ -34,7 +32,7 @@ public class QuoteMentionFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
             final Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.quote_mention_fragment, container, false);
+        return inflater.inflate(R.layout.quote_mention_pager_fragment, container, false);
     }
 
     @Override
@@ -45,11 +43,11 @@ public class QuoteMentionFragment extends Fragment {
         viewPager.setAdapter(mAdapter);
         viewPager.setOffscreenPageLimit(10);
 
-        mSlidingTabLayout = (TabLayout) view.findViewById(R.id
+        final TabLayout slidingTabLayout = (TabLayout) view.findViewById(R.id
                 .fragment_sliding_tab_layout);
-        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(android.R.color
+        slidingTabLayout.setSelectedIndicatorColors(getResources().getColor(android.R.color
                 .white));
-        mSlidingTabLayout.setViewPager(viewPager);
+        slidingTabLayout.setViewPager(viewPager);
 
         final ActionBar bar = UIUtils.getSupportActionBar(getActivity());
         bar.show();

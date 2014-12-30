@@ -189,7 +189,7 @@ public class NavigationDrawerFragment extends Fragment
                 mCallback.onNavigationItemClicked(new MyDeviceFragment());
                 break;
             case R.string.quote_mentions:
-                mCallback.onNavigationItemClicked(QuoteMentionFragment.getInstance());
+                mCallback.onNavigationItemClicked(QuoteMentionPagerFragment.getInstance());
                 break;
             case R.string.settings:
                 startActivity(new Intent(getActivity(), SettingsActivity.class));

@@ -6,19 +6,9 @@
     android:layout_marginTop="?android:attr/actionBarSize"
     tools:context=".ui.MainActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:clipToPadding="false"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
-        android:visibility="gone" />
+    <include layout="@layout/recycler_inside_refresh" />
 
     <include
         android:id="@android:id/empty"
         layout="@layout/default_list_empty_view" />
-
-    <include layout="@layout/load_more_progress_bar" />
 </RelativeLayout>

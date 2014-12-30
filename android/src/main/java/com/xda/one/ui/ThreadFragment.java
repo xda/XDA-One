@@ -353,8 +353,8 @@ public class ThreadFragment extends Fragment {
     public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == 1) {
+                UIUtils.updateEmptyViewState(getView(), mRecyclerView, true);
                 reloadTheFirstPage();
-                mRefreshLayout.setRefreshing(true);
             } else if (requestCode == 101) {
                 final UnifiedThread thread = data.getParcelableExtra("thread");
                 updateThread(thread);
@@ -445,17 +445,17 @@ public class ThreadFragment extends Fragment {
                 // TODO - we need to tailor this to lack of connection/other network issue
                 addDataToAdapter(null);
                 return;
-            } else if (mInfiniteScrollListener != null && !mInfiniteScrollListener.isLoading()
-                    && mAdapter.isEmpty()) {
+            }
+
+            if (mInfiniteScrollListener != null && !mInfiniteScrollListener.isLoading()
+                    && !mRefreshLayout.isRefreshing()) {
                 // This may happen when we are coming back from posts fragment to threads. For some
                 // reason loadFinished gets called. However, we may have new data about the thread -
                 // don't disturb this data.
-                // UIUtils.updateEmptyViewState(getView(), mRecyclerView, count);
-                // mRecyclerView.setOnScrollListener(mInfiniteScrollListener);
+                UIUtils.updateEmptyViewState(getView(), mRecyclerView, false);
+                mRecyclerView.setOnScrollListener(mInfiniteScrollListener);
                 return;
-            }
-
-            if (data.getCurrentPage() == 1) {
+            } else if (data.getCurrentPage() == 1 || mInfiniteScrollListener == null) {
                 mAdapter.clear();
 
                 mTotalPages = data.getTotalPages();
