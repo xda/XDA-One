@@ -5,8 +5,7 @@
     xmlns:pkg="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorAccent"
-    android:fitsSystemWindows="true">
+    android:background="@color/colorAccent">
 
     <ImageView
         android:id="@+id/navigation_drawer_header_background"

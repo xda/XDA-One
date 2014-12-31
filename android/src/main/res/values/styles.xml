@@ -30,6 +30,6 @@
     <style name="Theme.One.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
     </style>
 
-    <style name="Theme.One.Popup" parent="ThemeOverlay.AppCompat.Dark">
+    <style name="Theme.One.Popup" parent="Widget.AppCompat.PopupMenu">
     </style>
 </resources>

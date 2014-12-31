@@ -4,7 +4,6 @@
     android:layout_width="304dp"
     android:layout_height="match_parent"
     android:layout_gravity="start"
-    android:fitsSystemWindows="true"
     android:gravity="start"
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
@@ -14,6 +13,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
-        android:divider="@null"
-        android:fitsSystemWindows="true" />
+        android:divider="@null" />
 </LinearLayout>

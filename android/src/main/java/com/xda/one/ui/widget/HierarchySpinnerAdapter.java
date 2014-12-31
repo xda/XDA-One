@@ -63,10 +63,7 @@ public class HierarchySpinnerAdapter extends BaseAdapter
 
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        final View view = getView(position, convertView, parent);
-        final View imageView = view.findViewById(R.id.hierarchy_spinner_item_device_image);
-        imageView.setVisibility(View.VISIBLE);
-        return view;
+        return getView(position, convertView, parent);
     }
 
     @Override
