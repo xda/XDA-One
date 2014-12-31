@@ -1,6 +1,5 @@
 package com.xda.one.ui;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
@@ -49,6 +48,7 @@ public class MainActivity extends BaseActivity
         /*NewRelic.withApplicationToken(
                 "AA31aa88f94b9a9db9fba799fdb1112f100438c79f"
         ).start(getApplication());*/
+
         super.onCreate(bundle);
 
         setContentView(R.layout.main_activity);

@@ -2,7 +2,7 @@
 <resources>
 
     <style name="Theme.One" parent="Theme.One.Base">
-        <item name="android:statusBarColor">?colorPrimaryDark</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <style name="Theme.One.NavDrawer" parent="Theme.One.Base">

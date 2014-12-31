@@ -91,7 +91,7 @@ public class NewsAdapter
 
     @Override
     public int getItemCount() {
-        return mNews.size() + mFooterItemCount;
+        return mNews.size() + mFooterItemCount ;
     }
 
     public void clear() {
