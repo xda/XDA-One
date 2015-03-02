@@ -13,8 +13,6 @@ import android.text.style.ForegroundColorSpan;
 
 public class AugmentedMention implements Mention {
 
-    private static final String MENTION_USERNAME_CONTENT_SEPARATOR = " - ";
-
     public static final Creator<AugmentedMention> CREATOR = new Creator<AugmentedMention>() {
         @Override
         public AugmentedMention createFromParcel(Parcel source) {
@@ -26,6 +24,8 @@ public class AugmentedMention implements Mention {
             return new AugmentedMention[size];
         }
     };
+
+    private static final String MENTION_USERNAME_CONTENT_SEPARATOR = " - ";
 
     private final Mention mMention;
 

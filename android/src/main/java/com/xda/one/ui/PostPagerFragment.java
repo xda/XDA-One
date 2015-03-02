@@ -14,9 +14,9 @@ import com.xda.one.ui.helper.QuickReturnHelper;
 import com.xda.one.ui.widget.FloatingActionButton;
 import com.xda.one.util.AccountUtils;
 import com.xda.one.util.CompatUtils;
+import com.xda.one.util.UIUtils;
 
 import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -27,8 +27,10 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.XDALinerLayoutManager;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -45,8 +47,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostPagerFragment extends Fragment
-        implements PostFragment.Callback {
+public class PostPagerFragment extends Fragment implements PostFragment.Callback {
 
     public static final String THREAD_PAGE_COUNT_ARGUMENT = "thread_page_count";
 
@@ -203,8 +204,8 @@ public class PostPagerFragment extends Fragment
         mAdapter = new PostFragmentAdapter(getChildFragmentManager(), mUnifiedThread,
                 mTotalPages, mContainerArgument);
         mSpinnerAdapter = new HierarchySpinnerAdapter();
-        mPageAdapter = new PostPageAdapter(getActivity(), mTotalPages,
-                new PostPageClickListener());
+
+        mPageAdapter = new PostPageAdapter(getActivity(), mTotalPages, new PostPageClickListener());
     }
 
     @Override
@@ -221,8 +222,9 @@ public class PostPagerFragment extends Fragment
 
         final View header = view.findViewById(R.id.pagination_bar);
         mPageRecyclerView = (RecyclerView) view.findViewById(R.id.page_list);
+        mPageRecyclerView.setLayoutManager(new XDALinerLayoutManager(getActivity()));
+
         if (mTotalPages > 1) {
-            mPageRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             mPageRecyclerView.setAdapter(mPageAdapter);
             ViewCompat.setOverScrollMode(mPageRecyclerView, ViewCompat.OVER_SCROLL_NEVER);
             mPageRecyclerView.post(new Runnable() {
@@ -240,13 +242,14 @@ public class PostPagerFragment extends Fragment
             mTopBar.setOnClickListener(new TopBarClickListener());
             setupPagingButtons(header);
 
-            mQuickReturnHelper = new QuickReturnHelper(header, getActivity().getActionBar());
+            mQuickReturnHelper = new QuickReturnHelper(getActivity(), header,
+                    mCallback.getToolbar());
         } else {
             header.setVisibility(View.GONE);
             mPageRecyclerView.setVisibility(View.GONE);
         }
 
-        final ActionBar actionBar = getActivity().getActionBar();
+        final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
         actionBar.setTitle(null);
         actionBar.setSubtitle(null);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
@@ -267,7 +270,7 @@ public class PostPagerFragment extends Fragment
         final FloatingActionButton button = (FloatingActionButton) view
                 .findViewById(R.id.post_pager_fragment_floating_reply_button);
         button.setOnClickListener(new CreatePostListener());
-        if (CompatUtils.hasL()) {
+        if (CompatUtils.hasLollipop()) {
             final Drawable drawable = getResources().getDrawable(R.drawable.fab_background);
             button.setBackground(drawable);
         } else {
@@ -305,8 +308,11 @@ public class PostPagerFragment extends Fragment
     public void onDestroyView() {
         super.onDestroyView();
 
-        final ActionBar actionBar = getActivity().getActionBar();
+        final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        if (mQuickReturnHelper != null) {
+            mQuickReturnHelper.showToolbar();
+        }
 
         mThreadClient.getBus().unregister(mEventHandler);
     }
@@ -347,7 +353,7 @@ public class PostPagerFragment extends Fragment
     @Override
     public void postPaddingToQuickReturn(final View content) {
         final View header = getView().findViewById(R.id.pagination_bar);
-        QuickReturnHelper.postPaddingToQuickReturn(getActivity().getActionBar(), header, content);
+        QuickReturnHelper.postPaddingToQuickReturn(header, content);
     }
 
     @Override
@@ -400,7 +406,19 @@ public class PostPagerFragment extends Fragment
         }
     }
 
+    @Override
+    public void onPageLoaded(final ResponseUnifiedThread thread) {
+        if (getTargetFragment() != null) {
+            final Intent intent = new Intent();
+            intent.putExtra("thread", thread);
+            getTargetFragment()
+                    .onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
+        }
+    }
+
     public interface Callback {
+
+        public Toolbar getToolbar();
 
         public void login(final Runnable runnable);
     }
@@ -470,25 +488,13 @@ public class PostPagerFragment extends Fragment
 
         @Override
         public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            final View view = getView(position, convertView, parent);
-            final View imageView = view.findViewById(R.id.hierarchy_spinner_item_device_image);
-            imageView.setVisibility(View.VISIBLE);
-            return view;
+            return getView(position, convertView, parent);
         }
 
         @Override
         public boolean onNavigationItemSelected(int itemPosition, long itemId) {
             getFragmentManager().popBackStack(getItem(itemPosition), 0);
             return true;
-        }
-    }
-
-    @Override
-    public void onPageLoaded(final ResponseUnifiedThread thread) {
-        if (getTargetFragment() != null) {
-            final Intent intent = new Intent();
-            intent.putExtra("thread", thread);
-            getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
         }
     }
 

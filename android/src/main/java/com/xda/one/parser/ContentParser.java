@@ -34,6 +34,8 @@ public class ContentParser {
         SPANNER.registerHandler("xdaquote", new XDATagHandlers.QuoteTagHandler());
         SPANNER.registerHandler("img", new XDATagHandlers.ImageHandler());
 
+        SPANNER.registerHandler("a", new XDATagHandlers.LinkHandler());
+
         addPattern(EMOTICONS_MAP, ":)", R.drawable.smile);
         addPattern(EMOTICONS_MAP, ":(", R.drawable.frown);
         addPattern(EMOTICONS_MAP, ":victory:", R.drawable.victory);

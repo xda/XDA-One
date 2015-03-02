@@ -11,6 +11,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.SpannableStringBuilder;
 import android.text.style.ClickableSpan;
+import android.text.style.URLSpan;
+import android.util.Log;
 import android.view.View;
 
 import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
@@ -91,6 +93,19 @@ public class XDATagHandlers {
             public String getUserId() {
                 return mUserId;
             }
+        }
+    }
+
+    public static class LinkHandler extends TagNodeHandler {
+
+        @Override
+        public void handleTagNode(final TagNode node, final SpannableStringBuilder builder,
+                final int start, final int end, final SpanStack spanStack) {
+            String url = node.getAttributeByName("href").trim();
+            if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                url = "http://" + url;
+            }
+            spanStack.pushSpan(new URLSpan(url), start, end);
         }
     }
 }

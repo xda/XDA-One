@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/post_fragment_cab_quote"
-        android:showAsAction="always"
-        android:title="@string/quote" />
+        android:title="@string/quote"
+        app:showAsAction="always" />
 </menu>

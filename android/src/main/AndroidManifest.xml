@@ -2,11 +2,8 @@
 <manifest
     package="com.xda.one"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:versionCode="11"
     android:versionName="0.1.11">
-
-    <uses-sdk/>
 
     <!-- Network -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -22,15 +19,16 @@
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 
     <application
+        android:name=".util.OneApplication"
         android:allowBackup="true"
-        android:name=".util.AnalyticsUtil"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.One">
 
         <activity
             android:name=".ui.MainActivity"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.One.NavDrawer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.SEARCH" />
@@ -82,9 +80,9 @@
             android:name=".auth.XDAAuthenticatorActivity"
             android:label="Login" />
 
-        <meta-data
+        <!--<meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+            android:value="@integer/google_play_services_version" />-->
 
         <meta-data
             android:name="com.google.android.gms.analytics.globalConfigResource"

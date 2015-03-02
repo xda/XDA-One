@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ProgressBar
-    android:id="@+id/load_more_progress_bar"
-    style="?android:attr/android:progressBarStyleSmallInverse"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/load_more_progress_container"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:layout_centerHorizontal="true"
-    android:indeterminate="true"
-    android:paddingBottom="8dp"
-    android:visibility="gone" />
+    android:layout_marginBottom="16dp"
+    android:visibility="gone">
+
+    <com.xda.one.ui.widget.FloatingActionButton
+        android:id="@+id/load_more_progress_bar_background"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@color/cpb_white" />
+
+    <include
+        layout="@layout/load_more_progress_bar_only"/>
+</RelativeLayout>

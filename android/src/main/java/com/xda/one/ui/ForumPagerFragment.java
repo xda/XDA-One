@@ -6,8 +6,8 @@ import com.xda.one.db.ForumDbHelper;
 import com.xda.one.model.misc.ForumType;
 import com.xda.one.ui.widget.TabLayout;
 import com.xda.one.util.FragmentUtils;
+import com.xda.one.util.UIUtils;
 
-import android.app.ActionBar;
 import android.app.SearchManager;
 import android.content.Context;
 import android.database.Cursor;
@@ -16,7 +16,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,7 +28,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
@@ -34,8 +37,6 @@ public class ForumPagerFragment extends Fragment {
     private ForumFragmentAdapter mFragmentAdapter;
 
     private MenuItem mSearchMenuItem;
-
-    private SimpleCursorAdapter mSuggestionAdapter;
 
     public static Fragment createInstance() {
         return new ForumPagerFragment();
@@ -59,7 +60,7 @@ public class ForumPagerFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
 
-        final ActionBar bar = getActivity().getActionBar();
+        final ActionBar bar = UIUtils.getSupportActionBar(getActivity());
         bar.show();
         bar.setTitle(R.string.subscribed);
         bar.setSubtitle(null);
@@ -86,7 +87,8 @@ public class ForumPagerFragment extends Fragment {
         final SearchManager searchManager = (SearchManager) getActivity()
                 .getSystemService(Context.SEARCH_SERVICE);
 
-        final SearchView searchView = (SearchView) mSearchMenuItem.getActionView();
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(mSearchMenuItem);
+
         // Assumes current activity is the searchable activity
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity()
                 .getComponentName()));
@@ -97,9 +99,9 @@ public class ForumPagerFragment extends Fragment {
     }
 
     public boolean onBackPressed() {
-        final boolean isExpanded = mSearchMenuItem.isActionViewExpanded();
+        final boolean isExpanded = MenuItemCompat.isActionViewExpanded(mSearchMenuItem);
         if (isExpanded) {
-            mSearchMenuItem.collapseActionView();
+            MenuItemCompat.collapseActionView(mSearchMenuItem);
         }
         return isExpanded;
     }
@@ -175,7 +177,7 @@ public class ForumPagerFragment extends Fragment {
             if (TextUtils.isEmpty(s)) {
                 return false;
             }
-            mSearchView.onActionViewCollapsed();
+            MenuItemCompat.collapseActionView(mSearchMenuItem);
 
             final FragmentTransaction transaction = FragmentUtils
                     .getDefaultTransaction(getFragmentManager());

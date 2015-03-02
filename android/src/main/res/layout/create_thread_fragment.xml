@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <com.makeramen.RoundedImageView
         android:id="@+id/create_thread_fragment_avatar"
         android:layout_width="48dp"
@@ -14,7 +13,6 @@
         android:src="@drawable/account_circle"
         pkg:oval="true" />
 
-
     <TextView
         android:id="@+id/create_message_thread_curr_username"
         android:layout_width="match_parent"
@@ -22,8 +20,6 @@
         android:layout_toRightOf="@id/create_thread_fragment_avatar"
         android:background="@android:color/transparent"
         android:hint="@string/username"
-        android:inputType="text"
-        android:maxLines="4"
         android:padding="8dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textStyle="bold" />
@@ -35,7 +31,7 @@
         android:layout_below="@id/create_message_thread_curr_username"
         android:layout_toRightOf="@id/create_thread_fragment_avatar"
         android:background="@android:color/transparent"
-        android:hint="Post Title"
+        android:hint="@string/post_title"
         android:inputType="text"
         android:maxLines="4"
         android:padding="8dp"
@@ -68,6 +64,5 @@
         android:layout_toLeftOf="@+id/create_thread_fragment_send"
         android:background="?android:attr/selectableItemBackground"
         android:padding="8dp"
-        android:src="@drawable/ic_smilie" />
-
+        android:src="@drawable/ic_insert_emoticon" />
 </RelativeLayout>

@@ -1,9 +1,7 @@
 package com.xda.one.ui;
 
 import com.xda.one.R;
-import com.xda.one.util.AnalyticsUtil;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,8 +33,8 @@ public class UserProfileActivity extends BaseActivity {
         }
 
         // Remove the title and subtitle if any
-        final ActionBar actionBar = getActionBar();
+        /*final ActionBar actionBar = UIUtils.getSupportActionBar(this);
         actionBar.setTitle(null);
-        actionBar.setSubtitle(null);
+        actionBar.setSubtitle(null);*/
     }
 }

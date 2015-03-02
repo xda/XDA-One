@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/header_user_stuff"
-            android:background="@color/tabLayoutBackgroundColor" />
+            android:background="@color/tab_layout_background_color" />
     </RelativeLayout>
 
     <com.makeramen.RoundedImageView

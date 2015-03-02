@@ -1,13 +1,13 @@
 package com.xda.one.util;
 
 import com.xda.one.R;
+import com.xda.one.ui.BaseActivity;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
+import android.util.TypedValue;
 import android.view.View;
 
 import static android.view.View.GONE;
@@ -15,35 +15,20 @@ import static android.view.View.VISIBLE;
 
 public class UIUtils {
 
-    private static final int[] RES_IDS_ACTION_BAR_SIZE = {android.R.attr.actionBarSize};
-
     public static int calculateActionBarSize(final Context context) {
-        if (context == null) {
-            return 0;
-        }
-
-        Resources.Theme curTheme = context.getTheme();
-        if (curTheme == null) {
-            return 0;
-        }
-
-        TypedArray att = curTheme.obtainStyledAttributes(RES_IDS_ACTION_BAR_SIZE);
-        if (att == null) {
-            return 0;
-        }
-
-        float size = att.getDimension(0, 0);
-        att.recycle();
-        return (int) size;
+        final TypedValue tv = new TypedValue();
+        context.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true);
+        return TypedValue.complexToDimensionPixelSize(tv.data,
+                context.getResources().getDisplayMetrics());
     }
 
     public static void updateEmptyViewState(final View view, final RecyclerView recyclerView,
-            int itemCount) {
+            boolean isEmpty) {
         // Find the empty view from the main view - it's using the android id for it
         final View emptyView = view.findViewById(android.R.id.empty);
 
         // If we don't have any threads then simply tell the user this and quit
-        if (itemCount == 0) {
+        if (isEmpty) {
             // Toggle what's happening with the view
             showEmptyText(recyclerView, emptyView);
 
@@ -61,6 +46,11 @@ public class UIUtils {
         recyclerView.setVisibility(View.VISIBLE);
         // ... and manually remove the loading view
         emptyView.setVisibility(View.GONE);
+    }
+
+    public static void updateEmptyViewState(final View view, final RecyclerView recyclerView,
+            int itemCount) {
+        updateEmptyViewState(view, recyclerView, itemCount == 0);
     }
 
     public static void showEmptyText(final RecyclerView recyclerView, final View emptyView) {
@@ -85,11 +75,11 @@ public class UIUtils {
         progressBar.setVisibility(VISIBLE);
     }
 
-    public static void toggleDrawerLayout(final DrawerLayout drawerLayout) {
-        if (drawerLayout.isDrawerOpen(Gravity.START)) {
-            drawerLayout.closeDrawer(Gravity.START);
-        } else {
-            drawerLayout.openDrawer(Gravity.START);
-        }
+    public static ActionBar getSupportActionBar(final Activity activity) {
+        return getBaseActivity(activity).getSupportActionBar();
+    }
+
+    public static BaseActivity getBaseActivity(final Activity activity) {
+        return (BaseActivity) activity;
     }
 }

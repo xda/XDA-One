@@ -4,9 +4,9 @@ import com.xda.one.R;
 import com.xda.one.ui.widget.FloatingActionButton;
 import com.xda.one.ui.widget.TabLayout;
 import com.xda.one.util.CompatUtils;
+import com.xda.one.util.UIUtils;
 
 import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -16,6 +16,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,8 +47,7 @@ public class MessagePagerFragment extends Fragment {
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final ActionBar actionBar = getActivity().getActionBar();
-        actionBar.show();
+        final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
         actionBar.setTitle(R.string.private_messages);
 
         mViewPager = (ViewPager) view.findViewById(R.id.message_view_pager);
@@ -61,18 +61,16 @@ public class MessagePagerFragment extends Fragment {
         final FloatingActionButton button = (FloatingActionButton) view
                 .findViewById(R.id.message_fragment_action_create);
 
-        final Fragment holder = this;
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 final DialogFragment fragment = CreateMessageFragment.createInstance();
-                fragment.setTargetFragment(holder, CREATE_MESSAGE_REQUEST_CODE);
+                fragment.setTargetFragment(MessagePagerFragment.this, CREATE_MESSAGE_REQUEST_CODE);
                 fragment.show(getFragmentManager(), "createMessage");
             }
         });
 
-        if (CompatUtils.hasL()) {
+        if (CompatUtils.hasLollipop()) {
             CompatUtils.setBackground(button,
                     getResources().getDrawable(R.drawable.fab_background));
         } else {

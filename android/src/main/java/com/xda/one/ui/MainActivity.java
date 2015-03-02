@@ -1,41 +1,37 @@
 package com.xda.one.ui;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+
 import com.xda.one.R;
 import com.xda.one.api.misc.Consumer;
 import com.xda.one.model.misc.ForumType;
 import com.xda.one.ui.helper.UrlParseHelper;
 import com.xda.one.util.AccountUtils;
-import com.xda.one.util.AnalyticsUtil;
-import com.xda.one.util.CrashUtils;
-import com.xda.one.util.UIUtils;
-import com.xda.one.util.Utils;
+import com.xda.one.util.FragmentUtils;
+import com.xda.one.util.OneApplication;
 
-import android.app.ActionBar;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.NavUtils;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Toast;
-import com.newrelic.agent.android.NewRelic;
 
 public class MainActivity extends BaseActivity
         implements NavigationDrawerFragment.Callback, SubscribedPagerFragment.Callback,
         ThreadFragment.Callback, PostPagerFragment.Callback, SearchFragment.Callback {
+
+    private static final String SCREEN_NAME = "XDA-One MainActivity";
 
     private DrawerLayout mDrawerLayout;
 
@@ -43,48 +39,29 @@ public class MainActivity extends BaseActivity
 
     private Runnable mLoginSuccessfulRunnable;
 
-    private final String SCREEN_NAME = "XDA-One MainActivity";
+    private ActionBarDrawerToggle mDrawerToggle;
+
+    private Toolbar mToolbar;
 
     @Override
     public void onCreate(final Bundle bundle) {
-
-        NewRelic.withApplicationToken(
+        /*NewRelic.withApplicationToken(
                 "AA31aa88f94b9a9db9fba799fdb1112f100438c79f"
-        ).start(this.getApplication());
+        ).start(getApplication());*/
 
-        requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-        requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
         super.onCreate(bundle);
 
-//        CrashUtils.startCrashlytics(this);
-
         setContentView(R.layout.main_activity);
-
-        final ActionBar actionBar = getActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setIcon(R.drawable.ic_action_menu);
-
-        startTracker(SCREEN_NAME);
+        // startTracker(SCREEN_NAME);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
-            @Override
-            public void onDrawerSlide(View view, float v) {
-            }
+        mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
 
-            @Override
-            public void onDrawerOpened(View view) {
-                actionBar.show();
-            }
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
-            @Override
-            public void onDrawerClosed(View view) {
-            }
-
-            @Override
-            public void onDrawerStateChanged(int i) {
-            }
-        });
+        mDrawerToggle = new MainActionBarToggle(mToolbar);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         if (bundle == null) {
             mNavigationDrawerFragment = new NavigationDrawerFragment();
@@ -99,29 +76,33 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                UIUtils.toggleDrawerLayout(mDrawerLayout);
-                return true;
-        }
-        return false;
+        return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
     @Override
     protected void onStart() {
-        // TODO Auto-generated method stub
-
         super.onStart();
-        GoogleAnalytics.getInstance(MainActivity.this).reportActivityStart(this);
-        //Get an Analytics tracker to report app starts & uncaught exceptions etc.
 
+        // GoogleAnalytics.getInstance(MainActivity.this).reportActivityStart(this);
     }
 
     private void initialReplaceFragment() {
-        Intent intent = getIntent();
-        if (Intent.ACTION_VIEW.equals(intent.getAction())) {
-            String url = intent.getDataString();
+        if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
+            String url = getIntent().getDataString();
             if (url != null) {
                 parseAndDisplayForumUrl(url, true);
                 return;
@@ -190,11 +171,16 @@ public class MainActivity extends BaseActivity
             if (searchFragment.onBackPressed()) {
                 return;
             }
+        } else if (fragment instanceof ForumPagerFragment) {
+            final ForumPagerFragment pagerFragment = (ForumPagerFragment) fragment;
+            if (pagerFragment.onBackPressed()) {
+                return;
+            }
         }
 
-        if (!mDrawerLayout.isDrawerOpen(Gravity.LEFT)
+        if (!mDrawerLayout.isDrawerOpen(Gravity.START)
                 && getSupportFragmentManager().getBackStackEntryCount() == 0) {
-            mDrawerLayout.openDrawer(Gravity.LEFT);
+            mDrawerLayout.openDrawer(Gravity.START);
             return;
         }
         super.onBackPressed();
@@ -202,15 +188,14 @@ public class MainActivity extends BaseActivity
 
     @Override
     protected void onStop() {
-        // TODO Auto-generated method stub
         super.onStop();
-        //Stop the analytics tracking
-        GoogleAnalytics.getInstance(MainActivity.this).reportActivityStop(this);
+
+        // GoogleAnalytics.getInstance(MainActivity.this).reportActivityStop(this);
     }
 
     @Override
     public void closeNavigationDrawer() {
-        mDrawerLayout.closeDrawer(Gravity.LEFT);
+        mDrawerLayout.closeDrawer(Gravity.START);
     }
 
     @Override
@@ -238,13 +223,17 @@ public class MainActivity extends BaseActivity
     public void switchCurrentlyDisplayedFragment(final Fragment fragment,
             final boolean backStackAndAnimate, final String title) {
         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        final FragmentTransaction transaction = FragmentUtils
+                .getDefaultTransaction(getSupportFragmentManager());
         if (backStackAndAnimate) {
-            transaction.addToBackStack(title)
-                    .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
-                            R.anim.slide_in_left, R.anim.slide_out_right);
+            transaction.addToBackStack(title);
         }
         transaction.replace(R.id.content_frame, fragment).commit();
+    }
+
+    @Override
+    public Toolbar getToolbar() {
+        return mToolbar;
     }
 
     @Override
@@ -253,16 +242,31 @@ public class MainActivity extends BaseActivity
         mNavigationDrawerFragment.login();
     }
 
-    private void startTracker(String screenName){
-        // Get tracker.
-        Tracker tracker = ((AnalyticsUtil) this.getApplication()).getTracker(
-                AnalyticsUtil.TrackerName.APP_TRACKER);
-
-        // Set screen name.
-        // Where path is a String representing the screen name.
+    private void startTracker(String screenName) {
+        final Tracker tracker = getOneApplication()
+                .getTracker(OneApplication.TrackerName.APP_TRACKER);
         tracker.setScreenName(screenName);
-
-        // Send a screen view.
         tracker.send(new HitBuilders.AppViewBuilder().build());
+    }
+
+    private class MainActionBarToggle extends ActionBarDrawerToggle {
+
+        public MainActionBarToggle(final Toolbar toolBar) {
+            super(MainActivity.this, mDrawerLayout, toolBar, R.string.drawer_open,
+                    R.string.drawer_close);
+        }
+
+        @Override
+        public void onDrawerOpened(final View drawerView) {
+            getSupportActionBar().show();
+        }
+
+        @Override
+        public void onDrawerClosed(final View drawerView) {
+        }
+
+        @Override
+        public void onDrawerSlide(final View drawerView, final float slideOffset) {
+        }
     }
 }

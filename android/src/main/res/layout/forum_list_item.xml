@@ -27,7 +27,7 @@
         android:layout_toLeftOf="@id/forum_list_item_subscribe"
         android:gravity="center_vertical"
         android:paddingBottom="16dp"
-        android:paddingLeft="72dp"
+        android:paddingLeft="64dp"
         android:paddingTop="16dp"
         android:singleLine="true"
         android:text="@string/forums"

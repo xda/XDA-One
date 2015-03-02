@@ -25,14 +25,15 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +41,7 @@ import java.util.List;
 
 import static com.xda.one.ui.NavigationDrawerAdapter.NavigationDrawerItem;
 
-public class NavigationDrawerFragment extends ListFragment
+public class NavigationDrawerFragment extends Fragment
         implements AdapterView.OnItemClickListener {
 
     private final UserListener mUserListener = new UserListener();
@@ -58,6 +59,8 @@ public class NavigationDrawerFragment extends ListFragment
     private ImageView mAvatar;
 
     private CircularProgressButton mLoginLogout;
+
+    private ListView mListView;
 
     @Override
     public void onAttach(Activity activity) {
@@ -92,16 +95,32 @@ public class NavigationDrawerFragment extends ListFragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mListView = (ListView) view.findViewById(android.R.id.list);
+        ViewCompat.setOverScrollMode(mListView, ViewCompat.OVER_SCROLL_NEVER);
+
+        mListView.setOnItemClickListener(this);
+
+        final LayoutInflater inflater = LayoutInflater.from(getActivity());
+        final View headerView = inflater.inflate(R.layout.navigation_drawer_header,
+                mListView, false);
+        mListView.addHeaderView(headerView);
+
         // Register for the login event
         mUserClient.getBus().register(mUserListener);
 
-        getListView().setOnItemClickListener(this);
+        final View headerUser = headerView.findViewById(R.id.navigation_drawer_header_background);
+        headerUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                startActivityForResult(new Intent(getActivity(), UserProfileActivity.class), 100);
+            }
+        });
 
-        mUsernameTextView = (TextView) view.findViewById(R.id.navigation_drawer_fragment_username);
+        mUsernameTextView = (TextView) headerView
+                .findViewById(R.id.navigation_drawer_fragment_username);
+        mAvatar = (ImageView) headerView.findViewById(R.id.navigation_drawer_fragment_avatar);
 
-        mAvatar = (ImageView) view.findViewById(R.id.navigation_drawer_fragment_avatar);
-
-        mLoginLogout = (CircularProgressButton) view
+        mLoginLogout = (CircularProgressButton) headerView
                 .findViewById(R.id.navigation_drawer_login_logout);
         mLoginLogout.setOnClickListener(new LoginLogoutListener());
         mLoginLogout.setIndeterminateProgressMode(true);
@@ -118,7 +137,7 @@ public class NavigationDrawerFragment extends ListFragment
         mAdapter.onUserProfileChanged(selectedAccount);
         mSectionAdapter.notifyDataSetChanged();
 
-        setListAdapter(mSectionAdapter);
+        mListView.setAdapter(mSectionAdapter);
     }
 
     @Override
@@ -142,8 +161,7 @@ public class NavigationDrawerFragment extends ListFragment
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        final NavigationDrawerItem menuItem = mSectionAdapter
-                .getItem(position);
+        final NavigationDrawerItem menuItem = mSectionAdapter.getItem(position - 1);
         final int title = menuItem.getTitleId();
         switch (title) {
             case R.string.forum_home_title:
@@ -165,16 +183,13 @@ public class NavigationDrawerFragment extends ListFragment
                 mCallback.onNavigationItemClicked(new SubscribedPagerFragment());
                 break;
             case R.string.participated:
-                mCallback.onNavigationItemClicked(new ParticipatedFragment());
+                mCallback.onNavigationItemClicked(ThreadFragment.createParticipated());
                 break;
             case R.string.my_devices:
                 mCallback.onNavigationItemClicked(new MyDeviceFragment());
                 break;
-            case R.string.user_profile:
-                startActivityForResult(new Intent(getActivity(), UserProfileActivity.class), 100);
-                break;
             case R.string.quote_mentions:
-                mCallback.onNavigationItemClicked(QuoteMentionFragment.getInstance());
+                mCallback.onNavigationItemClicked(QuoteMentionPagerFragment.getInstance());
                 break;
             case R.string.settings:
                 startActivity(new Intent(getActivity(), SettingsActivity.class));

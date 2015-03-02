@@ -42,9 +42,8 @@ public class AugmentedUnifiedThread implements UnifiedThread {
         final String text = thread.getFirstPostContent();
         final Spannable formattedContent = ContentParser.parseAndSmilifyBBCode(context, text);
         final TextDataStructure dataStructure = new TextDataStructure(formattedContent);
-        final String createdText = PostUtils.getCreatedText(dataStructure);
 
-        mSubPageText = StringUtils.trimCharSequence(createdText.trim(), MAX_STRING_LENGTH);
+        mSubPageText = PostUtils.getCreatedText(dataStructure, MAX_STRING_LENGTH);
     }
 
     public AugmentedUnifiedThread(final Parcel source) {

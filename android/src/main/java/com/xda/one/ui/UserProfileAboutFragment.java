@@ -2,9 +2,7 @@ package com.xda.one.ui;
 
 import com.xda.one.R;
 import com.xda.one.api.model.interfaces.Forum;
-import com.xda.one.api.model.response.ResponseForum;
 import com.xda.one.api.model.response.ResponseUserProfile;
-import com.xda.one.api.model.response.ResponseUserProfileDevice;
 import com.xda.one.loader.UserProfileLoader;
 import com.xda.one.ui.widget.ObservableScrollView;
 import com.xda.one.util.Utils;

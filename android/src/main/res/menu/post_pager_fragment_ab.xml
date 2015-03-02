@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/post_pager_fragment_subscribe_unsubscribe"
         android:icon="@drawable/ic_star_light"
-        android:showAsAction="always"
-        android:title="@string/subscribe" />
+        android:title="@string/subscribe"
+        app:showAsAction="always" />
 </menu>

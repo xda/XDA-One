@@ -1,8 +1,8 @@
 package com.xda.one.ui.widget;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +14,6 @@ import com.xda.one.R;
 
 import java.util.List;
 
-/**
- * Created by Shazi on 11/6/2014.
- */
 public class HierarchySpinnerAdapter extends BaseAdapter
         implements ActionBar.OnNavigationListener {
 
@@ -66,10 +63,7 @@ public class HierarchySpinnerAdapter extends BaseAdapter
 
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        final View view = getView(position, convertView, parent);
-        final View imageView = view.findViewById(R.id.hierarchy_spinner_item_device_image);
-        imageView.setVisibility(View.VISIBLE);
-        return view;
+        return getView(position, convertView, parent);
     }
 
     @Override

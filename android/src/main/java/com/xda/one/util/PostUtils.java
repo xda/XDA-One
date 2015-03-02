@@ -14,14 +14,20 @@ public class PostUtils {
                 augmentedPost.getCreatedText());
     }
 
-    public static String getCreatedText(final TextDataStructure textDataStructure) {
+    public static String getCreatedText(final TextDataStructure textDataStructure,
+            final int maxLimit) {
         final StringBuilder builder = new StringBuilder();
         for (final TextDataStructure.Section section : textDataStructure.getSections()) {
-            if (section.getType() == TextDataStructure.SectionType.NORMAL) {
-                for (TextDataStructure.Item item : section.getItems()) {
-                    if (item.getType() == TextDataStructure.ItemType.TEXT) {
-                        builder.append(item.getId());
-                    }
+            if (section.getType() != TextDataStructure.SectionType.NORMAL) {
+                continue;
+            }
+            for (TextDataStructure.Item item : section.getItems()) {
+                if (item.getType() != TextDataStructure.ItemType.TEXT) {
+                    continue;
+                }
+                builder.append(item.getId());
+                if (builder.length() >= maxLimit) {
+                    return StringUtils.trimCharSequence(builder.toString(), maxLimit);
                 }
             }
         }

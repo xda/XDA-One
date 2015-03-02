@@ -112,11 +112,15 @@ public class ForumAdapter<T extends Forum>
     public void clear() {
         final int count = mForums.size();
         mForums.clear();
-        notifyItemRangeRemoved(0, count - 1);
+        notifyItemRangeRemoved(0, count);
     }
 
     public int indexOf(T forum) {
         return mForums.indexOf(forum);
+    }
+
+    public boolean isEmpty() {
+        return mForums.isEmpty();
     }
 
     public static interface ImageViewDeviceDelegate {
