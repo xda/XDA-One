@@ -50,6 +50,9 @@ android {
             ext.enableCrashlytics = true
         }
     }
+
+    defaultPublishConfig "simpleDebug"
+
 }
 
 dependencies {
