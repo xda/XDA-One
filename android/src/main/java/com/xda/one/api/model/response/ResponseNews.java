@@ -9,8 +9,7 @@ import android.os.Parcelable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ResponseNews implements Parcelable {
 
-    public static final Creator<ResponseNews> CREATOR
-            = new Creator<ResponseNews>() {
+    public static final Creator<ResponseNews> CREATOR = new Creator<ResponseNews>() {
         @Override
         public ResponseNews createFromParcel(Parcel source) {
             return new ResponseNews(source);
@@ -35,11 +34,9 @@ public class ResponseNews implements Parcelable {
     private String mThumbnail;
 
     public ResponseNews() {
-
     }
 
     private ResponseNews(Parcel in) {
-
         mTitle = in.readString();
         mContent = in.readString();
         mUrl = in.readString();
@@ -50,32 +47,16 @@ public class ResponseNews implements Parcelable {
         return mTitle;
     }
 
-    public void setTitle(String mTitle) {
-        this.mTitle = mTitle;
-    }
-
     public String getContent() {
         return mContent;
-    }
-
-    public void setContent(String mContent) {
-        this.mContent = mContent;
     }
 
     public String getUrl() {
         return mUrl;
     }
 
-    public void setUrl(String mUrl) {
-        this.mUrl = mUrl;
-    }
-
     public String getThumbnail() {
         return mThumbnail;
-    }
-
-    public void setThumbnail(String thumbnail) {
-        this.mThumbnail = thumbnail;
     }
 
     @Override

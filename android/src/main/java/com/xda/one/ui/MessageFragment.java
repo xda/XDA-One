@@ -13,9 +13,9 @@ import com.xda.one.model.augmented.AugmentedMessage;
 import com.xda.one.model.augmented.container.AugmentedMessageContainer;
 import com.xda.one.ui.listener.AvatarClickListener;
 import com.xda.one.ui.listener.InfiniteRecyclerLoadHelper;
-import com.xda.one.ui.widget.XDALinerLayoutManager;
 import com.xda.one.ui.widget.XDARefreshLayout;
 import com.xda.one.util.UIUtils;
+import com.xda.one.util.Utils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -27,10 +27,10 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.XDALinerLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -47,6 +47,8 @@ public class MessageFragment extends Fragment implements LoaderManager
 
     private static final String MESSAGES_SAVED_STATE = "messages_saved_state";
 
+    private static final String PAGES_SAVED_STATE = "total_pages_state";
+
     private static final int VIEW_MESSAGE_REQUEST_CODE = 100;
 
     private final Object mEventHandler = new Object() {
@@ -59,7 +61,7 @@ public class MessageFragment extends Fragment implements LoaderManager
 
         @Subscribe
         public void onMessageSent(final MessageSentEvent event) {
-            loadTheFirstPage();
+            reloadTheFirstPage();
         }
 
         @Subscribe
@@ -69,23 +71,26 @@ public class MessageFragment extends Fragment implements LoaderManager
         }
     };
 
+    // Global helpers
+    private PrivateMessageClient mPrivateMessageClient;
+
+    // Views
     private RecyclerView mRecyclerView;
-
-    private MessageAdapter mAdapter;
-
-    private MessagePagerFragment.MessageContainerType mMessageContainerType;
-
-    // Infinite scrolling
-    private InfiniteRecyclerLoadHelper mInfiniteScrollListener;
 
     private XDARefreshLayout mRefreshLayout;
 
-    private PrivateMessageClient mPrivateMessageClient;
+    private MessageAdapter mAdapter;
 
-    private ProgressBar mLoadMoreProgressBar;
+    // Helpers
+    private InfiniteRecyclerLoadHelper mInfiniteScrollListener;
 
-    public static MessageFragment getInstance(
-            final MessagePagerFragment.MessageContainerType type) {
+    // Data
+    private MessagePagerFragment.MessageContainerType mMessageContainerType;
+
+    private int mTotalPages;
+
+    public static MessageFragment getInstance(final MessagePagerFragment
+            .MessageContainerType type) {
         final Bundle bundle = new Bundle();
         bundle.putSerializable(MESSAGE_FRAGMENT_TYPE, type);
 
@@ -117,11 +122,8 @@ public class MessageFragment extends Fragment implements LoaderManager
     }
 
     @Override
-    public void onViewCreated(final View view, final Bundle bundle) {
-        super.onViewCreated(view, bundle);
-
-        mLoadMoreProgressBar = (ProgressBar) view.findViewById(R.id
-                .message_fragment_load_more_progress_bar);
+    public void onViewCreated(final View view, final Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         mRefreshLayout = (XDARefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mRefreshLayout.setXDAColourScheme();
@@ -129,7 +131,7 @@ public class MessageFragment extends Fragment implements LoaderManager
             @Override
             public void onRefresh() {
                 UIUtils.updateEmptyViewState(getView(), mRecyclerView, mAdapter.getItemCount());
-                loadTheFirstPage();
+                reloadTheFirstPage();
             }
         });
 
@@ -143,18 +145,25 @@ public class MessageFragment extends Fragment implements LoaderManager
             mInfiniteScrollListener.updateRecyclerView(mRecyclerView);
         }
 
-        if (mAdapter.getItemCount() != 0) {
+        if (!mAdapter.isEmpty()) {
             return;
         }
-        if (bundle == null) {
-            final Bundle loader = new Bundle();
-            loader.putInt(CURRENT_PAGE_LOADER_ARGUMENT, 1);
-            getLoaderManager().initLoader(0, loader, this);
-
-            mRefreshLayout.setRefreshing(true);
+        if (savedInstanceState == null) {
+            loadTheFirstPage();
         } else {
-            final ArrayList<Message> threads = bundle.getParcelableArrayList(MESSAGES_SAVED_STATE);
-            addDataToAdapter(threads);
+            final List<AugmentedMessage> messages = savedInstanceState
+                    .getParcelableArrayList(MESSAGES_SAVED_STATE);
+            if (Utils.isCollectionEmpty(messages)) {
+                // messages being empty implies a save state call came through when we were loading
+                // our data for the first time
+                loadTheFirstPage();
+            } else {
+                // This should give a non-zero integer
+                mTotalPages = savedInstanceState.getInt(PAGES_SAVED_STATE);
+                mInfiniteScrollListener = new InfiniteRecyclerLoadHelper(mRecyclerView,
+                        new InfiniteLoadCallback(), mTotalPages, null);
+                addDataToAdapter(messages);
+            }
         }
     }
 
@@ -164,6 +173,7 @@ public class MessageFragment extends Fragment implements LoaderManager
 
         final ArrayList<Parcelable> list = new ArrayList<Parcelable>(mAdapter.getMessages());
         outState.putParcelableArrayList(MESSAGES_SAVED_STATE, list);
+        outState.putInt(PAGES_SAVED_STATE, mTotalPages);
     }
 
     @Override
@@ -195,14 +205,27 @@ public class MessageFragment extends Fragment implements LoaderManager
             return;
         }
 
-        if (data.getCurrentPage() == 1) {
+        if (mInfiniteScrollListener != null && !mInfiniteScrollListener.isLoading()
+                && !mRefreshLayout.isRefreshing()) {
+            // This may happen when we are coming back from posts fragment to threads. For some
+            // reason loadFinished gets called. However, we may have new data about the thread -
+            // don't disturb this data.
+            UIUtils.updateEmptyViewState(getView(), mRecyclerView, false);
+            mRecyclerView.setOnScrollListener(mInfiniteScrollListener);
+            return;
+        } else if (data.getCurrentPage() == 1 || mInfiniteScrollListener == null) {
             mAdapter.clear();
+
+            mTotalPages = data.getTotalPages();
             mInfiniteScrollListener = new InfiniteRecyclerLoadHelper(mRecyclerView,
-                    new InfiniteLoadCallback(), data.getTotalPages(), null);
+                    new InfiniteLoadCallback(), mTotalPages, null);
         }
-        mLoadMoreProgressBar.setVisibility(View.GONE);
         mInfiniteScrollListener.onLoadFinished();
+
         addDataToAdapter(data.getMessages());
+        if (!mInfiniteScrollListener.hasMoreData()) {
+            mAdapter.removeFooter();
+        }
     }
 
     @Override
@@ -245,6 +268,12 @@ public class MessageFragment extends Fragment implements LoaderManager
     private void loadTheFirstPage() {
         final Bundle bundle = new Bundle();
         bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, 1);
+        getLoaderManager().initLoader(0, bundle, MessageFragment.this);
+    }
+
+    private void reloadTheFirstPage() {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, 1);
         getLoaderManager().restartLoader(0, bundle, MessageFragment.this);
     }
 
@@ -252,8 +281,6 @@ public class MessageFragment extends Fragment implements LoaderManager
 
         @Override
         public void loadMoreData(final int page) {
-            mLoadMoreProgressBar.setVisibility(View.VISIBLE);
-
             final Bundle bundle = new Bundle();
             bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, page);
             getLoaderManager().restartLoader(0, bundle, MessageFragment.this);

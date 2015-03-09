@@ -58,7 +58,7 @@ public class AugmentedPost implements Post {
         mTextDataStructure = new TextDataStructure(formattedContent);
         mFormatlessText = formattedContent.toString();
 
-        mCreatedText = PostUtils.getCreatedText(mTextDataStructure);
+        mCreatedText = PostUtils.getCreatedText(mTextDataStructure, Integer.MAX_VALUE);
     }
 
     public String getFormatlessText() {

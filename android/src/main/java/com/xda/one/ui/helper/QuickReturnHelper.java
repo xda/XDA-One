@@ -1,25 +1,27 @@
 package com.xda.one.ui.helper;
 
-import com.xda.one.ui.widget.XDALinerLayoutManager;
+import com.xda.one.util.UIUtils;
 
-import android.app.ActionBar;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.XDALinerLayoutManager;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewConfiguration;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
+import android.view.animation.AccelerateInterpolator;
 
 public class QuickReturnHelper {
 
-    private static final int ANIMATION_DURATION_MILLIS = 400;
+    private static final int ANIMATION_DURATION_MILLIS = 300;
+
+    private static final int DEFAULT_ANIMATED_POSITION = 0;
 
     private final View mQuickReturnView;
 
-    private final ActionBar mActionBar;
+    private final Toolbar mToolbar;
 
-    private SparseArray<QuickReturnOnScroll> mScrollSparseArray = new
-            SparseArray<>();
+    private SparseArray<QuickReturnOnScroll> mScrollSparseArray = new SparseArray<>();
 
     private int mActionBarHeight;
 
@@ -31,14 +33,17 @@ public class QuickReturnHelper {
 
     private int mTouchSlop;
 
-    public QuickReturnHelper(final View quickReturnView, final ActionBar actionBar) {
+    public QuickReturnHelper(final Context context, final View quickReturnView,
+            final Toolbar toolbar) {
         mQuickReturnView = quickReturnView;
-        mActionBar = actionBar;
+        mToolbar = toolbar;
 
-        final ViewConfiguration vc = ViewConfiguration.get(actionBar.getThemedContext());
+        final ViewConfiguration vc = ViewConfiguration.get(toolbar.getContext());
         mTouchSlop = vc.getScaledTouchSlop();
 
-        mActionBarHeight = mActionBar.getHeight();
+        mActionBarHeight = UIUtils.calculateActionBarSize(context);
+        //////mActionBarHeight = toolbar.getHeight();
+
         if (quickReturnView == null) {
             return;
         }
@@ -47,13 +52,11 @@ public class QuickReturnHelper {
             @Override
             public void run() {
                 mQuickReturnHeight = mQuickReturnView.getHeight();
-                mActionBarHeight = mActionBar.getHeight();
             }
         });
     }
 
-    public static void postPaddingToQuickReturn(final ActionBar actionBar,
-            final View quickReturnView, final View content) {
+    public static void postPaddingToQuickReturn(final View quickReturnView, final View content) {
         quickReturnView.post(new Runnable() {
             @Override
             public void run() {
@@ -61,8 +64,10 @@ public class QuickReturnHelper {
                 final int paddingTop = content.getPaddingTop();
                 final int paddingRight = content.getPaddingRight();
                 final int paddingBottom = content.getPaddingBottom();
-                content.setPadding(paddingLeft, quickReturnView.getHeight() + actionBar.getHeight()
-                        + paddingTop, paddingRight, paddingBottom);
+                content.setPadding(paddingLeft,
+                        UIUtils.calculateActionBarSize(content.getContext()) +
+                                quickReturnView.getHeight() +
+                                paddingTop, paddingRight, paddingBottom);
             }
         });
     }
@@ -76,10 +81,6 @@ public class QuickReturnHelper {
     }
 
     public void showTopBar() {
-        if (mActionBar.isShowing()) {
-            return;
-        }
-        mActionBar.show();
         if (mHeaderVisible || mQuickReturnView == null) {
             return;
         }
@@ -88,10 +89,6 @@ public class QuickReturnHelper {
     }
 
     public void hideTopBar() {
-        if (!mActionBar.isShowing()) {
-            return;
-        }
-        mActionBar.hide();
         if (!mHeaderVisible || mQuickReturnView == null) {
             return;
         }
@@ -100,29 +97,36 @@ public class QuickReturnHelper {
     }
 
     private void animateToOffScreen() {
-        final TranslateAnimation anim = new TranslateAnimation(0, 0, 0,
-                -mQuickReturnHeight - mActionBarHeight);
-        startAnimation(anim);
+        animateView(mToolbar, -mActionBarHeight);
+        animateView(mQuickReturnView, -mQuickReturnHeight - mActionBarHeight);
+
         mQuickReturnView.setVisibility(View.INVISIBLE);
     }
 
     private void animateToExpanding() {
-        final TranslateAnimation anim = new TranslateAnimation(0, 0,
-                -mQuickReturnHeight - mActionBarHeight, 0);
-        startAnimation(anim);
+        animateView(mToolbar, DEFAULT_ANIMATED_POSITION);
+        animateView(mQuickReturnView, DEFAULT_ANIMATED_POSITION);
+
         mQuickReturnView.setVisibility(View.VISIBLE);
     }
 
-    private void startAnimation(final Animation anim) {
-        anim.setDuration(ANIMATION_DURATION_MILLIS);
-        mQuickReturnView.startAnimation(anim);
+    private void animateView(final View view, final int animationOffset) {
+        view.animate()
+                .setDuration(ANIMATION_DURATION_MILLIS)
+                .translationY(animationOffset)
+                .setInterpolator(new AccelerateInterpolator())
+                .start();
     }
 
     public void setPosition(int position) {
         mPosition = position;
     }
 
-    private class QuickReturnOnScroll implements RecyclerView.OnScrollListener {
+    public void showToolbar() {
+        animateView(mToolbar, DEFAULT_ANIMATED_POSITION);
+    }
+
+    private class QuickReturnOnScroll extends RecyclerView.OnScrollListener {
 
         private final int mFragmentPosition;
 
@@ -143,11 +147,7 @@ public class QuickReturnHelper {
         }
 
         @Override
-        public void onScrollStateChanged(int newState) {
-        }
-
-        @Override
-        public void onScrolled(final int dx, final int dy) {
+        public void onScrolled(final RecyclerView recyclerView, final int dx, final int dy) {
             if (mPosition != mFragmentPosition) {
                 return;
             }

@@ -1,7 +1,5 @@
 package com.xda.one.util;
 
-import com.google.android.gms.wallet.fragment.Dimension;
-
 import com.squareup.picasso.Picasso;
 import com.xda.one.R;
 import com.xda.one.parser.TextDataStructure;
@@ -157,7 +155,7 @@ public class SectionUtils {
         view.setText(charSequence);
         view.setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
         view.setTextColor(Color.DKGRAY);
-        view.setTextSize(Dimension.UNIT_SP, 13);
+        // view.setTextSize(Dimension.UNIT_SP, 13);
         view.setPadding(16, 16, 16, 16);
         return view;
     }
@@ -169,7 +167,7 @@ public class SectionUtils {
         view.setText(charSequence);
         view.setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
         view.setTextColor(Color.BLACK);
-        view.setTextSize(Dimension.UNIT_SP, 13);
+        // view.setTextSize(Dimension.UNIT_SP, 13);
         return view;
     }
 }

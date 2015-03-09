@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--<style name="OneTheme" parent="@android:style/Theme.Material.Light.DarkActionBar">
-        <item name="android:colorPrimary">@color/colorPrimary</item>
-        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:colorAccent">@color/colorAccent</item>
+    <style name="Theme.One" parent="Theme.One.Base">
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="OneThreadTextAppearanceSmall" parent="@android:style/TextAppearance.Small">
-        <item name="android:textSize">11sp</item>
+    <style name="Theme.One.NavDrawer" parent="Theme.One.Base">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
-
-    <style name="OneCardViewLight" parent="@style/CardView.Light">
-        <item name="cardBackgroundColor">@android:color/white</item>
-    </style>-->
 
 </resources>

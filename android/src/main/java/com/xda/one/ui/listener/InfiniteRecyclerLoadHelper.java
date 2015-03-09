@@ -2,8 +2,8 @@ package com.xda.one.ui.listener;
 
 import android.support.v7.widget.RecyclerView;
 
-public class InfiniteRecyclerLoadHelper implements RecyclerEndHelper.Callback,
-        RecyclerView.OnScrollListener {
+public class InfiniteRecyclerLoadHelper extends RecyclerView.OnScrollListener
+        implements RecyclerEndHelper.Callback {
 
     private final Callback mCallback;
 
@@ -19,7 +19,7 @@ public class InfiniteRecyclerLoadHelper implements RecyclerEndHelper.Callback,
     private boolean mLoading = false;
 
     public InfiniteRecyclerLoadHelper(final RecyclerView recyclerView, final Callback callback,
-            final int totalPages, RecyclerView.OnScrollListener scrollListener) {
+            final int totalPages, final RecyclerView.OnScrollListener scrollListener) {
         mRecyclerEndHelper = new RecyclerEndHelper(recyclerView, this);
         mCallback = callback;
         mTotalPages = totalPages;
@@ -31,9 +31,8 @@ public class InfiniteRecyclerLoadHelper implements RecyclerEndHelper.Callback,
     @Override
     public void onListEndReached() {
         if (mLoadedPage < mTotalPages && !mLoading) {
-            ++mLoadedPage;
             mLoading = true;
-            mCallback.loadMoreData(mLoadedPage);
+            mCallback.loadMoreData(++mLoadedPage);
         }
     }
 
@@ -44,20 +43,24 @@ public class InfiniteRecyclerLoadHelper implements RecyclerEndHelper.Callback,
         mLoading = false;
     }
 
-    @Override
-    public void onScrollStateChanged(int newState) {
-        if (mScrollListener != null) {
-            mScrollListener.onScrollStateChanged(newState);
-        }
-        mRecyclerEndHelper.onScrollStateChanged(newState);
+    public boolean hasMoreData() {
+        return mLoadedPage < mTotalPages;
     }
 
     @Override
-    public void onScrolled(int dx, int dy) {
+    public void onScrollStateChanged(final RecyclerView recyclerView, final int newState) {
         if (mScrollListener != null) {
-            mScrollListener.onScrolled(dx, dy);
+            mScrollListener.onScrollStateChanged(recyclerView, newState);
         }
-        mRecyclerEndHelper.onScrolled(dx, dy);
+        mRecyclerEndHelper.onScrollStateChanged(recyclerView, newState);
+    }
+
+    @Override
+    public void onScrolled(final RecyclerView recyclerView, final int dx, final int dy) {
+        if (mScrollListener != null) {
+            mScrollListener.onScrolled(recyclerView, dx, dy);
+        }
+        mRecyclerEndHelper.onScrolled(recyclerView, dx, dy);
     }
 
     public void updateRecyclerView(RecyclerView recyclerView) {

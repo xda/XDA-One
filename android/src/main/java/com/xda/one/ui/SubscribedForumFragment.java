@@ -68,7 +68,7 @@ public class SubscribedForumFragment extends Fragment
             @Override
             public void onClick(final View view) {
                 final int position = mRecyclerView.getChildPosition(view);
-                startThreadActivity(position);
+                switchToThreadFragment(position);
             }
         }, null, null, new ForumAdapter.ImageViewDeviceDelegate() {
             @Override
@@ -133,13 +133,13 @@ public class SubscribedForumFragment extends Fragment
         mForumClient.getBus().unregister(mEventHandler);
     }
 
-    private void startThreadActivity(final int position) {
+    private void switchToThreadFragment(final int position) {
         final Forum forum = mAdapter.getForum(position);
 
         final ArrayList<String> hierarchy = new ArrayList<>();
         hierarchy.add(forum.getTitle());
 
-        final Fragment fragment = ThreadFragment.createInstance(forum.getForumId(),
+        final Fragment fragment = ThreadFragment.createDefault(forum.getForumId(),
                 forum.getTitle(), /* parentForum */ null, hierarchy);
         mCallback.switchCurrentlyDisplayedFragment(fragment, true, forum.getTitle());
     }
@@ -153,7 +153,7 @@ public class SubscribedForumFragment extends Fragment
     public void onLoadFinished(final Loader<List<ResponseForum>> loader,
             final List<ResponseForum> list) {
         // Remove the list if the adapter is not empty
-        if (mAdapter.getItemCount() != 0) {
+        if (!mAdapter.isEmpty()) {
             mAdapter.clear();
         }
 

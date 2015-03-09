@@ -22,6 +22,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
@@ -50,27 +51,31 @@ public class MentionFragment extends QuoteMentionBaseFragment
     public void onViewCreated(final View view, @Nullable final Bundle state) {
         super.onViewCreated(view, state);
 
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                UIUtils.updateEmptyViewState(getView(), mRecyclerView, mAdapter.isEmpty());
+                reloadTheFirstPage();
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
 
-        if (mAdapter.getItemCount() > 0) {
+        if (!mAdapter.isEmpty()) {
             return;
         }
-
         if (state == null) {
             loadTheFirstPage();
         } else {
-            final List<AugmentedMention> quotes = state.getParcelableArrayList(SAVED_ADAPTER_STATE);
-            if (Utils.isCollectionEmpty(quotes)) {
+            final List<AugmentedMention> mentions = state
+                    .getParcelableArrayList(SAVED_ADAPTER_STATE);
+            if (Utils.isCollectionEmpty(mentions)) {
                 loadTheFirstPage();
             } else {
                 // This should give a non-zero integer
                 mTotalPages = state.getInt(PAGES_SAVED_STATE);
-                if (mLoadHelper == null) {
-                    mLoadHelper = createInfiniteScrollListener(mTotalPages);
-                } else {
-                    // TODO - Should never happen - investigate if it does
-                }
-                addDataToAdapter(quotes);
+                mInfiniteScrollListener = new InfiniteRecyclerLoadHelper(mRecyclerView,
+                        new InfiniteLoadCallback(), mTotalPages, null);
+                addDataToAdapter(mentions);
             }
         }
     }
@@ -79,7 +84,8 @@ public class MentionFragment extends QuoteMentionBaseFragment
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        mAdapter.onSaveInstanceState(outState);
+        final ArrayList<AugmentedMention> mentions = new ArrayList<>(mAdapter.getMentions());
+        outState.putParcelableArrayList(MentionFragment.SAVED_ADAPTER_STATE, mentions);
         outState.putInt(PAGES_SAVED_STATE, mTotalPages);
     }
 
@@ -87,6 +93,12 @@ public class MentionFragment extends QuoteMentionBaseFragment
         final Bundle bundle = new Bundle();
         bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, 1);
         getLoaderManager().initLoader(0, bundle, this);
+    }
+
+    private void reloadTheFirstPage() {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, 1);
+        getLoaderManager().restartLoader(0, bundle, this);
     }
 
     @Override
@@ -103,25 +115,31 @@ public class MentionFragment extends QuoteMentionBaseFragment
             return;
         }
 
-        mTotalPages = data.getTotalPages();
-
-        if (data.getCurrentPage() == 1) {
+        if (mInfiniteScrollListener != null && !mInfiniteScrollListener.isLoading()
+                && !mRefreshLayout.isRefreshing()) {
+            // This may happen when we are coming back from posts fragment to threads. For some
+            // reason loadFinished gets called. However, we may have new data about the thread -
+            // don't disturb this data.
+            UIUtils.updateEmptyViewState(getView(), mRecyclerView, false);
+            mRecyclerView.setOnScrollListener(mInfiniteScrollListener);
+            return;
+        } else if (data.getCurrentPage() == 1 || mInfiniteScrollListener == null) {
             mAdapter.clear();
-            mLoadHelper = createInfiniteScrollListener(data.getTotalPages());
-        }
 
-        mLoadMoreProgressBar.setVisibility(View.GONE);
-        mLoadHelper.onLoadFinished();
+            mTotalPages = data.getTotalPages();
+            mInfiniteScrollListener = new InfiniteRecyclerLoadHelper(mRecyclerView,
+                    new InfiniteLoadCallback(), mTotalPages, null);
+        }
+        mInfiniteScrollListener.onLoadFinished();
+
         addDataToAdapter(data.getMentions());
+        if (!mInfiniteScrollListener.hasMoreData()) {
+            mAdapter.removeFooter();
+        }
     }
 
     @Override
     public void onLoaderReset(Loader<AugmentedMentionContainer> loader) {
-    }
-
-    private InfiniteRecyclerLoadHelper createInfiniteScrollListener(final int totalPages) {
-        return new InfiniteRecyclerLoadHelper(mRecyclerView, new InfiniteLoadCallback(),
-                totalPages, null);
     }
 
     private void addDataToAdapter(final List<AugmentedMention> data) {
@@ -130,14 +148,13 @@ public class MentionFragment extends QuoteMentionBaseFragment
 
         // Let's actually add the items now
         mAdapter.addAll(data);
+        mRefreshLayout.setRefreshing(false);
     }
 
     private class InfiniteLoadCallback implements InfiniteRecyclerLoadHelper.Callback {
 
         @Override
         public void loadMoreData(final int page) {
-            mLoadMoreProgressBar.setVisibility(View.VISIBLE);
-
             final Bundle bundle = new Bundle();
             bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, page);
             getLoaderManager().restartLoader(0, bundle, MentionFragment.this);

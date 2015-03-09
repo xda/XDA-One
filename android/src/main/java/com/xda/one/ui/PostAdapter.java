@@ -214,7 +214,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public void clear() {
         final int count = mPosts.size();
         mPosts.clear();
-        notifyItemRangeRemoved(0, count - 1);
+        notifyItemRangeRemoved(0, count);
     }
 
     private void attachFiles(PostViewHolder holder, ResponseAttachment a) {

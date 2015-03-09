@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentActivity;
 
 public class XDAAuthenticatorActivity extends FragmentActivity {
 
+    private final String SCREEN_NAME = "XDAAuthenticatorActivity";
+
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

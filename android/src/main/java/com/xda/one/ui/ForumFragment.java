@@ -15,30 +15,32 @@ import com.xda.one.event.forum.ForumSubscriptionChangingFailedEvent;
 import com.xda.one.loader.ForumLoader;
 import com.xda.one.model.misc.ForumType;
 import com.xda.one.ui.helper.ActionModeHelper;
-import com.xda.one.ui.widget.XDALinerLayoutManager;
+import com.xda.one.ui.widget.HierarchySpinnerAdapter;
 import com.xda.one.ui.widget.XDARefreshLayout;
 import com.xda.one.util.AccountUtils;
 import com.xda.one.util.FragmentUtils;
 import com.xda.one.util.UIUtils;
 import com.xda.one.util.Utils;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.RecyclerView;
-import android.view.ActionMode;
+import android.support.v7.widget.ShareActionProvider;
+import android.support.v7.widget.XDALinerLayoutManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -57,6 +59,8 @@ public class ForumFragment extends Fragment
     private static final String FORUM = "forum";
 
     private final EventHandler mEventHandler = new EventHandler();
+
+    private HierarchySpinnerAdapter mSpinnerAdapter;
 
     private List<String> mHierarchy;
 
@@ -109,21 +113,6 @@ public class ForumFragment extends Fragment
 
         mClient = RetrofitForumClient.getClient(getActivity());
 
-        mModeHelper = new ActionModeHelper(getActivity(),
-                new ForumFragmentActionMode(),
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(final View view) {
-                        final int position = mRecyclerView.getChildPosition(view);
-                        if (position == RecyclerView.NO_POSITION) {
-                            return;
-                        }
-                        final Forum responseForum = mAdapter.getForum(position);
-                        onListItemClicked(responseForum);
-                    }
-                },
-                ActionModeHelper.SelectionMode.SINGLE);
-
         mForumType = (ForumType) getArguments().getSerializable(FORUM_TYPE);
         if (mForumType == ForumType.CHILD) {
             mForum = getArguments().getParcelable(FORUM);
@@ -134,6 +123,26 @@ public class ForumFragment extends Fragment
             mForumTitle = getString(mForumType.getStringTitleId());
             mHierarchy = Collections.emptyList();
         }
+
+        mModeHelper = new ActionModeHelper(getActivity(),
+                new ForumFragmentActionMode(),
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(final View view) {
+                        final int position = mRecyclerView.getChildPosition(view);
+                        if (position == RecyclerView.NO_POSITION) {
+                            return;
+                        }
+
+                        final Forum responseForum = mAdapter.getForum(position);
+                        onListItemClicked(responseForum);
+
+                    }
+                },
+                ActionModeHelper.SelectionMode.SINGLE);
+
+        mSpinnerAdapter = new HierarchySpinnerAdapter(getActivity(),
+                LayoutInflater.from(getActivity()), mHierarchy, getFragmentManager());
 
         mAdapter = new ForumAdapter<>(getActivity(), mModeHelper, mModeHelper, mModeHelper,
                 new ForumAdapter.ImageViewDeviceDelegate() {
@@ -214,10 +223,14 @@ public class ForumFragment extends Fragment
 
         mModeHelper.setRecyclerView(mRecyclerView);
 
-        final ActionBar bar = getActivity().getActionBar();
-        bar.show();
-        bar.setTitle(mForumTitle);
-        bar.setSubtitle(mParentForumTitle);
+        final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
+        actionBar.setTitle(mForumTitle);
+        actionBar.setSubtitle(mParentForumTitle);
+        if (mForumType == ForumType.CHILD) {
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+            actionBar.setListNavigationCallbacks(mSpinnerAdapter, mSpinnerAdapter);
+            actionBar.setSelectedNavigationItem(mSpinnerAdapter.getCount() - 1);
+        }
 
         if (mAdapter.getItemCount() == 0) {
             getLoaderManager().initLoader(0, null, this);
@@ -283,13 +296,15 @@ public class ForumFragment extends Fragment
 
         @Override
         public boolean onCreateActionMode(final ActionMode actionMode, final Menu menu) {
-            actionMode.getMenuInflater().inflate(R.menu.forum_fragment_cab, menu);
+            final BaseActivity baseActivity = UIUtils.getBaseActivity(getActivity());
+            baseActivity.getMenuInflater().inflate(R.menu.thread_fragment_cab, menu);
 
             // Locate MenuItem with ShareActionProvider
             mShareMenuItem = menu.findItem(R.id.forum_fragment_cab_share);
 
             // Fetch and store ShareActionProvider
-            mShareActionProvider = (ShareActionProvider) mShareMenuItem.getActionProvider();
+            mShareActionProvider = (ShareActionProvider) MenuItemCompat
+                    .getActionProvider(mShareMenuItem);
 
             // Get the subscribed menu item
             mSubscribeItem = menu.findItem(R.id.forum_fragment_cab_subscribe);

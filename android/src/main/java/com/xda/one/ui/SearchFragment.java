@@ -1,14 +1,15 @@
 package com.xda.one.ui;
 
 import com.xda.one.R;
+import com.xda.one.util.UIUtils;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.SearchView;
@@ -53,14 +55,14 @@ public class SearchFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
 
-        final ActionBar actionBar = getActivity().getActionBar();
-        actionBar.show();
+        final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
         actionBar.setTitle(R.string.search);
         actionBar.setSubtitle(null);
 
-        mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.getSettings().setLoadWithOverviewMode(true);
-        mWebView.getSettings().setUseWideViewPort(true);
+        final WebSettings settings = mWebView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setUseWideViewPort(true);
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(final WebView view, final String url) {
@@ -100,7 +102,7 @@ public class SearchFragment extends Fragment {
 
         mSearchMenuItem = menu.findItem(R.id.search_ab_search);
 
-        final SearchView searchView = (SearchView) mSearchMenuItem.getActionView();
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(mSearchMenuItem);
         final SearchQueryListener listener = new SearchQueryListener();
         searchView.setOnQueryTextListener(listener);
 
@@ -115,7 +117,6 @@ public class SearchFragment extends Fragment {
 
     @Override
     public void onPrepareOptionsMenu(final Menu menu) {
-
     }
 
     @Override

@@ -4,12 +4,8 @@ import com.xda.one.R;
 import com.xda.one.api.model.interfaces.Quote;
 import com.xda.one.api.model.interfaces.container.QuoteContainer;
 import com.xda.one.model.augmented.AugmentedQuote;
-import com.xda.one.parser.ContentParser;
 
 import android.content.Context;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 
 import java.util.ArrayList;
 import java.util.List;

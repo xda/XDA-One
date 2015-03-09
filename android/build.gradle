@@ -1,22 +1,15 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            url 'http://download.crashlytics.com/maven'
-        }
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.13.0'
-        classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
-    }
-}
-
 apply plugin: 'com.android.application'
 apply plugin: 'crashlytics'
+// apply plugin : 'newrelic'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion '20.0.0'
+    compileSdkVersion 21
+    buildToolsVersion '21.1.2'
+
+    lintOptions {
+        abortOnError false
+        disable 'MissingTranslation', 'ExtraTranslation'
+    }
 
     packagingOptions {
         exclude 'META-INF/LICENSE'
@@ -32,7 +25,7 @@ android {
     defaultConfig {
         applicationId 'com.xda.one'
         minSdkVersion 14
-        targetSdkVersion 19
+        targetSdkVersion 21
     }
 
     buildTypes {
@@ -51,43 +44,35 @@ android {
 
     productFlavors {
         simple {
-            applicationId = android.defaultConfig.applicationId
-            versionName = android.defaultConfig.versionName
             ext.enableCrashlytics = false
         }
         full {
-            applicationId = android.defaultConfig.applicationId
-            versionName = android.defaultConfig.versionName
             ext.enableCrashlytics = true
         }
     }
-}
 
-repositories {
-    mavenCentral()
-    maven {
-        url "https://oss.sonatype.org/content/repositories/snapshots/"
-    }
-    maven {
-        url 'http://download.crashlytics.com/maven'
-    }
+    defaultPublishConfig "simpleDebug"
+
 }
 
 dependencies {
-    compile 'com.google.android.gms:play-services:5.0.89'
+    compile 'com.google.android.gms:play-services-plus:6.5.+'
+    compile 'com.google.android.gms:play-services-identity:6.5.+'
 
-    compile 'com.crashlytics.android:crashlytics:1.+'
+    // compile 'com.crashlytics.android:crashlytics:1.+'
 
-    compile 'com.android.support:support-v4:19.1.0'
-    compile 'com.android.support:appcompat-v7:19.1.0'
+    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:cardview-v7:21.0.3'
+    compile 'com.android.support:recyclerview-v7:21.0.3'
 
-    compile 'com.squareup.retrofit:retrofit:1.6.1'
-    compile 'com.squareup.retrofit:converter-jackson:1.6.1'
-    compile 'com.squareup.picasso:picasso:2.3.3'
+    compile 'com.squareup.retrofit:retrofit:1.8.0'
+    compile 'com.squareup.retrofit:converter-jackson:1.8.0'
+    compile 'com.squareup.picasso:picasso:2.4.0'
 
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.4.2'
-    compile 'com.fasterxml.jackson.core:jackson-core:2.4.2'
-    compile 'com.fasterxml.jackson.core:jackson-annotations:2.4.2'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.5.0-rc1'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.5.0-rc1'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.5.0-rc1'
 
     compile 'com.squareup:otto:1.3.5'
 
@@ -95,15 +80,12 @@ dependencies {
 
     compile 'com.makeramen:roundedimageview:1.3.0'
     compile 'me.grantland:autofittextview:0.2.0'
-    compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.2'
+    compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
 
     compile 'org.apache.commons:commons-lang3:3.3.2'
     compile 'commons-io:commons-io:2.4'
 
-    compile project(':libraries:cardview-v7')
-    compile project(':libraries:recyclerview-v7')
-    // compile 'com.android.support:cardview-v7:+'
-    // compile 'com.android.support:recyclerview-v7:+'
+    // compile 'com.newrelic.agent.android:android-agent:4.+'
 
     compile fileTree(dir: 'libs', include: '*.jar')
 }

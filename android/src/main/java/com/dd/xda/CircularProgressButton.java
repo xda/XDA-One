@@ -54,7 +54,7 @@ public class CircularProgressButton extends ImageButton {
     }
 
     private void init(Context context, AttributeSet attributeSet) {
-        mStrokeWidth = (int) getContext().getResources().getDimension(R.dimen.stroke_width);
+        mStrokeWidth = (int) getContext().getResources().getDimension(R.dimen.cpb_stroke_width);
 
         initAttributes(context, attributeSet);
 
@@ -72,7 +72,7 @@ public class CircularProgressButton extends ImageButton {
             mPaddingProgress = attr.getDimensionPixelSize(R.styleable
                     .CircularProgressButton_cpb_paddingProgress, 0);
 
-            int blue = getColor(R.color.blue);
+            int blue = getColor(R.color.cpb_blue);
             mColorIndicator = attr.getColor(R.styleable
                     .CircularProgressButton_cpb_colorIndicator, blue);
         } finally {

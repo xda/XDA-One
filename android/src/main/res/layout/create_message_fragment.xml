@@ -78,7 +78,7 @@
         android:layout_toLeftOf="@+id/create_message_fragment_send"
         android:background="?android:attr/selectableItemBackground"
         android:padding="8dp"
-        android:src="@drawable/ic_smilie" />
+        android:src="@drawable/ic_insert_emoticon" />
 </RelativeLayout>
 
 

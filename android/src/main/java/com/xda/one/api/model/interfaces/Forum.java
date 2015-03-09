@@ -2,8 +2,6 @@ package com.xda.one.api.model.interfaces;
 
 import android.os.Parcelable;
 
-import java.util.List;
-
 public interface Forum extends Parcelable {
 
     public String getTitle();

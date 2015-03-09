@@ -16,7 +16,6 @@ import com.xda.one.model.augmented.AugmentedPostContainer;
 import com.xda.one.ui.helper.ActionModeHelper;
 import com.xda.one.ui.helper.CancellableCallbackHelper;
 import com.xda.one.ui.listener.AvatarClickListener;
-import com.xda.one.ui.widget.XDALinerLayoutManager;
 import com.xda.one.util.UIUtils;
 import com.xda.one.util.Utils;
 
@@ -30,14 +29,16 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.RecyclerView;
-import android.view.ActionMode;
+import android.support.v7.widget.XDALinerLayoutManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -230,8 +231,8 @@ public class PostFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
 
         mRecyclerView = (RecyclerView) view.findViewById(android.R.id.list);
-        mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new XDALinerLayoutManager(getActivity()));
+        mRecyclerView.setAdapter(mAdapter);
         ViewCompat.setOverScrollMode(mRecyclerView, ViewCompat.OVER_SCROLL_NEVER);
 
         mEmptyView = view.findViewById(android.R.id.empty);
@@ -396,7 +397,7 @@ public class PostFragment extends Fragment
             final DownloadManager.Request request = new DownloadManager
                     .Request(Uri.parse(a.getAttachmentUrl()))
                     .setAllowedOverRoaming(false)
-                    .setDestinationInExternalPublicDir("XDA-One-Downloads", a.getFileName());
+                    .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS + "/XDA One/", a.getFileName());
             manager.enqueue(request);
         }
     }
@@ -410,12 +411,7 @@ public class PostFragment extends Fragment
         }
 
         @Override
-        public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
-            return true;
-        }
-
-        @Override
-        public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+        public boolean onActionItemClicked(final ActionMode actionMode, final MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.post_fragment_cab_quote:
                     final AugmentedPost[] posts = mAdapter

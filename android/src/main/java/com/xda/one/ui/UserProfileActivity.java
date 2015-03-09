@@ -2,7 +2,6 @@ package com.xda.one.ui;
 
 import com.xda.one.R;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +11,8 @@ import android.support.v4.app.FragmentTransaction;
 public class UserProfileActivity extends BaseActivity {
 
     public static final String USER_ID_ARGUMENT = "user_id";
+
+    private final String SCREEN_NAME = "ViewMessageActivity";
 
     public static Intent createIntent(final Context context, final String userId) {
         final Intent intent = new Intent(context, UserProfileActivity.class);
@@ -32,8 +33,8 @@ public class UserProfileActivity extends BaseActivity {
         }
 
         // Remove the title and subtitle if any
-        final ActionBar actionBar = getActionBar();
+        /*final ActionBar actionBar = UIUtils.getSupportActionBar(this);
         actionBar.setTitle(null);
-        actionBar.setSubtitle(null);
+        actionBar.setSubtitle(null);*/
     }
 }

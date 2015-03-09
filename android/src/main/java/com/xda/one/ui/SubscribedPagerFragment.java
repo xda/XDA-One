@@ -2,14 +2,15 @@ package com.xda.one.ui;
 
 import com.xda.one.R;
 import com.xda.one.ui.widget.TabLayout;
+import com.xda.one.util.UIUtils;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class SubscribedPagerFragment extends Fragment implements SubscribedForum
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final ActionBar bar = getActivity().getActionBar();
+        final ActionBar bar = UIUtils.getSupportActionBar(getActivity());
         bar.show();
         bar.setTitle(R.string.subscribed);
         bar.setSubtitle(null);
@@ -72,13 +73,13 @@ public class SubscribedPagerFragment extends Fragment implements SubscribedForum
 
         private SubscribedForumFragment mSubscribedForumFragment;
 
-        private SubscribedThreadFragment mSubscribedThreadFragment;
+        private ThreadFragment mSubscribedThreadFragment;
 
         public SubscribeFragmentAdapter(final FragmentManager fm) {
             super(fm);
 
             mSubscribedForumFragment = new SubscribedForumFragment();
-            mSubscribedThreadFragment = new SubscribedThreadFragment();
+            mSubscribedThreadFragment = ThreadFragment.createSubscribed();
         }
 
         @Override

@@ -123,8 +123,9 @@ public class UrlParseHelper {
                 success.run(instance);
             } else {
                 final String parentTitle = parent == null ? null : parent.getTitle();
-                final ThreadFragment instance = ThreadFragment.createInstance(forum.getForumId(),
-                        forum.getTitle(), parentTitle, new ArrayList<String>());
+                final ThreadFragment instance = ThreadFragment
+                        .createDefault(forum.getForumId(),
+                                forum.getTitle(), parentTitle, new ArrayList<String>());
                 success.run(instance);
             }
         }

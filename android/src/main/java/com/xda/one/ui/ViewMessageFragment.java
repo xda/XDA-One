@@ -137,7 +137,7 @@ public class ViewMessageFragment extends Fragment {
         final FloatingActionButton button = (FloatingActionButton) view
                 .findViewById(R.id.view_message_fragment_floating_reply_button);
         button.setOnClickListener(new CreateReplyListener());
-        if (CompatUtils.hasL()) {
+        if (CompatUtils.hasLollipop()) {
             final Drawable drawable = getResources().getDrawable(R.drawable.fab_background);
             button.setBackground(drawable);
         } else {

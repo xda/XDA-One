@@ -5,11 +5,10 @@ import com.xda.one.api.model.response.ResponseNews;
 import com.xda.one.api.model.response.container.ResponseNewsContainer;
 import com.xda.one.loader.NewsLoader;
 import com.xda.one.ui.listener.InfiniteRecyclerLoadHelper;
-import com.xda.one.ui.widget.XDALinerLayoutManager;
+import com.xda.one.ui.widget.XDARefreshLayout;
 import com.xda.one.util.UIUtils;
 import com.xda.one.util.Utils;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,11 +16,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.XDALinerLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,16 +36,19 @@ public class NewsFragment extends Fragment
 
     private static final String PAGES_SAVED_STATE = "pages_saved_state";
 
-    // Infinite scrolling
-    private InfiniteRecyclerLoadHelper mInfiniteScrollListener;
-
-    private NewsAdapter mAdapter;
+    // Views
+    private XDARefreshLayout mRefreshLayout;
 
     private RecyclerView mRecyclerView;
 
-    private int mTotalPages;
+    // View helpers
+    private InfiniteRecyclerLoadHelper mInfiniteScrollListener;
 
-    private ProgressBar mLoadMoreProgressBar;
+    // Adapters
+    private NewsAdapter mAdapter;
+
+    // Data
+    private int mTotalPages;
 
     public static NewsFragment createInstance() {
         return new NewsFragment();
@@ -76,12 +80,19 @@ public class NewsFragment extends Fragment
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mLoadMoreProgressBar = (ProgressBar) view.findViewById(R.id.load_more_progress_bar);
+        final ActionBar actionBar = UIUtils.getSupportActionBar(getActivity());
+        actionBar.setTitle(R.string.xda_news);
+        actionBar.setSubtitle(null);
 
-        final ActionBar bar = getActivity().getActionBar();
-        bar.show();
-        bar.setTitle(R.string.xda_news);
-        bar.setSubtitle(null);
+        mRefreshLayout = (XDARefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        mRefreshLayout.setXDAColourScheme();
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                UIUtils.updateEmptyViewState(getView(), mRecyclerView, mAdapter.isEmpty());
+                reloadTheFirstPage();
+            }
+        });
 
         mRecyclerView = (RecyclerView) view.findViewById(android.R.id.list);
         mRecyclerView.setAdapter(mAdapter);
@@ -93,29 +104,27 @@ public class NewsFragment extends Fragment
             mInfiniteScrollListener.updateRecyclerView(mRecyclerView);
         }
 
+        // Start loading data if necessary
+        if (!mAdapter.isEmpty()) {
+            return;
+        }
         if (savedInstanceState == null) {
             loadTheFirstPage();
         } else {
-            final List<ResponseNews> list = savedInstanceState
-                    .getParcelableArrayList(NEWS_SAVED_STATE);
-            if (Utils.isCollectionEmpty(list)) {
+            final List<ResponseNews> news = savedInstanceState.getParcelableArrayList(
+                    NEWS_SAVED_STATE);
+            if (Utils.isCollectionEmpty(news)) {
+                // news being empty implies a save state call came through when we were loading
+                // our data for the first time
                 loadTheFirstPage();
             } else {
                 // This should give a non-zero integer
                 mTotalPages = savedInstanceState.getInt(PAGES_SAVED_STATE);
-                if (mInfiniteScrollListener == null) {
-                    mInfiniteScrollListener = createInfiniteScrollListener(mTotalPages);
-                } else {
-                    // TODO - Should never happen - investigate if it does
-                }
-                addDataToAdapter(list);
+                mInfiniteScrollListener = new InfiniteRecyclerLoadHelper(mRecyclerView,
+                        new InfiniteLoadCallback(), mTotalPages, null);
+                addDataToAdapter(news);
             }
         }
-    }
-
-    private InfiniteRecyclerLoadHelper createInfiniteScrollListener(final int totalPages) {
-        return new InfiniteRecyclerLoadHelper(mRecyclerView,
-                new InfiniteLoadCallback(), totalPages, null);
     }
 
     @Override
@@ -130,6 +139,12 @@ public class NewsFragment extends Fragment
         final Bundle bundle = new Bundle();
         bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, 1);
         getLoaderManager().initLoader(0, bundle, this);
+    }
+
+    private void reloadTheFirstPage() {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, 1);
+        getLoaderManager().restartLoader(0, bundle, this);
     }
 
     @Override
@@ -147,15 +162,27 @@ public class NewsFragment extends Fragment
             return;
         }
 
-        mTotalPages = data.getTotalPages();
-
-        if (data.getCurrentPage() == 1) {
+        if (mInfiniteScrollListener != null && !mInfiniteScrollListener.isLoading()
+                && !mRefreshLayout.isRefreshing()) {
+            // This may happen when we are coming back from posts fragment to threads. For some
+            // reason loadFinished gets called. However, we may have new data about the thread -
+            // don't disturb this data.
+            UIUtils.updateEmptyViewState(getView(), mRecyclerView, false);
+            mRecyclerView.setOnScrollListener(mInfiniteScrollListener);
+            return;
+        } else if (data.getCurrentPage() == 1 || mInfiniteScrollListener == null) {
             mAdapter.clear();
-            mInfiniteScrollListener = createInfiniteScrollListener(data.getTotalPages());
+
+            mTotalPages = data.getTotalPages();
+            mInfiniteScrollListener = new InfiniteRecyclerLoadHelper(mRecyclerView,
+                    new InfiniteLoadCallback(), mTotalPages, null);
         }
-        mLoadMoreProgressBar.setVisibility(View.GONE);
         mInfiniteScrollListener.onLoadFinished();
+
         addDataToAdapter(data.getNewsItems());
+        if (!mInfiniteScrollListener.hasMoreData()) {
+            mAdapter.removeFooter();
+        }
     }
 
     private void addDataToAdapter(final List<ResponseNews> data) {
@@ -163,6 +190,7 @@ public class NewsFragment extends Fragment
 
         // Let's actually add the items now
         mAdapter.addAll(data);
+        mRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -173,8 +201,6 @@ public class NewsFragment extends Fragment
 
         @Override
         public void loadMoreData(final int page) {
-            mLoadMoreProgressBar.setVisibility(View.VISIBLE);
-
             final Bundle bundle = new Bundle();
             bundle.putInt(CURRENT_PAGE_LOADER_ARGUMENT, page);
             getLoaderManager().restartLoader(0, bundle, NewsFragment.this);

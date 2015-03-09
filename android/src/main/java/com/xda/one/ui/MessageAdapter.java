@@ -20,6 +20,12 @@ import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
 
+    private static final int NORMAL_VIEW_TYPE = 1;
+
+    private static final int FOOTER_VIEW_TYPE = 2;
+
+    private int mFooterItemCount = 0;
+
     private final Context mContext;
 
     private final LayoutInflater mLayoutInflater;
@@ -28,26 +34,43 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     private final View.OnClickListener mViewClickListener;
 
-    private final View.OnClickListener mAvatarClickListner;
+    private final View.OnClickListener mAvatarClickListener;
 
     public MessageAdapter(final Context context, final View.OnClickListener viewClickListener,
-            final View.OnClickListener avatarClickListner) {
+            final View.OnClickListener avatarClickListener) {
         mContext = context;
         mViewClickListener = viewClickListener;
-        mAvatarClickListner = avatarClickListner;
+        mAvatarClickListener = avatarClickListener;
 
         mMessages = new ArrayList<>();
         mLayoutInflater = LayoutInflater.from(context);
     }
 
     @Override
+    public int getItemViewType(final int position) {
+        if (position == mMessages.size()) {
+            return FOOTER_VIEW_TYPE;
+        }
+        return NORMAL_VIEW_TYPE;
+    }
+
+    @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int i) {
+        if (i == FOOTER_VIEW_TYPE) {
+            final View view = mLayoutInflater
+                    .inflate(R.layout.load_more_progress_bar_only, parent, false);
+            return new FooterViewType(view);
+        }
         final View view = mLayoutInflater.inflate(R.layout.message_list_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        if (getItemViewType(position) == FOOTER_VIEW_TYPE) {
+            return;
+        }
+
         final Message message = getMessage(position);
 
         // Set the view click listener
@@ -58,7 +81,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                 .placeholder(R.drawable.account_circle)
                 .error(R.drawable.account_circle)
                 .into(holder.avatarView);
-        holder.avatarView.setOnClickListener(mAvatarClickListner);
+        holder.avatarView.setOnClickListener(mAvatarClickListener);
         holder.avatarView.setTag(message.getFromUserId());
 
         holder.userName.setText(message.getFromUserName());
@@ -76,13 +99,17 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return mMessages.size();
+        return mMessages.size() + mFooterItemCount;
     }
 
     public void clear() {
+        if (isEmpty()) {
+            return;
+        }
+
         final int count = mMessages.size();
         mMessages.clear();
-        notifyItemRangeRemoved(0, count - 1);
+        notifyItemRangeRemoved(0, count + mFooterItemCount--);
     }
 
     public void addAll(final List<? extends Message> messages) {
@@ -92,7 +119,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         final int count = mMessages.size();
         mMessages.addAll(messages);
-        notifyItemRangeInserted(count, messages.size());
+        if (count == 0) {
+            // Add the footer in as well
+            notifyItemRangeInserted(count, messages.size() + ++mFooterItemCount);
+        } else {
+            notifyItemRangeInserted(count, messages.size());
+        }
     }
 
     public Message getMessage(int position) {
@@ -121,6 +153,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         return Collections.unmodifiableList(mMessages);
     }
 
+    public boolean isEmpty() {
+        return mMessages.isEmpty();
+    }
+
+    public void removeFooter() {
+        mFooterItemCount = 0;
+        notifyItemRemoved(mMessages.size());
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         public final TextView userName;
@@ -141,6 +182,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             titleView = (TextView) itemView.findViewById(R.id.messsage_list_item_title);
             messageView = (TextView) itemView.findViewById(R.id.messsage_list_item_content);
             avatarView = (ImageView) itemView.findViewById(R.id.messsage_list_item_avatar);
+        }
+    }
+
+    private static class FooterViewType extends ViewHolder {
+
+        public FooterViewType(final View itemView) {
+            super(itemView);
         }
     }
 }
