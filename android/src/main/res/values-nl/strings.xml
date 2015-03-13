@@ -2,144 +2,143 @@
 <resources>
     <string name="app_name">XDA One</string>
 
-    <string name="menu_send_message">Send Author a Message</string>
-    <string name="menu_copy_content">Copy Post Content</string>
-    <string name="menu_author_profile">View Author\'s Profile</string>
-    <string name="menu_open_browser">Open in Browser</string>
+    <string name="menu_send_message">Stuur een privébericht naar auteur</string>
+    <string name="menu_copy_content">Kopieer berichtinhoud</string>
+    <string name="menu_author_profile">Bekijk auteur\'s profiel</string>
+    <string name="menu_open_browser">Open in browser</string>
 
-    <string name="menu_add_attachment">Add Attachment</string>
+    <string name="menu_add_attachment">Bijlage toevoegen</string>
 
-    <string name="menu_profile_change_password">Change Password</string>
-    <string name="menu_profile_update_email">Update Email</string>
+    <string name="menu_profile_change_password">Verander wachtwoord</string>
+    <string name="menu_profile_update_email">E-mailadres wijzigen</string>
 
-    <string name="no_internet_connection">Please connect to Internet</string>
+    <string name="no_internet_connection">Maak verbinding met internet</string>
 
-    <string name="sign_in_title">Sign In/Register</string>
+    <string name="sign_in_title">Inloggen/Registreren</string>
 
     <string name="forums">Forums</string>
-    <string name="threads">Threads</string>
+    <string name="threads">Onderwerpen</string>
 
     <string name="inbox_title">Inbox</string>
-    <string name="sent_items_title">Sent Items</string>
+    <string name="sent_items_title">Verzonden items</string>
 
     <!-- forum menu -->
-    <string name="forum_home_title">XDA Home</string>
-    <string name="subscribed">Subscribed</string>
-    <string name="participated">Participated</string>
-    <string name="notifications">Notifications</string>
-    <string name="forum_newest_title">New</string>
+    <string name="forum_home_title">XDA startpagina</string>
+    <string name="subscribed">Geabonneerd</string>
+    <string name="participated">Deelgenomen</string>
+    <string name="notifications">Meldingen</string>
+    <string name="forum_newest_title">Nieuw</string>
     <string name="forum_top_title">Top</string>
-    <string name="forum_all_title">All</string>
+    <string name="forum_all_title">Alles</string>
 
-    <string name="drawer_open">Open</string>
-    <string name="drawer_close">Close</string>
+    <string name="drawer_open">Openen</string>
+    <string name="drawer_close">Sluiten</string>
 
-    <string name="d_items_checked">%d items checked</string>
-    <string name="posts_selected_number">%d posts selected</string>
+    <string name="d_items_checked">%d items geselecteerd</string>
+    <string name="posts_selected_number">%d berichten geselecteerd</string>
 
     <!-- Small phrases -->
-    <string name="send">Send</string>
-    <string name="message_content">Message Content</string>
-    <string name="title">Title</string>
-    <string name="loading">Loading…</string>
-    <string name="username">Username</string>
-    <string name="password">Password</string>
-    <string name="sign_in">Sign In</string>
-    <string name="or">or</string>
-    <string name="settings">Settings</string>
+    <string name="send">Verstuur</string>
+    <string name="message_content">Berichtinhoud</string>
+    <string name="title">Titel</string>
+    <string name="loading">Laden…</string>
+    <string name="username">Gebruikersnaam</string>
+    <string name="password">Wachtwoord</string>
+    <string name="sign_in">Inloggen</string>
+    <string name="or">of</string>
+    <string name="settings">Instellingen</string>
     <string name="help">Help</string>
-    <string name="about">About</string>
-    <string name="profile">Profile</string>
-    <string name="share">Share</string>
-    <string name="subscribe">Subscribe</string>
-    <string name="unsubscribe">Unsubscribe</string>
-    <string name="thanks">Thanks</string>
-    <string name="news">News</string>
-    <string name="search">Search</string>
-    <string name="user">User</string>
-    <string name="private_messages">Private Messages</string>
-    <string name="more_xda">More XDA</string>
-    <string name="replying_to">Replying to: %s</string>
-    <string name="other">Other</string>
-    <string name="last_post">Last Post</string>
-    <string name="thread_title">Thread Title</string>
+    <string name="about">Over</string>
+    <string name="profile">Profiel</string>
+    <string name="share">Delen</string>
+    <string name="subscribe">Abonneren</string>
+    <string name="unsubscribe">Uitschrijven</string>
+    <string name="thanks">Bedankt</string>
+    <string name="news">Nieuws</string>
+    <string name="search">Zoeken</string>
+    <string name="user">Gebruiker</string>
+    <string name="private_messages">Privéberichten</string>
+    <string name="more_xda">Meer XDA</string>
+    <string name="replying_to">Als antwoord op: %s</string>
+    <string name="other">Overig</string>
+    <string name="last_post">Laatste bericht</string>
+    <string name="thread_title">Onderwerptitel</string>
     <string name="views">Views</string>
-    <string name="reply_count">Reply Count</string>
-    <string name="date">Date</string>
+    <string name="reply_count">Aantal reacties</string>
+    <string name="date">Datum</string>
     <string name="avatar">Avatar</string>
-    <string name="remove_thanks">Remove Thanks</string>
-    <string name="count">Count</string>
-    <string name="email">Email</string>
-    <string name="mark_read">Mark Read</string>
-    <string name="mark_unread">Mark Unread</string>
-    <string name="delete">Delete</string>
-    <string name="forum_title">Forum Title</string>
-    <string name="creating_new_post">Creating…</string>
-    <string name="quote">Quote</string>
+    <string name="remove_thanks">Verwijder bedankje</string>
+    <string name="count">Aantal</string>
+    <string name="email">E-mail</string>
+    <string name="mark_read">Markeer als gelezen</string>
+    <string name="mark_unread">Markeer als ongelezen</string>
+    <string name="delete">Verwijder</string>
+    <string name="forum_title">Forumtitel</string>
+    <string name="creating_new_post">Aanmaken…</string>
+    <string name="quote">Citeer</string>
 
-    <string name="find_your_device_title">Find Your Device</string>
+    <string name="find_your_device_title">Zoek uw apparaat</string>
 
-    <string name="post_creation_failed">Post creation failed</string>
+    <string name="post_creation_failed">Bericht plaatsen mislukt</string>
 
-    <string name="message_delete_successful">Successfully deleted message</string>
+    <string name="message_delete_successful">Bericht verwijderen gelukt</string>
 
-    <string name="forum_subscription_subscribed">Successfully subscribed to forum</string>
-    <string name="forum_subscription_unsubscribed">Successfully unsubscribed from forum</string>
-    <string name="forum_subscription_toggle_failed">Toggling of forum subscription failed</string>
+    <string name="forum_subscription_subscribed">Succesvol geabonneerd op forum</string>
+    <string name="forum_subscription_unsubscribed">Succesvol uitgeschreven van forum</string>
+    <string name="forum_subscription_toggle_failed">Veranderen abonneerstatus van forum mislukt</string>
 
-    <string name="thread_subscription_subscribed">Successfully subscribed to thread</string>
-    <string name="thread_subscription_unsubscribed">Successfully unsubscribed from thread</string>
-    <string name="thread_subscription_toggle_failed">Failed to change subscription status
-        of thread</string>
+    <string name="thread_subscription_subscribed">Succesvol geabonneerd op onderwerp</string>
+    <string name="thread_subscription_unsubscribed">Succesvol uitgeschreven op onderwerp</string>
+    <string name="thread_subscription_toggle_failed">Veranderen abonneerstatus van onderwerp mislukt</string>
 
     <!-- User Profile -->
-    <string name="user_profile_title">Title:\n%1$s</string>
-    <string name="user_profile_signature">Signature:\n%1$s</string>
-    <string name="user_profile_devices">Devices:\n%1$s</string>
-    <string name="user_profile_email">Email:\n%1$s</string>
+    <string name="user_profile_title">Titel:\n%1$s</string>
+    <string name="user_profile_signature">Handtekening:\n%1$s</string>
+    <string name="user_profile_devices">Apparaten:\n%1$s</string>
+    <string name="user_profile_email">E-mail:\n%1$s</string>
 
     <!-- Auth -->
     <string name="dont_have_xda_account">
-        <![CDATA[Don&apos;t have an xda-developers account yet?]]></string>
-    <string name="sign_in_google_plus">g+ Sign In with Google</string>
-    <string name="register_email">Register using Email</string>
-    <string name="change_password">Change Password</string>
-    <string name="change_email_address">Change Email Address</string>
-    <string name="no_items_empty_view">No items to show</string>
+        <![CDATA[Nog geen xda-developers account?]]></string>
+    <string name="sign_in_google_plus">g+ Aanmelden met Google</string>
+    <string name="register_email">Registreren met e-mail</string>
+    <string name="change_password">Verander wachtwoord</string>
+    <string name="change_email_address">E-mailadres wijzigen</string>
+    <string name="no_items_empty_view">Geen items om te tonen</string>
 
-    <string name="message_reply_success">Replying to the message was successful</string>
-    <string name="message_reply_failed">Replying to the message failed</string>
+    <string name="message_reply_success">Bericht beantwoorden gelukt</string>
+    <string name="message_reply_failed">Bericht beantwoorden mislukt</string>
     <string name="placeholder">Placeholder</string>
-    <string name="to">To</string>
-    <string name="message_subject">Message Subject</string>
+    <string name="to">Naar</string>
+    <string name="message_subject">Berrichtonderwerp</string>
     <string name="content">Content</string>
     <string name="user_profile">User Profile</string>
-    <string name="find_your_device">Find Your Device</string>
+    <string name="find_your_device">Zoek uw apparaat</string>
     <string name="multi_quote">Multi Quote</string>
     <string name="mentions">Mentions</string>
     <string name="quotes">Quotes</string>
     <string name="quote_mentions">Quotes/Mentions</string>
-    <string name="user_profile_thanked_posts_count">Thanked Posts Count:\n%1$d</string>
-    <string name="user_profile_post_count">Post Count:\n%1$d</string>
-    <string name="find_a_device">Find a Device</string>
-    <string name="forum_general_title">General</string>
-    <string name="one_account_allowed">Only one XDA account can be added at a time</string>
-    <string name="login">Login</string>
-    <string name="logout">Logout</string>
-    <string name="logging_in">Logging in…</string>
-    <string name="new_message_send_successful">Message sent successfully</string>
-    <string name="new_message_send_failed">Sending message failed</string>
-    <string name="my_devices">My Devices</string>
+    <string name="user_profile_thanked_posts_count">Aantal bedankte berichten:\n%1$d</string>
+    <string name="user_profile_post_count">Aantal berichten:\n%1$d</string>
+    <string name="find_a_device">Zoek een apparaat</string>
+    <string name="forum_general_title">Algemeen</string>
+    <string name="one_account_allowed">Slechts één XDA account kan tegelijkertijd worden toegevoegd</string>
+    <string name="login">Aanmelden…</string>
+    <string name="logout">Afmelden…</string>
+    <string name="logging_in">Bezig met inloggen…</string>
+    <string name="new_message_send_successful">Bericht verzenden gelukt</string>
+    <string name="new_message_send_failed">Bericht verzenden mislukt</string>
+    <string name="my_devices">Mijn apparaten</string>
     <string name="failed_to_get_forum">Failed to get URL\'s items</string>
-    <string name="failed_to_logout">Failed to logout</string>
-    <string name="register">Register</string>
+    <string name="failed_to_logout">Uitloggen mislukt</string>
+    <string name="register">Registeer</string>
     <string name="recaptcha">reCAPTCHA Response</string>
     <string name="pm">PM</string>
 
-    <string name="xda_news">XDA News</string>
+    <string name="xda_news">XDA Nieuws</string>
     <string name="lorem_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta pretium urna, at sagittis turpis posuere nec. Quisque vulputate dignissim metus, eget eleifend tortor commodo ultrices. Cras eros ante, faucibus sit amet eleifend at, rhoncus ut dolor. Suspendisse cursus sollicitudin elit, sit amet porta ante interdum id. Maecenas feugiat, neque eget lobortis volutpat, metus neque fermentum erat, at tincidunt purus purus in justo. Curabitur consectetur augue non elit porttitor rhoncus. Pellentesque accumsan congue blandit. Mauris tincidunt congue velit. Quisque gravida at sem in rhoncus. Curabitur id lectus sed lectus ultrices aliquet a vitae augue. Sed eu euismod nisi, vitae semper nulla. Proin mauris orci, efficitur sed nunc sed, dictum maximus lectus. Cras fringilla suscipit nisl, sit amet scelerisque leo tincidunt ut. </string>
-    <string name="read_more">Read more</string>
-    <string name="something_went_wrong_request">Something went wrong with that request</string>
-    <string name="unable_to_refresh">Unable to refresh posts</string>
-    <string name="post_title">Post Title</string>
+    <string name="read_more">Lees meer</string>
+    <string name="something_went_wrong_request">Er is iets misgegaan, probeer opnieuw</string>
+    <string name="unable_to_refresh">Kan berichten niet vernieuwen</string>
+    <string name="post_title">Berichttitel</string>
 </resources>
