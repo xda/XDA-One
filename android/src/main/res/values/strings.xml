@@ -89,8 +89,7 @@
 
     <string name="thread_subscription_subscribed">Successfully subscribed to thread</string>
     <string name="thread_subscription_unsubscribed">Successfully unsubscribed from thread</string>
-    <string name="thread_subscription_toggle_failed">Failed to change subscription status
-        of thread</string>
+    <string name="thread_subscription_toggle_failed">Toggling of thread subscription failed</string>
 
     <!-- User Profile -->
     <string name="user_profile_title">Title:\n%1$s</string>
