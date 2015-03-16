@@ -32,6 +32,8 @@ If you wish to design a major change, please let us know what API endpoints we c
 * German: @laufersteppenwolf
 * Italian: @toyr99
 * Dutch: @tjorim
+* Russian: @DumF0rGaming
+* Czech: @loqan
 
 
 
