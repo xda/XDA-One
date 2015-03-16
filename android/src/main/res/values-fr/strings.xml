@@ -14,7 +14,7 @@
 
     <string name="no_internet_connection">Veuillez-vous connecter à Internet</string>
 
-    <string name="sign_in_title">Connexion / S\’enregistrer</string>
+    <string name="sign_in_title">Se connecter / S\’enregistrer</string>
 
     <string name="forums">Forums</string>
     <string name="threads">Sujets</string>
@@ -44,7 +44,7 @@
     <string name="loading">Chargement…</string>
     <string name="username">Identifiant</string>
     <string name="password">Mot de passe</string>
-    <string name="sign_in">S\’enregistrer</string>
+    <string name="sign_in">Se connecter</string>
     <string name="or">ou</string>
     <string name="settings">Paramètres</string>
     <string name="help">Aide</string>

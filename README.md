@@ -26,9 +26,12 @@ If you wish to design a major change, please let us know what API endpoints we c
 ##### Translators
 
 * Japanese: @blackzigong
-* Slovak: Dávid Kentoš
+* Slovak: @pasomnica and @pylerSM
 * Portuguese: @dragonpt 
 * French: @Primokorn
+* German: @laufersteppenwolf
+* Italian: @toyr99
+* Dutch: @tjorim
 
 
 
