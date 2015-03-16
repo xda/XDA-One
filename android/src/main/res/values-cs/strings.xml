@@ -23,9 +23,9 @@
     <string name="sent_items_title">Odeslané</string>
 
     <!-- forum menu -->
-    <string name="forum_home_title">XDA Domů</string>
+    <string name="forum_home_title">XDA Forum</string>
     <string name="subscribed">Odebírané</string>
-    <string name="participated">Účastním se</string>
+    <string name="participated">Zúčastněné</string>
     <string name="notifications">Oznámení</string>
     <string name="forum_newest_title">Nové</string>
     <string name="forum_top_title">Top</string>
@@ -48,7 +48,7 @@
     <string name="or">nebo</string>
     <string name="settings">Nastavení</string>
     <string name="help">Nápověda</string>
-    <string name="about">O aplikaci</string>
+    <string name="about">Informace</string>
     <string name="profile">Profil</string>
     <string name="share">Sdílet</string>
     <string name="subscribe">Odebírat</string>
@@ -59,7 +59,7 @@
     <string name="user">Uživatel</string>
     <string name="private_messages">Soukromé zprávy</string>
     <string name="more_xda">Více XDA</string>
-    <string name="replying_to">Odpověď pro: %s</string>
+    <string name="replying_to">Odpověď na: %s</string>
     <string name="other">Ostatní</string>
     <string name="last_post">Poslední příspěvek</string>
     <string name="thread_title">Nadpis vlákna</string>
