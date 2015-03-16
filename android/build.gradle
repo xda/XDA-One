@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'crashlytics'
-// apply plugin : 'newrelic'
+apply plugin: 'newrelic'
 
 android {
     compileSdkVersion 21
@@ -59,7 +59,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-plus:6.5.+'
     compile 'com.google.android.gms:play-services-identity:6.5.+'
 
-    // compile 'com.crashlytics.android:crashlytics:1.+'
+    compile 'com.crashlytics.android:crashlytics:1.+'
 
     compile 'com.android.support:support-v4:21.0.3'
     compile 'com.android.support:appcompat-v7:21.0.3'
@@ -85,7 +85,7 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.3.2'
     compile 'commons-io:commons-io:2.4'
 
-    // compile 'com.newrelic.agent.android:android-agent:4.+'
+    compile 'com.newrelic.agent.android:android-agent:4.+'
 
     compile fileTree(dir: 'libs', include: '*.jar')
 }

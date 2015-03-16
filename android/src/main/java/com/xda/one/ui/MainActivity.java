@@ -27,6 +27,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+// Add New Relic Reporting
+// import com.newrelic.agent.android.NewRelic;
+
 public class MainActivity extends BaseActivity
         implements NavigationDrawerFragment.Callback, SubscribedPagerFragment.Callback,
         ThreadFragment.Callback, PostPagerFragment.Callback, SearchFragment.Callback {
@@ -45,6 +48,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onCreate(final Bundle bundle) {
+        // Add New Relic Reporting
         /*NewRelic.withApplicationToken(
                 "AA31aa88f94b9a9db9fba799fdb1112f100438c79f"
         ).start(getApplication());*/
