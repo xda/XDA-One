@@ -141,3 +141,4 @@
     <string name="something_went_wrong_request">При обработке запроса что-то пошло не так</string>
     <string name="unable_to_refresh">Не удалось обновить посты</string>
     <string name="post_title">Заголовок поста</string>
+</resources>
