@@ -16,7 +16,7 @@
 
     <string name="sign_in_title">Anmelden/Registrieren</string>
 
-    <string name="forums">Forum</string>
+    <string name="forums">Foren</string>
     <string name="threads">Threads</string>
 
     <string name="inbox_title">Posteingang</string>
@@ -101,7 +101,7 @@
     <string name="dont_have_xda_account">
         <![CDATA[Noch kein xda-developers Account?]]></string>
     <string name="sign_in_google_plus">g+ Mit Google anmelden</string>
-    <string name="register_email">Email  Registrieren</string>
+    <string name="register_email">Mit Email Registrieren</string>
     <string name="change_password">Passwort ändern</string>
     <string name="change_email_address">Email Adresse ändern</string>
     <string name="no_items_empty_view">Keine Einträge zum Anzeigen</string>
@@ -113,7 +113,7 @@
     <string name="message_subject">Betreff</string>
     <string name="content">Inhalt</string>
     <string name="user_profile">Benutzerprofil</string>
-    <string name="find_your_device">Finde Dein Gerät</string>
+    <string name="find_your_device">Finde dein Gerät</string>
     <string name="multi_quote">Mehrfach-Zitat</string>
     <string name="mentions">Erwähnungen</string>
     <string name="quotes">Zitate</string>
@@ -129,7 +129,7 @@
     <string name="new_message_send_successful">Nachricht erfolgreich gesendet</string>
     <string name="new_message_send_failed">Senden der Nachricht fehlgeschlagen</string>
     <string name="my_devices">Meine Geräte</string>
-    <string name="failed_to_get_forum">Empfang der Objekte der URL fehlgeschlagen</string>
+    <string name="failed_to_get_forum">Empfang der Objekte der URL\ fehlgeschlagen</string>
     <string name="failed_to_logout">Logout fehlgeschlagen</string>
     <string name="register">Registrieren</string>
     <string name="recaptcha">reCAPTCHA Antwort</string>
@@ -139,5 +139,6 @@
     <string name="lorem_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta pretium urna, at sagittis turpis posuere nec. Quisque vulputate dignissim metus, eget eleifend tortor commodo ultrices. Cras eros ante, faucibus sit amet eleifend at, rhoncus ut dolor. Suspendisse cursus sollicitudin elit, sit amet porta ante interdum id. Maecenas feugiat, neque eget lobortis volutpat, metus neque fermentum erat, at tincidunt purus purus in justo. Curabitur consectetur augue non elit porttitor rhoncus. Pellentesque accumsan congue blandit. Mauris tincidunt congue velit. Quisque gravida at sem in rhoncus. Curabitur id lectus sed lectus ultrices aliquet a vitae augue. Sed eu euismod nisi, vitae semper nulla. Proin mauris orci, efficitur sed nunc sed, dictum maximus lectus. Cras fringilla suscipit nisl, sit amet scelerisque leo tincidunt ut. </string>
     <string name="read_more">Weiterlesen</string>
     <string name="something_went_wrong_request">Bei der Anforderung ist ein Fehler aufgetreten</string>
-    <string name="unable_to_refresh">Unfähig, Beiträge zu aktualisieren</string>
+    <string name="unable_to_refresh">Fehler beim aktualisieren der Beiträge</string>
+    <string name="post_title">Beitragstitel</string>
 </resources>
