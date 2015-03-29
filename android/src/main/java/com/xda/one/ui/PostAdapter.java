@@ -1,5 +1,14 @@
 package com.xda.one.ui;
 
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import com.dd.xda.CircularProgressButton;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -12,16 +21,6 @@ import com.xda.one.ui.helper.ActionModeHelper;
 import com.xda.one.util.AccountUtils;
 import com.xda.one.util.SectionUtils;
 import com.xda.one.util.Utils;
-
-import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -137,8 +136,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             holder.multiQuoteButton.setTag(holder.itemView);
 
             if (account.getUserName().equals(post.getUserName())) {
-                holder.thanksButton.setVisibility(View.GONE);
-                holder.thanksCount.setVisibility(View.GONE);
+                //holder.thanksButton.setVisibility(View.GONE);
+                //holder.thanksCount.setVisibility(View.GONE);
+                holder.thanksButton.setVisibility(View.VISIBLE);
+                holder.thanksCount.setVisibility(View.VISIBLE);
+
+                holder.thanksButton.setImageResource(R.drawable.ic_thumb_up_dark_outline);
+                holder.thanksCount.setText(String.valueOf(post.getThanksCount()));
             } else {
                 holder.thanksButton.setVisibility(View.VISIBLE);
                 holder.thanksButton.setOnClickListener(mThanksClickListener);
@@ -222,12 +226,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 false);
         holder.attachments.addView(group);
 
-        final TextView nameView = (TextView) group.findViewById(R.id.file_name);
-        final TextView sizeView = (TextView) group.findViewById(R.id.file_size);
-        Button downloadButton = (Button) group
-                .findViewById(R.id.download_button);
-        downloadButton.setOnClickListener(mDownloadClickListener);
-        downloadButton.setTag(a);
+        final TextView nameView = (TextView) group.findViewById(R.id.attachment_name);
+        final TextView sizeView = (TextView) group.findViewById(R.id.attachment_size);
+
+        LinearLayout attachmentContainer = (LinearLayout) group
+                .findViewById(R.id.attachment_container);
+        attachmentContainer.setOnClickListener(mDownloadClickListener);
+        attachmentContainer.setTag(a);
+
         nameView.setText(a.getFileName());
         sizeView.setText(a.getFileSize() + " Kb");
     }

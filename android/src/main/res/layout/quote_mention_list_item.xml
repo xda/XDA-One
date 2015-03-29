@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/list_item_height"
-    android:background="@android:color/white"
-    android:foreground="@drawable/activatable_selectable_selector"
+    android:background="@drawable/activatable_selectable_selector"
     tools:context=".ui.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" >
 
         <TextView
             android:id="@+id/user_profile_list_item_title"
@@ -53,7 +52,7 @@
             android:layout_marginLeft="@dimen/list_item_left_start_text_padding"
             android:layout_marginRight="16dp"
             android:layout_marginStart="@dimen/list_item_left_start_text_padding"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:lineSpacingMultiplier="1.5"
             android:maxLines="2"
             android:text="@string/placeholder_text"

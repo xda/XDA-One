@@ -1,8 +1,5 @@
 package com.xda.one.ui.widget;
 
-import com.xda.one.R;
-import com.xda.one.util.CompatUtils;
-
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -17,6 +14,9 @@ import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
 
+import com.xda.one.R;
+import com.xda.one.util.CompatUtils;
+
 public class FloatingActionButton extends ImageView {
 
     private Paint mButtonPaint;
@@ -24,13 +24,13 @@ public class FloatingActionButton extends ImageView {
     public FloatingActionButton(final Context context, final AttributeSet attributeSet) {
         super(context, attributeSet);
 
-        init(Color.BLUE);
+        init(getResources().getColor(R.color.fab_color));
     }
 
     public FloatingActionButton(final Context context) {
         super(context);
 
-        init(Color.BLUE);
+        init(getResources().getColor(R.color.fab_color));
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

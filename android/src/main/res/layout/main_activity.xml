@@ -26,11 +26,16 @@
             app:theme="@style/Theme.One.ActionBar" />
     </FrameLayout>
 
-    <FrameLayout
+    <com.xda.one.ui.widget.ScrimInsetsFrameLayout
         android:id="@+id/navigation_drawer_frame"
-        android:layout_width="304dp"
-        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:clickable="true"
         android:layout_gravity="start"
-        android:background="@color/colorAccent"
-        android:fitsSystemWindows="true" />
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:clipToPadding="false"
+        app:insetForeground="#4000"
+        android:elevation="5dp"
+        android:layout_width="304dp"
+ />
 </android.support.v4.widget.DrawerLayout>

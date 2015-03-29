@@ -1,27 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.otto.Subscribe;
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.api.inteface.ForumClient;
-import com.xda.one.api.model.interfaces.Forum;
-import com.xda.one.api.model.response.ResponseForum;
-import com.xda.one.api.retrofit.RetrofitClient;
-import com.xda.one.api.retrofit.RetrofitForumClient;
-import com.xda.one.auth.XDAAccount;
-import com.xda.one.constants.XDAConstants;
-import com.xda.one.event.forum.ForumSubscriptionChangedEvent;
-import com.xda.one.event.forum.ForumSubscriptionChangingFailedEvent;
-import com.xda.one.loader.ForumLoader;
-import com.xda.one.model.misc.ForumType;
-import com.xda.one.ui.helper.ActionModeHelper;
-import com.xda.one.ui.widget.HierarchySpinnerAdapter;
-import com.xda.one.ui.widget.XDARefreshLayout;
-import com.xda.one.util.AccountUtils;
-import com.xda.one.util.FragmentUtils;
-import com.xda.one.util.UIUtils;
-import com.xda.one.util.Utils;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -42,6 +20,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.squareup.otto.Subscribe;
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.api.inteface.ForumClient;
+import com.xda.one.api.model.interfaces.Forum;
+import com.xda.one.api.model.response.ResponseForum;
+import com.xda.one.api.retrofit.RetrofitClient;
+import com.xda.one.api.retrofit.RetrofitForumClient;
+import com.xda.one.auth.XDAAccount;
+import com.xda.one.constants.XDAConstants;
+import com.xda.one.event.forum.ForumSubscriptionChangedEvent;
+import com.xda.one.event.forum.ForumSubscriptionChangingFailedEvent;
+import com.xda.one.loader.ForumLoader;
+import com.xda.one.model.misc.ForumType;
+import com.xda.one.ui.helper.ActionModeHelper;
+import com.xda.one.ui.widget.DividerItemDecoration;
+import com.xda.one.ui.widget.HierarchySpinnerAdapter;
+import com.xda.one.ui.widget.XDARefreshLayout;
+import com.xda.one.util.AccountUtils;
+import com.xda.one.util.FragmentUtils;
+import com.xda.one.util.UIUtils;
+import com.xda.one.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -175,16 +176,16 @@ public class ForumFragment extends Fragment
                 }
             });
             subscribeButton.setImageResource(forum.isSubscribed()
-                    ? R.drawable.ic_star_light
-                    : R.drawable.ic_star_outline_light);
+                    ? R.drawable.ic_star_outline_selected
+                    : R.drawable.ic_star_outline);
         }
     }
 
     private void onSetupImageViewListItem(final ImageView imageView, final Forum responseForum) {
         Picasso.with(getActivity())
                 .load(responseForum.getImageUrl())
-                .placeholder(R.drawable.phone)
-                .error(R.drawable.phone)
+                .placeholder(R.drawable.ic_nav_phone)
+                .error(R.drawable.ic_nav_phone)
                 .into(imageView);
     }
 
@@ -205,6 +206,7 @@ public class ForumFragment extends Fragment
 
         mRecyclerView = (RecyclerView) view.findViewById(android.R.id.list);
         mRecyclerView.setLayoutManager(new XDALinerLayoutManager(getActivity()));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), XDALinerLayoutManager.VERTICAL));
         mRecyclerView.setAdapter(mAdapter);
         ViewCompat.setOverScrollMode(mRecyclerView, ViewCompat.OVER_SCROLL_NEVER);
 

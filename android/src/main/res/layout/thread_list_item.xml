@@ -1,119 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:id="@+id/thread_list_item_container"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:pkg="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/list_item_height"
-    android:background="@drawable/activatable_selectable_selector"
-    tools:context=".ui.MainActivity">
+    android:id="@+id/thread_list_item_container"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".ui.MainActivity" >
 
-    <TextView
-        android:id="@+id/thread_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="72dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="8dp"
-        android:layout_toLeftOf="@+id/reply_count"
-        android:layout_toStartOf="@+id/reply_count"
-        android:singleLine="true"
-        android:text="@string/thread_title"
-        android:textSize="14sp" />
-
-    <com.makeramen.RoundedImageView
-        android:id="@+id/avatar"
-        android:layout_width="@dimen/avatar_image_dimension"
-        android:layout_height="@dimen/avatar_image_dimension"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/account_circle"
-        pkg:border_color="@android:color/transparent"
-        pkg:oval="true" />
-
-    <TextView
-        android:id="@+id/poster_user_name"
-        style="@style/Theme.One.ThreadTextAppearanceSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/thread_title"
-        android:layout_marginLeft="72dp"
-        android:layout_marginTop="8dp"
-        android:singleLine="true"
-        android:text="@string/username" />
-
-    <TextView
-        android:id="@+id/thread_list_item_content"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/poster_user_name"
-        android:layout_marginLeft="72dp"
-        android:layout_marginTop="8dp"
-        android:singleLine="true"
-        android:text="@string/message_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textSize="13sp" />
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="5dp"
+        style="@style/CardViewStyle.Light"
+        pkg:cardBackgroundColor="@android:color/white"
+        pkg:cardCornerRadius="0dp" >
 
-    <TextView
-        android:id="@+id/reply_count"
-        style="@style/Theme.One.ThreadTextAppearanceSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/thread_title"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/thread_title"
-        android:layout_marginRight="8dp"
-        android:gravity="center"
-        android:text="@string/reply_count" />
+        <RelativeLayout
+            android:id="@+id/thread_list_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/avatar"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:orientation="horizontal">
+            <TextView
+                android:id="@+id/thread_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="false"
+                android:text="@string/thread_title"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textSize="14sp"
+                android:maxLines="2"
+                android:minLines="2"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
-        <ImageView
-            android:id="@+id/thread_list_item_sticky"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_pin" />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider"
+                android:layout_above="@+id/thread_list_user_container"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/view2" />
 
-        <ImageView
-            android:id="@+id/thread_list_item_locked"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_lock" />
-    </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/thread_list_user_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/thread_title"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" >
 
-    <TextView
-        android:id="@+id/last_post"
-        style="@style/Theme.One.ThreadTextAppearanceSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/poster_user_name"
-        android:layout_alignEnd="@+id/reply_count"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignRight="@+id/reply_count"
-        android:layout_alignTop="@id/poster_user_name"
-        android:layout_below="@+id/reply_count"
-        android:layout_marginRight="8dp"
-        android:gravity="center"
-        android:text="@string/last_post" />
+                <com.makeramen.RoundedImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="@dimen/avatar_image_dimension"
+                    android:layout_height="@dimen/avatar_image_dimension"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/account_circle"
+                    pkg:border_color="@android:color/transparent"
+                    pkg:oval="true"
+                    android:layout_alignTop="@+id/poster_user_name"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
 
-</RelativeLayout>
+                <TextView
+                    android:id="@+id/poster_user_name"
+                    style="@style/Theme.One.ThreadUsernameTextAppearance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/username"
+                    android:paddingTop="8dp"
+                    android:paddingLeft="8dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/avatar"
+                    android:layout_toEndOf="@+id/avatar" />
+
+                <TextView
+                    android:id="@+id/last_post"
+                    style="@style/Theme.One.ThreadTimeDateTextAppearance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="8dp"
+                    android:text="@string/last_post"
+                    android:layout_below="@+id/poster_user_name"
+                    android:layout_alignLeft="@+id/poster_user_name"
+                    android:layout_alignStart="@+id/poster_user_name" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/thread_list_item_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="false"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/message_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="13sp"
+                android:maxLines="3"
+                android:minLines="3"
+                android:layout_below="@+id/thread_list_user_container"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider"
+                android:layout_alignBottom="@+id/thread_list_item_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/view" />
+
+            <RelativeLayout
+                android:id="@+id/thread_item_container"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_alignTop="@+id/view"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+
+                <ImageView
+                    android:id="@+id/thread_list_item_sticky"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="8dp"
+                    android:padding="2dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_pin" />
+
+                <ImageView
+                    android:id="@+id/thread_list_item_locked"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:padding="2dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_lock"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/thread_list_item_sticky"
+                    android:layout_toEndOf="@+id/thread_list_item_sticky" />
+
+                <TextView
+                    android:id="@+id/reply_count"
+                    style="@style/Theme.One.ThreadTextAppearanceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reply_count"
+                    android:layout_gravity="right"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+                <ImageView
+                    android:id="@+id/thread_list_item_reply"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:padding="2dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_nav_message"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="4dp"
+                    android:layout_alignTop="@+id/reply_count"
+                    android:layout_toLeftOf="@+id/reply_count"
+                    android:layout_toStartOf="@+id/reply_count" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    </RelativeLayout>

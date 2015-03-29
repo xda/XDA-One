@@ -1,16 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.otto.Subscribe;
-import com.xda.one.R;
-import com.xda.one.api.inteface.ForumClient;
-import com.xda.one.api.model.interfaces.Forum;
-import com.xda.one.api.model.response.ResponseForum;
-import com.xda.one.api.retrofit.RetrofitForumClient;
-import com.xda.one.event.forum.ForumSubscriptionChangedEvent;
-import com.xda.one.event.forum.ForumSubscriptionChangingFailedEvent;
-import com.xda.one.loader.SubscribedForumLoader;
-import com.xda.one.ui.widget.XDARefreshLayout;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -26,6 +15,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.squareup.otto.Subscribe;
+import com.xda.one.R;
+import com.xda.one.api.inteface.ForumClient;
+import com.xda.one.api.model.interfaces.Forum;
+import com.xda.one.api.model.response.ResponseForum;
+import com.xda.one.api.retrofit.RetrofitForumClient;
+import com.xda.one.event.forum.ForumSubscriptionChangedEvent;
+import com.xda.one.event.forum.ForumSubscriptionChangingFailedEvent;
+import com.xda.one.loader.SubscribedForumLoader;
+import com.xda.one.ui.widget.XDARefreshLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +34,7 @@ import static com.xda.one.util.UIUtils.updateEmptyViewState;
 public class SubscribedForumFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<List<ResponseForum>> {
 
-    private static final int FORUM_LOADER = 1;
+    private static final int FORUM_LOADER = 2;
 
     private final EventHandler mEventHandler = new EventHandler();
 

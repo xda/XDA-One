@@ -1,11 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.model.augmented.AugmentedUnifiedThread;
-import com.xda.one.ui.helper.ActionModeHelper;
-import com.xda.one.util.Utils;
-
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.model.augmented.AugmentedUnifiedThread;
+import com.xda.one.ui.helper.ActionModeHelper;
+import com.xda.one.util.StringUtils;
+import com.xda.one.util.Utils;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -73,6 +74,7 @@ public class ThreadAdapter
                     .inflate(R.layout.load_more_progress_bar_only, viewGroup, false);
             return new FooterViewType(view);
         }
+        //final View view = mLayoutInflater.inflate(R.layout.thread_list_item, viewGroup, false);
         final View view = mLayoutInflater.inflate(R.layout.thread_list_item, viewGroup, false);
         return new NormalThreadViewHolder(view);
     }
@@ -104,7 +106,7 @@ public class ThreadAdapter
         holder.titleView.setText(Html.fromHtml(thread.getTitle()));
         holder.titleView.setTypeface(null, thread.isUnread() ? Typeface.BOLD : Typeface.NORMAL);
 
-        holder.textView.setText(thread.getSubPageText());
+        holder.textView.setText(StringUtils.removeWhiteSpaces(thread.getSubPageText()));
 
         holder.replyCount.setText(mNumberFormat.format(thread.getReplyCount()));
         holder.lastPostTimeView

@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="1dp"
-    android:layout_marginTop="1dp"
-    android:foreground="@drawable/activatable_selectable_selector"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp"
+    android:background="?android:attr/selectableItemBackground"
     pkg:cardBackgroundColor="@android:color/white"
     pkg:cardCornerRadius="2dp"
     tools:context=".ui.MainActivity">
@@ -38,18 +38,21 @@
             android:layout_marginTop="4dp"
             android:layout_toRightOf="@id/avatar"
             android:paddingLeft="8dp"
-            android:text="@string/username" />
+            android:text="@string/username"
+            android:textAppearance="@style/Theme.One.UsernameTextAppearance" />
 
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/user_name"
-            android:layout_toRightOf="@id/avatar"
             android:paddingLeft="8dp"
-            android:paddingTop="8dp"
+
+
             android:text="@string/date"
-            android:textAppearance="@style/Theme.One.ThreadTextAppearanceSmall" />
+            android:textAppearance="@style/Theme.One.PostTimeDateTextAppearance"
+            android:layout_below="@+id/user_name"
+            android:layout_toRightOf="@+id/avatar"
+            android:layout_toEndOf="@+id/avatar" />
 
         <LinearLayout
             android:id="@+id/post_layout"

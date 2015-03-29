@@ -1,5 +1,23 @@
 package com.xda.one.ui;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.XDALinerLayoutManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.xda.one.R;
 import com.xda.one.api.inteface.ThreadClient;
 import com.xda.one.api.model.interfaces.UnifiedThread;
@@ -24,24 +42,6 @@ import com.xda.one.util.AccountUtils;
 import com.xda.one.util.CompatUtils;
 import com.xda.one.util.UIUtils;
 import com.xda.one.util.Utils;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.XDALinerLayoutManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;

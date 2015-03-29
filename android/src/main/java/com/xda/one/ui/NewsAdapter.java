@@ -1,11 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.api.model.response.ResponseNews;
-import com.xda.one.util.StringUtils;
-import com.xda.one.util.Utils;
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -14,6 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.api.model.response.ResponseNews;
+import com.xda.one.util.StringUtils;
+import com.xda.one.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -78,11 +78,29 @@ public class NewsAdapter
         final String text = StringUtils.trimCharSequence(Html.fromHtml(content).toString(), 200);
         holder.contentView.setText(text);
 
+
+        // ToDo Implement better method for receiving full res image e.g. json tag
+        //
+
         Picasso.with(mContext)
-                .load(item.getThumbnail())
-                .placeholder(R.drawable.ic_account_circle_light)
-                .error(R.drawable.ic_account_circle_light)
+                .load(getFullImage(item.getThumbnail())).fit().centerCrop()
+                .placeholder(R.drawable.ic_image_placeholder)
+                .error(R.drawable.ic_image_placeholder)
                 .into(holder.imageView);
+    }
+
+    private String getFullImage (String url) {
+        String new_url = url;
+
+        if (new_url.isEmpty())
+            return new_url;
+
+        String main_url = url.substring(0, url.lastIndexOf("-"));
+        String extension = url.substring(url.lastIndexOf("."));
+
+        new_url = main_url + extension;
+
+        return new_url;
     }
 
     public ResponseNews getItem(int position) {

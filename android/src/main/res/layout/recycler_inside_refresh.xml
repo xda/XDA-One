@@ -9,9 +9,7 @@
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:clipToPadding="false"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
+        android:background="@color/main_xda_backgroud_color"
         android:visibility="gone" />
+
 </com.xda.one.ui.widget.XDARefreshLayout>

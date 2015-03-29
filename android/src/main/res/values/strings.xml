@@ -22,6 +22,8 @@
     <string name="inbox_title">Inbox</string>
     <string name="sent_items_title">Sent Items</string>
 
+    <string name="double_back_press">Press once again to exit!</string>
+
     <!-- forum menu -->
     <string name="forum_home_title">XDA Home</string>
     <string name="subscribed">Subscribed</string>
@@ -78,6 +80,8 @@
     <string name="quote">Quote</string>
 
     <string name="find_your_device_title">Find Your Device</string>
+
+    <string name="search_xda_title">Search XDA</string>
 
     <string name="post_creation_failed">Post creation failed</string>
 

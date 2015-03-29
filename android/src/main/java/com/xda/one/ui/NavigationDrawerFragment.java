@@ -1,5 +1,23 @@
 package com.xda.one.ui;
 
+import android.accounts.Account;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.support.v4.view.ViewCompat;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.dd.CircularProgressButton;
 import com.mobsandgeeks.adapters.Sectionizer;
 import com.mobsandgeeks.adapters.SimpleSectionAdapter;
@@ -19,24 +37,6 @@ import com.xda.one.model.misc.ForumType;
 import com.xda.one.util.AccountUtils;
 import com.xda.one.util.Utils;
 
-import android.accounts.Account;
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v4.view.ViewCompat;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.List;
 
 import static com.xda.one.ui.NavigationDrawerAdapter.NavigationDrawerItem;
@@ -53,6 +53,8 @@ public class NavigationDrawerFragment extends Fragment
     private SimpleSectionAdapter<NavigationDrawerItem> mSectionAdapter;
 
     private TextView mUsernameTextView;
+
+    private TextView mEmailTextView;
 
     private UserClient mUserClient;
 
@@ -118,6 +120,10 @@ public class NavigationDrawerFragment extends Fragment
 
         mUsernameTextView = (TextView) headerView
                 .findViewById(R.id.navigation_drawer_fragment_username);
+
+        mEmailTextView = (TextView) headerView
+                .findViewById(R.id.navigation_drawer_fragment_email);
+
         mAvatar = (ImageView) headerView.findViewById(R.id.navigation_drawer_fragment_avatar);
 
         mLoginLogout = (CircularProgressButton) headerView
@@ -216,6 +222,7 @@ public class NavigationDrawerFragment extends Fragment
             mLoginLogout.setText(getString(R.string.logout));
 
             mUsernameTextView.setText(account.getUserName());
+            mEmailTextView.setText(account.getEmail());
             Picasso.with(getActivity())
                     .load(account.getAvatarUrl())
                     .placeholder(R.drawable.ic_account_circle_light)
