@@ -92,8 +92,8 @@ public class NewsAdapter
     private String getFullImage (String url) {
         String new_url = url;
 
-        if (new_url.isEmpty())
-            return new_url;
+        if (new_url == null)
+            return url;
 
         String main_url = url.substring(0, url.lastIndexOf("-"));
         String extension = url.substring(url.lastIndexOf("."));
