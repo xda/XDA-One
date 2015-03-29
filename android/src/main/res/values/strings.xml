@@ -102,6 +102,9 @@
     <string name="user_profile_devices">Devices:\n%1$s</string>
     <string name="user_profile_email">Email:\n%1$s</string>
 
+    <string name="user_profile_post_title">Posts</string>
+    <string name="user_profile_user_title">User</string>
+
     <!-- Auth -->
     <string name="dont_have_xda_account">
         <![CDATA[Don&apos;t have an xda-developers account yet?]]></string>

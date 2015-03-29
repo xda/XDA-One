@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="2dp"
     android:layout_marginTop="2dp"
-    android:foreground="@drawable/activatable_selectable_selector"
+    style="@style/CardViewStyle.Light"
     pkg:cardBackgroundColor="@android:color/white"
     pkg:cardCornerRadius="2dp">
 
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:padding="16dp"
-            android:text="Posts"
+            android:text="@string/user_profile_post_title"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <RelativeLayout
