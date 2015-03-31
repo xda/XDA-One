@@ -165,6 +165,11 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+            return;
+        }
+
         final Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content_frame);
         // TODO - fix this hack
         if (fragment instanceof SearchFragment) {
