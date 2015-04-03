@@ -32,10 +32,9 @@
         android:clickable="true"
         android:layout_gravity="start"
         android:layout_height="match_parent"
+        android:layout_width="@dimen/nav_drawer_width"
         android:fitsSystemWindows="true"
         android:clipToPadding="false"
         app:insetForeground="#4000"
-        android:elevation="5dp"
-        android:layout_width="304dp"
- />
+        android:elevation="5dp" />
 </android.support.v4.widget.DrawerLayout>

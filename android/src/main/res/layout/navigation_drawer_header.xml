@@ -14,7 +14,7 @@
         android:id="@+id/navigation_drawer_fragment_header"
         android:layout_width="match_parent"
         android:layout_height="178dp"
-        android:background="@drawable/profile_background">
+        android:background="@drawable/profile_background" >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:layout_gravity="center_vertical"
             android:orientation="vertical"
             android:background="@drawable/navigation_header_scrim"
-            android:clickable="false">
+            android:clickable="false" >
 
             <ImageView
                 android:id="@+id/navigation_drawer_header_background"
@@ -52,7 +52,7 @@
                 android:paddingLeft="16dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true">
+                android:layout_alignParentStart="true" >
 
                 <TextView
                     android:id="@+id/navigation_drawer_fragment_username"
@@ -70,7 +70,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_gravity="left|center_vertical"
-                    android:textAppearance="@style/Theme.One.NavigationSubHeaderTextAppearance"/>
+                    android:textAppearance="@style/Theme.One.NavigationSubHeaderTextAppearance" />
 
                 <com.dd.CircularProgressButton
                     android:id="@+id/navigation_drawer_login_logout"
@@ -92,9 +92,6 @@
                     android:layout_gravity="right|center_vertical" />
 
             </FrameLayout>
-
         </RelativeLayout>
-
     </FrameLayout>
-
 </RelativeLayout>
