@@ -79,20 +79,20 @@
         android:background="@color/reply_dialog_footer_grey">
 
         <ImageView
-            android:id="@+id/create_message_dialog_fragment_emoticon"
+            android:id="@+id/create_message_fragment_emoticon"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:padding="8dp"
             android:layout_marginRight="8dp"
             android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@+id/create_message_dialog_fragment_send"
-            android:layout_toStartOf="@+id/create_message_dialog_fragment_send"
+            android:layout_toLeftOf="@+id/create_message_fragment_send"
+            android:layout_toStartOf="@+id/create_message_fragment_send"
             android:background="?android:attr/selectableItemBackground"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_insert_emoticon" />
 
         <ImageView
-            android:id="@+id/create_message_dialog_fragment_send"
+            android:id="@+id/create_message_fragment_send"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:padding="8dp"
