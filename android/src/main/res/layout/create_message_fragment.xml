@@ -68,27 +68,40 @@
         android:layout_height="match_parent"
         android:layout_below="@id/create_message_fragment_title" />
 
-    <ImageView
-        android:id="@+id/create_message_fragment_send"
-        android:layout_width="48dp"
+    <RelativeLayout
+        android:id="@+id/create_message_dialog_fragment_footer"
+        android:layout_width="fill_parent"
         android:layout_height="48dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:background="?android:attr/selectableItemBackground"
-        android:padding="8dp"
-        android:src="@drawable/send_button_background" />
+        android:layout_centerHorizontal="true"
+        android:background="@color/reply_dialog_footer_grey">
 
-    <ImageView
-        android:id="@+id/create_message_fragment_emoticon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/create_message_fragment_send"
-        android:background="?android:attr/selectableItemBackground"
-        android:padding="8dp"
-        android:src="@drawable/ic_insert_emoticon" />
+        <ImageView
+            android:id="@+id/create_message_dialog_fragment_emoticon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/create_message_dialog_fragment_send"
+            android:layout_toStartOf="@+id/create_message_dialog_fragment_send"
+            android:background="?android:attr/selectableItemBackground"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_insert_emoticon" />
+
+        <ImageView
+            android:id="@+id/create_message_dialog_fragment_send"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:scaleType="fitCenter"
+            android:src="@drawable/send_button_background" />
+    </RelativeLayout>
 </RelativeLayout>
-
-
-
