@@ -11,7 +11,7 @@
     <color name="text_color_hint_grey">#ff949494</color>
     <color name="attachment_image_background_color">#ffe5e5e5</color>
     <color name="post_item_background">#EEEEEE</color>
-    <color name="post_item_selected">#ff949494</color>
+    <color name="post_item_selected">#ffbebebe</color>
 
     <!-- Component colours -->
     <color name="fab_color">@color/colorAccent</color>
