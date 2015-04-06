@@ -18,7 +18,8 @@
 
     <dimen name="avatar_image_dimension">48dp</dimen>
 
-    <dimen name="nav_drawer_width">304dp</dimen>
+    <dimen name="nav_drawer_top_padding">0dp</dimen>
+    <dimen name="nav_drawer_width">264dp</dimen>
     <dimen name="nav_drawer_header_height">148dp</dimen>
 
     <dimen name="margin_half_small">4dp</dimen>
