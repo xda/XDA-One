@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/recycler_inside_refresh" />
+    <include layout="@layout/list_refresh_recycler" />
 
     <include layout="@layout/default_list_empty_view" />
 </RelativeLayout>
