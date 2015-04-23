@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.xda.one.R;
 import com.xda.one.api.model.response.ResponseNews;
-import com.xda.one.util.StringUtils;
 import com.xda.one.util.Utils;
 
 import java.util.ArrayList;
@@ -74,14 +73,6 @@ public class NewsAdapter
         holder.itemView.setOnClickListener(mOnClickListener);
         holder.titleView.setText(Html.fromHtml(item.getTitle()));
 
-        final String content = item.getContent();
-        final String text = StringUtils.trimCharSequence(Html.fromHtml(content).toString(), 200);
-        holder.contentView.setText(text);
-
-
-        // ToDo Implement better method for receiving full res image e.g. json tag
-        //
-
         Picasso.with(mContext)
                 .load(getFullImage(item.getThumbnail())).fit().centerCrop()
                 .placeholder(R.drawable.ic_image_placeholder)
@@ -89,18 +80,14 @@ public class NewsAdapter
                 .into(holder.imageView);
     }
 
-    private String getFullImage (String url) {
-        String new_url = url;
-
-        if (new_url == null)
-            return url;
+    private String getFullImage(String url) {
+        if (url == null)
+            return null;
 
         String main_url = url.substring(0, url.lastIndexOf("-"));
         String extension = url.substring(url.lastIndexOf("."));
 
-        new_url = main_url + extension;
-
-        return new_url;
+        return main_url + extension;
     }
 
     public ResponseNews getItem(int position) {
@@ -109,7 +96,7 @@ public class NewsAdapter
 
     @Override
     public int getItemCount() {
-        return mNews.size() + mFooterItemCount ;
+        return mNews.size() + mFooterItemCount;
     }
 
     public void clear() {
@@ -155,15 +142,12 @@ public class NewsAdapter
 
         private final TextView titleView;
 
-        private final TextView contentView;
-
         private final ImageView imageView;
 
         public NewsViewHolder(View itemView) {
             super(itemView);
 
             titleView = (TextView) itemView.findViewById(R.id.news_title);
-            contentView = (TextView) itemView.findViewById(R.id.news_content);
             imageView = (ImageView) itemView.findViewById(R.id.avatar);
         }
     }
