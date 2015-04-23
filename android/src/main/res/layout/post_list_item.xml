@@ -2,13 +2,14 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:pkg="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CardViewStyle.Light"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="4dp"
     android:layout_marginTop="4dp"
-    android:background="?android:attr/selectableItemBackground"
     pkg:cardBackgroundColor="@android:color/white"
-    pkg:cardCornerRadius="2dp"
+    pkg:cardCornerRadius="0dp"
+    pkg:cardElevation="1dp"
     tools:context=".ui.MainActivity">
 
     <RelativeLayout
@@ -68,7 +69,7 @@
             android:layout_marginTop="8dp"
             android:orientation="vertical" />
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/post_list_item_actions_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,36 +78,11 @@
             android:layout_marginTop="4dp"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/post_list_item_quote"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/post_item_selector"
-                android:gravity="center"
-                android:padding="8dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_quote_dark" />
-
-            <ImageButton
-                android:id="@+id/post_list_item_multi_quote"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/post_item_selector"
-                android:gravity="center"
-                android:padding="8dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_mult_quote_dark" />
-
             <com.dd.xda.CircularProgressButton
                 android:id="@+id/post_list_item_thanks"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_gravity="center"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="8dp"
                 android:background="@drawable/post_item_selector"
@@ -120,12 +96,37 @@
                 android:id="@+id/post_list_item_thanks_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/post_list_item_thanks"
                 android:paddingRight="8dp"
                 android:text="@string/count"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textSize="12sp" />
-        </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/post_list_item_multi_quote"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/post_item_selector"
+                android:padding="8dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_mult_quote_dark" />
+
+            <ImageButton
+                android:id="@+id/post_list_item_quote"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/post_list_item_multi_quote"
+                android:layout_toStartOf="@+id/post_list_item_multi_quote"
+                android:background="@drawable/post_item_selector"
+                android:padding="8dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_quote_dark" />
+        </RelativeLayout>
     </RelativeLayout>
 </android.support.v7.widget.CardView>
