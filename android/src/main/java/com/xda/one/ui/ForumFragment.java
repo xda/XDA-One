@@ -95,7 +95,7 @@ public class ForumFragment extends Fragment
     }
 
     public static ForumFragment createInstance(final Forum forum, final String parentTitle,
-            final ArrayList<String> hierarchy) {
+                                               final ArrayList<String> hierarchy) {
         final Bundle bundle = new Bundle();
         bundle.putSerializable(FORUM_TYPE, ForumType.CHILD);
         bundle.putParcelable(FORUM, forum);
@@ -155,7 +155,7 @@ public class ForumFragment extends Fragment
                 new ForumAdapter.SubscribeButtonDelegate() {
                     @Override
                     public void setupSubscribeButton(ImageView subscribeButton,
-                            final Forum forum) {
+                                                     final Forum forum) {
                         // Subscribe button
                         onSetupSubscribeButton(subscribeButton, forum);
                     }
@@ -196,7 +196,7 @@ public class ForumFragment extends Fragment
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.forum_fragment, container, false);
     }
 
@@ -206,7 +206,6 @@ public class ForumFragment extends Fragment
 
         mRecyclerView = (RecyclerView) view.findViewById(android.R.id.list);
         mRecyclerView.setLayoutManager(new XDALinerLayoutManager(getActivity()));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), XDALinerLayoutManager.VERTICAL));
         mRecyclerView.setAdapter(mAdapter);
         ViewCompat.setOverScrollMode(mRecyclerView, ViewCompat.OVER_SCROLL_NEVER);
 
@@ -263,7 +262,7 @@ public class ForumFragment extends Fragment
 
     @Override
     public void onLoadFinished(final Loader<List<ResponseForum>> loader,
-            final List<ResponseForum> responseForums) {
+                               final List<ResponseForum> responseForums) {
         // Remove the old data if the adapter is not empty
         if (mAdapter.getItemCount() != 0) {
             mAdapter.clear();
@@ -362,7 +361,7 @@ public class ForumFragment extends Fragment
 
         @Override
         public void onCheckedStateChanged(final ActionMode actionMode, final int position,
-                final boolean isNowChecked) {
+                                          final boolean isNowChecked) {
             actionMode.invalidate();
         }
     }
