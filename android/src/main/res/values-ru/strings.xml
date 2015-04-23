@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">XDA One</string>
+
+    <string name="menu_send_message">Отправить письмо автору</string>
+    <string name="menu_copy_content">Скопировать содержание</string>
+    <string name="menu_author_profile">Показать профиль автора</string>
+    <string name="menu_open_browser">Открыть в браузере</string>
+
+    <string name="menu_add_attachment">Прикрепить вложение</string>
+
+    <string name="menu_profile_change_password">Сменить пароль</string>
+    <string name="menu_profile_update_email">Изменить адрес эл. почты</string>
+
+    <string name="no_internet_connection">Пожалуйста, подключитесь к Сети</string>
+
+    <string name="sign_in_title">Вход/Регистрация</string>
+
+    <string name="forums">Разделы</string>
+    <string name="threads">Темы</string>
+
+    <string name="inbox_title">Входящие</string>
+    <string name="sent_items_title">Отправленные</string>
+
+    <!-- forum menu -->
+    <string name="forum_home_title">Главная XDA</string>
+    <string name="subscribed">Подписки</string>
+    <string name="participated">С моим участием</string>
+    <string name="notifications">Уведомления</string>
+    <string name="forum_newest_title">Новые</string>
+    <string name="forum_top_title">Флагманы</string>
+    <string name="forum_all_title">Все</string>
+
+    <string name="drawer_open">Открыть</string>
+    <string name="drawer_close">Закрыть</string>
+
+    <string name="d_items_checked">Выбрано %d элемента(-ов)</string>
+    <string name="posts_selected_number">Выбрано %d поста(-ов)</string>
+
+    <!-- Small phrases -->
+    <string name="send">Отправить</string>
+    <string name="message_content">Содержание</string>
+    <string name="title">Заголовок</string>
+    <string name="loading">Загрузка…</string>
+    <string name="username">Имя пользователя</string>
+    <string name="password">Пароль</string>
+    <string name="sign_in">Войти</string>
+    <string name="or">или</string>
+    <string name="settings">Настройки</string>
+    <string name="help">Справка</string>
+    <string name="about">Сведения</string>
+    <string name="profile">Профиль</string>
+    <string name="share">Поделиться</string>
+    <string name="subscribe">Подписаться</string>
+    <string name="unsubscribe">Отписаться</string>
+    <string name="thanks">Благодарить</string>
+    <string name="news">Новости</string>
+    <string name="search">Поиск</string>
+    <string name="user">Пользовательское</string>
+    <string name="private_messages">Личные сообщения</string>
+    <string name="more_xda">Ещё от XDA</string>
+    <string name="replying_to">Ответ на: %s</string>
+    <string name="other">Разное</string>
+    <string name="last_post">Последний пост</string>
+    <string name="thread_title">Название</string>
+    <string name="views">Просмотров</string>
+    <string name="reply_count">Сообщений</string>
+    <string name="date">Дата</string>
+    <string name="avatar">Аватар</string>
+    <string name="remove_thanks">Убрать благодарность</string>
+    <string name="count">Количество</string>
+    <string name="email">Email</string>
+    <string name="mark_read">Отметить прочитанным</string>
+    <string name="mark_unread">Отметить непрочитанным</string>
+    <string name="delete">Удалить</string>
+    <string name="forum_title">Forum Title</string>
+    <string name="creating_new_post">Создание…</string>
+    <string name="quote">Цитата</string>
+
+    <string name="find_your_device_title">Найти устройство</string>
+
+    <string name="post_creation_failed">Не удалось создать пост</string>
+
+    <string name="message_delete_successful">Сообщение удалено</string>
+
+    <string name="forum_subscription_subscribed">Подписка на раздел оформлена</string>
+    <string name="forum_subscription_unsubscribed">Вы отписаны от этого раздела</string>
+    <string name="forum_subscription_toggle_failed">Не удалось изменить статус подписки</string>
+
+    <string name="thread_subscription_subscribed">Подписка на тему оформлена</string>
+    <string name="thread_subscription_unsubscribed">Вы отписаны от этой темы</string>
+    <string name="thread_subscription_toggle_failed">Не удалось изменить статус подписки</string>
+
+    <!-- User Profile -->
+    <string name="user_profile_title">Звание:\n%1$s</string>
+    <string name="user_profile_signature">Подпись:\n%1$s</string>
+    <string name="user_profile_devices">Устройства:\n%1$s</string>
+    <string name="user_profile_email">Электронный адрес:\n%1$s</string>
+
+    <!-- Auth -->
+    <string name="dont_have_xda_account">
+        <![CDATA[У вас ещё нет аккаунта на xda-developers?]]></string>
+    <string name="sign_in_google_plus">g+ Войти с помощью Google</string>
+    <string name="register_email">Зарегестрироваться по эл. почте</string>
+    <string name="change_password">Сменить пароль</string>
+    <string name="change_email_address">Сменить адрес эл. почты</string>
+    <string name="no_items_empty_view">Нечего отобразить</string>
+
+    <string name="message_reply_success">Ответ отправлен</string>
+    <string name="message_reply_failed">Отправка не удалась</string>
+    <string name="placeholder">Заполнитель</string>
+    <string name="to">Кому</string>
+    <string name="message_subject">Тема</string>
+    <string name="content">Содержание письма</string>
+    <string name="user_profile">Профиль пользователя</string>
+    <string name="find_your_device">Найти устройство</string>
+    <string name="multi_quote">Мульти-цитата</string>
+    <string name="mentions">Упоминания</string>
+    <string name="quotes">Цитаты</string>
+    <string name="quote_mentions">Цитаты/Упоминания</string>
+    <string name="user_profile_thanked_posts_count">Репутация:\n%1$d</string>
+    <string name="user_profile_post_count">Сообщений:\n%1$d</string>
+    <string name="find_a_device">Найти устройство</string>
+    <string name="forum_general_title">Главные</string>
+    <string name="one_account_allowed">В настоящий момент можно добавить только один аккаунт XDA</string>
+    <string name="login">Войти</string>
+    <string name="logout">Выйти</string>
+    <string name="logging_in">Вход…</string>
+    <string name="new_message_send_successful">Сообщение отправлено</string>
+    <string name="new_message_send_failed">Отправка не удалась</string>
+    <string name="my_devices">Мои устройства</string>
+    <string name="failed_to_get_forum">URL не определён</string>
+    <string name="failed_to_logout">Выйти не удалось</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="recaptcha">Что вы видите?</string>
+    <string name="pm">Написать письмо</string>
+
+    <string name="xda_news">Новости XDA</string>
+    <string name="lorem_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta pretium urna, at sagittis turpis posuere nec. Quisque vulputate dignissim metus, eget eleifend tortor commodo ultrices. Cras eros ante, faucibus sit amet eleifend at, rhoncus ut dolor. Suspendisse cursus sollicitudin elit, sit amet porta ante interdum id. Maecenas feugiat, neque eget lobortis volutpat, metus neque fermentum erat, at tincidunt purus purus in justo. Curabitur consectetur augue non elit porttitor rhoncus. Pellentesque accumsan congue blandit. Mauris tincidunt congue velit. Quisque gravida at sem in rhoncus. Curabitur id lectus sed lectus ultrices aliquet a vitae augue. Sed eu euismod nisi, vitae semper nulla. Proin mauris orci, efficitur sed nunc sed, dictum maximus lectus. Cras fringilla suscipit nisl, sit amet scelerisque leo tincidunt ut. </string>
+    <string name="read_more">Читать дальше</string>
+    <string name="something_went_wrong_request">При обработке запроса что-то пошло не так</string>
+    <string name="unable_to_refresh">Не удалось обновить посты</string>
+    <string name="post_title">Заголовок поста</string>
+</resources>

@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'crashlytics'
-// apply plugin : 'newrelic'
+apply plugin: 'newrelic'
 
 android {
     compileSdkVersion 22
@@ -60,10 +60,12 @@ dependencies {
     compile 'com.google.android.gms:play-services-identity:7.0.0'
     compile 'com.google.android.gms:play-services-analytics:7.0.0'
 
-    compile 'com.android.support:support-v4:22.1.0'
-    compile 'com.android.support:appcompat-v7:22.1.0'
-    compile 'com.android.support:cardview-v7:22.1.0'
-    compile 'com.android.support:recyclerview-v7:22.1.0'
+    compile 'com.crashlytics.android:crashlytics:1.+'
+
+    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:cardview-v7:21.0.3'
+    compile 'com.android.support:recyclerview-v7:21.0.3'
 
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.squareup.retrofit:converter-jackson:1.9.0'
@@ -83,8 +85,7 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.4'
     compile 'commons-io:commons-io:2.4'
 
-    // compile 'com.crashlytics.android:crashlytics:1.+'
-    // compile 'com.newrelic.agent.android:android-agent:4.+'
+    compile 'com.newrelic.agent.android:android-agent:4.+'
 
     compile fileTree(include: '*.jar', dir: 'libs')
 }

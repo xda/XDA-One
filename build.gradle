@@ -9,12 +9,13 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.1.0'
         classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
-        // classpath 'com.newrelic.agent.android:agent-gradle-plugin:4.+'
+        classpath 'com.newrelic.agent.android:agent-gradle-plugin:4.+'
     }
 }
 
 allprojects {
     repositories {
+        mavenCentral()
         jcenter()
         maven {
             url "http://repo.pageturner-reader.org"
