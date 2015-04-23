@@ -355,7 +355,7 @@ public class ThreadFragment extends Fragment {
             if (requestCode == 1) {
                 UIUtils.updateEmptyViewState(getView(), mRecyclerView, true);
                 reloadTheFirstPage();
-            } else if (requestCode == 101) {
+            } else if (requestCode == CREATE_THREAD_REQUEST_CODE) {
                 final UnifiedThread thread = data.getParcelableExtra("thread");
                 updateThread(thread);
             }
@@ -379,7 +379,7 @@ public class ThreadFragment extends Fragment {
 
     public interface Callback {
 
-        public void login(final Runnable runnable);
+        void login(final Runnable runnable);
     }
 
     private class InfiniteLoadCallback implements InfiniteRecyclerLoadHelper.Callback {
@@ -396,7 +396,7 @@ public class ThreadFragment extends Fragment {
 
         @Override
         public void onClick(final View view) {
-            final int position = mRecyclerView.getChildPosition(view);
+            final int position = mRecyclerView.getChildAdapterPosition(view);
             if (position == RecyclerView.NO_POSITION) {
                 return;
             }

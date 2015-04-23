@@ -27,7 +27,8 @@ import com.xda.one.util.FragmentUtils;
 import com.xda.one.util.OneApplication;
 
 public class MainActivity extends BaseActivity
-        implements NavigationDrawerFragment.Callback, SubscribedPagerFragment.Callback,
+        implements NavigationDrawerFragment.Callback, ForumPagerFragment.Callback,
+        SubscribedPagerFragment.Callback,
         ThreadFragment.Callback, PostPagerFragment.Callback, SearchFragment.Callback {
 
     private static final String SCREEN_NAME = "XDA-One MainActivity";
@@ -241,7 +242,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void switchCurrentlyDisplayedFragment(final Fragment fragment,
-            final boolean backStackAndAnimate, final String title) {
+                                                 final boolean backStackAndAnimate, final String title) {
         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         final FragmentTransaction transaction = FragmentUtils
                 .getDefaultTransaction(getSupportFragmentManager());

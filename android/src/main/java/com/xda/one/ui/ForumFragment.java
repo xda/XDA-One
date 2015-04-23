@@ -36,6 +36,7 @@ import com.xda.one.event.forum.ForumSubscriptionChangingFailedEvent;
 import com.xda.one.loader.ForumLoader;
 import com.xda.one.model.misc.ForumType;
 import com.xda.one.ui.helper.ActionModeHelper;
+import com.xda.one.ui.helper.QuickReturnHelper;
 import com.xda.one.ui.widget.DividerItemDecoration;
 import com.xda.one.ui.widget.HierarchySpinnerAdapter;
 import com.xda.one.ui.widget.XDARefreshLayout;
@@ -71,7 +72,6 @@ public class ForumFragment extends Fragment
 
     private ForumType mForumType = ForumType.ALL;
 
-    // Adapter for ListView
     private ForumAdapter<Forum> mAdapter;
 
     private XDARefreshLayout mRefreshLayout;
