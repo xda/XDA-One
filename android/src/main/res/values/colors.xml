@@ -5,8 +5,10 @@
     <color name="colorPrimary">@color/main_xda_color</color>
     <color name="colorPrimaryDark">#cF7A0D</color>
     <color name="colorAccent">@color/blue_500</color>
+
     <color name="actionmode_cab_background">#303030</color>
     <color name="actionmode_cab_statusbar_color">#212121</color>
+
     <color name="attachment_name_color">#ff333333</color>
     <color name="text_color_hint_grey">#ff949494</color>
     <color name="attachment_image_background_color">#ffe5e5e5</color>

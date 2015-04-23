@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -171,7 +170,7 @@ public class ThreadAdapter
 
     public static class NormalThreadViewHolder extends RecyclerView.ViewHolder {
 
-        public final RelativeLayout container;
+        public final View container;
 
         public final TextView titleView;
 
@@ -192,7 +191,7 @@ public class ThreadAdapter
         public NormalThreadViewHolder(View itemView) {
             super(itemView);
 
-            container = (RelativeLayout) itemView.findViewById(R.id.thread_list_item_container);
+            container = itemView.findViewById(R.id.thread_list_item_container);
             titleView = (TextView) itemView.findViewById(R.id.thread_title);
             textView = (TextView) itemView.findViewById(R.id.thread_list_item_content);
             replyCount = (TextView) itemView.findViewById(R.id.reply_count);

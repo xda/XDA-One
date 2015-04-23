@@ -66,7 +66,7 @@ public class ActionModeHelper implements View.OnClickListener, View.OnLongClickL
     }
 
     private void toggleViewActivatedState(final View view) {
-        final int position = mRecyclerView.getChildPosition(view);
+        final int position = mRecyclerView.getChildAdapterPosition(view);
         if (position == RecyclerView.NO_POSITION) {
             return;
         }
