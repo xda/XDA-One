@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="4dp"
         style="@style/CardViewStyle.Light"
         pkg:cardBackgroundColor="@android:color/white"
         pkg:cardCornerRadius="0dp">
@@ -33,7 +33,7 @@
                 android:paddingBottom="8dp"
                 android:textSize="14sp"
                 android:maxLines="2"
-                android:minLines="2"
+                android:minLines="1"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -69,7 +69,6 @@
 
                 <TextView
                     android:id="@+id/poster_user_name"
-                    style="@style/Theme.One.ThreadUsernameTextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
@@ -82,7 +81,6 @@
 
                 <TextView
                     android:id="@+id/last_post"
-                    style="@style/Theme.One.ThreadTimeDateTextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -98,14 +96,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="@string/message_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textSize="13sp"
-                android:maxLines="3"
-                android:minLines="3"
+                android:maxLines="4"
+                android:minLines="1"
                 android:layout_below="@+id/thread_list_user_container"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />

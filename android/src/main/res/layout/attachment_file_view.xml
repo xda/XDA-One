@@ -2,56 +2,56 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="48dp"
+    android:layout_marginBottom="4dp"
     android:background="@drawable/attachment_bg"
     android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:layout_marginBottom="5dp">
+    android:focusableInTouchMode="true">
 
     <LinearLayout
         android:id="@+id/attachment_container"
-        android:background="?android:attr/selectableItemBackground"
+        android:layout_width="fill_parent"
 
         android:layout_height="fill_parent"
-        android:layout_width="fill_parent" >
+        android:background="?android:attr/selectableItemBackground">
 
         <RelativeLayout
             android:id="@+id/attachment_thumb_container"
-            android:layout_height="48dp"
             android:layout_width="48dp"
-            android:gravity="center"
-            android:background="@color/attachment_image_background_color" >
+            android:layout_height="48dp"
+            android:background="@color/attachment_image_background_color"
+            android:gravity="center">
 
             <ImageView
-                android:layout_gravity="center_vertical"
                 android:id="@+id/thumbnail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_attach_file" />
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_gravity="center_vertical"
-            android:orientation="vertical"
             android:layout_width="0.0dip"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
             android:layout_weight="1.0"
-            android:layout_marginLeft="8dp" >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/attachment_name"
-                android:textAppearance="?android:textAppearanceSmall"
-                android:textColor="@color/attachment_name_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@color/attachment_name_color" />
 
             <TextView
                 android:id="@+id/attachment_size"
-                android:textSize="12.0sp"
-                android:textColor="@color/text_color_hint_grey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textColor="@color/text_color_hint_grey"
+                android:textSize="12.0sp" />
         </LinearLayout>
     </LinearLayout>
 

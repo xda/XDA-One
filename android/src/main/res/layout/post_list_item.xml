@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="5dp"
-    android:layout_marginTop="5dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginTop="4dp"
     android:background="?android:attr/selectableItemBackground"
     pkg:cardBackgroundColor="@android:color/white"
     pkg:cardCornerRadius="2dp"
@@ -45,12 +45,12 @@
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/user_name"
+            android:layout_toEndOf="@+id/avatar"
+            android:layout_toRightOf="@+id/avatar"
             android:paddingLeft="8dp"
             android:text="@string/date"
-            android:textAppearance="@style/Theme.One.PostTimeDateTextAppearance"
-            android:layout_below="@+id/user_name"
-            android:layout_toRightOf="@+id/avatar"
-            android:layout_toEndOf="@+id/avatar" />
+            android:textAppearance="@style/Theme.One.PostTimeDateTextAppearance" />
 
         <LinearLayout
             android:id="@+id/post_layout"
@@ -73,9 +73,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/attachments"
-            android:orientation="horizontal"
+            android:layout_marginBottom="4dp"
             android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp">
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/post_list_item_quote"

@@ -3,7 +3,7 @@
     xmlns:pkg="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="5dp"
+    android:layout_marginBottom="4dp"
     android:layout_marginTop="2dp"
     style="@style/CardViewStyle.Light"
     pkg:cardBackgroundColor="@android:color/white"
