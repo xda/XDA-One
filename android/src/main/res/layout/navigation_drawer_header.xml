@@ -31,7 +31,7 @@
                 android:clickable="true"
                 android:src="?android:attr/selectableItemBackground" />
 
-            <com.makeramen.RoundedImageView
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/navigation_drawer_fragment_avatar"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -41,7 +41,7 @@
                 android:layout_marginBottom="14dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_account_circle_light"
-                pkg:oval="true"
+                pkg:riv_oval="true"
                 android:layout_above="@+id/navigation_drawer_profile_textcontainer" />
 
             <FrameLayout

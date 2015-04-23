@@ -7,7 +7,7 @@
     android:background="@android:color/white"
     tools:context=".ui.MainActivity" >
 
-    <com.makeramen.RoundedImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/create_post_dialog_fragment_avatar"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -16,7 +16,7 @@
         android:layout_marginTop="8dp"
         android:scaleType="fitXY"
         android:src="@drawable/account_circle"
-        pkg:oval="true" />
+        pkg:riv_oval="true" />
 
     <TextView
         android:id="@+id/create_post_fragment_header_username"

@@ -5,10 +5,9 @@ import com.xda.one.R;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 
-public class XDAAuthenticatorActivity extends FragmentActivity {
-
-    private final String SCREEN_NAME = "XDAAuthenticatorActivity";
+public class XDAAuthenticatorActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {

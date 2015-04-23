@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
-    <com.makeramen.RoundedImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/create_message_fragment_avatar"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_margin="8dp"
         android:scaleType="fitXY"
         android:src="@drawable/account_circle"
-        pkg:oval="true" />
+        pkg:riv_oval="true" />
 
     <TextView
         android:id="@+id/create_message_fragment_curr_username"

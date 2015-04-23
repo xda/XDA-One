@@ -17,14 +17,14 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp" >
 
-        <com.makeramen.RoundedImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/avatar"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:scaleType="fitXY"
             android:src="@drawable/account_circle"
-            pkg:border_color="@android:color/transparent"
-            pkg:oval="true"
+            pkg:riv_border_color="@android:color/transparent"
+            pkg:riv_oval="true"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />

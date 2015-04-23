@@ -19,7 +19,7 @@
         android:paddingRight="16dp"
         android:paddingTop="16dp">
 
-        <com.makeramen.RoundedImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/avatar"
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -28,8 +28,8 @@
             android:maxWidth="48dp"
             android:scaleType="centerCrop"
             android:src="@drawable/account_circle"
-            pkg:border_color="@android:color/transparent"
-            pkg:oval="true" />
+            pkg:riv_border_color="@android:color/transparent"
+            pkg:riv_oval="true" />
 
         <TextView
             android:id="@+id/user_name"
@@ -46,8 +46,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
-
-
             android:text="@string/date"
             android:textAppearance="@style/Theme.One.PostTimeDateTextAppearance"
             android:layout_below="@+id/user_name"
@@ -77,7 +75,7 @@
             android:layout_below="@id/attachments"
             android:orientation="horizontal"
             android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp" >
+            android:layout_marginBottom="4dp">
 
             <ImageButton
                 android:id="@+id/post_list_item_quote"
