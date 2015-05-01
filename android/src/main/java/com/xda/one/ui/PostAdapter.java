@@ -254,9 +254,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         return posts;
     }
 
-    public static interface GoToQuoteListener {
+    public interface GoToQuoteListener {
 
-        public void onClick(final String postId);
+        void onClick(final String postId);
     }
 
     public static class PostViewHolder extends RecyclerView.ViewHolder {

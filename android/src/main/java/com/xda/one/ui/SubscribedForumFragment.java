@@ -168,8 +168,8 @@ public class SubscribedForumFragment extends Fragment
 
     public interface Callback {
 
-        public void switchCurrentlyDisplayedFragment(final Fragment fragment,
-                final boolean backStackAndAnimate, final String backstackTitle);
+        void switchCurrentlyDisplayedFragment(final Fragment fragment,
+                                              final boolean backStackAndAnimate, final String backstackTitle);
     }
 
     public class EventHandler {

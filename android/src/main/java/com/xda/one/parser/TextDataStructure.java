@@ -106,14 +106,14 @@ public class TextDataStructure {
 
     public interface Item {
 
-        public ItemType getType();
+        ItemType getType();
 
-        public CharSequence getId();
+        CharSequence getId();
     }
 
     private interface Callback {
 
-        public void setupOther(int start, int end);
+        void setupOther(int start, int end);
     }
 
     public class Section {

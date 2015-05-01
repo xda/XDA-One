@@ -4,47 +4,47 @@ import android.os.Parcelable;
 
 public interface UnifiedThread extends Parcelable {
 
-    public String getThreadId();
+    String getThreadId();
 
-    public boolean isAttach();
+    boolean isAttach();
 
-    public boolean hasAttachment();
+    boolean hasAttachment();
 
-    public int getViews();
+    int getViews();
 
-    public long getLastPost();
+    long getLastPost();
 
-    public String getTitle();
+    String getTitle();
 
-    public String getFirstPostContent();
+    String getFirstPostContent();
 
-    public String getPostUsername();
+    String getPostUsername();
 
-    public boolean isSticky();
+    boolean isSticky();
 
-    public int getTotalPosts();
+    int getTotalPosts();
 
-    public int getLastPostId();
+    int getLastPostId();
 
-    public String getLastPoster();
+    String getLastPoster();
 
-    public int getFirstPostId();
+    int getFirstPostId();
 
-    public String getThreadSlug();
+    String getThreadSlug();
 
     String getForumTitle();
 
-    public int getForumId();
+    int getForumId();
 
-    public int getReplyCount();
+    int getReplyCount();
 
-    public boolean isSubscribed();
+    boolean isSubscribed();
 
-    public String getAvatarUrl();
+    String getAvatarUrl();
 
-    public boolean isUnread();
+    boolean isUnread();
 
     boolean isOpen();
 
-    public String getWebUri();
+    String getWebUri();
 }

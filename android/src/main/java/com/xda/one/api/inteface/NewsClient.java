@@ -8,9 +8,9 @@ import retrofit.Callback;
 
 public interface NewsClient {
 
-    public EventBus getBus();
+    EventBus getBus();
 
-    public ResponseNewsContainer getNews(final int page);
+    ResponseNewsContainer getNews(final int page);
 
-    public void getNewsAsync(final int page, final Callback<ResponsePostContainer> consumer);
+    void getNewsAsync(final int page, final Callback<ResponsePostContainer> consumer);
 }

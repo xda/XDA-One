@@ -4,27 +4,27 @@ import android.os.Parcelable;
 
 public interface Mention extends Parcelable {
 
-    public String getPageText();
+    String getPageText();
 
-    public String getDateLine();
+    String getDateLine();
 
-    public String getPostId();
+    String getPostId();
 
-    public String getType();
+    String getType();
 
     String getUserId();
 
-    public String getUserName();
+    String getUserName();
 
-    public String getMentionedUserId();
+    String getMentionedUserId();
 
-    public String getMentionedUsername();
+    String getMentionedUsername();
 
-    public String getMentionedUserGroupId();
+    String getMentionedUserGroupId();
 
-    public String getMentionedInfractionGroupId();
+    String getMentionedInfractionGroupId();
 
-    public UnifiedThread getThread();
+    UnifiedThread getThread();
 
     String getAvatarUrl();
 }

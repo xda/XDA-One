@@ -136,7 +136,7 @@ public class SearchFragment extends Fragment {
 
     public interface Callback {
 
-        public void parseAndDisplayForumUrl(final String url, final boolean fromExternal);
+        void parseAndDisplayForumUrl(final String url, final boolean fromExternal);
     }
 
     private class SearchQueryListener implements SearchView.OnQueryTextListener {

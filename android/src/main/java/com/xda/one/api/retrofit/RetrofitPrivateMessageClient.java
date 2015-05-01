@@ -171,30 +171,30 @@ public class RetrofitPrivateMessageClient implements PrivateMessageClient {
         });
     }
 
-    protected static interface PrivateMessageAPI {
+    protected interface PrivateMessageAPI {
 
         @GET("/pms/inbox")
-        public ResponseMessageContainer getInboxMessages(@Header("Cookie") final String cookie,
-                @Query("page") final int page);
+        ResponseMessageContainer getInboxMessages(@Header("Cookie") final String cookie,
+                                                  @Query("page") final int page);
 
         @GET("/pms/sent")
-        public ResponseMessageContainer getSentMessages(@Header("Cookie") final String cookie,
-                @Query("page") final int page);
+        ResponseMessageContainer getSentMessages(@Header("Cookie") final String cookie,
+                                                 @Query("page") final int page);
 
         @POST("/pms/send")
-        public void sendMessageAsync(@Header("Cookie") final String cookie,
-                @Body final RequestMessage message, final Callback<Response> response);
+        void sendMessageAsync(@Header("Cookie") final String cookie,
+                              @Body final RequestMessage message, final Callback<Response> response);
 
         @PUT("/pms/markread")
-        public void markMessageReadAsync(@Header("Cookie") final String cookie,
-                @Query("pmid") final int messageId, final Callback<Response> response);
+        void markMessageReadAsync(@Header("Cookie") final String cookie,
+                                  @Query("pmid") final int messageId, final Callback<Response> response);
 
         @PUT("/pms/markunread")
-        public void markMessageUnreadAsync(@Header("Cookie") final String cookie,
-                @Query("pmid") final int messageId, final Callback<Response> response);
+        void markMessageUnreadAsync(@Header("Cookie") final String cookie,
+                                    @Query("pmid") final int messageId, final Callback<Response> response);
 
         @DELETE("/pms")
-        public void deleteMessageAsync(@Header("Cookie") final String cookie,
-                @Query("pmid") final int messageId, final Callback<Response> response);
+        void deleteMessageAsync(@Header("Cookie") final String cookie,
+                                @Query("pmid") final int messageId, final Callback<Response> response);
     }
 }

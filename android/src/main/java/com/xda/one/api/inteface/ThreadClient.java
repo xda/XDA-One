@@ -8,20 +8,20 @@ import com.xda.one.api.model.response.container.ResponseUnifiedThreadContainer;
 
 public interface ThreadClient {
 
-    public EventBus getBus();
+    EventBus getBus();
 
-    public ResponseUnifiedThreadContainer getThreads(final int forumId, final int page);
+    ResponseUnifiedThreadContainer getThreads(final int forumId, final int page);
 
-    public ResponseUnifiedThreadContainer getParticipatedThreads(final int page);
+    ResponseUnifiedThreadContainer getParticipatedThreads(final int page);
 
-    public ResponseUnifiedThreadContainer getSubscribedThreads(final int page);
+    ResponseUnifiedThreadContainer getSubscribedThreads(final int page);
 
-    public void createThread(final int forumId, final String title, final String message,
-            final Consumer<Result> runnable);
+    void createThread(final int forumId, final String title, final String message,
+                      final Consumer<Result> runnable);
 
-    public void subscribeAsync(final UnifiedThread normalDefaultUnifiedThread);
+    void subscribeAsync(final UnifiedThread normalDefaultUnifiedThread);
 
-    public void unsubscribeAsync(final UnifiedThread normalDefaultUnifiedThread);
+    void unsubscribeAsync(final UnifiedThread normalDefaultUnifiedThread);
 
-    public void toggleSubscribeAsync(final UnifiedThread normalDefaultUnifiedThread);
+    void toggleSubscribeAsync(final UnifiedThread normalDefaultUnifiedThread);
 }

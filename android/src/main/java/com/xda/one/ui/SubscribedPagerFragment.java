@@ -63,8 +63,8 @@ public class SubscribedPagerFragment extends Fragment implements SubscribedForum
 
     public interface Callback {
 
-        public void switchCurrentlyDisplayedFragment(final Fragment fragment,
-                final boolean backStackAndAnimate, final String title);
+        void switchCurrentlyDisplayedFragment(final Fragment fragment,
+                                              final boolean backStackAndAnimate, final String title);
     }
 
     private class SubscribeFragmentAdapter extends FragmentPagerAdapter {

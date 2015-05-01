@@ -254,9 +254,9 @@ public class NavigationDrawerFragment extends Fragment
 
     public interface Callback {
 
-        public void closeNavigationDrawer();
+        void closeNavigationDrawer();
 
-        public void onNavigationItemClicked(final Fragment fr);
+        void onNavigationItemClicked(final Fragment fr);
     }
 
     private class NavigationSectionizer implements Sectionizer<NavigationDrawerItem> {
