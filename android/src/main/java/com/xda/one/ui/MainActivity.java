@@ -1,17 +1,16 @@
 package com.xda.one.ui;
 
-import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -54,7 +53,7 @@ public class MainActivity extends BaseActivity
 
         setContentView(R.layout.main_activity);
         // startTracker(SCREEN_NAME);
-
+        2
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
 
@@ -77,28 +76,8 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        // GoogleAnalytics.getInstance(MainActivity.this).reportActivityStart(this);
     }
 
     private void initialReplaceFragment() {
@@ -163,12 +142,10 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    private static long back_pressed;
-
     @Override
     public void onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
-            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
             return;
         }
 
@@ -186,38 +163,12 @@ public class MainActivity extends BaseActivity
             }
         }
 
-        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-            if (back_pressed + 2000 > System.currentTimeMillis()) {
-                super.onBackPressed();
-            } else {
-                Toast.makeText(getBaseContext(), R.string.double_back_press, Toast.LENGTH_SHORT).show();
-                back_pressed = System.currentTimeMillis();
-                return;
-            }
-        }
-
-        /*
-        if (!mDrawerLayout.isDrawerOpen(Gravity.START)
-                && getSupportFragmentManager().getBackStackEntryCount() == 0) {
-            mDrawerLayout.openDrawer(Gravity.START);
-            return;
-        }
-        */
-
         super.onBackPressed();
-
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        // GoogleAnalytics.getInstance(MainActivity.this).reportActivityStop(this);
     }
 
     @Override
     public void closeNavigationDrawer() {
-        mDrawerLayout.closeDrawer(Gravity.START);
+        mDrawerLayout.closeDrawer(GravityCompat.START);
     }
 
     @Override

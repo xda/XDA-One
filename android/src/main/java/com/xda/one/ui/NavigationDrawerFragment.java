@@ -62,8 +62,6 @@ public class NavigationDrawerFragment extends Fragment
 
     private CircularProgressButton mLoginLogout;
 
-    private ListView mListView;
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -97,15 +95,15 @@ public class NavigationDrawerFragment extends Fragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mListView = (ListView) view.findViewById(android.R.id.list);
-        ViewCompat.setOverScrollMode(mListView, ViewCompat.OVER_SCROLL_NEVER);
+        final ListView listView = (ListView) view.findViewById(android.R.id.list);
+        listView.setOnItemClickListener(this);
 
-        mListView.setOnItemClickListener(this);
+        ViewCompat.setOverScrollMode(listView, ViewCompat.OVER_SCROLL_NEVER);
 
         final LayoutInflater inflater = LayoutInflater.from(getActivity());
         final View headerView = inflater.inflate(R.layout.navigation_drawer_header,
-                mListView, false);
-        mListView.addHeaderView(headerView);
+                listView, false);
+        listView.addHeaderView(headerView);
 
         // Register for the login event
         mUserClient.getBus().register(mUserListener);
@@ -143,7 +141,7 @@ public class NavigationDrawerFragment extends Fragment
         mAdapter.onUserProfileChanged(selectedAccount);
         mSectionAdapter.notifyDataSetChanged();
 
-        mListView.setAdapter(mSectionAdapter);
+        listView.setAdapter(mSectionAdapter);
     }
 
     @Override
