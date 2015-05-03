@@ -64,7 +64,7 @@ public class ThreadUnreadPostHelper extends CancellableCallbackHelper<PostContai
         fragment.setTargetFragment(mThreadFragment, 101);
 
         final FragmentTransaction transaction = FragmentUtils
-                .getDefaultTransaction(mFragmentManager);
+                .getDefaultTransaction(mFragmentManager, true);
         transaction.addToBackStack(mUnifiedThread.getTitle());
         transaction.replace(R.id.content_frame, fragment).commit();
     }

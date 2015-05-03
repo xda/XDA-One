@@ -183,7 +183,7 @@ public class ForumPagerFragment extends Fragment {
             MenuItemCompat.collapseActionView(mSearchMenuItem);
 
             final FragmentTransaction transaction = FragmentUtils
-                    .getDefaultTransaction(getFragmentManager());
+                    .getDefaultTransaction(getFragmentManager(), true);
             final FindYourDeviceFragment fragment = FindYourDeviceFragment.createInstance(s);
             transaction.addToBackStack(null);
             transaction.replace(R.id.content_frame, fragment).commit();

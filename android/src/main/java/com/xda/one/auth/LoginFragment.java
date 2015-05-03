@@ -136,7 +136,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(final View v) {
                 final FragmentTransaction transaction = FragmentUtils
-                        .getDefaultTransaction(getFragmentManager());
+                        .getDefaultTransaction(getFragmentManager(), true);
                 transaction.replace(R.id.frame_activity_content, RegisterFragment.createInstance())
                         .addToBackStack(null)
                         .commit();

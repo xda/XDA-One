@@ -33,7 +33,7 @@ public class FirstThreadClickStrategy implements ThreadClickStrategy {
         fragment.setTargetFragment(threadFragment, 101);
 
         final FragmentTransaction transaction = FragmentUtils
-                .getDefaultTransaction(threadFragment.getFragmentManager());
+                .getDefaultTransaction(threadFragment.getFragmentManager(), true);
         transaction.addToBackStack(thread.getTitle());
         transaction.replace(R.id.content_frame, fragment).commit();
     }

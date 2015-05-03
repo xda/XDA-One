@@ -182,7 +182,7 @@ public class QuoteFragment extends QuoteMentionBaseFragment
                     new ArrayList<String>(), data);
 
             final FragmentTransaction transaction = FragmentUtils.getDefaultTransaction
-                    (getParentFragment().getFragmentManager());
+                    (getParentFragment().getFragmentManager(), true);
             transaction.addToBackStack(mQuote.getThread().getTitle());
             transaction.replace(R.id.content_frame, fragment).commit();
         }

@@ -2,6 +2,7 @@ package com.xda.one.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -53,7 +54,7 @@ public class MainActivity extends BaseActivity
 
         setContentView(R.layout.main_activity);
         // startTracker(SCREEN_NAME);
-        2
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
 
@@ -73,6 +74,19 @@ public class MainActivity extends BaseActivity
             mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.navigation_drawer_frame);
         }
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -194,10 +208,11 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void switchCurrentlyDisplayedFragment(final Fragment fragment,
-                                                 final boolean backStackAndAnimate, final String title) {
+                                                 final boolean backStackAndAnimate,
+                                                 final String title) {
         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         final FragmentTransaction transaction = FragmentUtils
-                .getDefaultTransaction(getSupportFragmentManager());
+                .getDefaultTransaction(getSupportFragmentManager(), backStackAndAnimate);
         if (backStackAndAnimate) {
             transaction.addToBackStack(title);
         }
