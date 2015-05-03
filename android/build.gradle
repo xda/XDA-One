@@ -83,7 +83,6 @@ dependencies {
     compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
 
     compile 'org.apache.commons:commons-lang3:3.4'
-    compile 'commons-io:commons-io:2.4'
 
     compile 'com.newrelic.agent.android:android-agent:4.273.4'
 

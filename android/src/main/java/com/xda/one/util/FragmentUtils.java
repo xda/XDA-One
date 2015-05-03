@@ -2,6 +2,7 @@ package com.xda.one.util;
 
 import com.xda.one.R;
 import com.xda.one.api.model.interfaces.Forum;
+import com.xda.one.api.model.interfaces.container.PostContainer;
 import com.xda.one.api.model.response.container.ResponsePostContainer;
 import com.xda.one.model.augmented.AugmentedUnifiedThread;
 import com.xda.one.ui.ForumFragment;
@@ -80,7 +81,7 @@ public class FragmentUtils {
     }
 
     public static Fragment switchToPostList(final AugmentedUnifiedThread unifiedThread,
-            final ArrayList<String> hierarchy, final ResponsePostContainer container) {
+            final ArrayList<String> hierarchy, final PostContainer container) {
         final int pageCount;
         if (container == null) {
             final int totalPosts = unifiedThread.getTotalPosts();

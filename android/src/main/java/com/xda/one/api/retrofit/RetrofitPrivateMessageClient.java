@@ -1,9 +1,12 @@
 package com.xda.one.api.retrofit;
 
+import android.content.Context;
+
 import com.xda.one.api.inteface.PrivateMessageClient;
 import com.xda.one.api.misc.EventBus;
 import com.xda.one.api.misc.Result;
 import com.xda.one.api.model.interfaces.Message;
+import com.xda.one.api.model.interfaces.container.MessageContainer;
 import com.xda.one.api.model.request.RequestMessage;
 import com.xda.one.api.model.response.container.ResponseMessageContainer;
 import com.xda.one.constants.XDAConstants;
@@ -12,8 +15,6 @@ import com.xda.one.event.message.MessageSendingFailedEvent;
 import com.xda.one.event.message.MessageSentEvent;
 import com.xda.one.event.message.MessageStatusToggledEvent;
 import com.xda.one.util.Utils;
-
-import android.content.Context;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -56,7 +57,7 @@ public class RetrofitPrivateMessageClient implements PrivateMessageClient {
     }
 
     @Override
-    public ResponseMessageContainer getInboxMessages(final int page) {
+    public MessageContainer getInboxMessages(final int page) {
         try {
             return mMessageAPI.getInboxMessages(getAuthToken(), page);
         } catch (RetrofitError error) {
@@ -66,7 +67,7 @@ public class RetrofitPrivateMessageClient implements PrivateMessageClient {
     }
 
     @Override
-    public ResponseMessageContainer getSentMessages(final int page) {
+    public MessageContainer getSentMessages(final int page) {
         try {
             return mMessageAPI.getSentMessages(getAuthToken(), page);
         } catch (RetrofitError error) {
@@ -77,7 +78,7 @@ public class RetrofitPrivateMessageClient implements PrivateMessageClient {
 
     @Override
     public void sendMessageAsync(final String username, final String subject,
-            final String message) {
+                                 final String message) {
         final RequestMessage requestMessage = new RequestMessage(username, subject, message);
         mMessageAPI.sendMessageAsync(getAuthToken(), requestMessage, new Callback<Response>() {
             @Override
@@ -95,15 +96,6 @@ public class RetrofitPrivateMessageClient implements PrivateMessageClient {
                 mBus.post(new MessageSendingFailedEvent());
             }
         });
-    }
-
-    @Override
-    public void toggleMessageReadAsync(final Message responseMessage) {
-        if (responseMessage.isMessageUnread()) {
-            markMessageReadAsync(responseMessage);
-        } else {
-            markMessageUnreadAsync(responseMessage);
-        }
     }
 
     @Override
@@ -183,18 +175,22 @@ public class RetrofitPrivateMessageClient implements PrivateMessageClient {
 
         @POST("/pms/send")
         void sendMessageAsync(@Header("Cookie") final String cookie,
-                              @Body final RequestMessage message, final Callback<Response> response);
+                              @Body final RequestMessage message,
+                              final Callback<Response> response);
 
         @PUT("/pms/markread")
         void markMessageReadAsync(@Header("Cookie") final String cookie,
-                                  @Query("pmid") final int messageId, final Callback<Response> response);
+                                  @Query("pmid") final int messageId,
+                                  final Callback<Response> response);
 
         @PUT("/pms/markunread")
         void markMessageUnreadAsync(@Header("Cookie") final String cookie,
-                                    @Query("pmid") final int messageId, final Callback<Response> response);
+                                    @Query("pmid") final int messageId,
+                                    final Callback<Response> response);
 
         @DELETE("/pms")
         void deleteMessageAsync(@Header("Cookie") final String cookie,
-                                @Query("pmid") final int messageId, final Callback<Response> response);
+                                @Query("pmid") final int messageId,
+                                final Callback<Response> response);
     }
 }

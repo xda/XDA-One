@@ -2,6 +2,7 @@ package com.xda.one.ui;
 
 import com.xda.one.R;
 import com.xda.one.api.inteface.PostClient;
+import com.xda.one.api.model.interfaces.container.PostContainer;
 import com.xda.one.api.model.response.container.ResponsePostContainer;
 import com.xda.one.api.retrofit.RetrofitPostClient;
 import com.xda.one.loader.QuoteLoader;
@@ -160,7 +161,7 @@ public class QuoteFragment extends QuoteMentionBaseFragment
         }
     }
 
-    private class QuoteCallback extends CancellableCallbackHelper<ResponsePostContainer> {
+    private class QuoteCallback extends CancellableCallbackHelper<PostContainer> {
 
         private final AlertDialog mDialog;
 
@@ -174,7 +175,7 @@ public class QuoteFragment extends QuoteMentionBaseFragment
         }
 
         @Override
-        public void safeCallback(final ResponsePostContainer data) {
+        public void safeCallback(final PostContainer data) {
             mDialog.dismiss();
 
             final Fragment fragment = FragmentUtils.switchToPostList(mQuote.getThread(),

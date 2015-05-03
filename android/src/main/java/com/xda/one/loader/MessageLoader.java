@@ -1,6 +1,7 @@
 package com.xda.one.loader;
 
 import com.xda.one.api.inteface.PrivateMessageClient;
+import com.xda.one.api.model.interfaces.container.MessageContainer;
 import com.xda.one.api.model.response.container.ResponseMessageContainer;
 import com.xda.one.model.augmented.container.AugmentedMessageContainer;
 
@@ -27,21 +28,21 @@ public class MessageLoader extends AsyncLoader<AugmentedMessageContainer> {
 
     @Override
     public AugmentedMessageContainer loadInBackground() {
-        final ResponseMessageContainer responseMessageContainer;
+        final MessageContainer messageContainer;
         switch (mContainerType) {
             case INBOX:
-                responseMessageContainer = mMessageClient.getInboxMessages(mPage);
+                messageContainer = mMessageClient.getInboxMessages(mPage);
                 break;
             case OUTBOX:
-                responseMessageContainer = mMessageClient.getSentMessages(mPage);
+                messageContainer = mMessageClient.getSentMessages(mPage);
                 break;
             default:
                 throw new IllegalArgumentException();
         }
-        if (responseMessageContainer == null) {
+        if (messageContainer == null) {
             return null;
         }
-        return new AugmentedMessageContainer(getContext(), responseMessageContainer);
+        return new AugmentedMessageContainer(getContext(), messageContainer);
     }
 
     @Override

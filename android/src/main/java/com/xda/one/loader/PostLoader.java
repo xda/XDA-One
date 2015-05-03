@@ -1,17 +1,17 @@
 package com.xda.one.loader;
 
+import android.content.Context;
+
 import com.xda.one.api.inteface.PostClient;
-import com.xda.one.api.model.response.container.ResponsePostContainer;
+import com.xda.one.api.model.interfaces.container.PostContainer;
 import com.xda.one.api.retrofit.RetrofitPostClient;
 import com.xda.one.model.augmented.AugmentedPostContainer;
-
-import android.content.Context;
 
 public class PostLoader extends AsyncLoader<AugmentedPostContainer> {
 
     private final PostClient mPostClient;
 
-    private final ResponsePostContainer mResponseContainer;
+    private final PostContainer mPostContainer;
 
     private int mPage;
 
@@ -22,14 +22,14 @@ public class PostLoader extends AsyncLoader<AugmentedPostContainer> {
 
         mPage = page;
         mThreadId = threadId;
-        mResponseContainer = null;
+        mPostContainer = null;
         mPostClient = RetrofitPostClient.getClient(getContext());
     }
 
-    public PostLoader(final Context context, final ResponsePostContainer responseContainer) {
+    public PostLoader(final Context context, final PostContainer container) {
         super(context);
 
-        mResponseContainer = responseContainer;
+        mPostContainer = container;
         mPostClient = RetrofitPostClient.getClient(getContext());
     }
 
@@ -39,9 +39,9 @@ public class PostLoader extends AsyncLoader<AugmentedPostContainer> {
 
     @Override
     public AugmentedPostContainer loadInBackground() {
-        final ResponsePostContainer container = mResponseContainer == null
+        final PostContainer container = mPostContainer == null
                 ? mPostClient.getPosts(mThreadId, mPage)
-                : mResponseContainer;
+                : mPostContainer;
         if (container == null) {
             return null;
         }

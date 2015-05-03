@@ -5,6 +5,7 @@ import com.xda.one.api.misc.EventBus;
 import com.xda.one.api.misc.Result;
 import com.xda.one.api.model.interfaces.Post;
 import com.xda.one.api.model.interfaces.UnifiedThread;
+import com.xda.one.api.model.interfaces.container.PostContainer;
 import com.xda.one.api.model.response.container.ResponsePostContainer;
 
 import retrofit.Callback;
@@ -15,14 +16,17 @@ public interface PostClient {
 
     ResponsePostContainer getPosts(final String threadId, final int page);
 
-    void getPostsAsync(final String threadId, final int page,
-                       final Callback<ResponsePostContainer> consumer);
+    void getPostsAsync(final String threadId,
+                       final int page,
+                       final Callback<PostContainer> consumer);
 
-    void getPostsById(String postId, Consumer<ResponsePostContainer> consumer,
+    void getPostsById(final String postId,
+                      final Consumer<PostContainer> consumer,
                       final Runnable failure);
 
     void getUnreadPostFeed(final UnifiedThread unifiedThread,
-                           final Consumer<ResponsePostContainer> consumer, final Runnable failure);
+                           final Consumer<PostContainer> consumer,
+                           final Runnable failure);
 
     void addAttachmentAsync(final Post post, final Consumer<Result> runnable);
 
@@ -33,6 +37,4 @@ public interface PostClient {
     void addThanksAsync(final Post post, final Consumer<Result> runnable);
 
     void removeThanksAsync(final Post post, final Consumer<Result> runnable);
-
-    void toggleThanksAsync(final Post post, final Consumer<Result> runnable);
 }

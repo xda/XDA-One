@@ -1,9 +1,13 @@
 package com.xda.one.ui.helper;
 
+import android.content.Context;
+import android.net.Uri;
+import android.support.v4.app.Fragment;
+
 import com.xda.one.api.inteface.PostClient;
 import com.xda.one.api.misc.Consumer;
 import com.xda.one.api.model.interfaces.Forum;
-import com.xda.one.api.model.response.container.ResponsePostContainer;
+import com.xda.one.api.model.interfaces.container.PostContainer;
 import com.xda.one.api.retrofit.RetrofitPostClient;
 import com.xda.one.db.ForumDbHelper;
 import com.xda.one.model.augmented.AugmentedUnifiedThread;
@@ -13,10 +17,6 @@ import com.xda.one.ui.ThreadFragment;
 import com.xda.one.ui.UserProfileActivity;
 import com.xda.one.util.FragmentUtils;
 import com.xda.one.util.Utils;
-
-import android.content.Context;
-import android.net.Uri;
-import android.support.v4.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class UrlParseHelper {
     private static final Pattern THREAD_PATTERN = Pattern.compile("-t(\\d+)");
 
     public static void parseUrl(final Context context, final Uri uri,
-            final Consumer<Fragment> success, final Runnable failure) {
+                                final Consumer<Fragment> success, final Runnable failure) {
         final String path = uri.getPath();
         switch (path) {
             case "/showthread.php":
@@ -53,7 +53,7 @@ public class UrlParseHelper {
     }
 
     private static void parseMemberUrl(final Context context, final Uri uri,
-            final Consumer<Fragment> success) {
+                                       final Consumer<Fragment> success) {
         final String userId = uri.getQueryParameter("u");
         success.run(null);
 
@@ -61,7 +61,7 @@ public class UrlParseHelper {
     }
 
     private static void parsePossibleForumThreadPath(final Context context, final Uri uri,
-            final Consumer<Fragment> success, final Runnable failure) {
+                                                     final Consumer<Fragment> success, final Runnable failure) {
         final List<String> segments = uri.getPathSegments();
         if (Utils.isCollectionEmpty(segments)) {
             failure.run();
@@ -135,8 +135,10 @@ public class UrlParseHelper {
         success.run(new MessagePagerFragment());
     }
 
-    private static void parseThreadUrl(final Context context, final Uri uri,
-            final Consumer<Fragment> success, final Runnable failure) {
+    private static void parseThreadUrl(final Context context,
+                                       final Uri uri,
+                                       final Consumer<Fragment> success,
+                                       final Runnable failure) {
         final String threadId = uri.getQueryParameter("t");
         final String pageString = uri.getQueryParameter("page");
         final int page = pageString == null ? 1 : Integer.parseInt(pageString);
@@ -144,12 +146,15 @@ public class UrlParseHelper {
         getPostFeed(context, success, failure, threadId, page);
     }
 
-    private static void getPostFeed(final Context context, final Consumer<Fragment> success,
-            final Runnable failure, final String threadId, final int page) {
+    private static void getPostFeed(final Context context,
+                                    final Consumer<Fragment> success,
+                                    final Runnable failure,
+                                    final String threadId,
+                                    final int page) {
         final PostClient userClient = RetrofitPostClient.getClient(context);
-        userClient.getPostsAsync(threadId, page, new Callback<ResponsePostContainer>() {
+        userClient.getPostsAsync(threadId, page, new Callback<PostContainer>() {
             @Override
-            public void success(final ResponsePostContainer container, final Response response) {
+            public void success(final PostContainer container, final Response response) {
                 final AugmentedUnifiedThread thread = new AugmentedUnifiedThread(container
                         .getThread(), context);
                 Fragment fragment = FragmentUtils.switchToPostList(thread, new ArrayList<String>(),

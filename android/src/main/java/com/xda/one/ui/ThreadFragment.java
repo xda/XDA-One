@@ -117,8 +117,10 @@ public class ThreadFragment extends Fragment {
     // Data
     private int mTotalPages;
 
-    public static ThreadFragment createDefault(final int forumId, final String forumTitle,
-            final String parentForumTitle, final ArrayList<String> hierarchy) {
+    public static ThreadFragment createDefault(final int forumId,
+                                               final String forumTitle,
+                                               final String parentForumTitle,
+                                               final ArrayList<String> hierarchy) {
         final Bundle bundle = new Bundle();
 
         // Internal use
@@ -212,7 +214,7 @@ public class ThreadFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.thread_fragment, container, false);
     }
 
@@ -440,7 +442,7 @@ public class ThreadFragment extends Fragment {
 
         @Override
         public void onLoadFinished(final Loader<AugmentedUnifiedThreadContainer> loader,
-                final AugmentedUnifiedThreadContainer data) {
+                                   final AugmentedUnifiedThreadContainer data) {
             if (data == null) {
                 // TODO - we need to tailor this to lack of connection/other network issue
                 addDataToAdapter(null);
@@ -453,7 +455,7 @@ public class ThreadFragment extends Fragment {
                 // reason loadFinished gets called. However, we may have new data about the thread -
                 // don't disturb this data.
                 UIUtils.updateEmptyViewState(getView(), mRecyclerView, false);
-                mRecyclerView.setOnScrollListener(mInfiniteScrollListener);
+                mRecyclerView.addOnScrollListener(mInfiniteScrollListener);
                 return;
             } else if (data.getCurrentPage() == 1 || mInfiniteScrollListener == null) {
                 mAdapter.clear();

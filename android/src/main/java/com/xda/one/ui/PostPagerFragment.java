@@ -31,6 +31,8 @@ import android.widget.Toast;
 import com.squareup.otto.Subscribe;
 import com.xda.one.R;
 import com.xda.one.api.inteface.ThreadClient;
+import com.xda.one.api.model.interfaces.UnifiedThread;
+import com.xda.one.api.model.interfaces.container.PostContainer;
 import com.xda.one.api.model.response.ResponseUnifiedThread;
 import com.xda.one.api.model.response.container.ResponsePostContainer;
 import com.xda.one.api.retrofit.RetrofitThreadClient;
@@ -104,7 +106,7 @@ public class PostPagerFragment extends Fragment implements PostFragment.Callback
 
     private HierarchySpinnerAdapter mSpinnerAdapter;
 
-    private ResponsePostContainer mContainerArgument;
+    private PostContainer mContainerArgument;
 
     private Callback mCallback;
 
@@ -119,7 +121,8 @@ public class PostPagerFragment extends Fragment implements PostFragment.Callback
     private View mLast;
 
     public static PostPagerFragment getInstance(final AugmentedUnifiedThread unifiedThread,
-                                                final ResponsePostContainer container, final int pageCount,
+                                                final PostContainer container,
+                                                final int pageCount,
                                                 final ArrayList<String> hierarchy) {
         final Bundle bundle = new Bundle();
         bundle.putParcelable(THREAD_ARGUMENT, unifiedThread);
@@ -334,7 +337,7 @@ public class PostPagerFragment extends Fragment implements PostFragment.Callback
     }
 
     @Override
-    public void switchToFragment(final ResponsePostContainer container) {
+    public void switchToFragment(final PostContainer container) {
         mAdapter.setContainerArgument(container);
         mViewPager.setCurrentItem(container.getCurrentPage() - 1);
 
@@ -407,7 +410,7 @@ public class PostPagerFragment extends Fragment implements PostFragment.Callback
     }
 
     @Override
-    public void onPageLoaded(final ResponseUnifiedThread thread) {
+    public void onPageLoaded(final UnifiedThread thread) {
         if (getTargetFragment() != null) {
             final Intent intent = new Intent();
             intent.putExtra("thread", thread);

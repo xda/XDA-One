@@ -213,7 +213,7 @@ public class MessageFragment extends Fragment implements LoaderManager
             // reason loadFinished gets called. However, we may have new data about the thread -
             // don't disturb this data.
             UIUtils.updateEmptyViewState(getView(), mRecyclerView, false);
-            mRecyclerView.setOnScrollListener(mInfiniteScrollListener);
+            mRecyclerView.addOnScrollListener(mInfiniteScrollListener);
             return;
         } else if (data.getCurrentPage() == 1 || mInfiniteScrollListener == null) {
             mAdapter.clear();

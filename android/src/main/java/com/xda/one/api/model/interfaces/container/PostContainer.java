@@ -1,9 +1,9 @@
 package com.xda.one.api.model.interfaces.container;
 
-import com.xda.one.api.model.interfaces.Post;
-import com.xda.one.api.model.response.ResponseUnifiedThread;
-
 import android.os.Parcelable;
+
+import com.xda.one.api.model.interfaces.Post;
+import com.xda.one.api.model.interfaces.UnifiedThread;
 
 import java.util.List;
 
@@ -19,5 +19,5 @@ public interface PostContainer extends Parcelable {
 
     int getIndex();
 
-    ResponseUnifiedThread getThread();
+    UnifiedThread getThread();
 }

@@ -1,22 +1,24 @@
 package com.xda.one.ui;
 
-import com.xda.one.api.model.interfaces.UnifiedThread;
-import com.xda.one.api.model.response.container.ResponsePostContainer;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.xda.one.api.model.interfaces.UnifiedThread;
+import com.xda.one.api.model.interfaces.container.PostContainer;
 
 public class PostFragmentAdapter extends FragmentStatePagerAdapter {
 
     private final int mCount;
 
-    private ResponsePostContainer mContainerArgument;
+    private PostContainer mContainerArgument;
 
     private UnifiedThread mUnifiedThread;
 
-    public PostFragmentAdapter(final FragmentManager fm, final UnifiedThread unifiedThread,
-            final int count, final ResponsePostContainer containerArgument) {
+    public PostFragmentAdapter(final FragmentManager fm,
+                               final UnifiedThread unifiedThread,
+                               final int count,
+                               final PostContainer containerArgument) {
         super(fm);
 
         mUnifiedThread = unifiedThread;
@@ -32,7 +34,7 @@ public class PostFragmentAdapter extends FragmentStatePagerAdapter {
         return PostFragment.getInstance(mUnifiedThread, position + 1);
     }
 
-    public void setContainerArgument(final ResponsePostContainer containerArgument) {
+    public void setContainerArgument(final PostContainer containerArgument) {
         mContainerArgument = containerArgument;
     }
 

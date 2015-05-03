@@ -33,9 +33,9 @@ import com.xda.one.api.misc.Consumer;
 import com.xda.one.api.misc.Result;
 import com.xda.one.api.model.interfaces.Post;
 import com.xda.one.api.model.interfaces.UnifiedThread;
+import com.xda.one.api.model.interfaces.container.PostContainer;
 import com.xda.one.api.model.response.ResponseAttachment;
 import com.xda.one.api.model.response.ResponseUnifiedThread;
-import com.xda.one.api.model.response.container.ResponsePostContainer;
 import com.xda.one.api.retrofit.RetrofitPostClient;
 import com.xda.one.loader.PostLoader;
 import com.xda.one.model.augmented.AugmentedPost;
@@ -96,7 +96,7 @@ public class PostFragment extends Fragment
 
     private ActionModeHelper mModeHelper;
 
-    private ResponsePostContainer mContainerArgument;
+    private PostContainer mPostContainer;
 
     private View mEmptyView;
 
@@ -111,9 +111,9 @@ public class PostFragment extends Fragment
         return fragment;
     }
 
-    public static Fragment getInstance(final ResponsePostContainer containerArgument) {
+    public static Fragment getInstance(final PostContainer container) {
         final Bundle bundle = new Bundle();
-        bundle.putParcelable(PAGE_CONTAINER_ARGUMENT, containerArgument);
+        bundle.putParcelable(PAGE_CONTAINER_ARGUMENT, container);
 
         final PostFragment fragment = new PostFragment();
         fragment.setArguments(bundle);
@@ -140,12 +140,12 @@ public class PostFragment extends Fragment
         mModeHelper = new ActionModeHelper(getActivity(),
                 new PostFragmentActionMode(), null, ActionModeHelper.SelectionMode.MULTIPLE);
 
-        mContainerArgument = getArguments().getParcelable(PAGE_CONTAINER_ARGUMENT);
-        if (mContainerArgument == null) {
+        mPostContainer = getArguments().getParcelable(PAGE_CONTAINER_ARGUMENT);
+        if (mPostContainer == null) {
             mThreadId = getArguments().getString(THREAD_ID_ARGUMENT);
             mPage = getArguments().getInt(PostPagerFragment.POST_PAGE_ARGUMENT);
         } else {
-            mPage = mContainerArgument.getCurrentPage();
+            mPage = mPostContainer.getCurrentPage();
         }
 
         getActivity().registerReceiver(mOnComplete, new IntentFilter(DownloadManager
@@ -291,11 +291,11 @@ public class PostFragment extends Fragment
 
     @Override
     public Loader<AugmentedPostContainer> onCreateLoader(int id, Bundle args) {
-        if (mContainerArgument == null) {
+        if (mPostContainer == null) {
             return new PostLoader(getActivity(), mThreadId, mPage);
         }
-        mScrollToItem = mContainerArgument.getIndex();
-        return new PostLoader(getActivity(), mContainerArgument);
+        mScrollToItem = mPostContainer.getIndex();
+        return new PostLoader(getActivity(), mPostContainer);
     }
 
     @Override
@@ -336,13 +336,18 @@ public class PostFragment extends Fragment
     }
 
     private void toggleThanks(final int position, final Post post) {
-        mPostClient.toggleThanksAsync(post, new Consumer<Result>() {
+        Consumer<Result> runnable = new Consumer<Result>() {
             @Override
             public void run(Result result) {
                 Toast.makeText(getActivity(), "Thanks toggled", Toast.LENGTH_LONG).show();
                 mAdapter.notifyItemChanged(position);
             }
-        });
+        };
+        if (post.isThanked()) {
+            mPostClient.removeThanksAsync(post, runnable);
+        } else {
+            mPostClient.addThanksAsync(post, runnable);
+        }
     }
 
     public void refreshPageAndScrollToBottom() {
@@ -370,7 +375,7 @@ public class PostFragment extends Fragment
         }
     }
 
-    public void scrollToPosition(final ResponsePostContainer data) {
+    public void scrollToPosition(final PostContainer data) {
         mRecyclerView.scrollToPosition(data.getIndex());
     }
 
@@ -378,13 +383,13 @@ public class PostFragment extends Fragment
 
         void quotePost(final AugmentedPost... post);
 
-        void switchToFragment(final ResponsePostContainer container);
+        void switchToFragment(final PostContainer container);
 
         void setQuickReturnListener(final RecyclerView recyclerView, final int page);
 
         void postPaddingToQuickReturn(final View content);
 
-        void onPageLoaded(final ResponseUnifiedThread thread);
+        void onPageLoaded(final UnifiedThread thread);
     }
 
     private class DownloadButtonClickListener implements View.OnClickListener {
@@ -423,7 +428,7 @@ public class PostFragment extends Fragment
         }
     }
 
-    public class GoToQuoteCallback extends CancellableCallbackHelper<ResponsePostContainer> {
+    public class GoToQuoteCallback extends CancellableCallbackHelper<PostContainer> {
 
         private final AlertDialog mDialog;
 
@@ -434,7 +439,7 @@ public class PostFragment extends Fragment
         }
 
         @Override
-        public void safeCallback(final ResponsePostContainer data) {
+        public void safeCallback(final PostContainer data) {
             mDialog.dismiss();
 
             if (data.getCurrentPage() == mPage) {
