@@ -3,7 +3,7 @@
 
     <!-- Main Android colours -->
     <color name="colorPrimary">@color/main_xda_color</color>
-    <color name="colorPrimaryDark">#cF7A0D</color>
+    <color name="colorPrimaryDark">#303030</color>
     <color name="colorAccent">@color/blue_500</color>
 
     <color name="actionmode_cab_background">#303030</color>
@@ -21,7 +21,7 @@
     <color name="navigation_drawer_icon">#8c000000</color>
 
     <!-- Custom/XDA colours -->
-    <color name="main_xda_color">#EC9E08</color>
+    <color name="main_xda_color">#303030</color>
     <color name="main_xda_background_color">#EAEAEA</color>
 
     <color name="custom_accent_green">#12911D</color>
@@ -39,7 +39,7 @@
 
     <color name="deep_purple_a700">#6200EA</color>
 
-    <color name="blue_500">#2196F3</color>
+    <color name="blue_500">#303030</color>
     <color name="indigo_a700">#304ffe</color>
 
     <!-- Black palate from Google's guidelines -->
