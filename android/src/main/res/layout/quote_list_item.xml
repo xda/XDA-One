@@ -53,17 +53,6 @@
             android:layout_centerVertical="true"
             android:gravity="center"
             android:padding="16dp"
-            android:src="@drawable/phone" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="0.5dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_toEndOf="@+id/forum_list_item_device_image"
-            android:layout_toRightOf="@+id/forum_list_item_device_image"
-            android:background="@color/lighter_gray"
-            android:visibility="visible" />
+            android:src="@drawable/ic_nav_phone" />
     </RelativeLayout>
 </FrameLayout>

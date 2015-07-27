@@ -1,16 +1,15 @@
 package com.xda.one.model.augmented;
 
+import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.text.Spannable;
+
 import com.xda.one.api.model.interfaces.UnifiedThread;
 import com.xda.one.api.model.response.ResponseUnifiedThread;
 import com.xda.one.parser.ContentParser;
 import com.xda.one.parser.TextDataStructure;
 import com.xda.one.util.PostUtils;
-import com.xda.one.util.StringUtils;
-
-import android.content.Context;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.text.Spannable;
 
 public class AugmentedUnifiedThread implements UnifiedThread {
 
@@ -27,7 +26,7 @@ public class AugmentedUnifiedThread implements UnifiedThread {
         }
     };
 
-    private static final int MAX_STRING_LENGTH = 100;
+    private static final int MAX_STRING_LENGTH = 200;
 
     private final UnifiedThread mUnifiedThread;
 

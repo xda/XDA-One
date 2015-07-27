@@ -1,61 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:id="@+id/navigation_drawer_fragment_header"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:pkg="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorAccent">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/navigation_drawer_header_background"
-        android:layout_width="fill_parent"
-        android:layout_height="64dp"
-        android:clickable="true"
-        android:src="?android:attr/selectableItemBackground" />
-
-    <com.makeramen.RoundedImageView
-        android:id="@+id/navigation_drawer_fragment_avatar"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:minHeight="48dp"
-        android:minWidth="48dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_account_circle_light"
-        pkg:oval="true" />
-
-    <TextView
-        android:id="@+id/navigation_drawer_fragment_username"
+    <ScrollView
+        android:id="@+id/navigation_drawer_fragment_scrollview"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/navigation_drawer_fragment_avatar"
-        android:layout_toEndOf="@+id/navigation_drawer_fragment_avatar"
-        android:layout_toRightOf="@+id/navigation_drawer_fragment_avatar"
-        android:padding="16dp"
-        android:text="@string/username"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="?android:attr/textColorPrimaryInverse"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content" />
 
-    <com.dd.CircularProgressButton
-        android:id="@+id/navigation_drawer_login_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/navigation_drawer_fragment_avatar"
-        android:background="?android:attr/selectableItemBackground"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="?android:attr/textColorPrimaryInverse"
-        android:textStyle="bold"
-        pkg:cpb_colorIndicator="?android:attr/textColorPrimaryInverse"
-        pkg:cpb_colorIndicatorBackground="@android:color/transparent"
-        pkg:cpb_colorProgress="@android:color/transparent"
-        pkg:cpb_cornerRadius="2dp"
-        pkg:cpb_paddingProgress="16dp"
-        pkg:cpb_selectorIdle="@drawable/test"
-        pkg:cpb_textIdle="Login" />
+    <FrameLayout
+        android:id="@+id/navigation_drawer_fragment_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/nav_drawer_header_height"
+        android:background="@drawable/profile_background">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/navigation_header_scrim"
+            android:clickable="false"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/navigation_drawer_header_background"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:src="?android:attr/selectableItemBackground" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/navigation_drawer_fragment_avatar"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_above="@+id/navigation_drawer_profile_textcontainer"
+                android:layout_marginBottom="14dp"
+                android:layout_marginLeft="16dp"
+                android:minHeight="48dp"
+                android:minWidth="48dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_account_circle_light"
+                pkg:riv_oval="true" />
+
+            <FrameLayout
+                android:id="@+id/navigation_drawer_profile_textcontainer"
+                android:layout_width="fill_parent"
+                android:layout_height="56dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:gravity="bottom"
+                android:paddingLeft="16dp">
+
+                <TextView
+                    android:id="@+id/navigation_drawer_fragment_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/username"
+                    android:textAppearance="@style/Theme.One.NavigationHeaderTextAppearance" />
+
+                <TextView
+                    android:id="@+id/navigation_drawer_fragment_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/navigation_drawer_fragment_username"
+                    android:layout_gravity="left|center_vertical"
+                    android:text="@string/email"
+                    android:textAppearance="@style/Theme.One.NavigationSubHeaderTextAppearance" />
+
+                <com.dd.CircularProgressButton
+                    android:id="@+id/navigation_drawer_login_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="right|center_vertical"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="?android:attr/textColorPrimaryInverse"
+                    android:textStyle="bold"
+                    pkg:cpb_colorIndicator="?android:attr/textColorPrimaryInverse"
+                    pkg:cpb_colorIndicatorBackground="@android:color/transparent"
+                    pkg:cpb_colorProgress="@android:color/transparent"
+                    pkg:cpb_cornerRadius="2dp"
+                    pkg:cpb_paddingProgress="16dp"
+                    pkg:cpb_selectorIdle="@drawable/test"
+                    pkg:cpb_textIdle="Login" />
+
+            </FrameLayout>
+        </RelativeLayout>
+    </FrameLayout>
 </RelativeLayout>

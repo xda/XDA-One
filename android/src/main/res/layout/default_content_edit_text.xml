@@ -8,4 +8,7 @@
     android:inputType="textMultiLine|textAutoCorrect|textCapSentences"
     android:padding="16dp"
     android:scrollbars="vertical"
-    android:textSize="13sp" />
+    android:textSize="13sp"
+    android:textColor="@color/default_primary_text"
+    android:textColorHint="@color/default_secondary_text"
+    android:textColorHighlight="@color/colorAccent" />

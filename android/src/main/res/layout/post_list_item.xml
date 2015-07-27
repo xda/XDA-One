@@ -2,13 +2,14 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:pkg="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CardViewStyle.Light"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="1dp"
-    android:layout_marginTop="1dp"
-    android:foreground="@drawable/activatable_selectable_selector"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="8dp"
     pkg:cardBackgroundColor="@android:color/white"
-    pkg:cardCornerRadius="2dp"
+    pkg:cardCornerRadius="0dp"
+    pkg:cardElevation="1dp"
     tools:context=".ui.MainActivity">
 
     <RelativeLayout
@@ -19,7 +20,7 @@
         android:paddingRight="16dp"
         android:paddingTop="16dp">
 
-        <com.makeramen.RoundedImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/avatar"
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -28,8 +29,8 @@
             android:maxWidth="48dp"
             android:scaleType="centerCrop"
             android:src="@drawable/account_circle"
-            pkg:border_color="@android:color/transparent"
-            pkg:oval="true" />
+            pkg:riv_border_color="@android:color/transparent"
+            pkg:riv_oval="true" />
 
         <TextView
             android:id="@+id/user_name"
@@ -38,18 +39,19 @@
             android:layout_marginTop="4dp"
             android:layout_toRightOf="@id/avatar"
             android:paddingLeft="8dp"
-            android:text="@string/username" />
+            android:text="@string/username"
+            android:textAppearance="@style/Theme.One.UsernameTextAppearance" />
 
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/user_name"
-            android:layout_toRightOf="@id/avatar"
+            android:layout_below="@+id/user_name"
+            android:layout_toEndOf="@+id/avatar"
+            android:layout_toRightOf="@+id/avatar"
             android:paddingLeft="8dp"
-            android:paddingTop="8dp"
             android:text="@string/date"
-            android:textAppearance="@style/Theme.One.ThreadTextAppearanceSmall" />
+            android:textAppearance="@style/Theme.One.PostTimeDateTextAppearance" />
 
         <LinearLayout
             android:id="@+id/post_layout"
@@ -67,47 +69,23 @@
             android:layout_marginTop="8dp"
             android:orientation="vertical" />
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/post_list_item_actions_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/attachments"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
             android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/post_list_item_quote"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:gravity="center"
-                android:padding="8dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_quote_dark" />
-
-            <ImageButton
-                android:id="@+id/post_list_item_multi_quote"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:gravity="center"
-                android:padding="8dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_mult_quote_dark" />
 
             <com.dd.xda.CircularProgressButton
                 android:id="@+id/post_list_item_thanks"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_gravity="center"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:background="?android:attr/selectableItemBackground"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/post_item_selector"
                 android:padding="8dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_thumb_up_dark"
@@ -118,12 +96,37 @@
                 android:id="@+id/post_list_item_thanks_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/post_list_item_thanks"
                 android:paddingRight="8dp"
                 android:text="@string/count"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textSize="12sp" />
-        </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/post_list_item_multi_quote"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/post_item_selector"
+                android:padding="8dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_mult_quote_dark" />
+
+            <ImageButton
+                android:id="@+id/post_list_item_quote"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/post_list_item_multi_quote"
+                android:layout_toStartOf="@+id/post_list_item_multi_quote"
+                android:background="@drawable/post_item_selector"
+                android:padding="8dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_quote_dark" />
+        </RelativeLayout>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

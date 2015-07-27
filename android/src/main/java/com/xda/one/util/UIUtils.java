@@ -1,14 +1,14 @@
 package com.xda.one.util;
 
-import com.xda.one.R;
-import com.xda.one.ui.BaseActivity;
-
 import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
+
+import com.xda.one.R;
+import com.xda.one.ui.BaseActivity;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -30,7 +30,7 @@ public class UIUtils {
         // If we don't have any threads then simply tell the user this and quit
         if (isEmpty) {
             // Toggle what's happening with the view
-            showEmptyText(recyclerView, emptyView);
+            showEmptyView(recyclerView, emptyView);
 
             // TODO - find if there's a better way to do this
             // For now simply show the empty view ...
@@ -53,14 +53,14 @@ public class UIUtils {
         updateEmptyViewState(view, recyclerView, itemCount == 0);
     }
 
-    public static void showEmptyText(final RecyclerView recyclerView, final View emptyView) {
+    public static void showEmptyView(final RecyclerView recyclerView, final View emptyView) {
         recyclerView.setVisibility(GONE);
         emptyView.setVisibility(VISIBLE);
 
-        final View textView = emptyView.findViewById(R.id.empty_view_text_view);
+        final View linearLayout = emptyView.findViewById(R.id.empty_view);
         final View progressBar = emptyView.findViewById(R.id.empty_view_progress_bar);
 
-        textView.setVisibility(VISIBLE);
+        linearLayout.setVisibility(VISIBLE);
         progressBar.setVisibility(GONE);
     }
 
@@ -68,10 +68,10 @@ public class UIUtils {
         recyclerView.setVisibility(GONE);
         emptyView.setVisibility(VISIBLE);
 
-        final View textView = emptyView.findViewById(R.id.empty_view_text_view);
+        final View linearLayout = emptyView.findViewById(R.id.empty_view);
         final View progressBar = emptyView.findViewById(R.id.empty_view_progress_bar);
 
-        textView.setVisibility(GONE);
+        linearLayout.setVisibility(GONE);
         progressBar.setVisibility(VISIBLE);
     }
 

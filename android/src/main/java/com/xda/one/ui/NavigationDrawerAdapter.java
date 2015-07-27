@@ -1,8 +1,5 @@
 package com.xda.one.ui;
 
-import com.xda.one.R;
-import com.xda.one.auth.XDAAccount;
-
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -11,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.xda.one.R;
+import com.xda.one.auth.XDAAccount;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,32 +81,32 @@ public class NavigationDrawerAdapter extends BaseAdapter {
     public void onUserProfileChanged(final XDAAccount account) {
         NAVIGATION_DRAWER_ITEMS.clear();
 
-        NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.forum,
+        NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.ic_nav_forums,
                 R.string.forum_home_title, R.string.forums));
         NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.ic_feed_icon,
                 R.string.xda_news, R.string.forums));
-        NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.ic_search_dark,
+        NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.ic_nav_search,
                 R.string.find_a_device, R.string.forums));
 
         if (account != null) {
             final String quoteMentionsCount = account.getQuoteCount() + "/" + account
                     .getMentionCount();
-            NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.account_circle,
+            NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.ic_nav_account,
                     R.string.quote_mentions, R.string.user, quoteMentionsCount));
-            NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.phone,
+            NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.ic_nav_phone,
                     R.string.my_devices, R.string.user));
 
-            NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.message,
+            NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.ic_nav_message,
                     R.string.private_messages, R.string.user,
                     String.valueOf(account.getPmCount())));
 
-            NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.favorite,
+            NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.ic_nav_favorite,
                     R.string.subscribed, R.string.user));
-            NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.reply,
+            NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.ic_nav_reply,
                     R.string.participated, R.string.user));
         }
 
-        NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.ic_search_dark,
+        NAVIGATION_DRAWER_ITEMS.add(new NavigationDrawerItem(R.drawable.ic_nav_search,
                 R.string.search, R.string.other));
     }
 

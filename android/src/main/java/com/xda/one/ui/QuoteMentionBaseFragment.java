@@ -2,6 +2,7 @@ package com.xda.one.ui;
 
 import com.xda.one.R;
 import com.xda.one.ui.listener.InfiniteRecyclerLoadHelper;
+import com.xda.one.ui.widget.DividerItemDecoration;
 import com.xda.one.ui.widget.XDARefreshLayout;
 
 import android.os.Bundle;
@@ -42,6 +43,7 @@ public abstract class QuoteMentionBaseFragment extends Fragment {
 
         mRecyclerView = (RecyclerView) view.findViewById(android.R.id.list);
         mRecyclerView.setLayoutManager(new XDALinerLayoutManager(getActivity()));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), XDALinerLayoutManager.VERTICAL));
         ViewCompat.setOverScrollMode(mRecyclerView, ViewCompat.OVER_SCROLL_NEVER);
 
         // If the listener already exists then tell it about the new recycler view

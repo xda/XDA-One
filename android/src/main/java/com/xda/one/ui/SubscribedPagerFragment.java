@@ -1,9 +1,5 @@
 package com.xda.one.ui;
 
-import com.xda.one.R;
-import com.xda.one.ui.widget.TabLayout;
-import com.xda.one.util.UIUtils;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +10,10 @@ import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.xda.one.R;
+import com.xda.one.ui.widget.TabLayout;
+import com.xda.one.util.UIUtils;
 
 public class SubscribedPagerFragment extends Fragment implements SubscribedForumFragment.Callback {
 
@@ -86,9 +86,10 @@ public class SubscribedPagerFragment extends Fragment implements SubscribedForum
         public Fragment getItem(int i) {
             switch (i) {
                 case 0:
-                    return mSubscribedForumFragment;
-                case 1:
                     return mSubscribedThreadFragment;
+                case 1:
+                    return mSubscribedForumFragment;
+
                 default:
                     throw new UnsupportedOperationException();
             }
@@ -98,9 +99,9 @@ public class SubscribedPagerFragment extends Fragment implements SubscribedForum
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return getString(R.string.forums);
-                case 1:
                     return getString(R.string.threads);
+                case 1:
+                    return getString(R.string.forums);
                 default:
                     return super.getPageTitle(position);
             }

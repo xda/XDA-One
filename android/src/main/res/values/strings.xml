@@ -22,6 +22,8 @@
     <string name="inbox_title">Inbox</string>
     <string name="sent_items_title">Sent Items</string>
 
+    <string name="double_back_press">Press once again to exit!</string>
+
     <!-- forum menu -->
     <string name="forum_home_title">XDA Home</string>
     <string name="subscribed">Subscribed</string>
@@ -79,6 +81,8 @@
 
     <string name="find_your_device_title">Find Your Device</string>
 
+    <string name="search_xda_title">Search XDA</string>
+
     <string name="post_creation_failed">Post creation failed</string>
 
     <string name="message_delete_successful">Successfully deleted message</string>
@@ -96,6 +100,9 @@
     <string name="user_profile_signature">Signature:\n%1$s</string>
     <string name="user_profile_devices">Devices:\n%1$s</string>
     <string name="user_profile_email">Email:\n%1$s</string>
+
+    <string name="user_profile_post_title">Posts</string>
+    <string name="user_profile_user_title">User</string>
 
     <!-- Auth -->
     <string name="dont_have_xda_account">
