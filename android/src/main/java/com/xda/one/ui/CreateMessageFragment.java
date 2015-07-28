@@ -1,15 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.otto.Subscribe;
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.api.inteface.PrivateMessageClient;
-import com.xda.one.api.retrofit.RetrofitPrivateMessageClient;
-import com.xda.one.auth.XDAAccount;
-import com.xda.one.event.message.MessageSendingFailedEvent;
-import com.xda.one.event.message.MessageSentEvent;
-import com.xda.one.util.AccountUtils;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -25,6 +15,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.otto.Subscribe;
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.api.inteface.PrivateMessageClient;
+import com.xda.one.api.retrofit.RetrofitPrivateMessageClient;
+import com.xda.one.auth.XDAAccount;
+import com.xda.one.event.message.MessageSendingFailedEvent;
+import com.xda.one.event.message.MessageSentEvent;
+import com.xda.one.util.AccountUtils;
 
 import static android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE;
 
@@ -91,7 +91,7 @@ public class CreateMessageFragment extends DialogFragment implements TextWatcher
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.create_message_fragment, container, false);
     }
 

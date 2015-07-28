@@ -1,8 +1,5 @@
 package com.xda.one.ui;
 
-import com.xda.one.R;
-import com.xda.one.parser.ContentParser;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,12 +12,16 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 
+import com.xda.one.R;
+import com.xda.one.parser.ContentParser;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 public class SelectEmoticonFragment extends DialogFragment {
 
+    private EditText mEditText;
     private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(final View v) {
@@ -30,8 +31,6 @@ public class SelectEmoticonFragment extends DialogFragment {
             dismiss();
         }
     };
-
-    private EditText mEditText;
 
     public SelectEmoticonFragment(final EditText txt) {
         mEditText = txt;
@@ -50,7 +49,7 @@ public class SelectEmoticonFragment extends DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.select_emoticon_fragment, container, false);
     }
 
@@ -95,7 +94,7 @@ public class SelectEmoticonFragment extends DialogFragment {
 
         @Override
         public View getView(final int position, final View convertView,
-                final ViewGroup parent) {
+                            final ViewGroup parent) {
             final View view = convertView == null
                     ? mLayoutInflater.inflate(R.layout.select_emoticon_grid_item, parent, false)
                     : convertView;

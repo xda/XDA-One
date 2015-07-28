@@ -1,5 +1,15 @@
 package com.xda.one.ui;
 
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import com.dd.xda.CircularProgressButton;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -12,16 +22,6 @@ import com.xda.one.ui.helper.ActionModeHelper;
 import com.xda.one.util.AccountUtils;
 import com.xda.one.util.SectionUtils;
 import com.xda.one.util.Utils;
-
-import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -53,13 +53,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     private List<AugmentedPost> mPosts;
 
     public PostAdapter(final Context context, final ActionModeHelper modeHelper,
-            final View.OnClickListener downloadClickListener,
-            final View.OnClickListener imageClickListener,
-            final View.OnClickListener avatarClickListener,
-            final View.OnClickListener thanksClickListener,
-            final View.OnClickListener quoteClickListener,
-            final View.OnClickListener multiQuoteClickListener,
-            final GoToQuoteListener quoteListener) {
+                       final View.OnClickListener downloadClickListener,
+                       final View.OnClickListener imageClickListener,
+                       final View.OnClickListener avatarClickListener,
+                       final View.OnClickListener thanksClickListener,
+                       final View.OnClickListener quoteClickListener,
+                       final View.OnClickListener multiQuoteClickListener,
+                       final GoToQuoteListener quoteListener) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
 
@@ -163,7 +163,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
     private void attachImagesThumbnail(final PostViewHolder holder,
-            final ResponseAttachment responseAttachment) {
+                                       final ResponseAttachment responseAttachment) {
         final ViewGroup group = (ViewGroup) mLayoutInflater.inflate(R.layout.attachment_image_view,
                 holder.attachments, false);
         holder.attachments.addView(group);

@@ -1,8 +1,5 @@
 package com.xda.one.ui;
 
-import com.xda.one.R;
-import com.xda.one.util.UIUtils;
-
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +18,9 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.SearchView;
+
+import com.xda.one.R;
+import com.xda.one.util.UIUtils;
 
 public class SearchFragment extends Fragment {
 
@@ -45,7 +45,7 @@ public class SearchFragment extends Fragment {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container,
-            @Nullable final Bundle savedInstanceState) {
+                             @Nullable final Bundle savedInstanceState) {
         mWebView = new WebView(getActivity());
         return mWebView;
     }

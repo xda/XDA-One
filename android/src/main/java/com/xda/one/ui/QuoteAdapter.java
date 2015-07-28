@@ -1,11 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.model.augmented.AugmentedQuote;
-import com.xda.one.util.StringUtils;
-import com.xda.one.util.Utils;
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.model.augmented.AugmentedQuote;
+import com.xda.one.util.StringUtils;
+import com.xda.one.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,23 +23,16 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.QuoteViewHol
     private static final int NORMAL_VIEW_TYPE = 1;
 
     private static final int FOOTER_VIEW_TYPE = 2;
-
+    private static final int MAX_STRING_LENGTH = 100;
+    private final LayoutInflater mLayoutInflater;
+    private final List<AugmentedQuote> mQuotes;
+    private final View.OnClickListener mQuoteClickListener;
+    private final View.OnClickListener mAvatarClickListener;
+    private final Context mContext;
     private int mFooterItemCount = 0;
 
-    private static final int MAX_STRING_LENGTH = 100;
-
-    private final LayoutInflater mLayoutInflater;
-
-    private final List<AugmentedQuote> mQuotes;
-
-    private final View.OnClickListener mQuoteClickListener;
-
-    private final View.OnClickListener mAvatarClickListener;
-
-    private final Context mContext;
-
     public QuoteAdapter(final Context context, final View.OnClickListener quoteClickListener,
-            final View.OnClickListener avatarClickListener) {
+                        final View.OnClickListener avatarClickListener) {
         mContext = context;
         mQuoteClickListener = quoteClickListener;
         mAvatarClickListener = avatarClickListener;

@@ -1,18 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.otto.Subscribe;
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.api.inteface.PrivateMessageClient;
-import com.xda.one.api.retrofit.RetrofitPrivateMessageClient;
-import com.xda.one.event.message.MessageDeletedEvent;
-import com.xda.one.model.augmented.AugmentedMessage;
-import com.xda.one.parser.TextDataStructure;
-import com.xda.one.ui.widget.FloatingActionButton;
-import com.xda.one.util.CompatUtils;
-import com.xda.one.util.SectionUtils;
-import com.xda.one.util.Utils;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -33,6 +20,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.otto.Subscribe;
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.api.inteface.PrivateMessageClient;
+import com.xda.one.api.retrofit.RetrofitPrivateMessageClient;
+import com.xda.one.event.message.MessageDeletedEvent;
+import com.xda.one.model.augmented.AugmentedMessage;
+import com.xda.one.parser.TextDataStructure;
+import com.xda.one.ui.widget.FloatingActionButton;
+import com.xda.one.util.CompatUtils;
+import com.xda.one.util.SectionUtils;
+import com.xda.one.util.Utils;
+
 public class ViewMessageFragment extends Fragment {
 
     public static final String MESSAGE_ARGUMENT = "message";
@@ -40,7 +40,10 @@ public class ViewMessageFragment extends Fragment {
     public static final String ACTIVITY_RESULT_BUNDLE_ARGUMENTS = "bundle_arguments";
 
     public static final String ACTIVITY_RESULT_BUNDLE_ARGUMENTS_RESULT = "bundle_arguments_result";
-
+    public static final int REPLY_MESSAGE_REQUEST_CODE = 1;
+    private AugmentedMessage mMessage;
+    private PrivateMessageClient mPrivateMessageClient;
+    private Bundle mBundle;
     private final Object mEventHandler = new Object() {
         @Subscribe
         public void onMessageDeleted(final MessageDeletedEvent event) {
@@ -53,14 +56,6 @@ public class ViewMessageFragment extends Fragment {
             getActivity().finish();
         }
     };
-
-    public static final int REPLY_MESSAGE_REQUEST_CODE = 1;
-
-    private AugmentedMessage mMessage;
-
-    private PrivateMessageClient mPrivateMessageClient;
-
-    private Bundle mBundle;
 
     public static ViewMessageFragment createInstance(final AugmentedMessage message) {
         final Bundle bundle = new Bundle();
@@ -93,7 +88,7 @@ public class ViewMessageFragment extends Fragment {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container,
-            @Nullable final Bundle savedInstanceState) {
+                             @Nullable final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.view_message_fragment, container, false);
     }
 

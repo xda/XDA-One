@@ -1,8 +1,5 @@
 package com.xda.one.ui;
 
-import com.xda.one.R;
-import com.xda.one.auth.XDAAccount;
-
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -11,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.xda.one.R;
+import com.xda.one.auth.XDAAccount;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,7 +125,7 @@ public class NavigationDrawerAdapter extends BaseAdapter {
         }
 
         public NavigationDrawerItem(final int drawableId,
-                final int titleId, final int sectionId, final String countString) {
+                                    final int titleId, final int sectionId, final String countString) {
             mDrawableId = drawableId;
             mTitleId = titleId;
             mSectionId = sectionId;

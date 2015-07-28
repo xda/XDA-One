@@ -1,5 +1,23 @@
 package com.xda.one.ui;
 
+import android.accounts.Account;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.support.v4.view.ViewCompat;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.dd.CircularProgressButton;
 import com.mobsandgeeks.adapters.Sectionizer;
 import com.mobsandgeeks.adapters.SimpleSectionAdapter;
@@ -18,24 +36,6 @@ import com.xda.one.loader.ForumLoader;
 import com.xda.one.model.misc.ForumType;
 import com.xda.one.util.AccountUtils;
 import com.xda.one.util.Utils;
-
-import android.accounts.Account;
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v4.view.ViewCompat;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -87,7 +87,7 @@ public class NavigationDrawerFragment extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.navigation_drawer_fragment, container, false);
     }
 
@@ -304,7 +304,7 @@ public class NavigationDrawerFragment extends Fragment
 
         @Override
         public void onLoadFinished(final Loader<List<ResponseForum>> loader,
-                final List<ResponseForum> data) {
+                                   final List<ResponseForum> data) {
             mProgressDialog.dismiss();
 
             if (Utils.isCollectionEmpty(data)) {

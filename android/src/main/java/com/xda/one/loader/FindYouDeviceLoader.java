@@ -1,9 +1,9 @@
 package com.xda.one.loader;
 
-import com.xda.one.db.ForumDbHelper;
-
 import android.content.Context;
 import android.database.Cursor;
+
+import com.xda.one.db.ForumDbHelper;
 
 public class FindYouDeviceLoader extends AsyncLoader<Cursor> {
 

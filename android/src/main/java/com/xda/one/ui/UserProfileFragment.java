@@ -1,13 +1,5 @@
 package com.xda.one.ui;
 
-import com.makeramen.RoundedImageView;
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.api.model.response.ResponseUserProfile;
-import com.xda.one.ui.widget.TabLayout;
-import com.xda.one.util.CompatUtils;
-import com.xda.one.util.UIUtils;
-
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -25,6 +17,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.makeramen.RoundedImageView;
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.api.model.response.ResponseUserProfile;
+import com.xda.one.ui.widget.TabLayout;
+import com.xda.one.util.CompatUtils;
+import com.xda.one.util.UIUtils;
 
 public class UserProfileFragment extends Fragment
         implements UserProfileAboutFragment.Callback {
@@ -80,7 +80,7 @@ public class UserProfileFragment extends Fragment
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final @Nullable ViewGroup container,
-            final @Nullable Bundle savedInstanceState) {
+                             final @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.user_profile_fragment, container, false);
     }
 

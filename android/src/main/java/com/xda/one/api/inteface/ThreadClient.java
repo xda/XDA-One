@@ -17,7 +17,7 @@ public interface ThreadClient {
     public ResponseUnifiedThreadContainer getSubscribedThreads(final int page);
 
     public void createThread(final int forumId, final String title, final String message,
-            final Consumer<Result> runnable);
+                             final Consumer<Result> runnable);
 
     public void subscribeAsync(final UnifiedThread normalDefaultUnifiedThread);
 

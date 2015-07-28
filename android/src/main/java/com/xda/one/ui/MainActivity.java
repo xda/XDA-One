@@ -1,16 +1,5 @@
 package com.xda.one.ui;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
-
-import com.xda.one.R;
-import com.xda.one.api.misc.Consumer;
-import com.xda.one.model.misc.ForumType;
-import com.xda.one.ui.helper.UrlParseHelper;
-import com.xda.one.util.AccountUtils;
-import com.xda.one.util.FragmentUtils;
-import com.xda.one.util.OneApplication;
-
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -26,6 +15,16 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.xda.one.R;
+import com.xda.one.api.misc.Consumer;
+import com.xda.one.model.misc.ForumType;
+import com.xda.one.ui.helper.UrlParseHelper;
+import com.xda.one.util.AccountUtils;
+import com.xda.one.util.FragmentUtils;
+import com.xda.one.util.OneApplication;
 
 // Add New Relic Reporting
 // import com.newrelic.agent.android.NewRelic;
@@ -225,7 +224,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void switchCurrentlyDisplayedFragment(final Fragment fragment,
-            final boolean backStackAndAnimate, final String title) {
+                                                 final boolean backStackAndAnimate, final String title) {
         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         final FragmentTransaction transaction = FragmentUtils
                 .getDefaultTransaction(getSupportFragmentManager());

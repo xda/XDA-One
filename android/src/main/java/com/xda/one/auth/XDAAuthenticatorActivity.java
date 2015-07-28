@@ -1,10 +1,10 @@
 package com.xda.one.auth;
 
-import com.xda.one.R;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+
+import com.xda.one.R;
 
 public class XDAAuthenticatorActivity extends FragmentActivity {
 

@@ -1,17 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.otto.Subscribe;
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.api.inteface.PrivateMessageClient;
-import com.xda.one.api.retrofit.RetrofitPrivateMessageClient;
-import com.xda.one.auth.XDAAccount;
-import com.xda.one.event.message.MessageSendingFailedEvent;
-import com.xda.one.event.message.MessageSentEvent;
-import com.xda.one.model.augmented.AugmentedMessage;
-import com.xda.one.ui.listener.NonEmptyTextViewListener;
-import com.xda.one.util.AccountUtils;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -23,6 +11,18 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.otto.Subscribe;
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.api.inteface.PrivateMessageClient;
+import com.xda.one.api.retrofit.RetrofitPrivateMessageClient;
+import com.xda.one.auth.XDAAccount;
+import com.xda.one.event.message.MessageSendingFailedEvent;
+import com.xda.one.event.message.MessageSentEvent;
+import com.xda.one.model.augmented.AugmentedMessage;
+import com.xda.one.ui.listener.NonEmptyTextViewListener;
+import com.xda.one.util.AccountUtils;
 
 import static android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE;
 
@@ -82,7 +82,7 @@ public class ReplyMessageFragment extends DialogFragment {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.reply_message_dialog_fragment, container, false);
     }
 

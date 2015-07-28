@@ -1,10 +1,10 @@
 package com.xda.one.api.retrofit;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xda.one.constants.XDAConstants;
-
 import android.content.Context;
 import android.net.http.HttpResponseCache;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.xda.one.constants.XDAConstants;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,8 +1,8 @@
 package com.xda.one.api.model.interfaces;
 
-import com.xda.one.api.model.response.ResponseAttachment;
-
 import android.os.Parcelable;
+
+import com.xda.one.api.model.response.ResponseAttachment;
 
 import java.util.List;
 

@@ -1,14 +1,14 @@
 package com.xda.one.util;
 
-import com.xda.one.R;
-import com.xda.one.ui.BaseActivity;
-
 import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
+
+import com.xda.one.R;
+import com.xda.one.ui.BaseActivity;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -23,7 +23,7 @@ public class UIUtils {
     }
 
     public static void updateEmptyViewState(final View view, final RecyclerView recyclerView,
-            boolean isEmpty) {
+                                            boolean isEmpty) {
         // Find the empty view from the main view - it's using the android id for it
         final View emptyView = view.findViewById(android.R.id.empty);
 
@@ -49,7 +49,7 @@ public class UIUtils {
     }
 
     public static void updateEmptyViewState(final View view, final RecyclerView recyclerView,
-            int itemCount) {
+                                            int itemCount) {
         updateEmptyViewState(view, recyclerView, itemCount == 0);
     }
 

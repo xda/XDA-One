@@ -1,11 +1,11 @@
 package com.xda.one.auth;
 
+import android.accounts.Account;
+import android.os.Parcel;
+
 import com.xda.one.api.model.response.ResponseUserProfile;
 import com.xda.one.api.model.response.container.ResponseUserProfileNotificationContainer;
 import com.xda.one.api.retrofit.RetrofitClient;
-
-import android.accounts.Account;
-import android.os.Parcel;
 
 public class XDAAccount extends Account {
 
@@ -36,8 +36,8 @@ public class XDAAccount extends Account {
     private final String mAuthToken;
 
     public XDAAccount(final String name, final String userId, final String email,
-            final String avatarUrl, final int pmCount, final int quoteCount,
-            final int mentionCount, final String authToken) {
+                      final String avatarUrl, final int pmCount, final int quoteCount,
+                      final int mentionCount, final String authToken) {
         super(name, "com.xda");
         mEmail = email;
         mUserId = userId;

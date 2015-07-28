@@ -1,16 +1,5 @@
 package com.xda.one.auth;
 
-import com.squareup.otto.Subscribe;
-import com.xda.one.R;
-import com.xda.one.api.inteface.UserClient;
-import com.xda.one.api.misc.Consumer;
-import com.xda.one.api.misc.Result;
-import com.xda.one.api.retrofit.RetrofitUserClient;
-import com.xda.one.constants.XDAConstants;
-import com.xda.one.event.user.UserProfileEvent;
-import com.xda.one.event.user.UserProfileFailedEvent;
-import com.xda.one.ui.listener.MultipleNonEmptyTextViewListener;
-
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,6 +11,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.squareup.otto.Subscribe;
+import com.xda.one.R;
+import com.xda.one.api.inteface.UserClient;
+import com.xda.one.api.misc.Consumer;
+import com.xda.one.api.misc.Result;
+import com.xda.one.api.retrofit.RetrofitUserClient;
+import com.xda.one.constants.XDAConstants;
+import com.xda.one.event.user.UserProfileEvent;
+import com.xda.one.event.user.UserProfileFailedEvent;
+import com.xda.one.ui.listener.MultipleNonEmptyTextViewListener;
 
 import retrofit.client.Response;
 
@@ -74,7 +74,7 @@ public class RegisterFragment extends Fragment {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container,
-            @Nullable final Bundle savedInstanceState) {
+                             @Nullable final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.register_fragment, container, false);
     }
 

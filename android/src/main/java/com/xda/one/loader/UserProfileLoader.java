@@ -1,10 +1,10 @@
 package com.xda.one.loader;
 
+import android.content.Context;
+
 import com.xda.one.api.inteface.UserClient;
 import com.xda.one.api.model.response.ResponseUserProfile;
 import com.xda.one.api.retrofit.RetrofitUserClient;
-
-import android.content.Context;
 
 public class UserProfileLoader extends AsyncLoader<ResponseUserProfile> {
 

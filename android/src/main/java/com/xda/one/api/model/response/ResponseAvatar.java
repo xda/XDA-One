@@ -1,9 +1,9 @@
 package com.xda.one.api.model.response;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import android.os.Parcel;
 import android.text.TextUtils;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public final class ResponseAvatar {

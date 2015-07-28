@@ -1,5 +1,7 @@
 package com.xda.one.api.retrofit;
 
+import android.content.Context;
+
 import com.xda.one.api.inteface.ThreadClient;
 import com.xda.one.api.misc.Consumer;
 import com.xda.one.api.misc.EventBus;
@@ -12,8 +14,6 @@ import com.xda.one.constants.XDAConstants;
 import com.xda.one.event.thread.ThreadSubscriptionChangedEvent;
 import com.xda.one.event.thread.ThreadSubscriptionChangingFailedEvent;
 import com.xda.one.util.Utils;
-
-import android.content.Context;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -86,7 +86,7 @@ public class RetrofitThreadClient implements ThreadClient {
 
     @Override
     public void createThread(final int forumId, final String title, final String message,
-            final Consumer<Result> runnable) {
+                             final Consumer<Result> runnable) {
         final RequestThread thread = new RequestThread(forumId, title, message);
         mThreadAPI.createThread(getAuthToken(), thread, new Callback<Response>() {
             @Override
@@ -132,7 +132,7 @@ public class RetrofitThreadClient implements ThreadClient {
 
         @GET("/threads")
         public ResponseUnifiedThreadContainer getThreads(@Header("Cookie") final String cookie,
-                @Query("forumid") final String forumId, @Query("page") final int page);
+                                                         @Query("forumid") final String forumId, @Query("page") final int page);
 
         @GET("/threads/participated")
         public ResponseUnifiedThreadContainer getParticipatedThreads(
@@ -140,20 +140,20 @@ public class RetrofitThreadClient implements ThreadClient {
 
         @GET("/threads/subscribed")
         public ResponseUnifiedThreadContainer getSubscribedThreads(@Header("Cookie") final String
-                cookie, @Query("page") final int page);
+                                                                           cookie, @Query("page") final int page);
 
         @POST("/threads/new")
         public void createThread(@Header("Cookie") final String cookie,
-                @Body final RequestThread thread, final Callback<Response> response);
+                                 @Body final RequestThread thread, final Callback<Response> response);
 
         @POST("/threads/subscribe")
         public void subscribe(@Header("Cookie") final String cookie,
-                @Body final RequestThreadSubscription subscription,
-                final Callback<Response> response);
+                              @Body final RequestThreadSubscription subscription,
+                              final Callback<Response> response);
 
         @DELETE("/threads/unsubscribe")
         public void unsubscribe(@Header("Cookie") final String cookie,
-                @Query("threadid") final String threadid, final Callback<Response> response);
+                                @Query("threadid") final String threadid, final Callback<Response> response);
     }
 
     private class SubscribeCallback implements Callback<Response> {

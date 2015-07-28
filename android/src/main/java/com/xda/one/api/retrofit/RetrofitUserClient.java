@@ -1,5 +1,7 @@
 package com.xda.one.api.retrofit;
 
+import android.content.Context;
+
 import com.xda.one.R;
 import com.xda.one.api.inteface.UserClient;
 import com.xda.one.api.misc.Consumer;
@@ -18,8 +20,6 @@ import com.xda.one.event.user.UserProfileEvent;
 import com.xda.one.event.user.UserProfileFailedEvent;
 import com.xda.one.parser.ContentParser;
 import com.xda.one.util.Utils;
-
-import android.content.Context;
 
 import java.util.HashMap;
 import java.util.List;
@@ -114,8 +114,8 @@ public class RetrofitUserClient implements UserClient {
 
     @Override
     public void register(final String email, final String username, final String password,
-            final String challenge, final String response, final Consumer<Response> success,
-            final Consumer<Result> failure) {
+                         final String challenge, final String response, final Consumer<Response> success,
+                         final Consumer<Result> failure) {
         final Map<String, String> map = new HashMap<>();
         map.put("username", username);
         map.put("password", password);
@@ -140,11 +140,11 @@ public class RetrofitUserClient implements UserClient {
     }
 
     private void getUserInternalAsync(final Consumer<ResponseUserProfile> success,
-            final Consumer<RetrofitError> failure) {
+                                      final Consumer<RetrofitError> failure) {
         mUserAPI.getUser(getAuthToken(), new Callback<ResponseUserProfile>() {
             @Override
             public void success(final ResponseUserProfile profile,
-                    final Response response) {
+                                final Response response) {
                 final CharSequence parsedSig = ContentParser.parseBBCode(mContext,
                         String.format(mContext.getString(R.string.user_profile_signature),
                                 profile.getSignature()));
@@ -234,29 +234,29 @@ public class RetrofitUserClient implements UserClient {
 
         @POST("/user/login")
         public void login(@Body final Map<String, String> body,
-                final Callback<Response> callback);
+                          final Callback<Response> callback);
 
         @POST("/user/register")
         public void register(@Body final Map<String, String> body,
-                final Callback<Response> callback);
+                             final Callback<Response> callback);
 
         @GET("/user")
         public ResponseUserProfile getUser(@retrofit.http.Header("Cookie") final String cookie);
 
         @GET("/user")
         public void getUser(@retrofit.http.Header("Cookie") final String cookie,
-                final Callback<ResponseUserProfile> callback);
+                            final Callback<ResponseUserProfile> callback);
 
         @GET("/user/quotes")
         public ResponseQuoteContainer getQuotes(@retrofit.http.Header("Cookie") final String cookie,
-                @Query("page") final int page);
+                                                @Query("page") final int page);
 
         @GET("/user/mentions")
         public ResponseMentionContainer getMentions(@retrofit.http.Header("Cookie") final String
-                cookie, @Query("page") final int page);
+                                                            cookie, @Query("page") final int page);
 
         @GET("/user/userinfo")
         public ResponseUserProfile getUserProfile(@retrofit.http.Header("Cookie") final String
-                cookie, @Query("userid") final String userId);
+                                                          cookie, @Query("userid") final String userId);
     }
 }

@@ -11,7 +11,7 @@ public class UserProfileEvent extends Event {
     public final XDAAccount account;
 
     public UserProfileEvent(final XDAAccount account,
-            final ResponseUserProfile responseUserProfile) {
+                            final ResponseUserProfile responseUserProfile) {
         this.account = account;
         this.userProfile = responseUserProfile;
     }

@@ -1,10 +1,5 @@
 package com.xda.one.ui;
 
-import com.xda.one.R;
-import com.xda.one.api.model.interfaces.Forum;
-import com.xda.one.ui.helper.ActionModeHelper;
-import com.xda.one.util.Utils;
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.xda.one.R;
+import com.xda.one.api.model.interfaces.Forum;
+import com.xda.one.ui.helper.ActionModeHelper;
+import com.xda.one.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +34,10 @@ public class ForumAdapter<T extends Forum>
     private final SubscribeButtonDelegate mSubscribeButtonDelegate;
 
     public ForumAdapter(final Context context, final View.OnClickListener listener,
-            final View.OnLongClickListener longClickListener,
-            final ActionModeHelper modeHelper,
-            final ImageViewDeviceDelegate imageViewDeviceDelegate,
-            final SubscribeButtonDelegate buttonDelegate) {
+                        final View.OnLongClickListener longClickListener,
+                        final ActionModeHelper modeHelper,
+                        final ImageViewDeviceDelegate imageViewDeviceDelegate,
+                        final SubscribeButtonDelegate buttonDelegate) {
         mLayoutInflater = LayoutInflater.from(context);
         mForums = new ArrayList<>();
         mListener = listener;

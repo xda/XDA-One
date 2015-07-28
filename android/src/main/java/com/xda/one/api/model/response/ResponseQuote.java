@@ -1,11 +1,11 @@
 package com.xda.one.api.model.response;
 
+import android.os.Parcel;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.xda.one.api.model.interfaces.Quote;
 import com.xda.one.api.model.interfaces.UnifiedThread;
-
-import android.os.Parcel;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ResponseQuote implements Quote {

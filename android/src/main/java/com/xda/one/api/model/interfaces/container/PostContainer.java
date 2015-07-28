@@ -1,9 +1,9 @@
 package com.xda.one.api.model.interfaces.container;
 
+import android.os.Parcelable;
+
 import com.xda.one.api.model.interfaces.Post;
 import com.xda.one.api.model.response.ResponseUnifiedThread;
-
-import android.os.Parcelable;
 
 import java.util.List;
 

@@ -1,12 +1,12 @@
 package com.xda.one.ui.thread;
 
-import com.xda.one.loader.ParticipatedThreadLoader;
-import com.xda.one.model.augmented.container.AugmentedUnifiedThreadContainer;
-
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.content.Loader;
+
+import com.xda.one.loader.ParticipatedThreadLoader;
+import com.xda.one.model.augmented.container.AugmentedUnifiedThreadContainer;
 
 public class ParticipatedThreadLoaderStrategy implements ThreadLoaderStrategy {
 
@@ -23,7 +23,7 @@ public class ParticipatedThreadLoaderStrategy implements ThreadLoaderStrategy {
 
     @Override
     public Loader<AugmentedUnifiedThreadContainer> createLoader(final Context context,
-            final int forumId, final int currentPage) {
+                                                                final int forumId, final int currentPage) {
         return new ParticipatedThreadLoader(context, currentPage);
     }
 

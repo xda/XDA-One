@@ -1,11 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.model.augmented.AugmentedUnifiedThread;
-import com.xda.one.ui.helper.ActionModeHelper;
-import com.xda.one.util.Utils;
-
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.model.augmented.AugmentedUnifiedThread;
+import com.xda.one.ui.helper.ActionModeHelper;
+import com.xda.one.util.Utils;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -29,26 +29,18 @@ public class ThreadAdapter
     private static final int NORMAL_VIEW_TYPE = 1;
 
     private static final int FOOTER_VIEW_TYPE = 2;
-
-    private int mFooterItemCount = 0;
-
     private final Context mContext;
-
     private final LayoutInflater mLayoutInflater;
-
     private final List<AugmentedUnifiedThread> mThreads;
-
     private final View.OnClickListener mViewClickListener;
-
     private final View.OnLongClickListener mLongClickListener;
-
     private final ActionModeHelper mActionModeHelper;
-
+    private int mFooterItemCount = 0;
     private NumberFormat mNumberFormat;
 
     public ThreadAdapter(final Context context, final View.OnClickListener
             onClickListener, final View.OnLongClickListener longClickListener,
-            final ActionModeHelper helper) {
+                         final ActionModeHelper helper) {
         mLongClickListener = longClickListener;
         mActionModeHelper = helper;
         mNumberFormat = NumberFormat.getInstance(Locale.getDefault());

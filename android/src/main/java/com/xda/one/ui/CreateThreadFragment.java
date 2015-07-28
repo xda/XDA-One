@@ -1,14 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.api.inteface.ThreadClient;
-import com.xda.one.api.misc.Consumer;
-import com.xda.one.api.misc.Result;
-import com.xda.one.api.retrofit.RetrofitThreadClient;
-import com.xda.one.auth.XDAAccount;
-import com.xda.one.util.AccountUtils;
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -21,6 +12,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.api.inteface.ThreadClient;
+import com.xda.one.api.misc.Consumer;
+import com.xda.one.api.misc.Result;
+import com.xda.one.api.retrofit.RetrofitThreadClient;
+import com.xda.one.auth.XDAAccount;
+import com.xda.one.util.AccountUtils;
 
 import static android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE;
 
@@ -56,7 +56,7 @@ public class CreateThreadFragment extends DialogFragment implements TextWatcher 
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.create_thread_fragment, container, false);
     }
 

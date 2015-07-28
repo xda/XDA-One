@@ -1,5 +1,21 @@
 package com.xda.one.ui;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.XDALinerLayoutManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+
 import com.squareup.otto.Subscribe;
 import com.xda.one.R;
 import com.xda.one.api.inteface.PrivateMessageClient;
@@ -16,22 +32,6 @@ import com.xda.one.ui.listener.InfiniteRecyclerLoadHelper;
 import com.xda.one.ui.widget.XDARefreshLayout;
 import com.xda.one.util.UIUtils;
 import com.xda.one.util.Utils;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.XDALinerLayoutManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,12 @@ public class MessageFragment extends Fragment implements LoaderManager
     private static final String PAGES_SAVED_STATE = "total_pages_state";
 
     private static final int VIEW_MESSAGE_REQUEST_CODE = 100;
-
+    // Global helpers
+    private PrivateMessageClient mPrivateMessageClient;
+    // Views
+    private RecyclerView mRecyclerView;
+    private XDARefreshLayout mRefreshLayout;
+    private MessageAdapter mAdapter;
     private final Object mEventHandler = new Object() {
         @Subscribe
         public void onMessageDeleted(final MessageDeletedEvent event) {
@@ -70,17 +75,6 @@ public class MessageFragment extends Fragment implements LoaderManager
             mAdapter.update(event.message);
         }
     };
-
-    // Global helpers
-    private PrivateMessageClient mPrivateMessageClient;
-
-    // Views
-    private RecyclerView mRecyclerView;
-
-    private XDARefreshLayout mRefreshLayout;
-
-    private MessageAdapter mAdapter;
-
     // Helpers
     private InfiniteRecyclerLoadHelper mInfiniteScrollListener;
 
@@ -117,7 +111,7 @@ public class MessageFragment extends Fragment implements LoaderManager
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.message_fragment, container, false);
     }
 
@@ -198,7 +192,7 @@ public class MessageFragment extends Fragment implements LoaderManager
 
     @Override
     public void onLoadFinished(final Loader<AugmentedMessageContainer> loader,
-            final AugmentedMessageContainer data) {
+                               final AugmentedMessageContainer data) {
         if (data == null) {
             // TODO - we need to tailor this to lack of connection/other network issue
             addDataToAdapter(null);

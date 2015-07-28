@@ -1,5 +1,9 @@
 package com.xda.one.parser;
 
+import android.content.Context;
+import android.text.Spannable;
+import android.text.style.ImageSpan;
+
 import com.xda.one.R;
 
 import net.nightwhistler.htmlspanner.HtmlSpanner;
@@ -8,10 +12,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.kefirsf.bb.BBProcessorFactory;
 import org.kefirsf.bb.TextProcessor;
-
-import android.content.Context;
-import android.text.Spannable;
-import android.text.style.ImageSpan;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -117,7 +117,7 @@ public class ContentParser {
     }
 
     private static Spannable parseBBCode(final TextProcessor processor,
-            final CharSequence messageText) {
+                                         final CharSequence messageText) {
         final String htmlCode = processor.process(messageText).toString();
         final String unescapedHtml = StringEscapeUtils.unescapeHtml4(htmlCode);
         return SPANNER.fromHtml(unescapedHtml);

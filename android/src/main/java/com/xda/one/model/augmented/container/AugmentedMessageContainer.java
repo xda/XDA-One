@@ -1,12 +1,12 @@
 package com.xda.one.model.augmented.container;
 
+import android.content.Context;
+
 import com.xda.one.api.model.interfaces.Message;
 import com.xda.one.api.model.interfaces.container.MessageContainer;
 import com.xda.one.api.model.response.container.ResponseMessageContainer;
 import com.xda.one.model.augmented.AugmentedMessage;
 import com.xda.one.util.Utils;
-
-import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.List;

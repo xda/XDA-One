@@ -1,14 +1,5 @@
 package com.xda.one.auth;
 
-import com.squareup.otto.Subscribe;
-import com.xda.one.R;
-import com.xda.one.api.inteface.UserClient;
-import com.xda.one.api.retrofit.RetrofitUserClient;
-import com.xda.one.event.user.UserLoginEvent;
-import com.xda.one.event.user.UserLoginFailedEvent;
-import com.xda.one.ui.listener.MultipleNonEmptyTextViewListener;
-import com.xda.one.util.FragmentUtils;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -22,6 +13,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.squareup.otto.Subscribe;
+import com.xda.one.R;
+import com.xda.one.api.inteface.UserClient;
+import com.xda.one.api.retrofit.RetrofitUserClient;
+import com.xda.one.event.user.UserLoginEvent;
+import com.xda.one.event.user.UserLoginFailedEvent;
+import com.xda.one.ui.listener.MultipleNonEmptyTextViewListener;
+import com.xda.one.util.FragmentUtils;
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
 
@@ -105,7 +105,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container,
-            @Nullable final Bundle savedInstanceState) {
+                             @Nullable final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.login_fragment, container, false);
     }
 

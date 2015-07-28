@@ -16,13 +16,13 @@ public interface PostClient {
     public ResponsePostContainer getPosts(final String threadId, final int page);
 
     public void getPostsAsync(final String threadId, final int page,
-            final Callback<ResponsePostContainer> consumer);
+                              final Callback<ResponsePostContainer> consumer);
 
     public void getPostsById(String postId, Consumer<ResponsePostContainer> consumer,
-            final Runnable failure);
+                             final Runnable failure);
 
     public void getUnreadPostFeed(final UnifiedThread unifiedThread,
-            final Consumer<ResponsePostContainer> consumer, final Runnable failure);
+                                  final Consumer<ResponsePostContainer> consumer, final Runnable failure);
 
     public void addAttachmentAsync(final Post post, final Consumer<Result> runnable);
 

@@ -1,13 +1,13 @@
 package com.xda.one.search;
 
-import com.xda.one.db.ForumDbHelper;
-
-import org.apache.commons.lang3.NotImplementedException;
-
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
+
+import com.xda.one.db.ForumDbHelper;
+
+import org.apache.commons.lang3.NotImplementedException;
 
 public class SearchContentProvider extends ContentProvider {
 
@@ -43,14 +43,14 @@ public class SearchContentProvider extends ContentProvider {
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
-            String[] selectionArgs, String sortOrder) {
+                        String[] selectionArgs, String sortOrder) {
         final String query = uri.getLastPathSegment().toLowerCase();
         return mForumDbHelper.searchForums(query);
     }
 
     @Override
     public int update(Uri uri, ContentValues values, String selection,
-            String[] selectionArgs) {
+                      String[] selectionArgs) {
         // TODO: Implement this to handle requests to update one or more rows.
         throw new NotImplementedException("Not yet implemented");
     }

@@ -1,11 +1,11 @@
 package com.xda.one.loader;
 
+import android.content.Context;
+
 import com.xda.one.api.inteface.ThreadClient;
 import com.xda.one.api.model.response.container.ResponseUnifiedThreadContainer;
 import com.xda.one.api.retrofit.RetrofitThreadClient;
 import com.xda.one.model.augmented.container.AugmentedUnifiedThreadContainer;
-
-import android.content.Context;
 
 public class ParticipatedThreadLoader extends AsyncLoader<AugmentedUnifiedThreadContainer> {
 

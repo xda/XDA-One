@@ -1,16 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.otto.Subscribe;
-import com.xda.one.R;
-import com.xda.one.api.inteface.ForumClient;
-import com.xda.one.api.model.interfaces.Forum;
-import com.xda.one.api.model.response.ResponseForum;
-import com.xda.one.api.retrofit.RetrofitForumClient;
-import com.xda.one.event.forum.ForumSubscriptionChangedEvent;
-import com.xda.one.event.forum.ForumSubscriptionChangingFailedEvent;
-import com.xda.one.loader.SubscribedForumLoader;
-import com.xda.one.ui.widget.XDARefreshLayout;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,6 +14,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.squareup.otto.Subscribe;
+import com.xda.one.R;
+import com.xda.one.api.inteface.ForumClient;
+import com.xda.one.api.model.interfaces.Forum;
+import com.xda.one.api.model.response.ResponseForum;
+import com.xda.one.api.retrofit.RetrofitForumClient;
+import com.xda.one.event.forum.ForumSubscriptionChangedEvent;
+import com.xda.one.event.forum.ForumSubscriptionChangingFailedEvent;
+import com.xda.one.loader.SubscribedForumLoader;
+import com.xda.one.ui.widget.XDARefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +78,7 @@ public class SubscribedForumFragment extends Fragment
         }, new ForumAdapter.SubscribeButtonDelegate() {
             @Override
             public void setupSubscribeButton(final ImageView subscribeButton,
-                    final Forum forum) {
+                                             final Forum forum) {
                 subscribeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(final View view) {
@@ -96,7 +96,7 @@ public class SubscribedForumFragment extends Fragment
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.subscribed_forum_fragment, container, false);
     }
 
@@ -151,7 +151,7 @@ public class SubscribedForumFragment extends Fragment
 
     @Override
     public void onLoadFinished(final Loader<List<ResponseForum>> loader,
-            final List<ResponseForum> list) {
+                               final List<ResponseForum> list) {
         // Remove the list if the adapter is not empty
         if (!mAdapter.isEmpty()) {
             mAdapter.clear();
@@ -169,7 +169,7 @@ public class SubscribedForumFragment extends Fragment
     public interface Callback {
 
         public void switchCurrentlyDisplayedFragment(final Fragment fragment,
-                final boolean backStackAndAnimate, final String backstackTitle);
+                                                     final boolean backStackAndAnimate, final String backstackTitle);
     }
 
     public class EventHandler {

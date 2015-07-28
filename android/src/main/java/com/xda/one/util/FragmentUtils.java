@@ -1,5 +1,11 @@
 package com.xda.one.util;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
+import android.util.Log;
+
 import com.xda.one.R;
 import com.xda.one.api.model.interfaces.Forum;
 import com.xda.one.api.model.response.container.ResponsePostContainer;
@@ -7,12 +13,6 @@ import com.xda.one.model.augmented.AugmentedUnifiedThread;
 import com.xda.one.ui.ForumFragment;
 import com.xda.one.ui.PostPagerFragment;
 import com.xda.one.ui.ThreadFragment;
-
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.text.TextUtils;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +27,8 @@ public class FragmentUtils {
     }
 
     public static void switchToForumContent(final FragmentManager parentManager,
-            final Fragment parent, final List<String> hierarchyList, final String forumTitle,
-            final Forum forum) {
+                                            final Fragment parent, final List<String> hierarchyList, final String forumTitle,
+                                            final Forum forum) {
         final ArrayList<String> hierarchy = new ArrayList<>(hierarchyList);
         hierarchy.add(forum.getTitle());
 
@@ -48,8 +48,8 @@ public class FragmentUtils {
     }
 
     private static void switchToForumList(final Fragment parent,
-            final FragmentManager parentManager, final ArrayList<String> hierarchy,
-            final String forumTitle, final Forum forum) {
+                                          final FragmentManager parentManager, final ArrayList<String> hierarchy,
+                                          final String forumTitle, final Forum forum) {
         final FragmentManager fragmentManager = parent == null
                 ? parentManager
                 : parent.getFragmentManager();
@@ -66,7 +66,7 @@ public class FragmentUtils {
     }
 
     public static void switchToThreadList(final FragmentManager fragmentManager,
-            final Forum forum, final String parentTitle, final ArrayList<String> hierarchy) {
+                                          final Forum forum, final String parentTitle, final ArrayList<String> hierarchy) {
         final FragmentTransaction transaction = getDefaultTransaction(fragmentManager);
         transaction.addToBackStack(forum.getTitle());
         final Fragment fragment = ThreadFragment.createDefault(forum.getForumId(),
@@ -75,12 +75,12 @@ public class FragmentUtils {
     }
 
     public static Fragment switchToPostList(final AugmentedUnifiedThread unifiedThread,
-            final ArrayList<String> hierarchy) {
+                                            final ArrayList<String> hierarchy) {
         return switchToPostList(unifiedThread, hierarchy, null);
     }
 
     public static Fragment switchToPostList(final AugmentedUnifiedThread unifiedThread,
-            final ArrayList<String> hierarchy, final ResponsePostContainer container) {
+                                            final ArrayList<String> hierarchy, final ResponsePostContainer container) {
         final int pageCount;
         if (container == null) {
             final int totalPosts = unifiedThread.getTotalPosts();

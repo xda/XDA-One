@@ -1,11 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.model.augmented.AugmentedMention;
-import com.xda.one.util.StringUtils;
-import com.xda.one.util.Utils;
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.model.augmented.AugmentedMention;
+import com.xda.one.util.StringUtils;
+import com.xda.one.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,23 +23,16 @@ public class MentionAdapter extends RecyclerView.Adapter<MentionAdapter.MentionV
     private static final int NORMAL_VIEW_TYPE = 1;
 
     private static final int FOOTER_VIEW_TYPE = 2;
-
+    private static final int MAX_STRING_LENGTH = 100;
+    private final LayoutInflater mLayoutInflater;
+    private final List<AugmentedMention> mMentions;
+    private final View.OnClickListener mViewClickListener;
+    private final Context mContext;
+    private final View.OnClickListener mAvatarClickListener;
     private int mFooterItemCount = 0;
 
-    private static final int MAX_STRING_LENGTH = 100;
-
-    private final LayoutInflater mLayoutInflater;
-
-    private final List<AugmentedMention> mMentions;
-
-    private final View.OnClickListener mViewClickListener;
-
-    private final Context mContext;
-
-    private final View.OnClickListener mAvatarClickListener;
-
     public MentionAdapter(final Context context, final View.OnClickListener viewClickListener,
-            final View.OnClickListener avatarClickListener) {
+                          final View.OnClickListener avatarClickListener) {
         mContext = context;
         mViewClickListener = viewClickListener;
         mAvatarClickListener = avatarClickListener;

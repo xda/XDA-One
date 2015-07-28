@@ -1,11 +1,11 @@
 package com.xda.one.loader;
 
+import android.content.Context;
+
 import com.xda.one.api.inteface.UserClient;
 import com.xda.one.api.model.interfaces.container.QuoteContainer;
 import com.xda.one.api.retrofit.RetrofitUserClient;
 import com.xda.one.model.augmented.container.AugmentedQuoteContainer;
-
-import android.content.Context;
 
 public class QuoteLoader extends AsyncLoader<AugmentedQuoteContainer> {
 

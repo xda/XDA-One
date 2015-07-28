@@ -1,12 +1,12 @@
 package com.xda.one.ui.thread;
 
-import com.xda.one.model.augmented.AugmentedUnifiedThread;
-
 import android.app.ProgressDialog;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+
+import com.xda.one.model.augmented.AugmentedUnifiedThread;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class UnreadThreadClickStrategy implements ThreadClickStrategy {
 
     @Override
     public void onClick(final Fragment fragment, final List<String> hierarchy,
-            final AugmentedUnifiedThread thread) {
+                        final AugmentedUnifiedThread thread) {
         final ProgressDialog progressDialog = ProgressDialog.show(fragment.getActivity(),
                 "Finding post position", "Finding position of most recently read post",
                 true, true);

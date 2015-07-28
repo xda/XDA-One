@@ -1,24 +1,5 @@
 package com.xda.one.ui;
 
-import com.xda.one.R;
-import com.xda.one.api.inteface.PostClient;
-import com.xda.one.api.misc.Consumer;
-import com.xda.one.api.misc.Result;
-import com.xda.one.api.model.interfaces.Post;
-import com.xda.one.api.model.interfaces.UnifiedThread;
-import com.xda.one.api.model.response.ResponseAttachment;
-import com.xda.one.api.model.response.ResponseUnifiedThread;
-import com.xda.one.api.model.response.container.ResponsePostContainer;
-import com.xda.one.api.retrofit.RetrofitPostClient;
-import com.xda.one.loader.PostLoader;
-import com.xda.one.model.augmented.AugmentedPost;
-import com.xda.one.model.augmented.AugmentedPostContainer;
-import com.xda.one.ui.helper.ActionModeHelper;
-import com.xda.one.ui.helper.CancellableCallbackHelper;
-import com.xda.one.ui.listener.AvatarClickListener;
-import com.xda.one.util.UIUtils;
-import com.xda.one.util.Utils;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
@@ -46,6 +27,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.xda.one.R;
+import com.xda.one.api.inteface.PostClient;
+import com.xda.one.api.misc.Consumer;
+import com.xda.one.api.misc.Result;
+import com.xda.one.api.model.interfaces.Post;
+import com.xda.one.api.model.interfaces.UnifiedThread;
+import com.xda.one.api.model.response.ResponseAttachment;
+import com.xda.one.api.model.response.ResponseUnifiedThread;
+import com.xda.one.api.model.response.container.ResponsePostContainer;
+import com.xda.one.api.retrofit.RetrofitPostClient;
+import com.xda.one.loader.PostLoader;
+import com.xda.one.model.augmented.AugmentedPost;
+import com.xda.one.model.augmented.AugmentedPostContainer;
+import com.xda.one.ui.helper.ActionModeHelper;
+import com.xda.one.ui.helper.CancellableCallbackHelper;
+import com.xda.one.ui.listener.AvatarClickListener;
+import com.xda.one.util.UIUtils;
+import com.xda.one.util.Utils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,16 +63,12 @@ public class PostFragment extends Fragment
     private static final int SCROLL_TO_LAST_LIST_ITEM = -1;
 
     private static final int SCROLL_TO_NONE = -2;
-
-    private int mScrollToItem = SCROLL_TO_NONE;
-
     private final BroadcastReceiver mOnNotificationClick = new BroadcastReceiver() {
         @Override
         public void onReceive(final Context context, final Intent intent) {
             // TODO - do something useful here
         }
     };
-
     private final BroadcastReceiver mOnComplete = new BroadcastReceiver() {
         @Override
         public void onReceive(final Context context, final Intent intent) {
@@ -81,7 +77,7 @@ public class PostFragment extends Fragment
             Toast.makeText(context, "Finished downloading", Toast.LENGTH_LONG).show();
         }
     };
-
+    private int mScrollToItem = SCROLL_TO_NONE;
     private PostAdapter mAdapter;
 
     private int mPage;
@@ -222,7 +218,7 @@ public class PostFragment extends Fragment
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.post_fragment, container, false);
     }
 
@@ -300,7 +296,7 @@ public class PostFragment extends Fragment
 
     @Override
     public void onLoadFinished(final Loader<AugmentedPostContainer> loader,
-            final AugmentedPostContainer container) {
+                               final AugmentedPostContainer container) {
         if (container == null) {
             onItemsReceived(null);
         } else {

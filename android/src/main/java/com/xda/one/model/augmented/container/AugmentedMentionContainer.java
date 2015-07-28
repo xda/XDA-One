@@ -1,11 +1,11 @@
 package com.xda.one.model.augmented.container;
 
+import android.content.Context;
+
 import com.xda.one.R;
 import com.xda.one.api.model.interfaces.Mention;
 import com.xda.one.api.model.interfaces.container.MentionContainer;
 import com.xda.one.model.augmented.AugmentedMention;
-
-import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.List;

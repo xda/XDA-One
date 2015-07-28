@@ -1,15 +1,15 @@
 package com.xda.one.model.augmented;
 
-import com.xda.one.api.model.interfaces.Quote;
-import com.xda.one.api.model.response.ResponseQuote;
-import com.xda.one.parser.ContentParser;
-
 import android.content.Context;
 import android.os.Parcel;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+
+import com.xda.one.api.model.interfaces.Quote;
+import com.xda.one.api.model.response.ResponseQuote;
+import com.xda.one.parser.ContentParser;
 
 public final class AugmentedQuote implements Quote {
 
@@ -34,7 +34,7 @@ public final class AugmentedQuote implements Quote {
     private final Spanned mCombinedUsernameContent;
 
     public AugmentedQuote(final Quote quote, final Context context, final int primary,
-            final int secondary) {
+                          final int secondary) {
         mQuote = quote;
         mUnifiedThread = new AugmentedUnifiedThread(quote.getThread(), context);
 

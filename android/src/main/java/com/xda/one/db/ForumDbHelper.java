@@ -1,8 +1,5 @@
 package com.xda.one.db;
 
-import com.xda.one.api.model.interfaces.Forum;
-import com.xda.one.api.model.response.ResponseForum;
-
 import android.app.SearchManager;
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,6 +9,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.provider.BaseColumns;
 import android.text.TextUtils;
+
+import com.xda.one.api.model.interfaces.Forum;
+import com.xda.one.api.model.response.ResponseForum;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -93,7 +93,7 @@ public class ForumDbHelper extends SQLiteOpenHelper {
     }
 
     public static ResponseForum getForumWithTitleFromCursor(final Cursor cursor,
-            final String titleColumn) {
+                                                            final String titleColumn) {
         final ResponseForum forum = new ResponseForum();
         forum.setTitle(cursor.getString(cursor.getColumnIndex(titleColumn)));
         forum.setForumId(cursor.getInt(cursor.getColumnIndex(ForumEntry.COLUMN_NAME_FORUMID)));
@@ -114,13 +114,13 @@ public class ForumDbHelper extends SQLiteOpenHelper {
     }
 
     private static Cursor getForumsChildren(final SQLiteDatabase database,
-            final int forumId) {
+                                            final int forumId) {
         final String whereClause = ForumEntry.COLUMN_NAME_PARENTID + "=" + String.valueOf(forumId);
         return database.query(ForumDbHelper.TABLE_NAME, null, whereClause, null, null, null, null);
     }
 
     private static void addAllRecursive(final SQLiteDatabase database,
-            final Collection<ResponseForum> list) {
+                                        final Collection<ResponseForum> list) {
         if (list == null) {
             return;
         }

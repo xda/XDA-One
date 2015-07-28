@@ -1,9 +1,5 @@
 package com.xda.one.ui;
 
-import com.xda.one.R;
-import com.xda.one.ui.widget.TabLayout;
-import com.xda.one.util.UIUtils;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +10,10 @@ import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.xda.one.R;
+import com.xda.one.ui.widget.TabLayout;
+import com.xda.one.util.UIUtils;
 
 public class SubscribedPagerFragment extends Fragment implements SubscribedForumFragment.Callback {
 
@@ -28,7 +28,7 @@ public class SubscribedPagerFragment extends Fragment implements SubscribedForum
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.subscribed_fragment, container, false);
     }
 
@@ -57,14 +57,14 @@ public class SubscribedPagerFragment extends Fragment implements SubscribedForum
 
     @Override
     public void switchCurrentlyDisplayedFragment(final Fragment fragment,
-            final boolean backStackAndAnimate, final String title) {
+                                                 final boolean backStackAndAnimate, final String title) {
         mCallback.switchCurrentlyDisplayedFragment(fragment, backStackAndAnimate, title);
     }
 
     public interface Callback {
 
         public void switchCurrentlyDisplayedFragment(final Fragment fragment,
-                final boolean backStackAndAnimate, final String title);
+                                                     final boolean backStackAndAnimate, final String title);
     }
 
     private class SubscribeFragmentAdapter extends FragmentPagerAdapter {

@@ -1,8 +1,5 @@
 package com.xda.one.ui.helper;
 
-import com.xda.one.ui.BaseActivity;
-import com.xda.one.util.Utils;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.view.ActionMode;
@@ -10,6 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.xda.one.ui.BaseActivity;
+import com.xda.one.util.Utils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -36,8 +36,8 @@ public class ActionModeHelper implements View.OnClickListener, View.OnLongClickL
     private ActionMode mActionMode;
 
     public ActionModeHelper(final Activity activity,
-            final RecyclerViewActionModeCallback callback, final View.OnClickListener listener,
-            final SelectionMode selectionMode) {
+                            final RecyclerViewActionModeCallback callback, final View.OnClickListener listener,
+                            final SelectionMode selectionMode) {
         mActivity = (BaseActivity) activity;
         mActionModeCallback = callback;
         mClickListener = listener;
@@ -131,7 +131,7 @@ public class ActionModeHelper implements View.OnClickListener, View.OnLongClickL
     }
 
     public void onCheckedStateChanged(final ActionMode actionMode, int position,
-            boolean isNowChecked) {
+                                      boolean isNowChecked) {
         if (mActionModeCallback != null) {
             mActionModeCallback.onCheckedStateChanged(actionMode, position, isNowChecked);
         }
@@ -229,7 +229,7 @@ public class ActionModeHelper implements View.OnClickListener, View.OnLongClickL
         }
 
         public void onCheckedStateChanged(final ActionMode actionMode, int position,
-                boolean isNowChecked) {
+                                          boolean isNowChecked) {
         }
     }
 }

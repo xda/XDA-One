@@ -1,12 +1,12 @@
 package com.xda.one.api.model.response.container;
 
+import android.os.Parcel;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.xda.one.api.model.interfaces.container.PostContainer;
 import com.xda.one.api.model.response.ResponsePost;
 import com.xda.one.api.model.response.ResponseUnifiedThread;
-
-import android.os.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;

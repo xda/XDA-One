@@ -1,13 +1,13 @@
 package com.xda.one.ui;
 
-import com.xda.one.R;
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.xda.one.R;
 
 public class PostPageAdapter extends RecyclerView.Adapter<PostPageAdapter.PageViewHolder> {
 
@@ -18,7 +18,7 @@ public class PostPageAdapter extends RecyclerView.Adapter<PostPageAdapter.PageVi
     private final View.OnClickListener mOnClickListener;
 
     public PostPageAdapter(final Context context, final int count,
-            final View.OnClickListener clickListener) {
+                           final View.OnClickListener clickListener) {
         mCount = count;
         mOnClickListener = clickListener;
         mLayoutInflater = LayoutInflater.from(context);

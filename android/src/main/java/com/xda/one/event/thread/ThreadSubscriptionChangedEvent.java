@@ -10,7 +10,7 @@ public class ThreadSubscriptionChangedEvent extends Event {
     public final boolean isNowSubscribed;
 
     public ThreadSubscriptionChangedEvent(final UnifiedThread thread,
-            final boolean isNowSubscribed) {
+                                          final boolean isNowSubscribed) {
         this.thread = thread;
         this.isNowSubscribed = isNowSubscribed;
     }

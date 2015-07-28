@@ -1,7 +1,5 @@
 package com.dd.xda;
 
-import com.dd.circular.progress.button.R;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -10,6 +8,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.widget.ImageButton;
+
+import com.dd.circular.progress.button.R;
 
 public class CircularProgressButton extends ImageButton {
 
@@ -49,7 +49,7 @@ public class CircularProgressButton extends ImageButton {
     }
 
     protected static TypedArray getTypedArray(Context context, AttributeSet attributeSet,
-            int[] attr) {
+                                              int[] attr) {
         return context.obtainStyledAttributes(attributeSet, attr, 0, 0);
     }
 

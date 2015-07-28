@@ -1,15 +1,15 @@
 package com.xda.one.model.augmented;
 
-import com.xda.one.api.model.interfaces.Mention;
-import com.xda.one.api.model.response.ResponseMention;
-import com.xda.one.parser.ContentParser;
-
 import android.content.Context;
 import android.os.Parcel;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+
+import com.xda.one.api.model.interfaces.Mention;
+import com.xda.one.api.model.response.ResponseMention;
+import com.xda.one.parser.ContentParser;
 
 public class AugmentedMention implements Mention {
 
@@ -34,7 +34,7 @@ public class AugmentedMention implements Mention {
     private final Spanned mCombinedUsernameContent;
 
     public AugmentedMention(final Mention mention, final Context context, final int primary,
-            final int secondary) {
+                            final int secondary) {
         mMention = mention;
         mUnifiedThread = new AugmentedUnifiedThread(mention.getThread(), context);
 

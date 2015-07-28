@@ -1,10 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.api.model.interfaces.Message;
-import com.xda.one.util.Utils;
-
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.api.model.interfaces.Message;
+import com.xda.one.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,21 +23,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     private static final int NORMAL_VIEW_TYPE = 1;
 
     private static final int FOOTER_VIEW_TYPE = 2;
-
+    private final Context mContext;
+    private final LayoutInflater mLayoutInflater;
+    private final List<Message> mMessages;
+    private final View.OnClickListener mViewClickListener;
+    private final View.OnClickListener mAvatarClickListener;
     private int mFooterItemCount = 0;
 
-    private final Context mContext;
-
-    private final LayoutInflater mLayoutInflater;
-
-    private final List<Message> mMessages;
-
-    private final View.OnClickListener mViewClickListener;
-
-    private final View.OnClickListener mAvatarClickListener;
-
     public MessageAdapter(final Context context, final View.OnClickListener viewClickListener,
-            final View.OnClickListener avatarClickListener) {
+                          final View.OnClickListener avatarClickListener) {
         mContext = context;
         mViewClickListener = viewClickListener;
         mAvatarClickListener = avatarClickListener;

@@ -17,17 +17,14 @@ import java.util.List;
 public class HierarchySpinnerAdapter extends BaseAdapter
         implements ActionBar.OnNavigationListener {
 
-    private LayoutInflater mLayouInflater = null;
-
-    private List<String> mHierarchy;
-
-    private FragmentManager fragmentManager;
-
     Context context;
+    private LayoutInflater mLayouInflater = null;
+    private List<String> mHierarchy;
+    private FragmentManager fragmentManager;
 
 
     public HierarchySpinnerAdapter(Context context, LayoutInflater mLayoutInflater,
-        List<String> mHierarchy,FragmentManager fragmentManager) {
+                                   List<String> mHierarchy, FragmentManager fragmentManager) {
         this.context = context;
         mLayouInflater = mLayoutInflater;
         this.mHierarchy = mHierarchy;
@@ -68,7 +65,8 @@ public class HierarchySpinnerAdapter extends BaseAdapter
 
     @Override
     public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-        /*getFragmentManager()*/fragmentManager.popBackStack(getItem(itemPosition), 0);
+        /*getFragmentManager()*/
+        fragmentManager.popBackStack(getItem(itemPosition), 0);
         return true;
     }
 }

@@ -1,11 +1,5 @@
 package com.xda.one.ui;
 
-import com.xda.one.R;
-import com.xda.one.ui.widget.FloatingActionButton;
-import com.xda.one.ui.widget.TabLayout;
-import com.xda.one.util.CompatUtils;
-import com.xda.one.util.UIUtils;
-
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +14,12 @@ import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.xda.one.R;
+import com.xda.one.ui.widget.FloatingActionButton;
+import com.xda.one.ui.widget.TabLayout;
+import com.xda.one.util.CompatUtils;
+import com.xda.one.util.UIUtils;
 
 public class MessagePagerFragment extends Fragment {
 
@@ -38,7 +38,7 @@ public class MessagePagerFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.message_pager_fragment, container, false);
     }
 

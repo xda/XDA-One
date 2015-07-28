@@ -1,10 +1,10 @@
 package com.xda.one.util;
 
-import com.xda.one.model.augmented.AugmentedPost;
-import com.xda.one.parser.TextDataStructure;
-
 import android.text.TextUtils;
 import android.util.Pair;
+
+import com.xda.one.model.augmented.AugmentedPost;
+import com.xda.one.parser.TextDataStructure;
 
 public class PostUtils {
 
@@ -15,7 +15,7 @@ public class PostUtils {
     }
 
     public static String getCreatedText(final TextDataStructure textDataStructure,
-            final int maxLimit) {
+                                        final int maxLimit) {
         final StringBuilder builder = new StringBuilder();
         for (final TextDataStructure.Section section : textDataStructure.getSections()) {
             if (section.getType() != TextDataStructure.SectionType.NORMAL) {

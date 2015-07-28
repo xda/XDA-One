@@ -1,12 +1,12 @@
 package com.xda.one.model.augmented;
 
+import android.content.Context;
+import android.os.Parcel;
+
 import com.xda.one.api.model.interfaces.Post;
 import com.xda.one.api.model.interfaces.container.PostContainer;
 import com.xda.one.api.model.response.ResponseUnifiedThread;
 import com.xda.one.api.model.response.container.ResponsePostContainer;
-
-import android.content.Context;
-import android.os.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;

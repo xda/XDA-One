@@ -19,7 +19,7 @@ public class InfiniteRecyclerLoadHelper extends RecyclerView.OnScrollListener
     private boolean mLoading = false;
 
     public InfiniteRecyclerLoadHelper(final RecyclerView recyclerView, final Callback callback,
-            final int totalPages, final RecyclerView.OnScrollListener scrollListener) {
+                                      final int totalPages, final RecyclerView.OnScrollListener scrollListener) {
         mRecyclerEndHelper = new RecyclerEndHelper(recyclerView, this);
         mCallback = callback;
         mTotalPages = totalPages;

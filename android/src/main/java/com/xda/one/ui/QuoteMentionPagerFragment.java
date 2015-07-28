@@ -1,9 +1,5 @@
 package com.xda.one.ui;
 
-import com.xda.one.R;
-import com.xda.one.ui.widget.TabLayout;
-import com.xda.one.util.UIUtils;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +9,10 @@ import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.xda.one.R;
+import com.xda.one.ui.widget.TabLayout;
+import com.xda.one.util.UIUtils;
 
 public class QuoteMentionPagerFragment extends Fragment {
 
@@ -31,7 +31,7 @@ public class QuoteMentionPagerFragment extends Fragment {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.quote_mention_pager_fragment, container, false);
     }
 

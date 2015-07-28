@@ -1,10 +1,10 @@
 package com.xda.one.loader;
 
+import android.content.Context;
+
 import com.xda.one.api.inteface.NewsClient;
 import com.xda.one.api.model.response.container.ResponseNewsContainer;
 import com.xda.one.api.retrofit.RetrofitNewsClient;
-
-import android.content.Context;
 
 public class NewsLoader extends AsyncLoader<ResponseNewsContainer> {
 
