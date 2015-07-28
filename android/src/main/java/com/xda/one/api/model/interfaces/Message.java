@@ -1,8 +1,8 @@
 package com.xda.one.api.model.interfaces;
 
-import com.xda.one.parser.TextDataStructure;
-
 import android.os.Parcelable;
+
+import com.xda.one.parser.TextDataStructure;
 
 public interface Message extends Parcelable {
 

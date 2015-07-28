@@ -1,10 +1,5 @@
 package com.xda.one.auth;
 
-import com.xda.one.api.model.response.ResponseForum;
-import com.xda.one.loader.ForumLoader;
-import com.xda.one.model.misc.ForumType;
-import com.xda.one.util.Utils;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,6 +7,11 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.widget.Toast;
+
+import com.xda.one.api.model.response.ResponseForum;
+import com.xda.one.loader.ForumLoader;
+import com.xda.one.model.misc.ForumType;
+import com.xda.one.util.Utils;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class AuthForumLoaderCallbacks
     private final ProgressDialog mProgressDialog;
 
     public AuthForumLoaderCallbacks(final Activity activity, final XDAAccount account,
-            final ProgressDialog progressDialog) {
+                                    final ProgressDialog progressDialog) {
         mActivity = activity;
         mAccount = account;
         mProgressDialog = progressDialog;
@@ -38,7 +38,7 @@ public class AuthForumLoaderCallbacks
 
     @Override
     public void onLoadFinished(final Loader<List<ResponseForum>> loader,
-            final List<ResponseForum> data) {
+                               final List<ResponseForum> data) {
         mProgressDialog.dismiss();
         if (Utils.isCollectionEmpty(data) || mAccount == null) {
             Toast.makeText(mActivity, "Something went wrong", Toast.LENGTH_SHORT).show();

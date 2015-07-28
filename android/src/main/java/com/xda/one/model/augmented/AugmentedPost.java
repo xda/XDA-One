@@ -1,15 +1,15 @@
 package com.xda.one.model.augmented;
 
+import android.content.Context;
+import android.os.Parcel;
+import android.text.Spannable;
+
 import com.xda.one.api.model.interfaces.Post;
 import com.xda.one.api.model.response.ResponseAttachment;
 import com.xda.one.api.model.response.ResponsePost;
 import com.xda.one.parser.ContentParser;
 import com.xda.one.parser.TextDataStructure;
 import com.xda.one.util.PostUtils;
-
-import android.content.Context;
-import android.os.Parcel;
-import android.text.Spannable;
 
 import java.util.List;
 

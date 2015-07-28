@@ -1,13 +1,13 @@
 package com.xda.one.api.retrofit;
 
+import android.content.Context;
+
 import com.xda.one.api.inteface.NewsClient;
 import com.xda.one.api.misc.EventBus;
 import com.xda.one.api.model.response.container.ResponseNewsContainer;
 import com.xda.one.api.model.response.container.ResponsePostContainer;
 import com.xda.one.constants.XDAConstants;
 import com.xda.one.util.Utils;
-
-import android.content.Context;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -63,10 +63,10 @@ public class RetrofitNewsClient implements NewsClient {
 
         @GET("/")
         public ResponseNewsContainer getNews(@Query("json") final int json,
-                @Query("page") final int page);
+                                             @Query("page") final int page);
 
         @GET("/")
         public void getNewsAsync(@Query("json") final int json, @Query("page") final int page,
-                final Callback<ResponsePostContainer> containerCallback);
+                                 final Callback<ResponsePostContainer> containerCallback);
     }
 }

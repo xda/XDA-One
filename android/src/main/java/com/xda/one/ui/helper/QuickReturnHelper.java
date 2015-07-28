@@ -1,7 +1,5 @@
 package com.xda.one.ui.helper;
 
-import com.xda.one.util.UIUtils;
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +8,8 @@ import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.animation.AccelerateInterpolator;
+
+import com.xda.one.util.UIUtils;
 
 public class QuickReturnHelper {
 
@@ -34,7 +34,7 @@ public class QuickReturnHelper {
     private int mTouchSlop;
 
     public QuickReturnHelper(final Context context, final View quickReturnView,
-            final Toolbar toolbar) {
+                             final Toolbar toolbar) {
         mQuickReturnView = quickReturnView;
         mToolbar = toolbar;
 
@@ -133,7 +133,7 @@ public class QuickReturnHelper {
         private final XDALinerLayoutManager mLinerLayoutManager;
 
         private QuickReturnOnScroll(final int fragmentPosition,
-                final XDALinerLayoutManager linerLayoutManager) {
+                                    final XDALinerLayoutManager linerLayoutManager) {
             mFragmentPosition = fragmentPosition;
             mLinerLayoutManager = linerLayoutManager;
         }

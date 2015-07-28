@@ -16,8 +16,8 @@ public interface UserClient {
     public void login(final String username, final String password);
 
     void register(final String email, final String username, final String password,
-            final String challenge, final String response, final Consumer<Response> success,
-            final Consumer<Result> failure);
+                  final String challenge, final String response, final Consumer<Response> success,
+                  final Consumer<Result> failure);
 
     public MentionContainer getMentions(final int page);
 

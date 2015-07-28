@@ -1,19 +1,17 @@
 package com.xda.one.ui;
 
-import com.xda.one.R;
-import com.xda.one.model.augmented.AugmentedMessage;
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.WindowManager;
 
+import com.xda.one.R;
+import com.xda.one.model.augmented.AugmentedMessage;
+
 public class ViewMessageActivity extends BaseActivity {
 
     private static final String MESSAGE_ARGUMENT = "message";
-
-    private ViewMessageFragment mMessageFragment;
-
     private final String SCREEN_NAME = "ViewMessageActivity";
+    private ViewMessageFragment mMessageFragment;
 
     @Override
     public void onCreate(final Bundle bundle) {

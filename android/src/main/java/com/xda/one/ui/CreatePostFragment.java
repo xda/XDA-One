@@ -1,19 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.otto.Subscribe;
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.api.inteface.PostClient;
-import com.xda.one.api.model.interfaces.UnifiedThread;
-import com.xda.one.api.retrofit.RetrofitPostClient;
-import com.xda.one.auth.XDAAccount;
-import com.xda.one.event.post.PostCreatedEvent;
-import com.xda.one.event.post.PostCreationFailedEvent;
-import com.xda.one.model.augmented.AugmentedPost;
-import com.xda.one.ui.listener.NonEmptyTextViewListener;
-import com.xda.one.util.AccountUtils;
-import com.xda.one.util.PostUtils;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -28,6 +14,20 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.otto.Subscribe;
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.api.inteface.PostClient;
+import com.xda.one.api.model.interfaces.UnifiedThread;
+import com.xda.one.api.retrofit.RetrofitPostClient;
+import com.xda.one.auth.XDAAccount;
+import com.xda.one.event.post.PostCreatedEvent;
+import com.xda.one.event.post.PostCreationFailedEvent;
+import com.xda.one.model.augmented.AugmentedPost;
+import com.xda.one.ui.listener.NonEmptyTextViewListener;
+import com.xda.one.util.AccountUtils;
+import com.xda.one.util.PostUtils;
 
 import static android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE;
 
@@ -52,7 +52,7 @@ public class CreatePostFragment extends DialogFragment {
     private ProgressDialog mDialog;
 
     public static CreatePostFragment createInstance(final UnifiedThread defaultUnifiedThread,
-            final AugmentedPost[] post) {
+                                                    final AugmentedPost[] post) {
         final Bundle bundle = new Bundle();
         bundle.putParcelable(THREAD, defaultUnifiedThread);
         bundle.putParcelableArray(POST, post);
@@ -98,7 +98,7 @@ public class CreatePostFragment extends DialogFragment {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.create_post_fragment, container, false);
     }
 

@@ -70,8 +70,8 @@ public class SimpleSectionAdapter<T> extends BaseAdapter {
      * @param sectionizer            Sectionizer for sectioning the {@link ListView}.
      */
     public SimpleSectionAdapter(Context context, BaseAdapter listAdapter,
-            int sectionHeaderLayoutId, int sectionTitleTextViewId,
-            Sectionizer<T> sectionizer) {
+                                int sectionHeaderLayoutId, int sectionTitleTextViewId,
+                                Sectionizer<T> sectionizer) {
         if (context == null) {
             throw new IllegalArgumentException("context cannot be null.");
         } else if (listAdapter == null) {

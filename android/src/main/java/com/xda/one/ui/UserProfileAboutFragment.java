@@ -1,12 +1,5 @@
 package com.xda.one.ui;
 
-import com.xda.one.R;
-import com.xda.one.api.model.interfaces.Forum;
-import com.xda.one.api.model.response.ResponseUserProfile;
-import com.xda.one.loader.UserProfileLoader;
-import com.xda.one.ui.widget.ObservableScrollView;
-import com.xda.one.util.Utils;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,6 +14,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.xda.one.R;
+import com.xda.one.api.model.interfaces.Forum;
+import com.xda.one.api.model.response.ResponseUserProfile;
+import com.xda.one.loader.UserProfileLoader;
+import com.xda.one.ui.widget.ObservableScrollView;
+import com.xda.one.util.Utils;
 
 import java.util.List;
 
@@ -71,7 +71,7 @@ public class UserProfileAboutFragment extends Fragment implements ObservableScro
 
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container,
-            @Nullable final Bundle savedInstanceState) {
+                             @Nullable final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_user_profile_about, container, false);
     }
 
@@ -204,7 +204,7 @@ public class UserProfileAboutFragment extends Fragment implements ObservableScro
 
     @Override
     public void onLoadFinished(final Loader<ResponseUserProfile> responseUserProfileLoader,
-            final ResponseUserProfile profile) {
+                               final ResponseUserProfile profile) {
         mResponseUserProfile = profile;
         onUserProfileLoaded();
     }
@@ -220,7 +220,7 @@ public class UserProfileAboutFragment extends Fragment implements ObservableScro
         public void onScrolled(int scrollY);
 
         public void setupScrolling(View aboutView,
-                UserProfileAboutFragment userProfileAboutFragment);
+                                   UserProfileAboutFragment userProfileAboutFragment);
 
         void updateHeader(ResponseUserProfile profile);
     }

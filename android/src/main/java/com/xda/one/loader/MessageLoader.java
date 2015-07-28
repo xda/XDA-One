@@ -1,10 +1,10 @@
 package com.xda.one.loader;
 
+import android.content.Context;
+
 import com.xda.one.api.inteface.PrivateMessageClient;
 import com.xda.one.api.model.response.container.ResponseMessageContainer;
 import com.xda.one.model.augmented.container.AugmentedMessageContainer;
-
-import android.content.Context;
 
 import static com.xda.one.api.retrofit.RetrofitPrivateMessageClient.getClient;
 import static com.xda.one.ui.MessagePagerFragment.MessageContainerType;

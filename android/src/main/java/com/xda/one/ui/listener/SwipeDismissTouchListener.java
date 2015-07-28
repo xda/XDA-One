@@ -28,9 +28,9 @@ import android.view.ViewGroup;
 /**
  * A {@link View.OnTouchListener} that makes any {@link View} dismissable when the
  * user swipes (drags her finger) horizontally across the view.
- *
+ * <p/>
  * <p>Example usage:</p>
- *
+ * <p/>
  * <pre>
  * view.setOnTouchListener(new SwipeDismissTouchListener(
  *         view,
@@ -41,7 +41,7 @@ import android.view.ViewGroup;
  *             }
  *         }));
  * </pre>
- *
+ * <p/>
  * <p>This class Requires API level 12 or later due to use of {@link
  * android.view.ViewPropertyAnimator}.</p>
  */

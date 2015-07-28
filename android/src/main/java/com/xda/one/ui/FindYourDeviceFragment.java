@@ -1,13 +1,5 @@
 package com.xda.one.ui;
 
-import com.xda.one.R;
-import com.xda.one.api.model.interfaces.Forum;
-import com.xda.one.api.model.response.ResponseForum;
-import com.xda.one.db.ForumDbHelper;
-import com.xda.one.loader.FindYouDeviceLoader;
-import com.xda.one.util.FragmentUtils;
-import com.xda.one.util.UIUtils;
-
 import android.app.SearchManager;
 import android.content.Context;
 import android.database.Cursor;
@@ -30,6 +22,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.xda.one.R;
+import com.xda.one.api.model.interfaces.Forum;
+import com.xda.one.api.model.response.ResponseForum;
+import com.xda.one.db.ForumDbHelper;
+import com.xda.one.loader.FindYouDeviceLoader;
+import com.xda.one.util.FragmentUtils;
+import com.xda.one.util.UIUtils;
 
 import java.util.ArrayList;
 
@@ -92,7 +92,7 @@ public class FindYourDeviceFragment extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.find_your_device_fragment, container, false);
     }
 
@@ -132,7 +132,7 @@ public class FindYourDeviceFragment extends Fragment
 
     @Override
     public void onLoadFinished(final Loader<Cursor> ResponseSearchDevice,
-            final Cursor data) {
+                               final Cursor data) {
         mAdapter.setCursor(data);
         UIUtils.updateEmptyViewState(getView(), mRecyclerView, mAdapter.getItemCount());
     }

@@ -1,11 +1,11 @@
 package com.xda.one.loader;
 
+import android.content.Context;
+
 import com.xda.one.api.inteface.UserClient;
 import com.xda.one.api.model.interfaces.container.MentionContainer;
 import com.xda.one.api.retrofit.RetrofitUserClient;
 import com.xda.one.model.augmented.container.AugmentedMentionContainer;
-
-import android.content.Context;
 
 public class MentionLoader extends AsyncLoader<AugmentedMentionContainer> {
 

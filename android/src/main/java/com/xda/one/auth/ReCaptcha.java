@@ -1,5 +1,10 @@
 package com.xda.one.auth;
 
+import android.os.AsyncTask;
+import android.text.TextUtils;
+import android.util.Log;
+import android.widget.ImageView;
+
 import com.squareup.picasso.Picasso;
 
 import org.apache.http.client.HttpClient;
@@ -8,11 +13,6 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import android.os.AsyncTask;
-import android.text.TextUtils;
-import android.util.Log;
-import android.widget.ImageView;
 
 import java.io.IOException;
 

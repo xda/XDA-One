@@ -1,10 +1,10 @@
 package com.xda.one.ui.listener;
 
-import com.xda.one.ui.UserProfileActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+
+import com.xda.one.ui.UserProfileActivity;
 
 public class AvatarClickListener implements View.OnClickListener {
 

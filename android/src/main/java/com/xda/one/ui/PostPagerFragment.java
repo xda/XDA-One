@@ -1,21 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.otto.Subscribe;
-import com.xda.one.R;
-import com.xda.one.api.inteface.ThreadClient;
-import com.xda.one.api.model.response.ResponseUnifiedThread;
-import com.xda.one.api.model.response.container.ResponsePostContainer;
-import com.xda.one.api.retrofit.RetrofitThreadClient;
-import com.xda.one.event.thread.ThreadSubscriptionChangedEvent;
-import com.xda.one.event.thread.ThreadSubscriptionChangingFailedEvent;
-import com.xda.one.model.augmented.AugmentedPost;
-import com.xda.one.model.augmented.AugmentedUnifiedThread;
-import com.xda.one.ui.helper.QuickReturnHelper;
-import com.xda.one.ui.widget.FloatingActionButton;
-import com.xda.one.util.AccountUtils;
-import com.xda.one.util.CompatUtils;
-import com.xda.one.util.UIUtils;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -44,6 +28,22 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.otto.Subscribe;
+import com.xda.one.R;
+import com.xda.one.api.inteface.ThreadClient;
+import com.xda.one.api.model.response.ResponseUnifiedThread;
+import com.xda.one.api.model.response.container.ResponsePostContainer;
+import com.xda.one.api.retrofit.RetrofitThreadClient;
+import com.xda.one.event.thread.ThreadSubscriptionChangedEvent;
+import com.xda.one.event.thread.ThreadSubscriptionChangingFailedEvent;
+import com.xda.one.model.augmented.AugmentedPost;
+import com.xda.one.model.augmented.AugmentedUnifiedThread;
+import com.xda.one.ui.helper.QuickReturnHelper;
+import com.xda.one.ui.widget.FloatingActionButton;
+import com.xda.one.util.AccountUtils;
+import com.xda.one.util.CompatUtils;
+import com.xda.one.util.UIUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +60,23 @@ public class PostPagerFragment extends Fragment implements PostFragment.Callback
     private static final String PAGE_CONTAINER_ARGUMENT = "page_container";
 
     private static final String FORUM_HIERARCHY_ARGUMENT = "hierarchy";
-
+    private final EventHandler mEventHandler = new EventHandler();
+    private ViewPager mViewPager;
+    private QuickReturnHelper mQuickReturnHelper;
+    private RecyclerView mPageRecyclerView;
+    private PostFragmentAdapter mAdapter;
+    private int mTotalPages;
+    private AugmentedUnifiedThread mUnifiedThread;
+    private ThreadClient mThreadClient;
+    private List<String> mHierarchy;
+    private HierarchySpinnerAdapter mSpinnerAdapter;
+    private ResponsePostContainer mContainerArgument;
+    private Callback mCallback;
+    private int mTargetHeight;
+    private PostPageAdapter mPageAdapter;
+    private TextView mTopBar;
+    private View mFirst;
+    private View mLast;
     private final ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager
             .OnPageChangeListener() {
         @Override
@@ -84,43 +100,9 @@ public class PostPagerFragment extends Fragment implements PostFragment.Callback
         }
     };
 
-    private final EventHandler mEventHandler = new EventHandler();
-
-    private ViewPager mViewPager;
-
-    private QuickReturnHelper mQuickReturnHelper;
-
-    private RecyclerView mPageRecyclerView;
-
-    private PostFragmentAdapter mAdapter;
-
-    private int mTotalPages;
-
-    private AugmentedUnifiedThread mUnifiedThread;
-
-    private ThreadClient mThreadClient;
-
-    private List<String> mHierarchy;
-
-    private HierarchySpinnerAdapter mSpinnerAdapter;
-
-    private ResponsePostContainer mContainerArgument;
-
-    private Callback mCallback;
-
-    private int mTargetHeight;
-
-    private PostPageAdapter mPageAdapter;
-
-    private TextView mTopBar;
-
-    private View mFirst;
-
-    private View mLast;
-
     public static PostPagerFragment getInstance(final AugmentedUnifiedThread unifiedThread,
-            final ResponsePostContainer container, final int pageCount,
-            final ArrayList<String> hierarchy) {
+                                                final ResponsePostContainer container, final int pageCount,
+                                                final ArrayList<String> hierarchy) {
         final Bundle bundle = new Bundle();
         bundle.putParcelable(THREAD_ARGUMENT, unifiedThread);
         bundle.putParcelable(PAGE_CONTAINER_ARGUMENT, container);
@@ -163,7 +145,7 @@ public class PostPagerFragment extends Fragment implements PostFragment.Callback
         final Animation animation = new Animation() {
             @Override
             protected void applyTransformation(final float interpolatedTime,
-                    final Transformation transformation) {
+                                               final Transformation transformation) {
                 view.getLayoutParams().height = interpolatedTime == 1
                         ? ViewGroup.LayoutParams.WRAP_CONTENT
                         : (int) (mTargetHeight * interpolatedTime);
@@ -210,7 +192,7 @@ public class PostPagerFragment extends Fragment implements PostFragment.Callback
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.post_pager_fragment, container, false);
     }
 
@@ -516,7 +498,7 @@ public class PostPagerFragment extends Fragment implements PostFragment.Callback
 
         @Subscribe
         public void onThreadSubscriptionToggleFailed(final ThreadSubscriptionChangingFailedEvent
-                event) {
+                                                             event) {
             Toast.makeText(getActivity(), R.string.thread_subscription_toggle_failed,
                     Toast.LENGTH_LONG).show();
         }

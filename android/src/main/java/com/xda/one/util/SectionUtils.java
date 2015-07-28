@@ -1,10 +1,5 @@
 package com.xda.one.util;
 
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.parser.TextDataStructure;
-import com.xda.one.ui.PostAdapter;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -20,6 +15,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.parser.TextDataStructure;
+import com.xda.one.ui.PostAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +29,8 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 public class SectionUtils {
 
     public static void setupSections(final Context context, final LayoutInflater inflater,
-            final ViewGroup layout, final TextDataStructure structure,
-            final PostAdapter.GoToQuoteListener quoteListener) {
+                                     final ViewGroup layout, final TextDataStructure structure,
+                                     final PostAdapter.GoToQuoteListener quoteListener) {
         final List<TextDataStructure.Section> sections = structure.getSections();
         for (int i = 0, sectionsSize = sections.size(); i < sectionsSize; i++) {
             TextDataStructure.Section section = sections.get(i);
@@ -49,8 +49,8 @@ public class SectionUtils {
     }
 
     private static int forwardUntilNonEmbed(final int i,
-            final List<TextDataStructure.Section> sections,
-            final List<TextDataStructure.Section> skip) {
+                                            final List<TextDataStructure.Section> sections,
+                                            final List<TextDataStructure.Section> skip) {
         final int size = sections.size();
         for (int j = i; j < size; j++) {
             final TextDataStructure.Section section = sections.get(j);
@@ -64,7 +64,7 @@ public class SectionUtils {
 
     // TODO - this code could crash if there are more than 12 elements inside the view - fix that
     private static void setupNormalSection(final Context context, final LayoutInflater inflater,
-            final ViewGroup postLayout, final TextDataStructure.Section section) {
+                                           final ViewGroup postLayout, final TextDataStructure.Section section) {
         final ViewGroup view = (ViewGroup) inflater.inflate(R.layout.post_list_section,
                 postLayout, false);
         for (final TextDataStructure.Item item : section.getItems()) {
@@ -87,10 +87,10 @@ public class SectionUtils {
 
     // TODO - this code could crash if there are more than 12 elements inside the view - fix that
     private static void setupQuoteSection(final Context context,
-            final LayoutInflater layoutInflater, final ViewGroup postLayout,
-            final List<TextDataStructure.Section> skip,
-            final TextDataStructure.Section section,
-            final PostAdapter.GoToQuoteListener quoteListener) {
+                                          final LayoutInflater layoutInflater, final ViewGroup postLayout,
+                                          final List<TextDataStructure.Section> skip,
+                                          final TextDataStructure.Section section,
+                                          final PostAdapter.GoToQuoteListener quoteListener) {
         final ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.quote_post_list_section,
                 postLayout, false);
         if (!skip.isEmpty()) {
@@ -161,7 +161,7 @@ public class SectionUtils {
     }
 
     private static TextView getNormalPostView(final Context context,
-            final CharSequence charSequence) {
+                                              final CharSequence charSequence) {
         final TextView view = new TextView(context);
         view.setMovementMethod(LinkMovementMethod.getInstance());
         view.setText(charSequence);

@@ -1,10 +1,10 @@
 package com.xda.one.loader;
 
+import android.content.Context;
+
 import com.xda.one.api.inteface.ForumClient;
 import com.xda.one.api.model.response.ResponseForum;
 import com.xda.one.api.retrofit.RetrofitForumClient;
-
-import android.content.Context;
 
 import java.util.List;
 

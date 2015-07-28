@@ -1,9 +1,9 @@
 package com.xda.one.ui.helper;
 
-import com.xda.one.api.misc.Consumer;
-
 import android.app.Dialog;
 import android.content.DialogInterface;
+
+import com.xda.one.api.misc.Consumer;
 
 public abstract class CancellableCallbackHelper<T> implements Consumer<T>, Runnable,
         DialogInterface.OnCancelListener {

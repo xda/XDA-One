@@ -1,5 +1,26 @@
 package com.xda.one.ui;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.view.ActionMode;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.ShareActionProvider;
+import android.support.v7.widget.XDALinerLayoutManager;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
 import com.xda.one.R;
@@ -21,27 +42,6 @@ import com.xda.one.util.AccountUtils;
 import com.xda.one.util.FragmentUtils;
 import com.xda.one.util.UIUtils;
 import com.xda.one.util.Utils;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.view.ActionMode;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.ShareActionProvider;
-import android.support.v7.widget.XDALinerLayoutManager;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -94,7 +94,7 @@ public class ForumFragment extends Fragment
     }
 
     public static ForumFragment createInstance(final Forum forum, final String parentTitle,
-            final ArrayList<String> hierarchy) {
+                                               final ArrayList<String> hierarchy) {
         final Bundle bundle = new Bundle();
         bundle.putSerializable(FORUM_TYPE, ForumType.CHILD);
         bundle.putParcelable(FORUM, forum);
@@ -154,7 +154,7 @@ public class ForumFragment extends Fragment
                 new ForumAdapter.SubscribeButtonDelegate() {
                     @Override
                     public void setupSubscribeButton(ImageView subscribeButton,
-                            final Forum forum) {
+                                                     final Forum forum) {
                         // Subscribe button
                         onSetupSubscribeButton(subscribeButton, forum);
                     }
@@ -195,7 +195,7 @@ public class ForumFragment extends Fragment
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.forum_fragment, container, false);
     }
 
@@ -261,7 +261,7 @@ public class ForumFragment extends Fragment
 
     @Override
     public void onLoadFinished(final Loader<List<ResponseForum>> loader,
-            final List<ResponseForum> responseForums) {
+                               final List<ResponseForum> responseForums) {
         // Remove the old data if the adapter is not empty
         if (mAdapter.getItemCount() != 0) {
             mAdapter.clear();
@@ -360,7 +360,7 @@ public class ForumFragment extends Fragment
 
         @Override
         public void onCheckedStateChanged(final ActionMode actionMode, final int position,
-                final boolean isNowChecked) {
+                                          final boolean isNowChecked) {
             actionMode.invalidate();
         }
     }

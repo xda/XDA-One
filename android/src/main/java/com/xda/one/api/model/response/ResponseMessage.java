@@ -1,12 +1,12 @@
 package com.xda.one.api.model.response;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.xda.one.api.model.interfaces.Message;
 import com.xda.one.parser.TextDataStructure;
-
-import android.os.Parcel;
-import android.os.Parcelable;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ResponseMessage implements Message {

@@ -1,17 +1,17 @@
 package com.xda.one.model.augmented;
 
-import com.xda.one.api.model.interfaces.Message;
-import com.xda.one.api.model.response.ResponseMessage;
-import com.xda.one.parser.ContentParser;
-import com.xda.one.parser.TextDataStructure;
-import com.xda.one.util.StringUtils;
-
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.TextUtils;
+
+import com.xda.one.api.model.interfaces.Message;
+import com.xda.one.api.model.response.ResponseMessage;
+import com.xda.one.parser.ContentParser;
+import com.xda.one.parser.TextDataStructure;
+import com.xda.one.util.StringUtils;
 
 public class AugmentedMessage implements Message {
 

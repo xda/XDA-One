@@ -70,7 +70,7 @@ public class TextDataStructure {
     }
 
     private void setupImageSections(final Section section, final Spanned spanned,
-            final Callback callback) {
+                                    final Callback callback) {
         final XDATagHandlers.ImageHandler.ImageSpan[] imageSpans = spanned.getSpans(0,
                 spanned.length(), XDATagHandlers.ImageHandler.ImageSpan.class);
         int position = 0;

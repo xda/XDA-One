@@ -1,10 +1,10 @@
 package com.xda.one.util;
 
-import com.xda.one.auth.XDAAccount;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
+
+import com.xda.one.auth.XDAAccount;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 

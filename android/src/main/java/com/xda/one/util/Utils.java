@@ -1,10 +1,10 @@
 package com.xda.one.util;
 
-import org.apache.commons.io.IOUtils;
-
 import android.content.Context;
 import android.text.format.DateUtils;
 import android.util.Log;
+
+import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;

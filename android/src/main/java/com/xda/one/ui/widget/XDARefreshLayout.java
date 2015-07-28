@@ -1,10 +1,10 @@
 package com.xda.one.ui.widget;
 
-import com.xda.one.R;
-
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
+
+import com.xda.one.R;
 
 public class XDARefreshLayout extends SwipeRefreshLayout {
 

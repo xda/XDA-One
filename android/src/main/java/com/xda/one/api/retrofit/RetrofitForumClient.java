@@ -1,5 +1,7 @@
 package com.xda.one.api.retrofit;
 
+import android.content.Context;
+
 import com.xda.one.api.inteface.ForumClient;
 import com.xda.one.api.misc.Consumer;
 import com.xda.one.api.misc.EventBus;
@@ -11,8 +13,6 @@ import com.xda.one.constants.XDAConstants;
 import com.xda.one.db.ForumDbHelper;
 import com.xda.one.event.forum.ForumSubscriptionChangedEvent;
 import com.xda.one.event.forum.ForumSubscriptionChangingFailedEvent;
-
-import android.content.Context;
 
 import java.util.List;
 
@@ -187,23 +187,23 @@ public class RetrofitForumClient implements ForumClient {
 
         @GET("/forums")
         public ResponseForumContainer getForums(@Header("Cookie") final String cookie,
-                @Header("Cache-Control") final String header);
+                                                @Header("Cache-Control") final String header);
 
         @GET("/forums/children")
         public ResponseForumContainer getForumChildren(@Header("Cookie") final String cookie,
-                @Query("forumid") final int forumId);
+                                                       @Query("forumid") final int forumId);
 
         @GET("/forums/general")
         public ResponseForumContainer getGeneralForums(@Header("Cookie") final String cookie,
-                @Header("Cache-Control") final String header);
+                                                       @Header("Cache-Control") final String header);
 
         @GET("/forums/newest")
         public ResponseForumContainer getNewestForums(@Header("Cookie") final String cookie,
-                @Header("Cache-Control") final String header);
+                                                      @Header("Cache-Control") final String header);
 
         @GET("/forums/top")
         public ResponseForumContainer getTopForums(@Header("Cookie") final String cookie,
-                @Header("Cache-Control") final String header);
+                                                   @Header("Cache-Control") final String header);
 
         @GET("/forums/subscribed")
         public ResponseForumContainer getSubscribedForums(
@@ -211,15 +211,15 @@ public class RetrofitForumClient implements ForumClient {
 
         @POST("/forums/subscribe")
         public void subscribe(@Header("Cookie") final String cookie, @Body final int forumId,
-                final Callback<Response> callable);
+                              final Callback<Response> callable);
 
         @DELETE("/forums/unsubscribe")
         public void unsubscribe(@Header("Cookie") final String cookie,
-                @Query("forumid") final int forumId, final Callback<Response> callable);
+                                @Query("forumid") final int forumId, final Callback<Response> callable);
 
         @POST("/forums/markread")
         public void markRead(@Header("Cookie") final String cookie, @Body final int forumId,
-                final Callback<Response> callable);
+                             final Callback<Response> callable);
     }
 
     private class SubscribeCallback implements Callback<Response> {

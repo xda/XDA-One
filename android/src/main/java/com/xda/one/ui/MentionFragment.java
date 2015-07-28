@@ -1,5 +1,18 @@
 package com.xda.one.ui;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Toast;
+
 import com.xda.one.R;
 import com.xda.one.api.inteface.PostClient;
 import com.xda.one.api.model.response.container.ResponsePostContainer;
@@ -13,19 +26,6 @@ import com.xda.one.ui.listener.InfiniteRecyclerLoadHelper;
 import com.xda.one.util.FragmentUtils;
 import com.xda.one.util.UIUtils;
 import com.xda.one.util.Utils;
-
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +108,7 @@ public class MentionFragment extends QuoteMentionBaseFragment
 
     @Override
     public void onLoadFinished(final Loader<AugmentedMentionContainer> loader,
-            final AugmentedMentionContainer data) {
+                               final AugmentedMentionContainer data) {
         if (data == null) {
             // TODO - we need to tailor this to lack of connection/other network issue
             addDataToAdapter(null);

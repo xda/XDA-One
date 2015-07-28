@@ -1,14 +1,14 @@
 package com.xda.one.ui.thread;
 
+import android.support.v4.app.FragmentActivity;
+import android.widget.Toast;
+
 import com.squareup.otto.Subscribe;
 import com.xda.one.R;
 import com.xda.one.event.thread.ThreadSubscriptionChangedEvent;
 import com.xda.one.event.thread.ThreadSubscriptionChangingFailedEvent;
 import com.xda.one.model.augmented.AugmentedUnifiedThread;
 import com.xda.one.ui.ThreadAdapter;
-
-import android.support.v4.app.FragmentActivity;
-import android.widget.Toast;
 
 public class ThreadEventHelper {
 
@@ -17,7 +17,7 @@ public class ThreadEventHelper {
     private ThreadAdapter mAdapter;
 
     public ThreadEventHelper(final FragmentActivity activity,
-            final ThreadAdapter adapter) {
+                             final ThreadAdapter adapter) {
         mActivity = activity;
         mAdapter = adapter;
     }
@@ -47,7 +47,7 @@ public class ThreadEventHelper {
 
     @Subscribe
     public void onThreadSubscriptionToggleFailed(final ThreadSubscriptionChangingFailedEvent
-            event) {
+                                                         event) {
         Toast.makeText(mActivity, R.string.thread_subscription_toggle_failed,
                 Toast.LENGTH_LONG).show();
     }

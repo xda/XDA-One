@@ -1,8 +1,5 @@
 package com.xda.one.ui.widget;
 
-import com.xda.one.R;
-import com.xda.one.util.CompatUtils;
-
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -16,6 +13,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
+
+import com.xda.one.R;
+import com.xda.one.util.CompatUtils;
 
 public class FloatingActionButton extends ImageView {
 

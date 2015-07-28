@@ -1,14 +1,5 @@
 package com.xda.one.ui;
 
-import com.xda.one.R;
-import com.xda.one.api.model.response.ResponseNews;
-import com.xda.one.api.model.response.container.ResponseNewsContainer;
-import com.xda.one.loader.NewsLoader;
-import com.xda.one.ui.listener.InfiniteRecyclerLoadHelper;
-import com.xda.one.ui.widget.XDARefreshLayout;
-import com.xda.one.util.UIUtils;
-import com.xda.one.util.Utils;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,6 +14,15 @@ import android.support.v7.widget.XDALinerLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.xda.one.R;
+import com.xda.one.api.model.response.ResponseNews;
+import com.xda.one.api.model.response.container.ResponseNewsContainer;
+import com.xda.one.loader.NewsLoader;
+import com.xda.one.ui.listener.InfiniteRecyclerLoadHelper;
+import com.xda.one.ui.widget.XDARefreshLayout;
+import com.xda.one.util.UIUtils;
+import com.xda.one.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +72,7 @@ public class NewsFragment extends Fragment
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.news_fragment, container, false);
     }
 
@@ -155,7 +155,7 @@ public class NewsFragment extends Fragment
 
     @Override
     public void onLoadFinished(final Loader<ResponseNewsContainer> loader,
-            final ResponseNewsContainer data) {
+                               final ResponseNewsContainer data) {
         if (data == null) {
             // TODO - we need to tailor this to lack of connection/other network issue
             addDataToAdapter(null);

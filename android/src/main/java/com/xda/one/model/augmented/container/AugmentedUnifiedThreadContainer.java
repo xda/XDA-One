@@ -1,10 +1,10 @@
 package com.xda.one.model.augmented.container;
 
+import android.content.Context;
+
 import com.xda.one.api.model.interfaces.UnifiedThread;
 import com.xda.one.api.model.interfaces.container.UnifiedThreadContainer;
 import com.xda.one.model.augmented.AugmentedUnifiedThread;
-
-import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class AugmentedUnifiedThreadContainer implements UnifiedThreadContainer {
     private final List<AugmentedUnifiedThread> mAugmentedThreads;
 
     public AugmentedUnifiedThreadContainer(final UnifiedThreadContainer container,
-            final Context context) {
+                                           final Context context) {
         mUnifiedThreadContainer = container;
         mAugmentedThreads = new ArrayList<>(mUnifiedThreadContainer.getThreads().size());
 

@@ -1,10 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.api.model.response.ResponseForum;
-import com.xda.one.db.ForumDbHelper;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.api.model.response.ResponseForum;
+import com.xda.one.db.ForumDbHelper;
 
 public class FindYourDeviceAdapter
         extends RecyclerView.Adapter<FindYourDeviceAdapter.FindYourDeviceViewHolder> {

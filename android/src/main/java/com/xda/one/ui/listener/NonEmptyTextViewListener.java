@@ -18,7 +18,7 @@ public class NonEmptyTextViewListener implements TextWatcher {
 
     @Override
     public void beforeTextChanged(final CharSequence s, final int start, final int count,
-            final int after) {
+                                  final int after) {
     }
 
     @Override

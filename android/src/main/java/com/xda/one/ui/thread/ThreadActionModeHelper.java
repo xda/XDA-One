@@ -1,5 +1,13 @@
 package com.xda.one.ui.thread;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.view.ActionMode;
+import android.support.v7.widget.ShareActionProvider;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import com.xda.one.R;
 import com.xda.one.api.inteface.ThreadClient;
 import com.xda.one.constants.XDAConstants;
@@ -9,14 +17,6 @@ import com.xda.one.ui.ThreadAdapter;
 import com.xda.one.ui.helper.ActionModeHelper;
 import com.xda.one.util.AccountUtils;
 import com.xda.one.util.UIUtils;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.view.ActionMode;
-import android.support.v7.widget.ShareActionProvider;
-import android.view.Menu;
-import android.view.MenuItem;
 
 public class ThreadActionModeHelper extends ActionModeHelper.RecyclerViewActionModeCallback {
 
@@ -33,7 +33,7 @@ public class ThreadActionModeHelper extends ActionModeHelper.RecyclerViewActionM
     private MenuItem mSubscribeItem;
 
     public ThreadActionModeHelper(final Activity activity,
-            final ThreadClient threadClient) {
+                                  final ThreadClient threadClient) {
         mActivity = activity;
         mThreadClient = threadClient;
     }
@@ -103,7 +103,7 @@ public class ThreadActionModeHelper extends ActionModeHelper.RecyclerViewActionM
 
     @Override
     public void onCheckedStateChanged(final ActionMode actionMode, final int position,
-            final boolean isNowChecked) {
+                                      final boolean isNowChecked) {
         actionMode.invalidate();
     }
 

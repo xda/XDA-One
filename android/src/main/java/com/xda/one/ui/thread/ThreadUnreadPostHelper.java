@@ -1,5 +1,12 @@
 package com.xda.one.ui.thread;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.widget.Toast;
+
 import com.xda.one.R;
 import com.xda.one.api.inteface.PostClient;
 import com.xda.one.api.model.response.container.ResponsePostContainer;
@@ -7,13 +14,6 @@ import com.xda.one.api.retrofit.RetrofitPostClient;
 import com.xda.one.model.augmented.AugmentedUnifiedThread;
 import com.xda.one.ui.helper.CancellableCallbackHelper;
 import com.xda.one.util.FragmentUtils;
-
-import android.app.AlertDialog;
-import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -28,7 +28,7 @@ public class ThreadUnreadPostHelper extends CancellableCallbackHelper<ResponsePo
     private AlertDialog mDialog;
 
     public ThreadUnreadPostHelper(final Context context, final FragmentManager fragmentManager,
-            final AugmentedUnifiedThread unifiedThread, final AlertDialog dialog) {
+                                  final AugmentedUnifiedThread unifiedThread, final AlertDialog dialog) {
         super(dialog);
 
         mContext = context;

@@ -1,14 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.api.model.interfaces.Forum;
-import com.xda.one.api.model.response.ResponseUserProfile;
-import com.xda.one.loader.UserProfileLoader;
-import com.xda.one.ui.helper.ActionModeHelper;
-import com.xda.one.util.FragmentUtils;
-import com.xda.one.util.UIUtils;
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,6 +16,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.api.model.interfaces.Forum;
+import com.xda.one.api.model.response.ResponseUserProfile;
+import com.xda.one.loader.UserProfileLoader;
+import com.xda.one.ui.helper.ActionModeHelper;
+import com.xda.one.util.FragmentUtils;
+import com.xda.one.util.UIUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +51,7 @@ public class MyDeviceFragment extends Fragment
 
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container,
-            @Nullable final Bundle savedInstanceState) {
+                             @Nullable final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.my_device_fragment, container, false);
     }
 
@@ -79,7 +79,7 @@ public class MyDeviceFragment extends Fragment
 
     @Override
     public void onLoadFinished(final Loader<ResponseUserProfile> responseUserProfileLoader,
-            final ResponseUserProfile profile) {
+                               final ResponseUserProfile profile) {
         mAdapter.clear();
 
         if (profile != null) {
@@ -147,7 +147,7 @@ public class MyDeviceFragment extends Fragment
 
         @Override
         public void onCheckedStateChanged(final ActionMode actionMode, int position,
-                boolean isNowChecked) {
+                                          boolean isNowChecked) {
         }
     }
 }

@@ -1,11 +1,11 @@
 package com.xda.one.model.augmented.container;
 
+import android.content.Context;
+
 import com.xda.one.R;
 import com.xda.one.api.model.interfaces.Quote;
 import com.xda.one.api.model.interfaces.container.QuoteContainer;
 import com.xda.one.model.augmented.AugmentedQuote;
-
-import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.List;

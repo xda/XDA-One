@@ -1,9 +1,5 @@
 package com.xda.one.ui;
 
-import com.xda.one.R;
-import com.xda.one.ui.listener.InfiniteRecyclerLoadHelper;
-import com.xda.one.ui.widget.XDARefreshLayout;
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +9,10 @@ import android.support.v7.widget.XDALinerLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.xda.one.R;
+import com.xda.one.ui.listener.InfiniteRecyclerLoadHelper;
+import com.xda.one.ui.widget.XDARefreshLayout;
 
 public abstract class QuoteMentionBaseFragment extends Fragment {
 
@@ -29,7 +29,7 @@ public abstract class QuoteMentionBaseFragment extends Fragment {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container,
-            @Nullable final Bundle savedInstanceState) {
+                             @Nullable final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.quote_mention_fragment, container, false);
     }
 

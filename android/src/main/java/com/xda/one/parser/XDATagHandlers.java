@@ -1,19 +1,18 @@
 package com.xda.one.parser;
 
+import android.content.Context;
+import android.content.Intent;
+import android.text.SpannableStringBuilder;
+import android.text.style.ClickableSpan;
+import android.text.style.URLSpan;
+import android.view.View;
+
 import com.xda.one.ui.UserProfileActivity;
 
 import net.nightwhistler.htmlspanner.SpanStack;
 import net.nightwhistler.htmlspanner.TagNodeHandler;
 
 import org.htmlcleaner.TagNode;
-
-import android.content.Context;
-import android.content.Intent;
-import android.text.SpannableStringBuilder;
-import android.text.style.ClickableSpan;
-import android.text.style.URLSpan;
-import android.util.Log;
-import android.view.View;
 
 import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
 
@@ -23,7 +22,7 @@ public class XDATagHandlers {
 
         @Override
         public void handleTagNode(final TagNode node, final SpannableStringBuilder builder,
-                final int start, final int end, final SpanStack stack) {
+                                  final int start, final int end, final SpanStack stack) {
             final String src = node.getAttributeByName("src");
             final int newStart = builder.length();
             builder.append("\uFFFC");
@@ -48,7 +47,7 @@ public class XDATagHandlers {
 
         @Override
         public void handleTagNode(final TagNode node, final SpannableStringBuilder builder,
-                final int start, final int end, final SpanStack spanStack) {
+                                  final int start, final int end, final SpanStack spanStack) {
             final String userId = node.getAttributeByName("user");
             final MentionSpan mentionSpan = new MentionSpan(userId);
             builder.setSpan(mentionSpan, start, end, SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -77,7 +76,7 @@ public class XDATagHandlers {
 
         @Override
         public void handleTagNode(final TagNode node, final SpannableStringBuilder builder,
-                final int start, final int end, final SpanStack spanStack) {
+                                  final int start, final int end, final SpanStack spanStack) {
             final String userId = node.getAttributeByName("user");
             builder.setSpan(new QuoteSpan(userId), start, end, SPAN_EXCLUSIVE_EXCLUSIVE);
         }
@@ -100,7 +99,7 @@ public class XDATagHandlers {
 
         @Override
         public void handleTagNode(final TagNode node, final SpannableStringBuilder builder,
-                final int start, final int end, final SpanStack spanStack) {
+                                  final int start, final int end, final SpanStack spanStack) {
             String url = node.getAttributeByName("href").trim();
             if (!url.startsWith("http://") && !url.startsWith("https://")) {
                 url = "http://" + url;

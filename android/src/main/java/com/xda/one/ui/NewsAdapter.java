@@ -1,11 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.api.model.response.ResponseNews;
-import com.xda.one.util.StringUtils;
-import com.xda.one.util.Utils;
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -14,6 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.api.model.response.ResponseNews;
+import com.xda.one.util.StringUtils;
+import com.xda.one.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,16 +25,11 @@ public class NewsAdapter
     private static final int NORMAL_VIEW_TYPE = 1;
 
     private static final int FOOTER_VIEW_TYPE = 2;
-
-    private int mFooterItemCount = 0;
-
     protected final LayoutInflater mLayoutInflater;
-
     private final Context mContext;
-
     private final View.OnClickListener mOnClickListener;
-
     private final List<ResponseNews> mNews;
+    private int mFooterItemCount = 0;
 
     public NewsAdapter(final Context context, final View.OnClickListener clickListener) {
         mContext = context;
@@ -91,7 +86,7 @@ public class NewsAdapter
 
     @Override
     public int getItemCount() {
-        return mNews.size() + mFooterItemCount ;
+        return mNews.size() + mFooterItemCount;
     }
 
     public void clear() {
