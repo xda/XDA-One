@@ -8,29 +8,29 @@ import java.util.List;
 
 public interface Post extends Parcelable {
 
-    public int getPostId();
+    int getPostId();
 
-    public int getVisible();
+    int getVisible();
 
-    public String getUserId();
+    String getUserId();
 
-    public String getTitle();
+    String getTitle();
 
-    public String getPageText();
+    String getPageText();
 
-    public String getUserName();
+    String getUserName();
 
-    public long getDateline();
+    long getDateline();
 
-    public List<ResponseAttachment> getAttachments();
+    List<ResponseAttachment> getAttachments();
 
-    public String getAvatarUrl();
+    String getAvatarUrl();
 
-    public int getThanksCount();
+    int getThanksCount();
 
-    public void setThanksCount(int newCount);
+    void setThanksCount(int newCount);
 
-    public boolean isThanked();
+    boolean isThanked();
 
-    public void setThanked(boolean thanked);
+    void setThanked(boolean thanked);
 }

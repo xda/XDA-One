@@ -1,24 +1,5 @@
 package com.xda.one.ui;
 
-import com.xda.one.R;
-import com.xda.one.api.inteface.PostClient;
-import com.xda.one.api.misc.Consumer;
-import com.xda.one.api.misc.Result;
-import com.xda.one.api.model.interfaces.Post;
-import com.xda.one.api.model.interfaces.UnifiedThread;
-import com.xda.one.api.model.response.ResponseAttachment;
-import com.xda.one.api.model.response.ResponseUnifiedThread;
-import com.xda.one.api.model.response.container.ResponsePostContainer;
-import com.xda.one.api.retrofit.RetrofitPostClient;
-import com.xda.one.loader.PostLoader;
-import com.xda.one.model.augmented.AugmentedPost;
-import com.xda.one.model.augmented.AugmentedPostContainer;
-import com.xda.one.ui.helper.ActionModeHelper;
-import com.xda.one.ui.helper.CancellableCallbackHelper;
-import com.xda.one.ui.listener.AvatarClickListener;
-import com.xda.one.util.UIUtils;
-import com.xda.one.util.Utils;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
@@ -45,6 +26,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.xda.one.R;
+import com.xda.one.api.inteface.PostClient;
+import com.xda.one.api.misc.Consumer;
+import com.xda.one.api.misc.Result;
+import com.xda.one.api.model.interfaces.Post;
+import com.xda.one.api.model.interfaces.UnifiedThread;
+import com.xda.one.api.model.response.ResponseAttachment;
+import com.xda.one.api.model.response.ResponseUnifiedThread;
+import com.xda.one.api.model.response.container.ResponsePostContainer;
+import com.xda.one.api.retrofit.RetrofitPostClient;
+import com.xda.one.loader.PostLoader;
+import com.xda.one.model.augmented.AugmentedPost;
+import com.xda.one.model.augmented.AugmentedPostContainer;
+import com.xda.one.ui.helper.ActionModeHelper;
+import com.xda.one.ui.helper.CancellableCallbackHelper;
+import com.xda.one.ui.listener.AvatarClickListener;
+import com.xda.one.util.UIUtils;
+import com.xda.one.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -222,7 +222,7 @@ public class PostFragment extends Fragment
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.post_fragment, container, false);
     }
 
@@ -300,7 +300,7 @@ public class PostFragment extends Fragment
 
     @Override
     public void onLoadFinished(final Loader<AugmentedPostContainer> loader,
-            final AugmentedPostContainer container) {
+                               final AugmentedPostContainer container) {
         if (container == null) {
             onItemsReceived(null);
         } else {
@@ -374,17 +374,17 @@ public class PostFragment extends Fragment
         mRecyclerView.scrollToPosition(data.getIndex());
     }
 
-    public static interface Callback {
+    public interface Callback {
 
-        public void quotePost(final AugmentedPost... post);
+        void quotePost(final AugmentedPost... post);
 
-        public void switchToFragment(final ResponsePostContainer container);
+        void switchToFragment(final ResponsePostContainer container);
 
-        public void setQuickReturnListener(final RecyclerView recyclerView, final int page);
+        void setQuickReturnListener(final RecyclerView recyclerView, final int page);
 
-        public void postPaddingToQuickReturn(final View content);
+        void postPaddingToQuickReturn(final View content);
 
-        public void onPageLoaded(final ResponseUnifiedThread thread);
+        void onPageLoaded(final ResponseUnifiedThread thread);
     }
 
     private class DownloadButtonClickListener implements View.OnClickListener {

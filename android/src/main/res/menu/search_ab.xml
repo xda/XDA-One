@@ -4,7 +4,7 @@
     <item
         android:id="@+id/search_ab_search"
         android:icon="@drawable/ic_search_light"
-        android:title="@string/find_your_device_title"
+        android:title="@string/search_xda_title"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="always|collapseActionView" />
 </menu>

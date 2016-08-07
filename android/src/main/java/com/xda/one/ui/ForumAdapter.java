@@ -123,14 +123,14 @@ public class ForumAdapter<T extends Forum>
         return mForums.isEmpty();
     }
 
-    public static interface ImageViewDeviceDelegate {
+    public interface ImageViewDeviceDelegate {
 
-        public void setupImageViewDevice(final ImageView imageView, final Forum forum);
+        void setupImageViewDevice(final ImageView imageView, final Forum forum);
     }
 
-    public static interface SubscribeButtonDelegate {
+    public interface SubscribeButtonDelegate {
 
-        public void setupSubscribeButton(final ImageView subscribeButton, final Forum forum);
+        void setupSubscribeButton(final ImageView subscribeButton, final Forum forum);
     }
 
     static class ForumViewHolder extends RecyclerView.ViewHolder {

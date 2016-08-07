@@ -6,22 +6,7 @@
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
-    <com.xda.one.ui.widget.XDARefreshLayout
-        android:id="@+id/swipe_refresh_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@android:id/list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:clipToPadding="false"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:scrollbarStyle="outsideOverlay"
-            android:visibility="gone" />
-    </com.xda.one.ui.widget.XDARefreshLayout>
+    <include layout="@layout/list_refresh_recycler" />
 
     <include
         android:id="@android:id/empty"

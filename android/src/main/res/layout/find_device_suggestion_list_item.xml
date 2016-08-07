@@ -14,7 +14,7 @@
         android:layout_centerVertical="true"
         android:gravity="center"
         android:padding="16dp"
-        android:src="@drawable/phone"
+        android:src="@drawable/ic_nav_phone"
         android:tint="@android:color/white" />
 
     <TextView

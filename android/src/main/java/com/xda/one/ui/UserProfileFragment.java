@@ -1,6 +1,6 @@
 package com.xda.one.ui;
 
-import com.makeramen.RoundedImageView;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 import com.xda.one.R;
 import com.xda.one.api.model.response.ResponseUserProfile;
@@ -80,7 +80,7 @@ public class UserProfileFragment extends Fragment
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final @Nullable ViewGroup container,
-            final @Nullable Bundle savedInstanceState) {
+                             final @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.user_profile_fragment, container, false);
     }
 
@@ -94,7 +94,7 @@ public class UserProfileFragment extends Fragment
         mUsernameTextView = (TextView) view.findViewById(R.id.header_user_name);
         mTagTextView = (TextView) view.findViewById(R.id.header_user_stuff);
 
-        mAvatar = (RoundedImageView) view.findViewById(R.id.avatar);
+        mAvatar = (ImageView) view.findViewById(R.id.avatar);
         CompatUtils.setBackground(mAvatar, new ColorDrawable(getResources()
                 .getColor(android.R.color.white)));
 

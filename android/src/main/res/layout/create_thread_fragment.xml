@@ -2,16 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:pkg="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white" >
 
-    <com.makeramen.RoundedImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/create_thread_fragment_avatar"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_margin="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:scaleType="fitXY"
         android:src="@drawable/account_circle"
-        pkg:oval="true" />
+        pkg:riv_border_color="@android:color/transparent"
+        pkg:riv_oval="true" />
 
     <TextView
         android:id="@+id/create_message_thread_curr_username"
@@ -19,10 +23,17 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/create_thread_fragment_avatar"
         android:background="@android:color/transparent"
-        android:hint="@string/username"
-        android:padding="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
+        android:paddingTop="8dp"
+        android:text="@string/username"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/default_primary_text"
+        android:textColorHint="@color/default_secondary_text"
+        android:textColorHighlight="@color/default_secondary_text" />
 
     <EditText
         android:id="@+id/create_thread_fragment_title"
@@ -35,34 +46,51 @@
         android:inputType="text"
         android:maxLines="4"
         android:padding="8dp"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:textColor="@color/default_primary_text"
+        android:textColorHint="@color/default_secondary_text"
+        android:textColorHighlight="@color/colorAccent" />
 
     <include
         android:id="@+id/create_thread_fragment_content"
         layout="@layout/default_content_edit_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/create_thread_fragment_send"
+        android:layout_above="@+id/create_post_dialog_fragment_footer"
         android:layout_below="@id/create_thread_fragment_title" />
 
-    <ImageView
-        android:id="@+id/create_thread_fragment_send"
-        android:layout_width="48dp"
+    <RelativeLayout
+        android:id="@+id/create_post_dialog_fragment_footer"
+        android:layout_width="fill_parent"
         android:layout_height="48dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:background="?android:attr/selectableItemBackground"
-        android:padding="8dp"
-        android:src="@drawable/send_button_background" />
+        android:layout_centerHorizontal="true"
+        android:background="@color/reply_dialog_footer_grey">
 
-    <ImageView
-        android:id="@+id/create_thread_fragment_emoticon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/create_thread_fragment_send"
-        android:background="?android:attr/selectableItemBackground"
-        android:padding="8dp"
-        android:src="@drawable/ic_insert_emoticon" />
+        <ImageView
+            android:id="@+id/create_thread_fragment_emoticon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/create_thread_fragment_send"
+            android:layout_toStartOf="@+id/create_thread_fragment_send"
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/ic_insert_emoticon" />
+
+        <ImageView
+            android:id="@+id/create_thread_fragment_send"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/send_button_background" />
+    </RelativeLayout>
 </RelativeLayout>

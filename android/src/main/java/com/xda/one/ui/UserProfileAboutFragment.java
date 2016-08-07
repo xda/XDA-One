@@ -213,14 +213,14 @@ public class UserProfileAboutFragment extends Fragment implements ObservableScro
     public void onLoaderReset(final Loader<ResponseUserProfile> responseUserProfileLoader) {
     }
 
-    public static interface Callback {
+    public interface Callback {
 
-        public void updateHeaderHeights(final int viewHeight);
+        void updateHeaderHeights(final int viewHeight);
 
-        public void onScrolled(int scrollY);
+        void onScrolled(int scrollY);
 
-        public void setupScrolling(View aboutView,
-                UserProfileAboutFragment userProfileAboutFragment);
+        void setupScrolling(View aboutView,
+                            UserProfileAboutFragment userProfileAboutFragment);
 
         void updateHeader(ResponseUserProfile profile);
     }

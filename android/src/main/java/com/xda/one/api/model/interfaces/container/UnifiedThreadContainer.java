@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface UnifiedThreadContainer {
 
-    public List<? extends UnifiedThread> getThreads();
+    List<? extends UnifiedThread> getThreads();
 
-    public int getTotalPages();
+    int getTotalPages();
 
-    public int getPerPage();
+    int getPerPage();
 
-    public int getCurrentPage();
+    int getCurrentPage();
 }

@@ -1,34 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="48dp"
+    android:layout_marginBottom="4dp"
+    android:background="@drawable/attachment_bg"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
-    <TextView
-        android:id="@+id/file_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="18sp" />
+    <LinearLayout
+        android:id="@+id/attachment_container"
+        android:layout_width="fill_parent"
 
-    <TextView
-        android:id="@+id/file_size"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/file_name"
-        android:layout_below="@id/file_name"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="18sp" />
+        android:layout_height="fill_parent"
+        android:background="?android:attr/selectableItemBackground">
 
-    <Button
-        android:id="@+id/download_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:text="Download"
-        android:textSize="16sp" />
+        <RelativeLayout
+            android:id="@+id/attachment_thumb_container"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@color/attachment_image_background_color"
+            android:gravity="center">
 
-</RelativeLayout>
+            <ImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_attach_file" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1.0"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/attachment_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@color/attachment_name_color" />
+
+            <TextView
+                android:id="@+id/attachment_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/text_color_hint_grey"
+                android:textSize="12.0sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

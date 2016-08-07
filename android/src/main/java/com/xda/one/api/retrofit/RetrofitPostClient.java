@@ -164,41 +164,41 @@ public class RetrofitPostClient implements PostClient {
         });
     }
 
-    public static interface PostAPI {
+    public interface PostAPI {
 
         @GET("/posts")
-        public ResponsePostContainer getPosts(@Header("Cookie") final String cookie,
-                @Query("threadid") final String threadId, @Query("page") final int page);
+        ResponsePostContainer getPosts(@Header("Cookie") final String cookie,
+                                       @Query("threadid") final String threadId, @Query("page") final int page);
 
         @GET("/posts")
-        public void getPostsAsync(@Header("Cookie") final String cookie,
-                @Query("threadid") final String threadId, @Query("page") final int page,
-                final Callback<ResponsePostContainer> containerCallback);
+        void getPostsAsync(@Header("Cookie") final String cookie,
+                           @Query("threadid") final String threadId, @Query("page") final int page,
+                           final Callback<ResponsePostContainer> containerCallback);
 
         @GET("/posts/bypostid")
-        public void getPostsById(@Header("Cookie") final String authToken,
-                @Query("postid") final String postId,
-                final Callback<ResponsePostContainer> containerCallback);
+        void getPostsById(@Header("Cookie") final String authToken,
+                          @Query("postid") final String postId,
+                          final Callback<ResponsePostContainer> containerCallback);
 
         @GET("/posts/newpost")
         void getUnreadPostFeed(@Header("Cookie") final String authToken,
                 @Query("threadid") String threadId, final Callback<ResponsePostContainer> callback);
 
         @POST("/posts/addattachment")
-        public void addAttachment(@Header("Cookie") final String cookie,
-                @Body final RequestPostAttachment attachment, final Callback<Response> callback);
+        void addAttachment(@Header("Cookie") final String cookie,
+                           @Body final RequestPostAttachment attachment, final Callback<Response> callback);
 
         @POST("/posts/new")
-        public void createNewPost(@Header("Cookie") final String cookie,
-                @Body final RequestNewPost post, final Callback<Response> callback);
+        void createNewPost(@Header("Cookie") final String cookie,
+                           @Body final RequestNewPost post, final Callback<Response> callback);
 
         @POST("/posts/thanks")
-        public void addThanks(@Header("Cookie") final String cookie,
-                @Body final RequestThanks thanks, final Callback<Response> callback);
+        void addThanks(@Header("Cookie") final String cookie,
+                       @Body final RequestThanks thanks, final Callback<Response> callback);
 
         @DELETE("/posts/thanks")
-        public void removeThanks(@Header("Cookie") final String cookie,
-                @Query("postid") final int postid, final Callback<Response> callback);
+        void removeThanks(@Header("Cookie") final String cookie,
+                          @Query("postid") final int postid, final Callback<Response> callback);
     }
 
     private static class ThanksCallback implements Callback<Response> {

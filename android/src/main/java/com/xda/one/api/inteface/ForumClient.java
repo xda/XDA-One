@@ -10,33 +10,33 @@ import java.util.List;
 
 public interface ForumClient {
 
-    public EventBus getBus();
+    EventBus getBus();
 
-    public List<ResponseForum> getForums();
+    List<ResponseForum> getForums();
 
-    public List<ResponseForum> getForums(boolean forceReload);
+    List<ResponseForum> getForums(boolean forceReload);
 
-    public List<ResponseForum> getGeneralForums();
+    List<ResponseForum> getGeneralForums();
 
-    public List<ResponseForum> getGeneralForums(boolean forceReload);
+    List<ResponseForum> getGeneralForums(boolean forceReload);
 
-    public List<ResponseForum> getNewestForums();
+    List<ResponseForum> getNewestForums();
 
-    public List<ResponseForum> getNewestForums(boolean forceReload);
+    List<ResponseForum> getNewestForums(boolean forceReload);
 
-    public List<ResponseForum> getForumChildren(final Forum forum);
+    List<ResponseForum> getForumChildren(final Forum forum);
 
-    public List<ResponseForum> getSubscribedForums();
+    List<ResponseForum> getSubscribedForums();
 
-    public List<ResponseForum> getTopForums();
+    List<ResponseForum> getTopForums();
 
-    public List<ResponseForum> getTopForums(boolean forceReload);
+    List<ResponseForum> getTopForums(boolean forceReload);
 
-    public void toggleForumSubscriptionAsync(final Forum forum);
+    void toggleForumSubscriptionAsync(final Forum forum);
 
-    public void subscribeAsync(final Forum forum);
+    void subscribeAsync(final Forum forum);
 
-    public void unsubscribeAsync(final Forum forum);
+    void unsubscribeAsync(final Forum forum);
 
-    public void markReadAsync(final Forum forum, final Consumer<Result> callable);
+    void markReadAsync(final Forum forum, final Consumer<Result> callable);
 }

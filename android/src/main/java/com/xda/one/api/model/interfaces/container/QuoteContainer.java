@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface QuoteContainer {
 
-    public List<? extends Quote> getQuotes();
+    List<? extends Quote> getQuotes();
 
-    public int getTotalPages();
+    int getTotalPages();
 
-    public int getPerPage();
+    int getPerPage();
 
-    public int getCurrentPage();
+    int getCurrentPage();
 }

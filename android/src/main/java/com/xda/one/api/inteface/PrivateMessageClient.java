@@ -6,19 +6,19 @@ import com.xda.one.api.model.response.container.ResponseMessageContainer;
 
 public interface PrivateMessageClient {
 
-    public EventBus getBus();
+    EventBus getBus();
 
-    public ResponseMessageContainer getInboxMessages(int page);
+    ResponseMessageContainer getInboxMessages(int page);
 
-    public ResponseMessageContainer getSentMessages(int page);
+    ResponseMessageContainer getSentMessages(int page);
 
-    public void sendMessageAsync(final String username, final String subject, final String message);
+    void sendMessageAsync(final String username, final String subject, final String message);
 
-    public void markMessageReadAsync(final Message message);
+    void markMessageReadAsync(final Message message);
 
-    public void markMessageUnreadAsync(final Message message);
+    void markMessageUnreadAsync(final Message message);
 
-    public void deleteMessageAsync(final Message message);
+    void deleteMessageAsync(final Message message);
 
-    public void toggleMessageReadAsync(final Message message);
+    void toggleMessageReadAsync(final Message message);
 }

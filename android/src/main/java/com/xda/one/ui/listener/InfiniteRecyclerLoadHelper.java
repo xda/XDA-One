@@ -73,6 +73,6 @@ public class InfiniteRecyclerLoadHelper extends RecyclerView.OnScrollListener
 
     public interface Callback {
 
-        public void loadMoreData(final int page);
+        void loadMoreData(final int page);
     }
 }

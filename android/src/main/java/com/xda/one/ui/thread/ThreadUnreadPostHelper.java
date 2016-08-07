@@ -1,5 +1,12 @@
 package com.xda.one.ui.thread;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.widget.Toast;
+
 import com.xda.one.R;
 import com.xda.one.api.inteface.PostClient;
 import com.xda.one.api.model.response.container.ResponsePostContainer;
@@ -8,16 +15,11 @@ import com.xda.one.model.augmented.AugmentedUnifiedThread;
 import com.xda.one.ui.helper.CancellableCallbackHelper;
 import com.xda.one.util.FragmentUtils;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 
 public class ThreadUnreadPostHelper extends CancellableCallbackHelper<ResponsePostContainer> {
+
+    private final Fragment mThreadFragment;
 
     private final Context mContext;
 
@@ -27,11 +29,12 @@ public class ThreadUnreadPostHelper extends CancellableCallbackHelper<ResponsePo
 
     private AlertDialog mDialog;
 
-    public ThreadUnreadPostHelper(final Context context, final FragmentManager fragmentManager,
-            final AugmentedUnifiedThread unifiedThread, final AlertDialog dialog) {
+    public ThreadUnreadPostHelper(final Fragment fragment, final FragmentManager fragmentManager,
+                                  final AugmentedUnifiedThread unifiedThread, final AlertDialog dialog) {
         super(dialog);
 
-        mContext = context;
+        mThreadFragment = fragment;
+        mContext = fragment.getActivity();
         mFragmentManager = fragmentManager;
         mUnifiedThread = unifiedThread;
         mDialog = dialog;
@@ -53,9 +56,9 @@ public class ThreadUnreadPostHelper extends CancellableCallbackHelper<ResponsePo
     public void safeCallback(final ResponsePostContainer data) {
         mDialog.dismiss();
 
-        final Fragment fragment = FragmentUtils
-                .switchToPostList(mUnifiedThread, new ArrayList<String>(),
-                        data);
+        final Fragment fragment = FragmentUtils.switchToPostList(mUnifiedThread,
+                new ArrayList<String>(), data);
+        fragment.setTargetFragment(mThreadFragment, 101);
 
         final FragmentTransaction transaction = FragmentUtils
                 .getDefaultTransaction(mFragmentManager);

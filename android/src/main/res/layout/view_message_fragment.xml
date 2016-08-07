@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.makeramen.RoundedImageView
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/avatar"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -29,8 +29,8 @@
                 android:minWidth="48dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/account_circle"
-                pkg:border_color="@android:color/transparent"
-                pkg:oval="true" />
+                pkg:riv_border_color="@android:color/transparent"
+                pkg:riv_oval="true" />
 
             <TextView
                 android:id="@+id/title"

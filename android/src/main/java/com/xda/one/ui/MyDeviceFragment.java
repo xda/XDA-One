@@ -1,14 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.api.model.interfaces.Forum;
-import com.xda.one.api.model.response.ResponseUserProfile;
-import com.xda.one.loader.UserProfileLoader;
-import com.xda.one.ui.helper.ActionModeHelper;
-import com.xda.one.util.FragmentUtils;
-import com.xda.one.util.UIUtils;
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,6 +16,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.api.model.interfaces.Forum;
+import com.xda.one.api.model.response.ResponseUserProfile;
+import com.xda.one.loader.UserProfileLoader;
+import com.xda.one.ui.helper.ActionModeHelper;
+import com.xda.one.util.FragmentUtils;
+import com.xda.one.util.UIUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,8 +106,8 @@ public class MyDeviceFragment extends Fragment
         public void setupImageViewDevice(final ImageView imageView, final Forum forum) {
             Picasso.with(getActivity())
                     .load(forum.getImageUrl())
-                    .placeholder(R.drawable.phone)
-                    .error(R.drawable.phone)
+                    .placeholder(R.drawable.ic_nav_phone)
+                    .error(R.drawable.ic_nav_phone)
                     .into(imageView);
         }
     }
