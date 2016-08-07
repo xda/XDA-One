@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
-    <include layout="@layout/recycler_inside_refresh" />
+    <include layout="@layout/list_refresh_recycler" />
 
     <include
         android:id="@android:id/empty"

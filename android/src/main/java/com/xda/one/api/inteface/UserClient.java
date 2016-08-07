@@ -11,21 +11,21 @@ import retrofit.client.Response;
 
 public interface UserClient {
 
-    public EventBus getBus();
+    EventBus getBus();
 
-    public void login(final String username, final String password);
+    void login(final String username, final String password);
 
     void register(final String email, final String username, final String password,
             final String challenge, final String response, final Consumer<Response> success,
             final Consumer<Result> failure);
 
-    public MentionContainer getMentions(final int page);
+    MentionContainer getMentions(final int page);
 
-    public QuoteContainer getQuotes(final int page);
+    QuoteContainer getQuotes(final int page);
 
-    public ResponseUserProfile getUserProfile();
+    ResponseUserProfile getUserProfile();
 
-    public void getUserProfileAsync();
+    void getUserProfileAsync();
 
-    public ResponseUserProfile getUserProfile(final String userId);
+    ResponseUserProfile getUserProfile(final String userId);
 }

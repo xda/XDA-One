@@ -6,19 +6,19 @@ import android.os.Parcelable;
 
 public interface Message extends Parcelable {
 
-    public int getPmId();
+    int getPmId();
 
-    public String getFromUserId();
+    String getFromUserId();
 
-    public String getFromUserName();
+    String getFromUserName();
 
-    public String getTitle();
+    String getTitle();
 
-    public CharSequence getMessageContent();
+    CharSequence getMessageContent();
 
-    public long getDate();
+    long getDate();
 
-    public boolean isMessageUnread();
+    boolean isMessageUnread();
 
     String getToUserArray();
 
@@ -26,13 +26,13 @@ public interface Message extends Parcelable {
 
     boolean isAllowSmilie();
 
-    public String getAvatarUrl();
+    String getAvatarUrl();
 
-    public String getSubMessage();
+    String getSubMessage();
 
-    public TextDataStructure getTextDataStructure();
+    TextDataStructure getTextDataStructure();
 
-    public int getMessageReadStatus();
+    int getMessageReadStatus();
 
-    public void setMessageReadStatus(int messageRead);
+    void setMessageReadStatus(int messageRead);
 }

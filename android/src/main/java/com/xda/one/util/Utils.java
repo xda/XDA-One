@@ -20,7 +20,7 @@ public class Utils {
 
         InputStream inputStream = null;
         try {
-            if (error.isNetworkError()) {
+            if (error.getKind() == RetrofitError.Kind.NETWORK) {
                 Log.e("XDA-ONE", "Network error happened.");
             } else {
                 final TypedInput body = error.getResponse().getBody();

@@ -230,33 +230,33 @@ public class RetrofitUserClient implements UserClient {
         return null;
     }
 
-    private static interface UserAPI {
+    private interface UserAPI {
 
         @POST("/user/login")
-        public void login(@Body final Map<String, String> body,
-                final Callback<Response> callback);
+        void login(@Body final Map<String, String> body,
+                   final Callback<Response> callback);
 
         @POST("/user/register")
-        public void register(@Body final Map<String, String> body,
-                final Callback<Response> callback);
+        void register(@Body final Map<String, String> body,
+                      final Callback<Response> callback);
 
         @GET("/user")
-        public ResponseUserProfile getUser(@retrofit.http.Header("Cookie") final String cookie);
+        ResponseUserProfile getUser(@retrofit.http.Header("Cookie") final String cookie);
 
         @GET("/user")
-        public void getUser(@retrofit.http.Header("Cookie") final String cookie,
-                final Callback<ResponseUserProfile> callback);
+        void getUser(@retrofit.http.Header("Cookie") final String cookie,
+                     final Callback<ResponseUserProfile> callback);
 
         @GET("/user/quotes")
-        public ResponseQuoteContainer getQuotes(@retrofit.http.Header("Cookie") final String cookie,
-                @Query("page") final int page);
+        ResponseQuoteContainer getQuotes(@retrofit.http.Header("Cookie") final String cookie,
+                                         @Query("page") final int page);
 
         @GET("/user/mentions")
-        public ResponseMentionContainer getMentions(@retrofit.http.Header("Cookie") final String
-                cookie, @Query("page") final int page);
+        ResponseMentionContainer getMentions(@retrofit.http.Header("Cookie") final String
+                                                     cookie, @Query("page") final int page);
 
         @GET("/user/userinfo")
-        public ResponseUserProfile getUserProfile(@retrofit.http.Header("Cookie") final String
-                cookie, @Query("userid") final String userId);
+        ResponseUserProfile getUserProfile(@retrofit.http.Header("Cookie") final String
+                                                   cookie, @Query("userid") final String userId);
     }
 }

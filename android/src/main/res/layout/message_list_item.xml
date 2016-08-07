@@ -1,76 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     android:id="@+id/message_list_item_container"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:pkg="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="88dp"
-    android:background="?android:attr/selectableItemBackground"
+    android:background="@drawable/activatable_selectable_selector"
+    android:foreground="?android:attr/selectableItemBackground"
     android:clickable="true"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.MainActivity" >
 
-    <TextView
-        android:id="@+id/messsage_list_item_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="72dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"
-        android:singleLine="true"
-        android:text="@string/private_messages"
-        android:textSize="14sp" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp" >
 
-    <com.makeramen.RoundedImageView
-        android:id="@+id/messsage_list_item_avatar"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/account_circle"
-        pkg:border_color="@android:color/transparent"
-        pkg:oval="true" />
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/messsage_list_item_avatar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/account_circle"
+            pkg:riv_border_color="@android:color/transparent"
+            pkg:riv_oval="true"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-    <TextView
-        android:id="@+id/messsage_list_item_user_name"
-        style="@style/Theme.One.ThreadTextAppearanceSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/messsage_list_item_title"
-        android:layout_marginLeft="72dp"
-        android:layout_marginTop="8dp"
-        android:singleLine="true"
-        android:text="@string/username" />
+        <TextView
+            android:id="@+id/messsage_list_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@string/private_messages"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            android:textSize="14sp"
+            android:textColor="@color/default_primary_text"
+            android:textColorHint="@color/default_secondary_text"
+            android:textColorHighlight="@color/default_secondary_text"
+            android:layout_toRightOf="@+id/messsage_list_item_avatar"
+            android:layout_toEndOf="@+id/messsage_list_item_avatar" />
 
-    <TextView
-        android:id="@+id/messsage_list_item_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/messsage_list_item_user_name"
-        android:layout_marginLeft="72dp"
-        android:layout_marginTop="8dp"
-        android:singleLine="true"
-        android:text="@string/message_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textSize="13sp" />
+        <TextView
+            android:id="@+id/messsage_list_item_user_name"
+            style="@style/Theme.One.ThreadTextAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@string/username"
+            android:layout_marginBottom="4dp"
+            android:textColor="@color/default_secondary_text"
+            android:textColorHint="@color/default_secondary_text"
+            android:textColorHighlight="@color/default_secondary_text"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/messsage_list_item_content"
+            android:layout_alignStart="@+id/messsage_list_item_content" />
 
-    <TextView
-        android:id="@+id/messsage_list_item_last_post"
-        style="@style/Theme.One.ThreadTextAppearanceSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/messsage_list_item_user_name"
-        android:layout_marginRight="8dp"
-        android:gravity="center"
-        android:text="@string/last_post" />
+        <TextView
+            android:id="@+id/messsage_list_item_last_post"
+            style="@style/Theme.One.ThreadTextAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/last_post"
+            android:textColor="@color/default_secondary_text"
+            android:textColorHint="@color/default_secondary_text"
+            android:textColorHighlight="@color/default_secondary_text"
+            android:layout_centerVertical="true"
+            android:layout_alignRight="@+id/messsage_list_item_content"
+            android:layout_alignEnd="@+id/messsage_list_item_content" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/messsage_list_item_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@string/message_content"
+            android:layout_marginLeft="16dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="13sp"
+            android:textColor="@color/default_secondary_text"
+            android:textColorHint="@color/default_secondary_text"
+            android:textColorHighlight="@color/default_secondary_text"
+            android:layout_below="@+id/messsage_list_item_user_name"
+            android:layout_toRightOf="@+id/messsage_list_item_avatar"
+            android:layout_toEndOf="@+id/messsage_list_item_avatar" />
+
+    </RelativeLayout>
+</FrameLayout>

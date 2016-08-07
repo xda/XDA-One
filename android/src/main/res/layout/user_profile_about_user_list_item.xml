@@ -3,9 +3,9 @@
     xmlns:pkg="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="2dp"
+    android:layout_marginBottom="4dp"
     android:layout_marginTop="2dp"
-    android:foreground="@drawable/activatable_selectable_selector"
+    style="@style/CardViewStyle.Light"
     pkg:cardBackgroundColor="@android:color/white"
     pkg:cardCornerRadius="2dp">
 
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:padding="16dp"
-            android:text="User"
+            android:text="@string/user_profile_user_title"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <RelativeLayout

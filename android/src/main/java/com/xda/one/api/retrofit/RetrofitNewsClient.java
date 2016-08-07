@@ -59,14 +59,14 @@ public class RetrofitNewsClient implements NewsClient {
         mNewsAPI.getNewsAsync(1, page, callback);
     }
 
-    public static interface NewsAPI {
+    public interface NewsAPI {
 
         @GET("/")
-        public ResponseNewsContainer getNews(@Query("json") final int json,
-                @Query("page") final int page);
+        ResponseNewsContainer getNews(@Query("json") final int json,
+                                      @Query("page") final int page);
 
         @GET("/")
-        public void getNewsAsync(@Query("json") final int json, @Query("page") final int page,
-                final Callback<ResponsePostContainer> containerCallback);
+        void getNewsAsync(@Query("json") final int json, @Query("page") final int page,
+                          final Callback<ResponsePostContainer> containerCallback);
     }
 }

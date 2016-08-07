@@ -3,8 +3,17 @@
 
     <!-- Main Android colours -->
     <color name="colorPrimary">@color/main_xda_color</color>
-    <color name="colorPrimaryDark">@color/orange_900</color>
-    <color name="colorAccent">@color/indigo_a700</color>
+    <color name="colorPrimaryDark">#303030</color>
+    <color name="colorAccent">@color/blue_500</color>
+
+    <color name="actionmode_cab_background">#303030</color>
+    <color name="actionmode_cab_statusbar_color">#212121</color>
+
+    <color name="attachment_name_color">#ff333333</color>
+    <color name="text_color_hint_grey">#ff949494</color>
+    <color name="attachment_image_background_color">#ffe5e5e5</color>
+    <color name="post_item_background">#EEEEEE</color>
+    <color name="post_item_selected">#ffbebebe</color>
 
     <!-- Component colours -->
     <color name="fab_color">@color/colorAccent</color>
@@ -12,11 +21,15 @@
     <color name="navigation_drawer_icon">#8c000000</color>
 
     <!-- Custom/XDA colours -->
-    <color name="main_xda_color">#de7300</color>
+    <color name="main_xda_color">#303030</color>
+    <color name="main_xda_background_color">#EAEAEA</color>
+
     <color name="custom_accent_green">#12911D</color>
 
     <color name="lighter_gray">#ddd</color>
     <color name="very_light_grey">#E0E0E0</color>
+
+    <color name="reply_dialog_footer_grey">#E9E9E9</color>
 
     <!-- Material Design Colours -->
     <color name="orange_500">#ff9800</color>
@@ -26,6 +39,7 @@
 
     <color name="deep_purple_a700">#6200EA</color>
 
+    <color name="blue_500">#303030</color>
     <color name="indigo_a700">#304ffe</color>
 
     <!-- Black palate from Google's guidelines -->
@@ -34,4 +48,8 @@
     <color name="default_hint">#42000000</color>
     <color name="default_secondary_text">#8a000000</color>
     <color name="default_primary_text">#de000000</color>
+
+    <!-- Navigation Drawer -->
+    <color name="scrim_shade_start">#0000</color>
+    <color name="scrim_shade_end">#8a000000</color>
 </resources>

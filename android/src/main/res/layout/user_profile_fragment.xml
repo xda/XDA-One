@@ -62,7 +62,7 @@
             android:background="@color/tab_layout_background_color" />
     </RelativeLayout>
 
-    <com.makeramen.RoundedImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/avatar"
         android:layout_width="96dp"
         android:layout_height="96dp"
@@ -70,10 +70,10 @@
         android:layout_marginTop="-48dp"
         android:scaleType="fitXY"
         android:src="@drawable/account_circle"
-        pkg:border_color="@android:color/transparent"
-        pkg:border_width="0dp"
-        pkg:mutate_background="true"
-        pkg:oval="true" />
+        pkg:riv_border_color="@android:color/transparent"
+        pkg:riv_border_width="0dp"
+        pkg:riv_mutate_background="true"
+        pkg:riv_oval="true" />
 
     <View
         android:id="@+id/user_profile_header_background"

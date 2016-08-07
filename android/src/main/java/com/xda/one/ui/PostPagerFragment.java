@@ -1,21 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.otto.Subscribe;
-import com.xda.one.R;
-import com.xda.one.api.inteface.ThreadClient;
-import com.xda.one.api.model.response.ResponseUnifiedThread;
-import com.xda.one.api.model.response.container.ResponsePostContainer;
-import com.xda.one.api.retrofit.RetrofitThreadClient;
-import com.xda.one.event.thread.ThreadSubscriptionChangedEvent;
-import com.xda.one.event.thread.ThreadSubscriptionChangingFailedEvent;
-import com.xda.one.model.augmented.AugmentedPost;
-import com.xda.one.model.augmented.AugmentedUnifiedThread;
-import com.xda.one.ui.helper.QuickReturnHelper;
-import com.xda.one.ui.widget.FloatingActionButton;
-import com.xda.one.util.AccountUtils;
-import com.xda.one.util.CompatUtils;
-import com.xda.one.util.UIUtils;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -43,6 +27,24 @@ import android.view.animation.Transformation;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.otto.Subscribe;
+import com.xda.one.R;
+import com.xda.one.api.inteface.ThreadClient;
+import com.xda.one.api.model.interfaces.UnifiedThread;
+import com.xda.one.api.model.interfaces.container.PostContainer;
+import com.xda.one.api.model.response.ResponseUnifiedThread;
+import com.xda.one.api.model.response.container.ResponsePostContainer;
+import com.xda.one.api.retrofit.RetrofitThreadClient;
+import com.xda.one.event.thread.ThreadSubscriptionChangedEvent;
+import com.xda.one.event.thread.ThreadSubscriptionChangingFailedEvent;
+import com.xda.one.model.augmented.AugmentedPost;
+import com.xda.one.model.augmented.AugmentedUnifiedThread;
+import com.xda.one.ui.helper.QuickReturnHelper;
+import com.xda.one.ui.widget.FloatingActionButton;
+import com.xda.one.util.AccountUtils;
+import com.xda.one.util.CompatUtils;
+import com.xda.one.util.UIUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,7 +106,7 @@ public class PostPagerFragment extends Fragment implements PostFragment.Callback
 
     private HierarchySpinnerAdapter mSpinnerAdapter;
 
-    private ResponsePostContainer mContainerArgument;
+    private PostContainer mContainerArgument;
 
     private Callback mCallback;
 
@@ -119,8 +121,9 @@ public class PostPagerFragment extends Fragment implements PostFragment.Callback
     private View mLast;
 
     public static PostPagerFragment getInstance(final AugmentedUnifiedThread unifiedThread,
-            final ResponsePostContainer container, final int pageCount,
-            final ArrayList<String> hierarchy) {
+                                                final PostContainer container,
+                                                final int pageCount,
+                                                final ArrayList<String> hierarchy) {
         final Bundle bundle = new Bundle();
         bundle.putParcelable(THREAD_ARGUMENT, unifiedThread);
         bundle.putParcelable(PAGE_CONTAINER_ARGUMENT, container);
@@ -163,7 +166,7 @@ public class PostPagerFragment extends Fragment implements PostFragment.Callback
         final Animation animation = new Animation() {
             @Override
             protected void applyTransformation(final float interpolatedTime,
-                    final Transformation transformation) {
+                                               final Transformation transformation) {
                 view.getLayoutParams().height = interpolatedTime == 1
                         ? ViewGroup.LayoutParams.WRAP_CONTENT
                         : (int) (mTargetHeight * interpolatedTime);
@@ -210,7 +213,7 @@ public class PostPagerFragment extends Fragment implements PostFragment.Callback
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.post_pager_fragment, container, false);
     }
 
@@ -334,7 +337,7 @@ public class PostPagerFragment extends Fragment implements PostFragment.Callback
     }
 
     @Override
-    public void switchToFragment(final ResponsePostContainer container) {
+    public void switchToFragment(final PostContainer container) {
         mAdapter.setContainerArgument(container);
         mViewPager.setCurrentItem(container.getCurrentPage() - 1);
 
@@ -346,7 +349,7 @@ public class PostPagerFragment extends Fragment implements PostFragment.Callback
     @Override
     public void setQuickReturnListener(final RecyclerView recyclerView, final int position) {
         if (mTotalPages != 1) {
-            mQuickReturnHelper.setOnScrollListener(recyclerView, position);
+            mQuickReturnHelper.addOnScrollListener(recyclerView, position);
         }
     }
 
@@ -407,20 +410,19 @@ public class PostPagerFragment extends Fragment implements PostFragment.Callback
     }
 
     @Override
-    public void onPageLoaded(final ResponseUnifiedThread thread) {
+    public void onPageLoaded(final UnifiedThread thread) {
         if (getTargetFragment() != null) {
             final Intent intent = new Intent();
             intent.putExtra("thread", thread);
-            getTargetFragment()
-                    .onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
+            getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
         }
     }
 
     public interface Callback {
 
-        public Toolbar getToolbar();
+        Toolbar getToolbar();
 
-        public void login(final Runnable runnable);
+        void login(final Runnable runnable);
     }
 
     private class CreatePostListener implements View.OnClickListener {
@@ -516,7 +518,7 @@ public class PostPagerFragment extends Fragment implements PostFragment.Callback
 
         @Subscribe
         public void onThreadSubscriptionToggleFailed(final ThreadSubscriptionChangingFailedEvent
-                event) {
+                                                             event) {
             Toast.makeText(getActivity(), R.string.thread_subscription_toggle_failed,
                     Toast.LENGTH_LONG).show();
         }

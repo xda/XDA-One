@@ -1,11 +1,14 @@
 package com.xda.one.api.retrofit;
 
+import android.content.Context;
+
 import com.xda.one.api.inteface.PostClient;
 import com.xda.one.api.misc.Consumer;
 import com.xda.one.api.misc.EventBus;
 import com.xda.one.api.misc.Result;
 import com.xda.one.api.model.interfaces.Post;
 import com.xda.one.api.model.interfaces.UnifiedThread;
+import com.xda.one.api.model.interfaces.container.PostContainer;
 import com.xda.one.api.model.request.RequestNewPost;
 import com.xda.one.api.model.request.RequestPostAttachment;
 import com.xda.one.api.model.request.RequestThanks;
@@ -14,8 +17,6 @@ import com.xda.one.constants.XDAConstants;
 import com.xda.one.event.post.PostCreatedEvent;
 import com.xda.one.event.post.PostCreationFailedEvent;
 import com.xda.one.util.Utils;
-
-import android.content.Context;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -68,17 +69,28 @@ public class RetrofitPostClient implements PostClient {
 
     @Override
     public void getPostsAsync(final String threadId, final int page,
-            final Callback<ResponsePostContainer> callback) {
-        mPostAPI.getPostsAsync(getAuthToken(), threadId, page, callback);
+                              final Callback<PostContainer> callback) {
+        mPostAPI.getPostsAsync(getAuthToken(), threadId, page,
+                new Callback<ResponsePostContainer>() {
+                    @Override
+                    public void success(ResponsePostContainer container, Response response) {
+                        callback.success(container, response);
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        callback.failure(error);
+                    }
+                });
     }
 
     @Override
-    public void getPostsById(final String postId, final Consumer<ResponsePostContainer>
+    public void getPostsById(final String postId, final Consumer<PostContainer>
             container, final Runnable failure) {
         mPostAPI.getPostsById(getAuthToken(), postId, new Callback<ResponsePostContainer>() {
             @Override
             public void success(final ResponsePostContainer responsePostContainer,
-                    final Response response) {
+                                final Response response) {
                 container.run(responsePostContainer);
             }
 
@@ -91,13 +103,14 @@ public class RetrofitPostClient implements PostClient {
 
     @Override
     public void getUnreadPostFeed(final UnifiedThread unifiedThread,
-            final Consumer<ResponsePostContainer> consumer, final Runnable failure) {
+                                  final Consumer<PostContainer> consumer,
+                                  final Runnable failure) {
         mPostAPI.getUnreadPostFeed(getAuthToken(), unifiedThread.getThreadId(),
                 new Callback<ResponsePostContainer>() {
                     @Override
-                    public void success(final ResponsePostContainer responsePostContainer,
-                            final Response response) {
-                        consumer.run(responsePostContainer);
+                    public void success(final ResponsePostContainer container,
+                                        final Response response) {
+                        consumer.run(container);
                     }
 
                     @Override
@@ -136,15 +149,6 @@ public class RetrofitPostClient implements PostClient {
     }
 
     @Override
-    public void toggleThanksAsync(final Post post, final Consumer<Result> runnable) {
-        if (post.isThanked()) {
-            removeThanksAsync(post, runnable);
-        } else {
-            addThanksAsync(post, runnable);
-        }
-    }
-
-    @Override
     public void addAttachmentAsync(final Post post, final Consumer<Result> runnable) {
         final RequestPostAttachment newPost = new RequestPostAttachment(
                 String.valueOf(post.getPostId()), null, null);
@@ -152,7 +156,7 @@ public class RetrofitPostClient implements PostClient {
             @Override
             public void success(Response response, Response response2) {
                 final Result result = Result.parseResultFromResponse(response);
-                if (result.isSuccess()) {
+                if (Result.isSuccess(result)) {
                     runnable.run(result);
                 }
             }
@@ -164,41 +168,47 @@ public class RetrofitPostClient implements PostClient {
         });
     }
 
-    public static interface PostAPI {
+    public interface PostAPI {
 
         @GET("/posts")
-        public ResponsePostContainer getPosts(@Header("Cookie") final String cookie,
-                @Query("threadid") final String threadId, @Query("page") final int page);
+        ResponsePostContainer getPosts(@Header("Cookie") final String cookie,
+                                       @Query("threadid") final String threadId, @Query("page") final int page);
 
         @GET("/posts")
-        public void getPostsAsync(@Header("Cookie") final String cookie,
-                @Query("threadid") final String threadId, @Query("page") final int page,
-                final Callback<ResponsePostContainer> containerCallback);
+        void getPostsAsync(@Header("Cookie") final String cookie,
+                           @Query("threadid") final String threadId,
+                           @Query("page") final int page,
+                           final Callback<ResponsePostContainer> containerCallback);
 
         @GET("/posts/bypostid")
-        public void getPostsById(@Header("Cookie") final String authToken,
-                @Query("postid") final String postId,
-                final Callback<ResponsePostContainer> containerCallback);
+        void getPostsById(@Header("Cookie") final String authToken,
+                          @Query("postid") final String postId,
+                          final Callback<ResponsePostContainer> containerCallback);
 
         @GET("/posts/newpost")
         void getUnreadPostFeed(@Header("Cookie") final String authToken,
-                @Query("threadid") String threadId, final Callback<ResponsePostContainer> callback);
+                               @Query("threadid") String threadId,
+                               final Callback<ResponsePostContainer> callback);
 
         @POST("/posts/addattachment")
-        public void addAttachment(@Header("Cookie") final String cookie,
-                @Body final RequestPostAttachment attachment, final Callback<Response> callback);
+        void addAttachment(@Header("Cookie") final String cookie,
+                           @Body final RequestPostAttachment attachment,
+                           final Callback<Response> callback);
 
         @POST("/posts/new")
-        public void createNewPost(@Header("Cookie") final String cookie,
-                @Body final RequestNewPost post, final Callback<Response> callback);
+        void createNewPost(@Header("Cookie") final String cookie,
+                           @Body final RequestNewPost post,
+                           final Callback<Response> callback);
 
         @POST("/posts/thanks")
-        public void addThanks(@Header("Cookie") final String cookie,
-                @Body final RequestThanks thanks, final Callback<Response> callback);
+        void addThanks(@Header("Cookie") final String cookie,
+                       @Body final RequestThanks thanks,
+                       final Callback<Response> callback);
 
         @DELETE("/posts/thanks")
-        public void removeThanks(@Header("Cookie") final String cookie,
-                @Query("postid") final int postid, final Callback<Response> callback);
+        void removeThanks(@Header("Cookie") final String cookie,
+                          @Query("postid") final int postid,
+                          final Callback<Response> callback);
     }
 
     private static class ThanksCallback implements Callback<Response> {
@@ -210,7 +220,7 @@ public class RetrofitPostClient implements PostClient {
         private final boolean mNewState;
 
         public ThanksCallback(final Post post, final Consumer<Result> runnable,
-                final boolean newState) {
+                              final boolean newState) {
             mPost = post;
             mRunnable = runnable;
             mNewState = newState;
@@ -219,7 +229,7 @@ public class RetrofitPostClient implements PostClient {
         @Override
         public void success(final Response response, final Response response2) {
             final Result result = Result.parseResultFromResponse(response);
-            if (result.isSuccess()) {
+            if (result != null && result.isSuccess()) {
                 mPost.setThanked(mNewState);
                 mPost.setThanksCount(mPost.getThanksCount() + (mNewState ? 1 : -1));
                 mRunnable.run(result);

@@ -1,27 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.otto.Subscribe;
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.api.inteface.ForumClient;
-import com.xda.one.api.model.interfaces.Forum;
-import com.xda.one.api.model.response.ResponseForum;
-import com.xda.one.api.retrofit.RetrofitClient;
-import com.xda.one.api.retrofit.RetrofitForumClient;
-import com.xda.one.auth.XDAAccount;
-import com.xda.one.constants.XDAConstants;
-import com.xda.one.event.forum.ForumSubscriptionChangedEvent;
-import com.xda.one.event.forum.ForumSubscriptionChangingFailedEvent;
-import com.xda.one.loader.ForumLoader;
-import com.xda.one.model.misc.ForumType;
-import com.xda.one.ui.helper.ActionModeHelper;
-import com.xda.one.ui.widget.HierarchySpinnerAdapter;
-import com.xda.one.ui.widget.XDARefreshLayout;
-import com.xda.one.util.AccountUtils;
-import com.xda.one.util.FragmentUtils;
-import com.xda.one.util.UIUtils;
-import com.xda.one.util.Utils;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -42,6 +20,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.squareup.otto.Subscribe;
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.api.inteface.ForumClient;
+import com.xda.one.api.model.interfaces.Forum;
+import com.xda.one.api.model.response.ResponseForum;
+import com.xda.one.api.retrofit.RetrofitClient;
+import com.xda.one.api.retrofit.RetrofitForumClient;
+import com.xda.one.auth.XDAAccount;
+import com.xda.one.constants.XDAConstants;
+import com.xda.one.event.forum.ForumSubscriptionChangedEvent;
+import com.xda.one.event.forum.ForumSubscriptionChangingFailedEvent;
+import com.xda.one.loader.ForumLoader;
+import com.xda.one.model.misc.ForumType;
+import com.xda.one.ui.helper.ActionModeHelper;
+import com.xda.one.ui.helper.QuickReturnHelper;
+import com.xda.one.ui.widget.DividerItemDecoration;
+import com.xda.one.ui.widget.HierarchySpinnerAdapter;
+import com.xda.one.ui.widget.XDARefreshLayout;
+import com.xda.one.util.AccountUtils;
+import com.xda.one.util.FragmentUtils;
+import com.xda.one.util.UIUtils;
+import com.xda.one.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -70,7 +72,6 @@ public class ForumFragment extends Fragment
 
     private ForumType mForumType = ForumType.ALL;
 
-    // Adapter for ListView
     private ForumAdapter<Forum> mAdapter;
 
     private XDARefreshLayout mRefreshLayout;
@@ -94,7 +95,7 @@ public class ForumFragment extends Fragment
     }
 
     public static ForumFragment createInstance(final Forum forum, final String parentTitle,
-            final ArrayList<String> hierarchy) {
+                                               final ArrayList<String> hierarchy) {
         final Bundle bundle = new Bundle();
         bundle.putSerializable(FORUM_TYPE, ForumType.CHILD);
         bundle.putParcelable(FORUM, forum);
@@ -154,7 +155,7 @@ public class ForumFragment extends Fragment
                 new ForumAdapter.SubscribeButtonDelegate() {
                     @Override
                     public void setupSubscribeButton(ImageView subscribeButton,
-                            final Forum forum) {
+                                                     final Forum forum) {
                         // Subscribe button
                         onSetupSubscribeButton(subscribeButton, forum);
                     }
@@ -175,16 +176,16 @@ public class ForumFragment extends Fragment
                 }
             });
             subscribeButton.setImageResource(forum.isSubscribed()
-                    ? R.drawable.ic_star_light
-                    : R.drawable.ic_star_outline_light);
+                    ? R.drawable.ic_star_outline_selected
+                    : R.drawable.ic_star_outline);
         }
     }
 
     private void onSetupImageViewListItem(final ImageView imageView, final Forum responseForum) {
         Picasso.with(getActivity())
                 .load(responseForum.getImageUrl())
-                .placeholder(R.drawable.phone)
-                .error(R.drawable.phone)
+                .placeholder(R.drawable.ic_nav_phone)
+                .error(R.drawable.ic_nav_phone)
                 .into(imageView);
     }
 
@@ -195,7 +196,7 @@ public class ForumFragment extends Fragment
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.forum_fragment, container, false);
     }
 
@@ -261,7 +262,7 @@ public class ForumFragment extends Fragment
 
     @Override
     public void onLoadFinished(final Loader<List<ResponseForum>> loader,
-            final List<ResponseForum> responseForums) {
+                               final List<ResponseForum> responseForums) {
         // Remove the old data if the adapter is not empty
         if (mAdapter.getItemCount() != 0) {
             mAdapter.clear();
@@ -360,7 +361,7 @@ public class ForumFragment extends Fragment
 
         @Override
         public void onCheckedStateChanged(final ActionMode actionMode, final int position,
-                final boolean isNowChecked) {
+                                          final boolean isNowChecked) {
             actionMode.invalidate();
         }
     }

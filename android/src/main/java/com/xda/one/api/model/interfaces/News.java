@@ -8,29 +8,29 @@ import java.util.List;
 
 public interface News extends Parcelable {
 
-    public int getTitle();
+    int getTitle();
 
-    public int getContent();
+    int getContent();
 
-    public String getUrl();
+    String getUrl();
 
-    public String getThumb();
+    String getThumb();
 
-    public String getPageText();
+    String getPageText();
 
-    public String getUserName();
+    String getUserName();
 
-    public long getDateline();
+    long getDateline();
 
-    public List<ResponseAttachment> getAttachments();
+    List<ResponseAttachment> getAttachments();
 
-    public String getAvatarUrl();
+    String getAvatarUrl();
 
-    public int getThanksCount();
+    int getThanksCount();
 
-    public void setThanksCount(int newCount);
+    void setThanksCount(int newCount);
 
-    public boolean isThanked();
+    boolean isThanked();
 
-    public void setThanked(boolean thanked);
+    void setThanked(boolean thanked);
 }

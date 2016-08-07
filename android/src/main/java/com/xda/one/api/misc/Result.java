@@ -1,5 +1,7 @@
 package com.xda.one.api.misc;
 
+import android.support.annotation.Nullable;
+
 import com.fasterxml.jackson.databind.JsonNode;
 
 import org.apache.commons.io.IOUtils;
@@ -29,6 +31,7 @@ public class Result {
         mMessage = message;
     }
 
+    @Nullable
     public static Result parseResultFromResponse(final Response response) {
         InputStream inputStream = null;
         try {
@@ -43,6 +46,7 @@ public class Result {
         return null;
     }
 
+    @Nullable
     public static Result parseResultFromString(final String line) {
         if (line == null) {
             return null;

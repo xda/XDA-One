@@ -1,5 +1,23 @@
 package com.xda.one.ui;
 
+import android.accounts.Account;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.support.v4.view.ViewCompat;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.dd.CircularProgressButton;
 import com.mobsandgeeks.adapters.Sectionizer;
 import com.mobsandgeeks.adapters.SimpleSectionAdapter;
@@ -19,24 +37,6 @@ import com.xda.one.model.misc.ForumType;
 import com.xda.one.util.AccountUtils;
 import com.xda.one.util.Utils;
 
-import android.accounts.Account;
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v4.view.ViewCompat;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.List;
 
 import static com.xda.one.ui.NavigationDrawerAdapter.NavigationDrawerItem;
@@ -54,13 +54,13 @@ public class NavigationDrawerFragment extends Fragment
 
     private TextView mUsernameTextView;
 
+    private TextView mEmailTextView;
+
     private UserClient mUserClient;
 
     private ImageView mAvatar;
 
     private CircularProgressButton mLoginLogout;
-
-    private ListView mListView;
 
     @Override
     public void onAttach(Activity activity) {
@@ -95,15 +95,15 @@ public class NavigationDrawerFragment extends Fragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mListView = (ListView) view.findViewById(android.R.id.list);
-        ViewCompat.setOverScrollMode(mListView, ViewCompat.OVER_SCROLL_NEVER);
+        final ListView listView = (ListView) view.findViewById(android.R.id.list);
+        listView.setOnItemClickListener(this);
 
-        mListView.setOnItemClickListener(this);
+        ViewCompat.setOverScrollMode(listView, ViewCompat.OVER_SCROLL_NEVER);
 
         final LayoutInflater inflater = LayoutInflater.from(getActivity());
         final View headerView = inflater.inflate(R.layout.navigation_drawer_header,
-                mListView, false);
-        mListView.addHeaderView(headerView);
+                listView, false);
+        listView.addHeaderView(headerView);
 
         // Register for the login event
         mUserClient.getBus().register(mUserListener);
@@ -118,6 +118,10 @@ public class NavigationDrawerFragment extends Fragment
 
         mUsernameTextView = (TextView) headerView
                 .findViewById(R.id.navigation_drawer_fragment_username);
+
+        mEmailTextView = (TextView) headerView
+                .findViewById(R.id.navigation_drawer_fragment_email);
+
         mAvatar = (ImageView) headerView.findViewById(R.id.navigation_drawer_fragment_avatar);
 
         mLoginLogout = (CircularProgressButton) headerView
@@ -137,7 +141,7 @@ public class NavigationDrawerFragment extends Fragment
         mAdapter.onUserProfileChanged(selectedAccount);
         mSectionAdapter.notifyDataSetChanged();
 
-        mListView.setAdapter(mSectionAdapter);
+        listView.setAdapter(mSectionAdapter);
     }
 
     @Override
@@ -216,6 +220,7 @@ public class NavigationDrawerFragment extends Fragment
             mLoginLogout.setText(getString(R.string.logout));
 
             mUsernameTextView.setText(account.getUserName());
+            mEmailTextView.setText(account.getEmail());
             Picasso.with(getActivity())
                     .load(account.getAvatarUrl())
                     .placeholder(R.drawable.ic_account_circle_light)
@@ -247,9 +252,9 @@ public class NavigationDrawerFragment extends Fragment
 
     public interface Callback {
 
-        public void closeNavigationDrawer();
+        void closeNavigationDrawer();
 
-        public void onNavigationItemClicked(final Fragment fr);
+        void onNavigationItemClicked(final Fragment fr);
     }
 
     private class NavigationSectionizer implements Sectionizer<NavigationDrawerItem> {

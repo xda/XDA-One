@@ -79,7 +79,7 @@ public class FindYourDeviceFragment extends Fragment
 
                 final Forum forum = mAdapter.getItem(position);
                 final FragmentTransaction transaction = FragmentUtils.getDefaultTransaction
-                        (getFragmentManager());
+                        (getFragmentManager(), true);
                 // TODO - what should be done here?
                 transaction.addToBackStack(null);
 

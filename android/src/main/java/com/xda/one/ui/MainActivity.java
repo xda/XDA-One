@@ -1,8 +1,23 @@
 package com.xda.one.ui;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
-
 import com.xda.one.R;
 import com.xda.one.api.misc.Consumer;
 import com.xda.one.model.misc.ForumType;
@@ -11,27 +26,9 @@ import com.xda.one.util.AccountUtils;
 import com.xda.one.util.FragmentUtils;
 import com.xda.one.util.OneApplication;
 
-import android.app.FragmentManager;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
-// Add New Relic Reporting
-// import com.newrelic.agent.android.NewRelic;
-
 public class MainActivity extends BaseActivity
-        implements NavigationDrawerFragment.Callback, SubscribedPagerFragment.Callback,
+        implements NavigationDrawerFragment.Callback, ForumPagerFragment.Callback,
+        SubscribedPagerFragment.Callback,
         ThreadFragment.Callback, PostPagerFragment.Callback, SearchFragment.Callback {
 
     private static final String SCREEN_NAME = "XDA-One MainActivity";
@@ -95,13 +92,6 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        // GoogleAnalytics.getInstance(MainActivity.this).reportActivityStart(this);
     }
 
     private void initialReplaceFragment() {
@@ -168,6 +158,11 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+            return;
+        }
+
         final Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content_frame);
         // TODO - fix this hack
         if (fragment instanceof SearchFragment) {
@@ -182,24 +177,12 @@ public class MainActivity extends BaseActivity
             }
         }
 
-        if (!mDrawerLayout.isDrawerOpen(Gravity.START)
-                && getSupportFragmentManager().getBackStackEntryCount() == 0) {
-            mDrawerLayout.openDrawer(Gravity.START);
-            return;
-        }
         super.onBackPressed();
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-
-        // GoogleAnalytics.getInstance(MainActivity.this).reportActivityStop(this);
-    }
-
-    @Override
     public void closeNavigationDrawer() {
-        mDrawerLayout.closeDrawer(Gravity.START);
+        mDrawerLayout.closeDrawer(GravityCompat.START);
     }
 
     @Override
@@ -225,10 +208,11 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void switchCurrentlyDisplayedFragment(final Fragment fragment,
-            final boolean backStackAndAnimate, final String title) {
+                                                 final boolean backStackAndAnimate,
+                                                 final String title) {
         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         final FragmentTransaction transaction = FragmentUtils
-                .getDefaultTransaction(getSupportFragmentManager());
+                .getDefaultTransaction(getSupportFragmentManager(), backStackAndAnimate);
         if (backStackAndAnimate) {
             transaction.addToBackStack(title);
         }

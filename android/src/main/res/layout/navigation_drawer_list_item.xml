@@ -10,14 +10,14 @@
         android:layout_height="40dp"
         android:layout_centerVertical="true"
         android:padding="8dp"
-        android:src="@drawable/ic_search_dark"
-        android:tint="@color/navigation_drawer_icon" />
+        android:src="@drawable/ic_search_dark" />
 
     <TextView
         android:id="@+id/navigation_drawer_list_item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:paddingLeft="16dp"
         android:layout_toStartOf="@+id/navigation_drawer_list_item_count"
         android:layout_toEndOf="@id/navigation_drawer_list_item_icon"
         android:layout_toLeftOf="@+id/navigation_drawer_list_item_count"

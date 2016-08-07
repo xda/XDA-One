@@ -4,23 +4,23 @@ import android.os.Parcelable;
 
 public interface Forum extends Parcelable {
 
-    public String getTitle();
+    String getTitle();
 
-    public int getForumId();
+    int getForumId();
 
-    public int getParentId();
+    int getParentId();
 
-    public String getForumSlug();
+    String getForumSlug();
 
-    public boolean isSubscribed();
+    boolean isSubscribed();
 
-    public void setSubscribed(boolean subs);
+    void setSubscribed(boolean subs);
 
-    public String getImageUrl();
+    String getImageUrl();
 
-    public boolean hasChildren();
+    boolean hasChildren();
 
-    public String getWebUri();
+    String getWebUri();
 
-    public boolean canContainThreads();
+    boolean canContainThreads();
 }

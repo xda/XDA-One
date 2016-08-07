@@ -4,27 +4,27 @@ import android.os.Parcelable;
 
 public interface Quote extends Parcelable {
 
-    public String getPageText();
+    String getPageText();
 
-    public int getDateLine();
+    int getDateLine();
 
-    public String getPostId();
+    String getPostId();
 
-    public String getType();
+    String getType();
 
     String getUserId();
 
-    public String getUserName();
+    String getUserName();
 
-    public String getQuotedUserId();
+    String getQuotedUserId();
 
-    public String getQuotedUserName();
+    String getQuotedUserName();
 
-    public int getQuotedUserGroupId();
+    int getQuotedUserGroupId();
 
-    public int getQuotedInfractionGroupId();
+    int getQuotedInfractionGroupId();
 
-    public UnifiedThread getThread();
+    UnifiedThread getThread();
 
-    public String getAvatarUrl();
+    String getAvatarUrl();
 }

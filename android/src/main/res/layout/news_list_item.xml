@@ -1,53 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:pkg="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/list_item_height"
-    android:background="?android:attr/selectableItemBackground"
-    android:clickable="true"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="4dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    pkg:cardBackgroundColor="@android:color/white"
+    pkg:cardCornerRadius="2dp"
     tools:context=".ui.MainActivity">
 
-    <com.makeramen.RoundedImageView
-        android:id="@+id/avatar"
-        android:layout_width="@dimen/avatar_image_dimension"
-        android:layout_height="@dimen/avatar_image_dimension"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/margin_medium"
-        android:layout_marginStart="@dimen/margin_medium"
-        android:layout_marginTop="@dimen/margin_small"
-        android:scaleType="centerCrop"
-        android:src="@drawable/account_circle"
-        pkg:border_color="@android:color/transparent"
-        pkg:oval="true" />
-
-    <TextView
-        android:id="@+id/news_title"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:id="@+id/rl_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/avatar"
-        android:layout_marginLeft="@dimen/margin_small"
-        android:layout_toRightOf="@id/avatar"
-        android:singleLine="true"
-        android:text="@string/xda_news"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+        android:layout_alignParentTop="true">
 
-    <TextView
-        android:id="@+id/news_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/news_title"
-        android:layout_marginLeft="@dimen/margin_small"
-        android:layout_marginRight="@dimen/margin_small"
-        android:layout_marginTop="@dimen/margin_small"
-        android:layout_toRightOf="@id/avatar"
-        android:ellipsize="end"
-        android:lineSpacingMultiplier="1.5"
-        android:lines="2"
-        android:text="@string/lorem_long"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textSize="13sp" />
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="fill_parent"
+            android:layout_height="160dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_image_placeholder" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignBottom="@+id/avatar"
+            android:background="@color/scrim_shade_end">
+
+            <TextView
+                android:id="@+id/news_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:maxLines="1"
+                android:padding="16dp"
+                android:singleLine="true"
+                android:text="@string/xda_news"
+                android:textAppearance="?android:attr/textAppearanceInverse"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

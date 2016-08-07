@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface MentionContainer {
 
-    public List<? extends Mention> getMentions();
+    List<? extends Mention> getMentions();
 
-    public int getTotalPages();
+    int getTotalPages();
 
-    public int getPerPage();
+    int getPerPage();
 
-    public int getCurrentPage();
+    int getCurrentPage();
 }

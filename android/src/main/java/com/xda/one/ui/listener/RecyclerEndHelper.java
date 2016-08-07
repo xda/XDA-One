@@ -41,6 +41,6 @@ public class RecyclerEndHelper extends RecyclerView.OnScrollListener {
 
     public interface Callback {
 
-        public void onListEndReached();
+        void onListEndReached();
     }
 }

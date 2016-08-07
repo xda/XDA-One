@@ -5,10 +5,11 @@
         android:id="@+id/forum_fragment_cab_share"
         android:title="@string/share"
         app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
+        android:icon="@drawable/ic_share"
         app:showAsAction="always" />
     <item
         android:id="@+id/forum_fragment_cab_subscribe"
-        android:icon="@drawable/ic_action_star"
         android:title="@string/subscribe"
+        android:icon="@drawable/ic_star_light"
         app:showAsAction="ifRoom" />
 </menu>

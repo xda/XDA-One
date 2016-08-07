@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface MessageContainer {
 
-    public List<? extends Message> getMessages();
+    List<? extends Message> getMessages();
 
-    public int getTotalPages();
+    int getTotalPages();
 
-    public int getMessagesPerPage();
+    int getMessagesPerPage();
 
-    public int getCurrentPage();
+    int getCurrentPage();
 }

@@ -128,31 +128,31 @@ public class RetrofitThreadClient implements ThreadClient {
         }
     }
 
-    public static interface ThreadAPI {
+    public interface ThreadAPI {
 
         @GET("/threads")
-        public ResponseUnifiedThreadContainer getThreads(@Header("Cookie") final String cookie,
+        ResponseUnifiedThreadContainer getThreads(@Header("Cookie") final String cookie,
                 @Query("forumid") final String forumId, @Query("page") final int page);
 
         @GET("/threads/participated")
-        public ResponseUnifiedThreadContainer getParticipatedThreads(
+        ResponseUnifiedThreadContainer getParticipatedThreads(
                 @Header("Cookie") final String cookie, @Query("page") final int page);
 
         @GET("/threads/subscribed")
-        public ResponseUnifiedThreadContainer getSubscribedThreads(@Header("Cookie") final String
+        ResponseUnifiedThreadContainer getSubscribedThreads(@Header("Cookie") final String
                 cookie, @Query("page") final int page);
 
         @POST("/threads/new")
-        public void createThread(@Header("Cookie") final String cookie,
+        void createThread(@Header("Cookie") final String cookie,
                 @Body final RequestThread thread, final Callback<Response> response);
 
         @POST("/threads/subscribe")
-        public void subscribe(@Header("Cookie") final String cookie,
+        void subscribe(@Header("Cookie") final String cookie,
                 @Body final RequestThreadSubscription subscription,
                 final Callback<Response> response);
 
         @DELETE("/threads/unsubscribe")
-        public void unsubscribe(@Header("Cookie") final String cookie,
+        void unsubscribe(@Header("Cookie") final String cookie,
                 @Query("threadid") final String threadid, final Callback<Response> response);
     }
 

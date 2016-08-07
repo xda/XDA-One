@@ -1,11 +1,5 @@
 package com.xda.one.ui;
 
-import com.squareup.picasso.Picasso;
-import com.xda.one.R;
-import com.xda.one.api.model.response.ResponseNews;
-import com.xda.one.util.StringUtils;
-import com.xda.one.util.Utils;
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -14,6 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+import com.xda.one.R;
+import com.xda.one.api.model.response.ResponseNews;
+import com.xda.one.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -74,15 +73,21 @@ public class NewsAdapter
         holder.itemView.setOnClickListener(mOnClickListener);
         holder.titleView.setText(Html.fromHtml(item.getTitle()));
 
-        final String content = item.getContent();
-        final String text = StringUtils.trimCharSequence(Html.fromHtml(content).toString(), 200);
-        holder.contentView.setText(text);
-
         Picasso.with(mContext)
-                .load(item.getThumbnail())
-                .placeholder(R.drawable.ic_account_circle_light)
-                .error(R.drawable.ic_account_circle_light)
+                .load(getFullImage(item.getThumbnail())).fit().centerCrop()
+                .placeholder(R.drawable.ic_image_placeholder)
+                .error(R.drawable.ic_image_placeholder)
                 .into(holder.imageView);
+    }
+
+    private String getFullImage(String url) {
+        if (url == null)
+            return null;
+
+        String main_url = url.substring(0, url.lastIndexOf("-"));
+        String extension = url.substring(url.lastIndexOf("."));
+
+        return main_url + extension;
     }
 
     public ResponseNews getItem(int position) {
@@ -91,7 +96,7 @@ public class NewsAdapter
 
     @Override
     public int getItemCount() {
-        return mNews.size() + mFooterItemCount ;
+        return mNews.size() + mFooterItemCount;
     }
 
     public void clear() {
@@ -137,15 +142,12 @@ public class NewsAdapter
 
         private final TextView titleView;
 
-        private final TextView contentView;
-
         private final ImageView imageView;
 
         public NewsViewHolder(View itemView) {
             super(itemView);
 
             titleView = (TextView) itemView.findViewById(R.id.news_title);
-            contentView = (TextView) itemView.findViewById(R.id.news_content);
             imageView = (ImageView) itemView.findViewById(R.id.avatar);
         }
     }

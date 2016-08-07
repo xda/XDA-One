@@ -1,13 +1,5 @@
 package com.xda.one.ui.thread;
 
-import com.xda.one.R;
-import com.xda.one.api.inteface.PostClient;
-import com.xda.one.api.model.response.container.ResponsePostContainer;
-import com.xda.one.api.retrofit.RetrofitPostClient;
-import com.xda.one.model.augmented.AugmentedUnifiedThread;
-import com.xda.one.ui.helper.CancellableCallbackHelper;
-import com.xda.one.util.FragmentUtils;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -15,9 +7,20 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
 
+import com.xda.one.R;
+import com.xda.one.api.inteface.PostClient;
+import com.xda.one.api.model.interfaces.container.PostContainer;
+import com.xda.one.api.model.response.container.ResponsePostContainer;
+import com.xda.one.api.retrofit.RetrofitPostClient;
+import com.xda.one.model.augmented.AugmentedUnifiedThread;
+import com.xda.one.ui.helper.CancellableCallbackHelper;
+import com.xda.one.util.FragmentUtils;
+
 import java.util.ArrayList;
 
-public class ThreadUnreadPostHelper extends CancellableCallbackHelper<ResponsePostContainer> {
+public class ThreadUnreadPostHelper extends CancellableCallbackHelper<PostContainer> {
+
+    private final Fragment mThreadFragment;
 
     private final Context mContext;
 
@@ -27,11 +30,14 @@ public class ThreadUnreadPostHelper extends CancellableCallbackHelper<ResponsePo
 
     private AlertDialog mDialog;
 
-    public ThreadUnreadPostHelper(final Context context, final FragmentManager fragmentManager,
-            final AugmentedUnifiedThread unifiedThread, final AlertDialog dialog) {
+    public ThreadUnreadPostHelper(final Fragment fragment,
+                                  final FragmentManager fragmentManager,
+                                  final AugmentedUnifiedThread unifiedThread,
+                                  final AlertDialog dialog) {
         super(dialog);
 
-        mContext = context;
+        mThreadFragment = fragment;
+        mContext = fragment.getActivity();
         mFragmentManager = fragmentManager;
         mUnifiedThread = unifiedThread;
         mDialog = dialog;
@@ -50,15 +56,15 @@ public class ThreadUnreadPostHelper extends CancellableCallbackHelper<ResponsePo
     }
 
     @Override
-    public void safeCallback(final ResponsePostContainer data) {
+    public void safeCallback(final PostContainer data) {
         mDialog.dismiss();
 
-        final Fragment fragment = FragmentUtils
-                .switchToPostList(mUnifiedThread, new ArrayList<String>(),
-                        data);
+        final Fragment fragment = FragmentUtils.switchToPostList(mUnifiedThread,
+                new ArrayList<String>(), data);
+        fragment.setTargetFragment(mThreadFragment, 101);
 
         final FragmentTransaction transaction = FragmentUtils
-                .getDefaultTransaction(mFragmentManager);
+                .getDefaultTransaction(mFragmentManager, true);
         transaction.addToBackStack(mUnifiedThread.getTitle());
         transaction.replace(R.id.content_frame, fragment).commit();
     }

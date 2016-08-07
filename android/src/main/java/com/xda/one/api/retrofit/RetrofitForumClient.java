@@ -183,43 +183,43 @@ public class RetrofitForumClient implements ForumClient {
         });
     }
 
-    public static interface ForumAPI {
+    public interface ForumAPI {
 
         @GET("/forums")
-        public ResponseForumContainer getForums(@Header("Cookie") final String cookie,
-                @Header("Cache-Control") final String header);
+        ResponseForumContainer getForums(@Header("Cookie") final String cookie,
+                                         @Header("Cache-Control") final String header);
 
         @GET("/forums/children")
-        public ResponseForumContainer getForumChildren(@Header("Cookie") final String cookie,
-                @Query("forumid") final int forumId);
+        ResponseForumContainer getForumChildren(@Header("Cookie") final String cookie,
+                                                @Query("forumid") final int forumId);
 
         @GET("/forums/general")
-        public ResponseForumContainer getGeneralForums(@Header("Cookie") final String cookie,
-                @Header("Cache-Control") final String header);
+        ResponseForumContainer getGeneralForums(@Header("Cookie") final String cookie,
+                                                @Header("Cache-Control") final String header);
 
         @GET("/forums/newest")
-        public ResponseForumContainer getNewestForums(@Header("Cookie") final String cookie,
-                @Header("Cache-Control") final String header);
+        ResponseForumContainer getNewestForums(@Header("Cookie") final String cookie,
+                                               @Header("Cache-Control") final String header);
 
         @GET("/forums/top")
-        public ResponseForumContainer getTopForums(@Header("Cookie") final String cookie,
-                @Header("Cache-Control") final String header);
+        ResponseForumContainer getTopForums(@Header("Cookie") final String cookie,
+                                            @Header("Cache-Control") final String header);
 
         @GET("/forums/subscribed")
-        public ResponseForumContainer getSubscribedForums(
+        ResponseForumContainer getSubscribedForums(
                 @Header("Cookie") final String cookie);
 
         @POST("/forums/subscribe")
-        public void subscribe(@Header("Cookie") final String cookie, @Body final int forumId,
-                final Callback<Response> callable);
+        void subscribe(@Header("Cookie") final String cookie, @Body final int forumId,
+                       final Callback<Response> callable);
 
         @DELETE("/forums/unsubscribe")
-        public void unsubscribe(@Header("Cookie") final String cookie,
-                @Query("forumid") final int forumId, final Callback<Response> callable);
+        void unsubscribe(@Header("Cookie") final String cookie,
+                         @Query("forumid") final int forumId, final Callback<Response> callable);
 
         @POST("/forums/markread")
-        public void markRead(@Header("Cookie") final String cookie, @Body final int forumId,
-                final Callback<Response> callable);
+        void markRead(@Header("Cookie") final String cookie, @Body final int forumId,
+                      final Callback<Response> callable);
     }
 
     private class SubscribeCallback implements Callback<Response> {

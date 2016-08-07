@@ -3,63 +3,63 @@
     xmlns:pkg="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/list_item_height"
-    android:background="@android:color/white"
-    android:foreground="@drawable/activatable_selectable_selector"
-    tools:context=".ui.MainActivity">
+    android:layout_height="88dp"
+    android:background="@drawable/activatable_selectable_selector"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    tools:context=".ui.MainActivity" >
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp" >
 
-        <TextView
-            android:id="@+id/user_profile_list_item_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginEnd="16dp"
-            android:layout_marginLeft="@dimen/list_item_left_start_text_padding"
-            android:layout_marginRight="16dp"
-            android:layout_marginStart="@dimen/list_item_left_start_text_padding"
-            android:layout_marginTop="8dp"
-            android:singleLine="true"
-            android:text="@string/thread_title"
-            android:textSize="14sp" />
-
-        <com.makeramen.RoundedImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/avatar"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:src="@drawable/account_circle"
-            pkg:border_color="@android:color/transparent"
-            pkg:oval="true" />
+            pkg:riv_border_color="@android:color/transparent"
+            pkg:riv_oval="true"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/user_profile_list_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@string/private_messages"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            android:textSize="14sp"
+            android:textColor="@color/default_primary_text"
+            android:textColorHint="@color/default_secondary_text"
+            android:textColorHighlight="@color/default_secondary_text"
+            android:layout_toRightOf="@+id/avatar"
+            android:layout_toEndOf="@+id/avatar" />
 
         <TextView
             android:id="@+id/user_profile_list_item_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/user_profile_list_item_title"
-            android:layout_marginEnd="16dp"
-            android:layout_marginLeft="@dimen/list_item_left_start_text_padding"
-            android:layout_marginRight="16dp"
-            android:layout_marginStart="@dimen/list_item_left_start_text_padding"
-            android:layout_marginTop="8dp"
-            android:lineSpacingMultiplier="1.5"
             android:maxLines="2"
             android:text="@string/placeholder_text"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textSize="13sp"
-            tools:text="@string/placeholder_text_long" />
+            tools:text="@string/placeholder_text_long"
+            android:textColor="@color/default_secondary_text"
+            android:textColorHint="@color/default_secondary_text"
+            android:textColorHighlight="@color/default_secondary_text"
+            android:layout_below="@+id/user_profile_list_item_title"
+            android:layout_alignLeft="@+id/user_profile_list_item_title"
+            android:layout_alignStart="@+id/user_profile_list_item_title" />
 
     </RelativeLayout>
 </FrameLayout>

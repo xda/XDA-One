@@ -82,7 +82,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setTitle("Logging in...");
-        mProgressDialog.setMessage("Logging in...");
+        mProgressDialog.setMessage("Authenticating with the server...");
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setCancelable(false);
         mProgressDialog.setCanceledOnTouchOutside(false);
@@ -136,7 +136,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(final View v) {
                 final FragmentTransaction transaction = FragmentUtils
-                        .getDefaultTransaction(getFragmentManager());
+                        .getDefaultTransaction(getFragmentManager(), true);
                 transaction.replace(R.id.frame_activity_content, RegisterFragment.createInstance())
                         .addToBackStack(null)
                         .commit();
@@ -266,7 +266,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             mEventListener = null;
             mUserClient.getBus().unregister(this);
 
-            mProgressDialog.setTitle("Updating forums database");
+            mProgressDialog.setTitle("Logging in...");
             mProgressDialog.setMessage("Updating forums database");
             getLoaderManager().initLoader(0, null, new AuthForumLoaderCallbacks(getActivity(),
                     event.account, mProgressDialog));
